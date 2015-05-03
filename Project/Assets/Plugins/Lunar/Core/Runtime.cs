@@ -7,6 +7,11 @@ namespace LunarPluginInternal
 {
     static class Runtime
     {
+        #if LUNAR_DEVELOPMENT
+        private static RuntimePlatform s_overridenPlatform = RuntimePlatform.OSXEditor;
+        private static bool s_overridenIsPlaying = false;
+        #endif
+
         public static bool IsAndroid { get { return Platform == RuntimePlatform.Android; } }
         public static bool IsIOS { get { return Platform == RuntimePlatform.IPhonePlayer; } }
         public static bool IsMobile { get { return Application.isMobilePlatform; } }
