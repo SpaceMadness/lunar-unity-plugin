@@ -46,6 +46,11 @@ Features:
 - Angry Bots *// TBD*
   
 ## Social media
+
+- YouTube Channel: [Space Madness](https://www.youtube.com/channel/UCNZ2ja_pI9wqKsZcnVnt_zQ)
 - Twitter: [@LunarPlugin](https://twitter.com/intent/follow?screen_name=LunarPlugin&user_id=2939274198)
 - Facebook: [Unity Lunar Plugin](https://www.facebook.com/LunarPlugin)
-- Gmail: lunar.plugin
+ 
+## Contacts
+
+For any other questions: lunar.plugin@gmail.com
