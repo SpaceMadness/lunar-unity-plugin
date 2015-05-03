@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1047F44D-63D8-4E41-8737-BE8D579CD720}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Test</RootNamespace>
+    <AssemblyName>Test</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_0_1;UNITY_5_0;UNITY_5;ENABLE_LICENSE_RENAME;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_NEW_HIERARCHY;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_AUDIOMIXER_SUSPEND;ENABLE_NONPRO;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;LUNAR_DEVELOPMENT;LUNAR_DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit.framework" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>..\..\..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TestFixtureBase.cs" />
+    <Compile Include="StringUtilsTest.cs" />
+    <Compile Include="CycleArrayTest.cs" />
+    <Compile Include="StackTraceTest.cs" />
+    <Compile Include="IteratorTest.cs" />
+    <Compile Include="RuntimeUtilsTest.cs" />
+    <Compile Include="TableViewCellEntryTest.cs" />
+    <Compile Include="FileUtilsTest.cs" />
+    <Compile Include="TimerManager\TimerManagerTest.cs" />
+    <Compile Include="TimerManager\TimerTest.cs" />
+    <Compile Include="TimerManager\TestTimer.cs" />
+    <Compile Include="Debug\AssertTest.cs" />
+    <Compile Include="CCommandTests\CCommandTest.cs" />
+    <Compile Include="CCommandTests\CCommandTestDelegate.cs" />
+    <Compile Include="CCommandTests\CCommandTestOptions.cs" />
+    <Compile Include="CCommandTests\CCommandTestCommandProcessor.cs" />
+    <Compile Include="CCommandTests\CCommandTestCRegistryTest.cs" />
+    <Compile Include="CCommandTests\CCommandTestAutoComplete.cs" />
+    <Compile Include="CCommandTests\CCommandTestMultipleCommands.cs" />
+    <Compile Include="CCommandTests\CCommandTestCommandSplitter.cs" />
+    <Compile Include="CCommandTests\CCommandTestBind.cs" />
+    <Compile Include="CCommandTests\CCommandMock.cs" />
+    <Compile Include="CCommandTests\CCommandTestAlias.cs" />
+    <Compile Include="CCommandTests\CCommandTestPrintUsage.cs" />
+    <Compile Include="ConsoleViewTests\ConsoleViewTest.cs" />
+    <Compile Include="ConsoleViewTests\ConsoleViewTest.Filtering.cs" />
+    <Compile Include="ConsoleViewTests\ConsoleViewTest.Clear.cs" />
+    <Compile Include="ConsoleViewTests\ConsoleViewTest.Cursor.cs" />
+    <Compile Include="ConsoleViewTests\ConsoleViewTest.Text.cs" />
+    <Compile Include="TableViewTests\TableViewTest.cs" />
+    <Compile Include="TableViewTests\TableViewTest.VisibleRows.cs" />
+    <Compile Include="TableViewTests\TableViewTest.ReusableCells.cs" />
+    <Compile Include="TableViewTests\TableViewTest.AddRows.cs" />
+    <Compile Include="TableViewTests\TableViewTest.Clicks.cs" />
+    <Compile Include="TableViewTests\TableViewTest.Scrolling.cs" />
+    <Compile Include="TableViewTests\TableViewTest.Overflow.cs" />
+    <Compile Include="TableViewTests\TableViewTest.Resize.cs" />
+    <Compile Include="TerminalTests\TerminalHistoryTest.cs" />
+    <Compile Include="TerminalTests\AutoCompleteTest.cs" />
+    <Compile Include="CCommandTests\CCommandTestCommandsListing.cs" />
+    <Compile Include="Preferences\PreferencesTest.cs" />
+    <Compile Include="CCommandTests\CVarDelegateTest.cs" />
+    <Compile Include="CCommandTests\CCommandPlayModeOnlyTest.cs" />
+    <Compile Include="CCommandTests\CCommandTestCvar.cs" />
+    <Compile Include="CCommandTests\CCommandTestReflectionExecute.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Project\Assembly-CSharp-firstpass.csproj">
+      <Project>{EB8AA23C-2655-E22B-2EBB-05697394EDB3}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Project\Assembly-CSharp-Editor.csproj">
+      <Project>{6CDB4719-1D28-38FF-BF92-A07FF7EAE25F}</Project>
+      <Name>Assembly-CSharp-Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Project\Assembly-CSharp.csproj">
+      <Project>{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}</Project>
+      <Name>Assembly-CSharp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <TextStylePolicy inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/plain" />
+          <CSharpFormattingPolicy IndentSwitchBody="True" AnonymousMethodBraceStyle="NextLine" PropertyBraceStyle="NextLine" PropertyGetBraceStyle="NextLine" PropertySetBraceStyle="NextLine" EventBraceStyle="NextLine" EventAddBraceStyle="NextLine" EventRemoveBraceStyle="NextLine" StatementBraceStyle="NextLine" ArrayInitializerBraceStyle="NextLine" BeforeMethodDeclarationParentheses="False" BeforeMethodCallParentheses="False" BeforeConstructorDeclarationParentheses="False" BeforeDelegateDeclarationParentheses="False" NewParentheses="False" inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="TimerManager\" />
+    <Folder Include="Debug\" />
+    <Folder Include="CCommandTests\" />
+    <Folder Include="ConsoleViewTests\" />
+    <Folder Include="TableViewTests\" />
+    <Folder Include="TerminalTests\" />
+    <Folder Include="Preferences\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="unity_test_player_prefs.plist">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

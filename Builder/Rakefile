@@ -1,0 +1,281 @@
+require 'rake'
+
+require File.expand_path 'common.rb'
+require File.expand_path 'template_file.rb'
+
+include Lunar
+
+task :init do
+  $dir_builder = File.expand_path '.'
+  $dir_builder_project = resolve_path "#{$dir_builder}/BuilderProject"
+  $dir_builder_project_assets = resolve_path "#{$dir_builder_project}/Assets"
+  $dir_builder_project_assets_editor = resolve_path "#{$dir_builder_project_assets}/Editor"
+
+  $dir_out = File.expand_path 'temp'
+  $dir_out_libraries = "#{$dir_out}/libraries"
+
+  $dir_templates = resolve_path File.expand_path('templates')
+
+  $dir_project = resolve_path File.expand_path('../Project')
+  $dir_project_assets = resolve_path "#{$dir_project}/Assets"
+  $dir_project_assets_plugins = resolve_path "#{$dir_project_assets}/Plugins"
+  $dir_project_assets_plugins_unity = resolve_path "#{$dir_project_assets_plugins}/Lunar"
+  $dir_project_assets_plugins_ios = resolve_path "#{$dir_project_assets_plugins}/iOS"
+  $dir_project_assets_plugins_android = resolve_path "#{$dir_project_assets_plugins}/Android"
+  $dir_project_assets_editor = resolve_path "#{$dir_project_assets}/Editor"
+
+  $dir_native = resolve_path File.expand_path('../Native')
+  $dir_native_ios = resolve_path "#{$dir_native}/ios/LunarPlugin"
+  $dir_native_android = resolve_path "#{$dir_native}/android"
+
+  $package_list_filename = 'PackageFiles.cs'
+  $package_list_file = "#{$dir_out}/#{$package_list_filename}"
+
+end
+
+task :clean => [:init] do
+  FileUtils.rm_rf $dir_out
+  FileUtils.makedirs $dir_out
+end
+
+desc 'Builds Lunar plugin library'
+task :build_native_ios => [:init] do
+  dir_dest = $dir_project_assets_plugins_ios
+
+  # cleanup
+  delete_all_assets "#{dir_dest}/*.a"
+
+  # build
+  file_lib = build_ios_library $dir_native_ios, 'LunarPlugin', 'Release', 'LunarPlugin'
+
+  # check architectures
+  check_ios_library_architectures file_lib, 'armv7', 'arm64'
+
+  # copy to project
+  FileUtils.cp file_lib, "#{dir_dest}/libLunar.a"
+end
+
+desc 'Builds Lunar plugin library'
+task :build_native_android => [:init] do
+  dir_dest = "#{$dir_project_assets_plugins_android}/libs"
+
+  # cleanup
+  delete_all_assets "#{dir_dest}/*.jar"
+
+  # build
+  file_lib = build_android_jar $dir_native_android, 'lunar'
+
+  # copy to project
+  FileUtils.cp file_lib, "#{dir_dest}/lunar.jar"
+end
+
+desc 'Builds Lunar plugin library'
+task :build_native => [:build_native_ios, :build_native_android]
+
+task :prepare_package_files => [:init] do
+  # list package files
+  dest_plugin_editor = "#{$dir_builder_project_assets_editor}/Lunar"
+  dest_plugin_runtime = "#{$dir_builder_project_assets}/Plugins/Lunar"
+  dest_plugin_native_ios = "#{$dir_builder_project_assets}/Plugins/iOS"
+  dest_plugin_native_android = "#{$dir_builder_project_assets}/Plugins/Android"
+
+  # FIXME: I don't like this part
+  $package_entries = [
+      CopingEntry.new(dest_plugin_editor, "#{$dir_out}/bin/Debug",
+                      "#{$dir_out}/bin/Debug/LunarEditor.dll",
+                      "#{$dir_out}/bin/Debug/LunarEditor.dll.mdb"
+      ),
+      CopingEntry.new($dir_builder_project_assets_editor, $dir_project_assets_editor,
+                      "#{$dir_project_assets_editor}/Lunar/Menlo-Regular.ttf"
+      ),
+
+      CopingEntry.new(dest_plugin_runtime, "#{$dir_out}/bin/Debug",
+                      "#{$dir_out}/bin/Debug/LunarPlugin.dll",
+                      "#{$dir_out}/bin/Debug/LunarPlugin.dll.mdb"
+      ),
+
+      CopingEntry.new(dest_plugin_runtime, $dir_project_assets,
+                      "#{$dir_project_assets}/LunarCameraScript.cs"
+      ),
+
+      CopingEntry.new(dest_plugin_native_ios, $dir_project_assets_plugins_ios, *list_assets("#{$dir_project_assets_plugins_ios}/**/*")),
+      CopingEntry.new(dest_plugin_native_android, $dir_project_assets_plugins_android, *list_assets("#{$dir_project_assets_plugins_android}/**/*"))
+  ]
+
+  # generate package file list
+  package_files = []
+
+  $package_entries.each { |copying_entry|
+    dir_root = $dir_builder_project
+    dir_src = copying_entry.src
+
+    copying_entry.names.each { |file|
+      dest_file = "#{copying_entry.dest}/#{make_relative_path file, dir_src}"
+      file_parent = File.dirname dest_file
+      loop do
+        file_parent_path = make_relative_path(file_parent, dir_root)
+
+        break unless file_parent_path != '.' and file_parent_path != 'Assets'
+        package_files.push file_parent_path unless package_files.include? file_parent_path
+
+        file_parent = File.dirname file_parent
+        break if file_parent.nil?
+      end
+
+      package_files.push make_relative_path(dest_file, dir_root)
+    }
+  }
+
+  package_files.sort!
+
+  puts 'Package files:'
+  puts package_files
+
+  package_files_list = []
+  package_files.each {|file|
+    package_files_list.push %("#{file}")
+  }
+
+  package_list_file_template = resolve_path "#{$dir_templates}/#{$package_list_filename}.template"
+
+  options = {
+      :PackageFiles => package_files_list.join(",\n")
+  }
+
+  TemplateFile.new(package_list_file_template).process($package_list_file, options)
+end
+
+desc 'Builds Lunar plugin library'
+task :build_plugin => [:clean, :prepare_package_files] do
+
+  # basic defines
+  defines_basic = [
+    'UNITY_STANDALONE_OSX',
+    'UNITY_DASHBOARD_WIDGET',
+    'UNITY_STANDALONE_WIN',
+    'UNITY_STANDALONE_LINUX',
+    'UNITY_STANDALONE',
+    'UNITY_WEBPLAYER',
+    'UNITY_WII',
+    'UNITY_IPHONE',
+    'UNITY_ANDROID',
+    'UNITY_PS3',
+    'UNITY_XBOX360',
+    'UNITY_FLASH',
+    'UNITY_BLACKBERRY',
+    'UNITY_WP8',
+    'UNITY_METRO',
+    'UNITY_WINRT',
+    'UNITY_METRO'
+  ]
+
+  # plugin
+  defines_debug = %w(LUNAR_DEBUG) + defines_basic
+  defines_release = defines_basic
+
+  # source files
+  files = Dir["#{$dir_project_assets_plugins_unity}/**/*.cs"]
+
+  includes = create_includes $dir_project_assets_plugins, files
+
+  # additional files
+  file_assembly_info = resolve_path "#{$dir_templates}/LunarPlugin/AssemblyInfo.cs"
+  includes << create_include(file_assembly_info, 'AssemblyInfo.cs')
+
+  package_list_file = resolve_path $package_list_file
+  includes << create_include(package_list_file, $package_list_filename)
+
+  options = {
+      :RootNamespace => 'Lunar',
+      :AssemblyName => 'LunarPlugin',
+      :ReleaseVersion => '0.0.0',
+      :Description => 'Lunar Plugin Runtime Library',
+      :DefineDebugConstants => defines_debug.join(';'),
+      :DefineReleaseConstants => defines_release.join(';'),
+      :IncludeSources => includes.join("\n")
+  }
+
+  plugin_proj_template = resolve_path File.expand_path("#{$dir_templates}/LunarPlugin/LunarPlugin.csproj.template")
+  generate_build_mono_project plugin_proj_template, $dir_out, options
+
+  # editor only defines
+  editor_defines = defines_basic + [
+      'UNITY_EDITOR',
+      'UNITY_EDITOR_WIN',
+      'UNITY_EDITOR_OSX'
+  ]
+
+  # plugin
+  defines_debug = %w(LUNAR_DEBUG) + editor_defines
+  defines_release = editor_defines
+
+  # source files
+  files = Dir["#{$dir_project_assets_editor}/**/*.cs"]
+
+  includes = create_includes $dir_project_assets_editor, files
+
+  # assembly info
+  file_assembly_info = resolve_path "#{$dir_templates}/LunarEditor/AssemblyInfo.cs"
+  includes << create_include(file_assembly_info, 'AssemblyInfo.cs')
+
+  options = {
+      :RootNamespace => 'Lunar',
+      :AssemblyName => 'LunarEditor',
+      :ReleaseVersion => '0.0.0',
+      :Description => 'Lunar Plugin Editor Library',
+      :DefineDebugConstants => defines_debug.join(';'),
+      :DefineReleaseConstants => defines_release.join(';'),
+      :IncludeSources => includes.join("\n"),
+      :LunarPluginDll => resolve_path("#{$dir_out}/bin/Debug/LunarPlugin.dll") # FIXME!!!
+  }
+
+  editor_proj_template = resolve_path File.expand_path("#{$dir_templates}/LunarEditor/LunarEditor.csproj.template")
+  generate_build_mono_project editor_proj_template, $dir_out, options
+
+end
+
+desc 'Updates builder project'
+task :update_builder_project => [:init, :prepare_package_files] do
+
+  dir_builder_scripts = "#{$dir_builder_project_assets_editor}/Builder"
+
+  # remove everything except build scripts
+  builder_files = Dir["#{dir_builder_scripts}/**/*.cs"]
+  existing_files = Dir["#{$dir_builder_project_assets}/**/*"]
+  cleanup_project existing_files, builder_files
+
+  puts 'Copying package files...'
+  $package_entries.each { |copying_entry|
+    dir_dest = copying_entry.dest
+    FileUtils.mkpath dir_dest
+
+    dir_src = resolve_path copying_entry.src
+
+    copying_entry.names.each { |file_src|
+      file_dest = "#{dir_dest}/#{make_relative_path file_src, dir_src}"
+      puts file_dest
+      Lunar.copy_file file_src, file_dest
+    }
+  }
+end
+
+desc 'Export Unity package'
+task :export_unity_package => [:init] do
+
+  Dir.chdir $dir_builder_project do
+    exec_unity_method $dir_builder_project, 'LunarEditor.Build.Builder.ExportUnityPackage'
+
+    file_package = File.expand_path 'Build/Package/Lunar.unitypackage'
+    fail_script_unless_file_exists file_package
+
+    puts "Package written: #{file_package}"
+
+  end
+
+end
+
+desc 'Builds plugin and updates builder project'
+task :build_update_builder_project => [:clean, :build_plugin, :build_native, :update_builder_project]
+
+desc 'Builds plugin and exports Unity package'
+task :build_export_unity_package => [:clean, :build_update_builder_project, :export_unity_package]

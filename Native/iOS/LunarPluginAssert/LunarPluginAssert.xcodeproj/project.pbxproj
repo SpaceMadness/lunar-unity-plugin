@@ -1,0 +1,371 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EF8C34041A9A639500C19519 /* libLunarPluginAssert.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8C33F81A9A639500C19519 /* libLunarPluginAssert.a */; };
+		EF8C34301A9A673900C19519 /* LunarAssertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8C342F1A9A673900C19519 /* LunarAssertViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EF8C34051A9A639500C19519 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF8C33F01A9A639500C19519 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF8C33F71A9A639500C19519;
+			remoteInfo = LunarPluginAssert;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EF8C33F61A9A639500C19519 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		EF8C33F81A9A639500C19519 /* libLunarPluginAssert.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLunarPluginAssert.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF8C34031A9A639500C19519 /* LunarPluginAssertTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunarPluginAssertTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF8C34091A9A639500C19519 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF8C342E1A9A673900C19519 /* LunarAssertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LunarAssertViewController.h; sourceTree = SOURCE_ROOT; };
+		EF8C342F1A9A673900C19519 /* LunarAssertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LunarAssertViewController.m; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EF8C33F51A9A639500C19519 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF8C34001A9A639500C19519 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF8C34041A9A639500C19519 /* libLunarPluginAssert.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EF8C33EF1A9A639500C19519 = {
+			isa = PBXGroup;
+			children = (
+				EF8C33FA1A9A639500C19519 /* LunarPluginAssert */,
+				EF8C34071A9A639500C19519 /* LunarPluginAssertTests */,
+				EF8C33F91A9A639500C19519 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EF8C33F91A9A639500C19519 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF8C33F81A9A639500C19519 /* libLunarPluginAssert.a */,
+				EF8C34031A9A639500C19519 /* LunarPluginAssertTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EF8C33FA1A9A639500C19519 /* LunarPluginAssert */ = {
+			isa = PBXGroup;
+			children = (
+				EF8C342E1A9A673900C19519 /* LunarAssertViewController.h */,
+				EF8C342F1A9A673900C19519 /* LunarAssertViewController.m */,
+			);
+			path = LunarPluginAssert;
+			sourceTree = "<group>";
+		};
+		EF8C34071A9A639500C19519 /* LunarPluginAssertTests */ = {
+			isa = PBXGroup;
+			children = (
+				EF8C34081A9A639500C19519 /* Supporting Files */,
+			);
+			path = LunarPluginAssertTests;
+			sourceTree = "<group>";
+		};
+		EF8C34081A9A639500C19519 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EF8C34091A9A639500C19519 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EF8C33F71A9A639500C19519 /* LunarPluginAssert */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF8C340C1A9A639500C19519 /* Build configuration list for PBXNativeTarget "LunarPluginAssert" */;
+			buildPhases = (
+				EF8C33F41A9A639500C19519 /* Sources */,
+				EF8C33F51A9A639500C19519 /* Frameworks */,
+				EF8C33F61A9A639500C19519 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LunarPluginAssert;
+			productName = LunarPluginAssert;
+			productReference = EF8C33F81A9A639500C19519 /* libLunarPluginAssert.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		EF8C34021A9A639500C19519 /* LunarPluginAssertTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF8C340F1A9A639500C19519 /* Build configuration list for PBXNativeTarget "LunarPluginAssertTests" */;
+			buildPhases = (
+				EF8C33FF1A9A639500C19519 /* Sources */,
+				EF8C34001A9A639500C19519 /* Frameworks */,
+				EF8C34011A9A639500C19519 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF8C34061A9A639500C19519 /* PBXTargetDependency */,
+			);
+			name = LunarPluginAssertTests;
+			productName = LunarPluginAssertTests;
+			productReference = EF8C34031A9A639500C19519 /* LunarPluginAssertTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EF8C33F01A9A639500C19519 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Space Madness";
+				TargetAttributes = {
+					EF8C33F71A9A639500C19519 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					EF8C34021A9A639500C19519 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = EF8C33F31A9A639500C19519 /* Build configuration list for PBXProject "LunarPluginAssert" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EF8C33EF1A9A639500C19519;
+			productRefGroup = EF8C33F91A9A639500C19519 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EF8C33F71A9A639500C19519 /* LunarPluginAssert */,
+				EF8C34021A9A639500C19519 /* LunarPluginAssertTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EF8C34011A9A639500C19519 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EF8C33F41A9A639500C19519 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF8C34301A9A673900C19519 /* LunarAssertViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF8C33FF1A9A639500C19519 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EF8C34061A9A639500C19519 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF8C33F71A9A639500C19519 /* LunarPluginAssert */;
+			targetProxy = EF8C34051A9A639500C19519 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		EF8C340A1A9A639500C19519 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EF8C340B1A9A639500C19519 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EF8C340D1A9A639500C19519 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		EF8C340E1A9A639500C19519 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		EF8C34101A9A639500C19519 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LunarPluginAssertTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EF8C34111A9A639500C19519 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LunarPluginAssertTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EF8C33F31A9A639500C19519 /* Build configuration list for PBXProject "LunarPluginAssert" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF8C340A1A9A639500C19519 /* Debug */,
+				EF8C340B1A9A639500C19519 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF8C340C1A9A639500C19519 /* Build configuration list for PBXNativeTarget "LunarPluginAssert" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF8C340D1A9A639500C19519 /* Debug */,
+				EF8C340E1A9A639500C19519 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF8C340F1A9A639500C19519 /* Build configuration list for PBXNativeTarget "LunarPluginAssertTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF8C34101A9A639500C19519 /* Debug */,
+				EF8C34111A9A639500C19519 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EF8C33F01A9A639500C19519 /* Project object */;
+}

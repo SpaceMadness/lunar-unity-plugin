@@ -1,0 +1,554 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EF8A93D41A6C9B46001F2B25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8A93D31A6C9B46001F2B25 /* AppDelegate.swift */; };
+		EF8A93D61A6C9B46001F2B25 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8A93D51A6C9B46001F2B25 /* ViewController.swift */; };
+		EF8A93D91A6C9B46001F2B25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF8A93D71A6C9B46001F2B25 /* Main.storyboard */; };
+		EF8A93DB1A6C9B46001F2B25 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF8A93DA1A6C9B46001F2B25 /* Images.xcassets */; };
+		EF8A93DE1A6C9B46001F2B25 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF8A93DC1A6C9B46001F2B25 /* LaunchScreen.xib */; };
+		EF8A93EA1A6C9B46001F2B25 /* LunarTestAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8A93E91A6C9B46001F2B25 /* LunarTestAppTests.swift */; };
+		EF8C34351A9A68C800C19519 /* libLunarPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8C34221A9A655300C19519 /* libLunarPlugin.a */; };
+		EF8C34361A9A68C800C19519 /* libLunarPluginAssert.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8C342B1A9A656700C19519 /* libLunarPluginAssert.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EF8A93E41A6C9B46001F2B25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF8A93C61A6C9B46001F2B25 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF8A93CD1A6C9B46001F2B25;
+			remoteInfo = LunarTestApp;
+		};
+		EF8C34211A9A655300C19519 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF8C341C1A9A655300C19519 /* LunarPlugin.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EFE8DAFD1A6AFB4500550FD0;
+			remoteInfo = LunarPlugin;
+		};
+		EF8C34231A9A655300C19519 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF8C341C1A9A655300C19519 /* LunarPlugin.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EFE8DB081A6AFB4500550FD0;
+			remoteInfo = LunarPluginTests;
+		};
+		EF8C342A1A9A656700C19519 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF8C34251A9A656700C19519 /* LunarPluginAssert.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EF8C33F81A9A639500C19519;
+			remoteInfo = LunarPluginAssert;
+		};
+		EF8C342C1A9A656700C19519 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF8C34251A9A656700C19519 /* LunarPluginAssert.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EF8C34031A9A639500C19519;
+			remoteInfo = LunarPluginAssertTests;
+		};
+		EF8C34311A9A680500C19519 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF8C341C1A9A655300C19519 /* LunarPlugin.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EFE8DAFC1A6AFB4500550FD0;
+			remoteInfo = LunarPlugin;
+		};
+		EF8C34331A9A680500C19519 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF8C34251A9A656700C19519 /* LunarPluginAssert.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EF8C33F71A9A639500C19519;
+			remoteInfo = LunarPluginAssert;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EF8A93CE1A6C9B46001F2B25 /* LunarTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LunarTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF8A93D21A6C9B46001F2B25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF8A93D31A6C9B46001F2B25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EF8A93D51A6C9B46001F2B25 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EF8A93D81A6C9B46001F2B25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EF8A93DA1A6C9B46001F2B25 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EF8A93DD1A6C9B46001F2B25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		EF8A93E31A6C9B46001F2B25 /* LunarTestAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunarTestAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF8A93E81A6C9B46001F2B25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF8A93E91A6C9B46001F2B25 /* LunarTestAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunarTestAppTests.swift; sourceTree = "<group>"; };
+		EF8A93FF1A6CA02D001F2B25 /* LunarTestApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LunarTestApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		EF8C341C1A9A655300C19519 /* LunarPlugin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LunarPlugin.xcodeproj; path = ../LunarPlugin/LunarPlugin.xcodeproj; sourceTree = "<group>"; };
+		EF8C34251A9A656700C19519 /* LunarPluginAssert.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LunarPluginAssert.xcodeproj; path = ../LunarPluginAssert/LunarPluginAssert.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EF8A93CB1A6C9B46001F2B25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF8C34351A9A68C800C19519 /* libLunarPlugin.a in Frameworks */,
+				EF8C34361A9A68C800C19519 /* libLunarPluginAssert.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF8A93E01A6C9B46001F2B25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EF8A93C51A6C9B46001F2B25 = {
+			isa = PBXGroup;
+			children = (
+				EF8C341C1A9A655300C19519 /* LunarPlugin.xcodeproj */,
+				EF8C34251A9A656700C19519 /* LunarPluginAssert.xcodeproj */,
+				EF8A93D01A6C9B46001F2B25 /* LunarTestApp */,
+				EF8A93E61A6C9B46001F2B25 /* LunarTestAppTests */,
+				EF8A93CF1A6C9B46001F2B25 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EF8A93CF1A6C9B46001F2B25 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF8A93CE1A6C9B46001F2B25 /* LunarTestApp.app */,
+				EF8A93E31A6C9B46001F2B25 /* LunarTestAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EF8A93D01A6C9B46001F2B25 /* LunarTestApp */ = {
+			isa = PBXGroup;
+			children = (
+				EF8A93D31A6C9B46001F2B25 /* AppDelegate.swift */,
+				EF8A93DA1A6C9B46001F2B25 /* Images.xcassets */,
+				EF8A93DC1A6C9B46001F2B25 /* LaunchScreen.xib */,
+				EF8A93FF1A6CA02D001F2B25 /* LunarTestApp-Bridging-Header.h */,
+				EF8A93D71A6C9B46001F2B25 /* Main.storyboard */,
+				EF8A93D11A6C9B46001F2B25 /* Supporting Files */,
+				EF8A93D51A6C9B46001F2B25 /* ViewController.swift */,
+			);
+			path = LunarTestApp;
+			sourceTree = "<group>";
+		};
+		EF8A93D11A6C9B46001F2B25 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EF8A93D21A6C9B46001F2B25 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EF8A93E61A6C9B46001F2B25 /* LunarTestAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				EF8A93E91A6C9B46001F2B25 /* LunarTestAppTests.swift */,
+				EF8A93E71A6C9B46001F2B25 /* Supporting Files */,
+			);
+			path = LunarTestAppTests;
+			sourceTree = "<group>";
+		};
+		EF8A93E71A6C9B46001F2B25 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EF8A93E81A6C9B46001F2B25 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EF8C341D1A9A655300C19519 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF8C34221A9A655300C19519 /* libLunarPlugin.a */,
+				EF8C34241A9A655300C19519 /* LunarPluginTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EF8C34261A9A656700C19519 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF8C342B1A9A656700C19519 /* libLunarPluginAssert.a */,
+				EF8C342D1A9A656700C19519 /* LunarPluginAssertTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EF8A93CD1A6C9B46001F2B25 /* LunarTestApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF8A93ED1A6C9B46001F2B25 /* Build configuration list for PBXNativeTarget "LunarTestApp" */;
+			buildPhases = (
+				EF8A93CA1A6C9B46001F2B25 /* Sources */,
+				EF8A93CB1A6C9B46001F2B25 /* Frameworks */,
+				EF8A93CC1A6C9B46001F2B25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF8C34321A9A680500C19519 /* PBXTargetDependency */,
+				EF8C34341A9A680500C19519 /* PBXTargetDependency */,
+			);
+			name = LunarTestApp;
+			productName = LunarTestApp;
+			productReference = EF8A93CE1A6C9B46001F2B25 /* LunarTestApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EF8A93E21A6C9B46001F2B25 /* LunarTestAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF8A93F01A6C9B46001F2B25 /* Build configuration list for PBXNativeTarget "LunarTestAppTests" */;
+			buildPhases = (
+				EF8A93DF1A6C9B46001F2B25 /* Sources */,
+				EF8A93E01A6C9B46001F2B25 /* Frameworks */,
+				EF8A93E11A6C9B46001F2B25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF8A93E51A6C9B46001F2B25 /* PBXTargetDependency */,
+			);
+			name = LunarTestAppTests;
+			productName = LunarTestAppTests;
+			productReference = EF8A93E31A6C9B46001F2B25 /* LunarTestAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EF8A93C61A6C9B46001F2B25 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Space Madness";
+				TargetAttributes = {
+					EF8A93CD1A6C9B46001F2B25 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					EF8A93E21A6C9B46001F2B25 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = EF8A93CD1A6C9B46001F2B25;
+					};
+				};
+			};
+			buildConfigurationList = EF8A93C91A6C9B46001F2B25 /* Build configuration list for PBXProject "LunarTestApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EF8A93C51A6C9B46001F2B25;
+			productRefGroup = EF8A93CF1A6C9B46001F2B25 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EF8C341D1A9A655300C19519 /* Products */;
+					ProjectRef = EF8C341C1A9A655300C19519 /* LunarPlugin.xcodeproj */;
+				},
+				{
+					ProductGroup = EF8C34261A9A656700C19519 /* Products */;
+					ProjectRef = EF8C34251A9A656700C19519 /* LunarPluginAssert.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				EF8A93CD1A6C9B46001F2B25 /* LunarTestApp */,
+				EF8A93E21A6C9B46001F2B25 /* LunarTestAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EF8C34221A9A655300C19519 /* libLunarPlugin.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLunarPlugin.a;
+			remoteRef = EF8C34211A9A655300C19519 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EF8C34241A9A655300C19519 /* LunarPluginTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LunarPluginTests.xctest;
+			remoteRef = EF8C34231A9A655300C19519 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EF8C342B1A9A656700C19519 /* libLunarPluginAssert.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLunarPluginAssert.a;
+			remoteRef = EF8C342A1A9A656700C19519 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EF8C342D1A9A656700C19519 /* LunarPluginAssertTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LunarPluginAssertTests.xctest;
+			remoteRef = EF8C342C1A9A656700C19519 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EF8A93CC1A6C9B46001F2B25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF8A93D91A6C9B46001F2B25 /* Main.storyboard in Resources */,
+				EF8A93DE1A6C9B46001F2B25 /* LaunchScreen.xib in Resources */,
+				EF8A93DB1A6C9B46001F2B25 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF8A93E11A6C9B46001F2B25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EF8A93CA1A6C9B46001F2B25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF8A93D61A6C9B46001F2B25 /* ViewController.swift in Sources */,
+				EF8A93D41A6C9B46001F2B25 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF8A93DF1A6C9B46001F2B25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF8A93EA1A6C9B46001F2B25 /* LunarTestAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EF8A93E51A6C9B46001F2B25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF8A93CD1A6C9B46001F2B25 /* LunarTestApp */;
+			targetProxy = EF8A93E41A6C9B46001F2B25 /* PBXContainerItemProxy */;
+		};
+		EF8C34321A9A680500C19519 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LunarPlugin;
+			targetProxy = EF8C34311A9A680500C19519 /* PBXContainerItemProxy */;
+		};
+		EF8C34341A9A680500C19519 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LunarPluginAssert;
+			targetProxy = EF8C34331A9A680500C19519 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EF8A93D71A6C9B46001F2B25 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF8A93D81A6C9B46001F2B25 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EF8A93DC1A6C9B46001F2B25 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF8A93DD1A6C9B46001F2B25 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EF8A93EB1A6C9B46001F2B25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EF8A93EC1A6C9B46001F2B25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EF8A93EE1A6C9B46001F2B25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = LunarTestApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LunarTestApp/LunarTestApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/../LunarPlugin/LunarPlugin\"/** \"$SRCROOT/../LunarPluginAssert\"/**";
+			};
+			name = Debug;
+		};
+		EF8A93EF1A6C9B46001F2B25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = LunarTestApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LunarTestApp/LunarTestApp-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/../LunarPlugin/LunarPlugin\"/** \"$SRCROOT/../LunarPluginAssert\"/**";
+			};
+			name = Release;
+		};
+		EF8A93F11A6C9B46001F2B25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LunarTestAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LunarTestApp.app/LunarTestApp";
+			};
+			name = Debug;
+		};
+		EF8A93F21A6C9B46001F2B25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LunarTestAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LunarTestApp.app/LunarTestApp";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EF8A93C91A6C9B46001F2B25 /* Build configuration list for PBXProject "LunarTestApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF8A93EB1A6C9B46001F2B25 /* Debug */,
+				EF8A93EC1A6C9B46001F2B25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF8A93ED1A6C9B46001F2B25 /* Build configuration list for PBXNativeTarget "LunarTestApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF8A93EE1A6C9B46001F2B25 /* Debug */,
+				EF8A93EF1A6C9B46001F2B25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF8A93F01A6C9B46001F2B25 /* Build configuration list for PBXNativeTarget "LunarTestAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF8A93F11A6C9B46001F2B25 /* Debug */,
+				EF8A93F21A6C9B46001F2B25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EF8A93C61A6C9B46001F2B25 /* Project object */;
+}
