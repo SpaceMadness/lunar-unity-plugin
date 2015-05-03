@@ -194,7 +194,9 @@ namespace LunarEditor
             return values;
         }
     }
-    
+
+    //////////////////////////////////////////////////////////////////////////////
+
     [CCommand("cvar_restart", Description="Resets all cvars to their default values.")]
     class Cmd_cvar_restart : CCommand
     {
@@ -365,7 +367,9 @@ namespace LunarEditor
             return string.Format("alias {0} {1}", cmd.Name, StringUtils.Arg(cmd.Alias));
         }
     }
-    
+
+    //////////////////////////////////////////////////////////////////////////////
+
     [CCommand("aliaslist", Description="List current aliases")]
     class Cmd_aliaslist : CCommand
     {
@@ -413,6 +417,8 @@ namespace LunarEditor
             return string.Format("alias {0} {1}", cmd.Name, StringUtils.Arg(cmd.Alias));
         }
     }
+
+    //////////////////////////////////////////////////////////////////////////////
     
     [CCommand("unalias", Description="Remove an alias name for command(s)")]
     class Cmd_unalias : CCommand
@@ -473,6 +479,8 @@ namespace LunarEditor
             return true;
         }
     }
+
+    //////////////////////////////////////////////////////////////////////////////
     
     [CCommand("writeconfig", Description="Writes a config file.")]
     class Cmd_writeconfig : CCommand
@@ -615,12 +623,62 @@ namespace LunarEditor
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////////
+
     [CCommand("clear", Description="Clears current terminal window.")]
     class Cmd_clear : CCommand
     {
         void Execute()
         {
             ClearTerminal();
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    [CCommand("menu", Description="Invokes the menu item in the specified path")]
+    class Cmd_menu : CCommand
+    {
+        bool Execute(string menuItemPath)
+        {
+            return EditorApplication.ExecuteMenuItem(menuItemPath);
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////
+    
+    [CCommand("timeScale", Description="The scale at which the time is passing")]
+    class Cmd_timeScale : CPlayModeCommand
+    {
+        [CCommandOption(ShortName="v")]
+        bool verbose;
+
+        void Execute()
+        {
+            PrintCurrent();
+        }
+
+        bool Execute(float value)
+        {
+            if (value >= 0)
+            {
+                Time.timeScale = value;
+
+                if (verbose)
+                {
+                    PrintCurrent();
+                }
+
+                return true;
+            }
+
+            PrintError("Wrong value: {0}", value.ToString());
+            return false;
+        }
+
+        void PrintCurrent()
+        {
+            PrintIndent("Time scale: {0}", Time.timeScale.ToString());
         }
     }
 
