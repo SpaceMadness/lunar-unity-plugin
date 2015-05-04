@@ -2,14 +2,17 @@
 
 // TODO: asset store link
 
+Requires Unity 5
+
 ## Project Goals
 
-Lunar Plugin for Unity aims to improve the game development process by bringing UNIX/Quake3 style terminal into the editor application.
+Lunar Plugin for Unity aims to improve game developing/testing process by bringing UNIX/Quake3 style terminal into the editor application.
 
 - Create custom commands and execute them from the terminal window
 - Bind commands to the hot keys
 - Create aliases to execute batches
 - Define user variables which persist across game launches
+- Change some aspects of your game while testing
 
 ## Features
 
