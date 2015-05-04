@@ -41,9 +41,19 @@ Features:
   * Smart auto completion.
   * Hot keys bindids.
   
-- Project: Space Shooter *// TBD*
-- Project: Survival shooter *// TBD*
-- Angry Bots *// TBD*
+- [Project: Space Shooter](http://goo.gl/AzlZJp)  
+Demonstrates some possible use cases of the plugin for Unity's Space Shooter [tutorial](https://unity3d.com/learn/tutorials/projects/space-shooter).  
+Features:
+  * Execute Editor menu item from the terminal window.  
+  * Set Time.timeScale with numeric hot keys (from 0.1 to 1.0).
+  * Toggle God Mode for the player (with visual feedback).
+  * Command bindings and alias for God Mode.
+
+- [Project: Survival shooter](https://unity3d.com/learn/tutorials/projects/survival-shooter)  
+  *// TBD*
+
+- [Angry Bots](https://www.assetstore.unity3d.com/en/#!/content/12175)  
+  *// TBD*
   
 ## Social media
 
