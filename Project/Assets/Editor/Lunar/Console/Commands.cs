@@ -555,6 +555,9 @@ namespace LunarEditor
     [CCommand("cat", Description="Prints the content of a config file")]
     class Cmd_cat : CCommand
     {
+        [CCommandOption(ShortName="v")]
+        bool verbose;
+
         bool Execute(string filename = null)
         {
             string name = filename != null ? filename : "default.cfg";
@@ -565,7 +568,12 @@ namespace LunarEditor
                 PrintError("Can't find config file: '{0}'", path);
                 return false;
             }
-            
+
+            if (verbose)
+            {
+                Print(path);
+            }
+
             IList<string> lines = FileUtils.Read(path);
             foreach (string line in lines)
             {
