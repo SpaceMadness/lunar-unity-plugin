@@ -14,13 +14,13 @@ Lunar Plugin for Unity aims to improve game developing/testing process by bringi
 - Define user variables which persist across game launches
 - Change some aspects of your game while testing
 
-## Features
-
-// TBD
-
 ## Quick Start
 
 // TBD
+
+## User Guide
+
+Check [wiki](https://github.com/SpaceMadness/lunar-unity-plugin/wiki) page for more detailed guide.
 
 ## Showcases
 
