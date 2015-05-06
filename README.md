@@ -52,10 +52,13 @@ Features:
   * Toggle God Mode for the player (with visual feedback).
   * Command bindings and alias for God Mode.
 
-- [Project: Survival shooter](https://unity3d.com/learn/tutorials/projects/survival-shooter)  
-  *// TBD*
+- [Angry Bots](http://goo.gl/AB9ULT)  
+Demonstrates some possible use cases of the plugin for Unity's Angry Bots [demo](https://www.assetstore.unity3d.com/en/#!/content/12175).  
+Features:  
+  * Quickly move between checkpoints.
+  * JavaScript calls from C#.
 
-- [Angry Bots](https://www.assetstore.unity3d.com/en/#!/content/12175)  
+- [Project: Survival shooter](https://unity3d.com/learn/tutorials/projects/survival-shooter)  
   *// TBD*
   
 ## Social media
