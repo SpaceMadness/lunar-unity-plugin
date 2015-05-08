@@ -19,19 +19,14 @@ namespace LunarEditor
         [MenuItem("Window/Lunar/Console %#&c")]
         public static void ShowConsole()
         {
-            #if LUNAR_DEVELOPMENT
-            ConsoleWindow.ShowWindow();
-            #endif
+            // might get released
         }
 
         [MenuItem("Window/Lunar/Console %#&c", true)]
         public static bool ShowConsoleCheck()
         {
-            #if LUNAR_DEVELOPMENT
-            return true;
-            #else
+            // disabled for now
             return false;
-            #endif
         }
 
         [MenuItem("Window/Lunar/")]

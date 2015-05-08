@@ -8,6 +8,8 @@ using LunarPlugin;
 using LunarPlugin.Test;
 using LunarPluginInternal;
 
+using LunarEditor;
+
 namespace CCommandTests
 {
     using Assert = NUnit.Framework.Assert;

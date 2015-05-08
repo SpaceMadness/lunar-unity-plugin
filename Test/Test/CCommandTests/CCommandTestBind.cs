@@ -6,6 +6,7 @@ using NUnit.Framework;
 using UnityEngine;
 using LunarPlugin;
 using LunarPluginInternal;
+using LunarEditor;
 
 namespace CCommandTests
 {

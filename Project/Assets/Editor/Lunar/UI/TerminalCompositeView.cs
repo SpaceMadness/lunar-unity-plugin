@@ -76,11 +76,6 @@ namespace LunarEditor
 
             toolbar.AddFlexibleSpace();
 
-            toolbar.AddButton("Console", delegate(Button button)
-            {
-                ConsoleWindow.ShowWindow();
-            });
-
             AddSubview(toolbar);
 
             m_commandField = new TextField();
