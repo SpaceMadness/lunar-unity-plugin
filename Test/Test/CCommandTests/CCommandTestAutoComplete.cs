@@ -796,7 +796,7 @@ namespace CCommandTests
             }
         }
 
-        public void LogTerminal(CVar[] cvars)
+        public void LogTerminal(Exception e, string message)
         {
             throw new NotImplementedException();
         }

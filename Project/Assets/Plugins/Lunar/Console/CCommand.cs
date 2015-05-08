@@ -24,6 +24,7 @@ namespace LunarPlugin
     {
         void LogTerminal(string message);
         void LogTerminal(string[] table);
+        void LogTerminal(Exception e, string message);
 
         void ClearTerminal();
 
@@ -46,6 +47,10 @@ namespace LunarPlugin
         }
 
         public void LogTerminal(string[] table)
+        {
+        }
+
+        public void LogTerminal(Exception e, string message)
         {
         }
 
@@ -918,41 +923,93 @@ namespace LunarPlugin
             }
         }
 
+        /// <summary>
+        /// Print the specified message.
+        /// </summary>
         protected void Print(string message)
         {
             m_delegate.LogTerminal(message);
         }
 
+        /// <summary>
+        /// Print the specified formatted message.
+        /// </summary>
         protected void Print(string format, params object[] args)
         {
             m_delegate.LogTerminal(StringUtils.TryFormat(format, args));
         }
 
+        /// <summary>
+        /// Pretty print the table of strings.
+        /// 
+        /// Example:
+        /// alias            cvar_restart     reset
+        /// aliaslist        cvarlist         tag
+        /// bind             echo             test
+        /// bindlist         exec             throw_exception
+        /// break            exit             timeScale
+        /// cat              log              toggle
+        /// clear            man              unalias
+        /// clearprefs       menu             unbind
+        /// cmdlist          next             unbindall
+        /// colors           prefs            writeconfig
+        /// </summary>
         protected void Print(string[] table)
         {
             m_delegate.LogTerminal(table);
         }
 
+        /// <summary>
+        /// Prints message with indent.
+        /// </summary>
         protected void PrintIndent(string message)
         {
             m_delegate.LogTerminal("  " + message);
         }
 
+        /// <summary>
+        /// Prints formatted message with indent.
+        /// </summary>
         protected void PrintIndent(string format, params object[] args)
         {
             m_delegate.LogTerminal("  " + StringUtils.TryFormat(format, args));
         }
 
+        /// <summary>
+        /// Prints error message.
+        /// </summary>
         protected void PrintError(string format, params object[] args)
         {
             PrintIndent(C(StringUtils.TryFormat(format, args), ColorCode.Error));
         }
 
-        protected void PrintError(Exception e, string format, params object[] args)
+        /// <summary>
+        /// Prints exceptions.
+        /// </summary>
+        protected void PrintError(Exception e)
         {
-            Print(C(StringUtils.TryFormat(format, args), ColorCode.Error));
+            PrintError(e, null);
         }
 
+        /// <summary>
+        /// Prints exceptions.
+        /// </summary>
+        protected void PrintError(Exception e, string format, params object[] args)
+        {
+            PrintError(e, StringUtils.TryFormat(format, args));
+        }
+
+        /// <summary>
+        /// Prints exceptions.
+        /// </summary>
+        protected void PrintError(Exception e, string message)
+        {
+            m_delegate.LogTerminal(e, message);
+        }
+
+        /// <summary>
+        /// Prints command's usage.
+        /// </summary>
         public virtual void PrintUsage(bool showDescription = false)
         {
             StringBuilder buffer = new StringBuilder();

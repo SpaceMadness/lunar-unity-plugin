@@ -20,7 +20,6 @@ namespace LunarEditor
 
         private static readonly IDictionary<string, URLHandler> s_urlHandlers;
 
-        private readonly Console m_console;
         private readonly Terminal m_terminal;
 
         private readonly Preferences m_preferences;
@@ -38,10 +37,7 @@ namespace LunarEditor
         private EditorApp()
         {
             m_preferences = CreatePreferences();
-
-            m_console = CreateConsole(CVars.c_historySize.IntValue);
             m_terminal = CreateTerminal(CVars.c_historySize.IntValue);
-
             m_lastUpdateTime = EditorApplication.timeSinceStartup;
 
             TimerManager.ScheduleTimer(() =>
@@ -70,16 +66,14 @@ namespace LunarEditor
             m_terminal.Add(table);
         }
 
+        protected override void LogTerminalImpl(Exception e, string message)
+        {
+            m_terminal.Add(e, message);
+        }
+
         protected override void ClearTerminalImpl()
         {
             m_terminal.Clear();
-        }
-
-        private Console CreateConsole(int capacity)
-        {
-            Console console = new FormattedConsole(capacity);
-            console.RegisterLogDelegate();
-            return console;
         }
 
         private Terminal CreateTerminal(int capacity)
@@ -183,11 +177,6 @@ namespace LunarEditor
         internal static Preferences Prefs
         {
             get { return s_editorInstance.m_preferences; }
-        }
-
-        internal static Console Console
-        {
-            get { return s_editorInstance.m_console; }
         }
 
         internal static Terminal Terminal

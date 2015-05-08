@@ -139,6 +139,8 @@ namespace LunarPluginInternal
 
         protected abstract void LogTerminalImpl(string[] table);
 
+        protected abstract void LogTerminalImpl(Exception e, string message);
+
         protected abstract void ClearTerminalImpl();
 
         #endregion
@@ -153,6 +155,11 @@ namespace LunarPluginInternal
         public void LogTerminal(string[] table)
         {
             LogTerminalImpl(table);
+        }
+
+        public void LogTerminal(Exception e, string message)
+        {
+            LogTerminalImpl(e, message);
         }
 
         public void ClearTerminal()

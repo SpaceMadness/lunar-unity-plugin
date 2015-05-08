@@ -28,9 +28,9 @@ namespace LunarEditor
             Add(new ConsoleViewCellEntry(lines));
         }
 
-        public virtual void Add(CVar[] cvars)
+        public virtual void Add(Exception e, string message)
         {
-            Add(new ConsoleViewCellEntry(cvars));
+            
         }
 
         //////////////////////////////////////////////////////////////////////////////
@@ -171,6 +171,11 @@ namespace LunarEditor
         public void LogTerminal(string[] table)
         {
             Add(table);
+        }
+
+        public void LogTerminal(Exception e, string message)
+        {
+            
         }
 
         public void ClearTerminal()

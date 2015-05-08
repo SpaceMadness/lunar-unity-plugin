@@ -65,6 +65,11 @@ namespace CCommandTests
             }
         }
 
+        public void LogTerminal(Exception e, string message)
+        {
+            throw new NotImplementedException();
+        }
+
         public void ClearTerminal()
         {
         }
