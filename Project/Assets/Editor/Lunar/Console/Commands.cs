@@ -239,13 +239,41 @@ namespace LunarEditor
         {
             string name = key.ToLower();
             
-            if (command != null)
+            if (!string.IsNullOrEmpty(command))
             {
                 KeyCode Code = CBindings.Parse(name);
                 if (Code == KeyCode.None)
                 {
                     PrintError("Unknown key: {0}", name);
                     return false;
+                }
+
+                char op = command[0];
+                if (op == '+' || op == '-')
+                {
+                    if (command.Length == 1)
+                    {
+                        PrintError("Identifier expected!");
+                        return false;
+                    }
+
+                    string identifier = command.Substring(1);
+
+                    // register operation command
+                    CCommand cmd = CRegistery.FindCommand(command);
+                    if (cmd == null)
+                    {
+                        CRegistery.Register(new COperationCommand(op, identifier));
+                    }
+
+                    // register opposite operation command
+                    char oppositeOp = OppositeOperation(op);
+                    string oppositeCommand = oppositeOp + identifier;
+                    CCommand oppositeCmd = CRegistery.FindCommand(oppositeCommand);
+                    if (oppositeCmd == null)
+                    {
+                        CRegistery.Register(new COperationCommand(oppositeOp, identifier));
+                    }
                 }
                 
                 CBindings.Bind(Code, StringUtils.UnArg(command));
@@ -272,6 +300,14 @@ namespace LunarEditor
             }
             
             return true;
+        }
+
+        private static char OppositeOperation(char op)
+        {
+            if (op == '+') return '-';
+            if (op == '-') return '+';
+
+            throw new ArgumentException("Unknown operation '" + op + "'");
         }
         
         public static string ToString(CBinding b)
@@ -583,7 +619,7 @@ namespace LunarEditor
             return true;
         }
     }
-    
+
     //////////////////////////////////////////////////////////////////////////////
     
     [CCommand("man", Description="Prints command usage")]
