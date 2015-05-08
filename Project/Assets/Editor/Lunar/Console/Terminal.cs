@@ -30,7 +30,7 @@ namespace LunarEditor
 
         public virtual void Add(Exception e, string message)
         {
-            
+            Add(new ConsoleViewCellEntry(e, message));
         }
 
         //////////////////////////////////////////////////////////////////////////////

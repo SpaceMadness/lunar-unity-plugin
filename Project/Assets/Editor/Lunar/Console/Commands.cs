@@ -1014,12 +1014,7 @@ namespace LunarEditor
     {
         bool Execute()
         {
-            TimerManager.ScheduleTimer(delegate()
-            {
-                throw new Exception("Test exception");
-            });
-            
-            return true;
+            throw new Exception("Test exception");
         }
     }
 

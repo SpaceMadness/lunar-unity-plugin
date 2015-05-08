@@ -119,6 +119,10 @@ namespace LunarPlugin
             {
                 PrintError(e.Message);
             }
+            catch (TargetInvocationException e)
+            {
+                PrintError(e.InnerException, "Error while executing command");
+            }
             catch (Exception e)
             {
                 PrintError(e, "Error while executing command");

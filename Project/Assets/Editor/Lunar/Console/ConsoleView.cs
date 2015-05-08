@@ -216,18 +216,7 @@ namespace LunarEditor
             }
             else
             {
-                Assert.IsTrue(entry.IsCvars);
-
-                ConsoleCvarsEntryView cell = table.DequeueReusableCell<ConsoleCvarsEntryView>();
-                if (cell == null)
-                {
-                    cell = new ConsoleCvarsEntryView();
-                }
-                cell.Width = entry.width;
-                cell.Height = entry.height;
-                cell.Cvars = entry.Cvars;
-
-                return cell;
+                throw new NotImplementedException("Unexpected entry type");
             }
         }
 
@@ -374,8 +363,7 @@ namespace LunarEditor
         internal enum Flags : byte
         {
             Plain     = 1 << 1,
-            Table     = 1 << 2,
-            Cvars     = 1 << 3,
+            Table     = 1 << 2
         }
 
         private static readonly string kColSeparator = "  ";
@@ -388,7 +376,6 @@ namespace LunarEditor
 
         public Tag tag;
         public LogLevel level;
-        public string fileName;
         public string stackTrace;
 
         internal Flags flags;
@@ -403,7 +390,6 @@ namespace LunarEditor
             this.data = null;
             this.tag = null;
             this.level = null;
-            this.fileName = null;
             this.stackTrace = null;
         }
 
@@ -426,24 +412,20 @@ namespace LunarEditor
 
             this.tag = null;
             this.level = null;
-            this.fileName = null;
             this.stackTrace = null;
         }
 
-        public ConsoleViewCellEntry(CVar[] cvars, float width = 0, float height = 0)
+        public ConsoleViewCellEntry(Exception e, string message, float width = 0, float height = 0)
         {
-            Assert.IsNotNull(cvars);
-
-            this.flags = Flags.Cvars;
-            this.data = cvars;
+            this.value = message != null ? StringUtils.TryFormat("{0} ({1})", message, e.Message) : e.Message;
             this.width = width;
             this.height = height;
+            this.flags = Flags.Plain;
 
-            this.value = null;
+            this.data = null;
             this.tag = null;
-            this.level = null;
-            this.fileName = null;
-            this.stackTrace = null;
+            this.level = LogLevel.Exception;
+            this.stackTrace = e.StackTrace;
         }
 
         internal void Layout(ITextMeasure measure, float maxWidth)
@@ -478,13 +460,11 @@ namespace LunarEditor
 
                 LayoutTable(measure, table, contentWidth, maxWidth);
             }
-            else if (this.IsCvars)
+            else
             {
-                CVar[] cvars = this.Cvars;
-                Assert.IsNotNull(cvars);
-
-                LayoutCvars(measure, cvars, contentWidth, maxWidth);
+                throw new NotImplementedException("Unexpected entry type");
             }
+
         }
 
         private void LayoutPlain(ITextMeasure measure, float maxWidth)
@@ -591,12 +571,6 @@ namespace LunarEditor
             this.height = totalHeight;
         }
 
-        private void LayoutCvars(ITextMeasure measure, CVar[] cvars, float contentWidth, float maxWidth)
-        {
-            this.width = maxWidth;
-            this.height = ConsoleCvarsEntryView.CalcHeight(cvars);
-        }
-
         private static void ResolveSourceLink(GUIStyleTextMeasure measure, ref StackTraceLine stackLine)
         {
             Color color = EditorSkin.GetColor(stackLine.sourcePathExists ? ColorCode.Link : ColorCode.LinkInnactive);
@@ -629,19 +603,9 @@ namespace LunarEditor
             get { return HasFlag(Flags.Table); }
         }
 
-        public bool IsCvars
-        {
-            get { return HasFlag(Flags.Cvars); }
-        }
-
         public string[] Table
         {
             get { return data as string[]; }
-        }
-
-        public CVar[] Cvars
-        {
-            get { return data as CVar[]; }
         }
     }
 
@@ -817,61 +781,6 @@ namespace LunarEditor
         {
             get { return m_stackTraceLines; }
             set { m_stackTraceLines = value; }
-        }
-
-        #endregion
-    }
-
-    class ConsoleCvarsEntryView : ConsoleViewCell
-    {
-        private static readonly float kVerticalIndent = 2.0f;
-        private CVar[] m_cvars;
-
-        internal protected override void OnTableResized(float dx, float dy)
-        {
-            // no need to resize: elements sizes are fixed
-        }
-
-        protected internal override void PrepareForReuse()
-        {
-            base.PrepareForReuse();
-
-            RemoveSubviews();
-            m_cvars = null;
-        }
-
-        //////////////////////////////////////////////////////////////////////////////
-
-        public static float CalcHeight(CVar[] cvars)
-        {
-            if (cvars != null && cvars.Length > 0)
-            {
-                return cvars.Length * CVarView.kItemHeight + (cvars.Length - 1) * kVerticalIndent;
-            }
-
-            return 0.0f;
-        }
-
-        //////////////////////////////////////////////////////////////////////////////
-
-        #region Properties
-
-        public CVar[] Cvars
-        {
-            get { return m_cvars; }
-            set
-            {
-                Assert.IsNotNull(value);
-                m_cvars = value;
-
-                foreach (CVar cvar in m_cvars)
-                {
-                    AddSubview(new CVarView(cvar, UISize.CVarEntryWidth));
-                }
-
-                ArrangeVert(kVerticalIndent);
-                ResizeToFitSubviews();
-            }
         }
 
         #endregion
