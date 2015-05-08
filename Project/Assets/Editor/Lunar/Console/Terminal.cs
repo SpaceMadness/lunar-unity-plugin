@@ -173,22 +173,7 @@ namespace LunarEditor
             Add(table);
         }
 
-        public void LogTerminal(CVar[] cvars)
-        {
-            Add(cvars);
-        }
-
-        public void LogConsole(LunarPlugin.Tag tag, LunarPlugin.LogLevel level, string message, string stackTrace)
-        {
-            throw new NotImplementedException();
-        }
-
         public void ClearTerminal()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ClearConsole()
         {
             throw new NotImplementedException();
         }

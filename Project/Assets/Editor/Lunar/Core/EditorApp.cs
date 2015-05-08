@@ -70,19 +70,9 @@ namespace LunarEditor
             m_terminal.Add(table);
         }
 
-        protected override void LogTerminalImpl(CVar[] cvars)
-        {
-            m_terminal.Add(cvars);
-        }
-
         protected override void ClearTerminalImpl()
         {
             m_terminal.Clear();
-        }
-
-        protected override void ClearConsoleImpl()
-        {
-            m_console.Clear();
         }
 
         private Console CreateConsole(int capacity)

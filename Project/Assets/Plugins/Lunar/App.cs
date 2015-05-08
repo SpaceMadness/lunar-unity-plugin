@@ -139,11 +139,7 @@ namespace LunarPluginInternal
 
         protected abstract void LogTerminalImpl(string[] table);
 
-        protected abstract void LogTerminalImpl(CVar[] cvars);
-
         protected abstract void ClearTerminalImpl();
-
-        protected abstract void ClearConsoleImpl();
 
         #endregion
 
@@ -159,24 +155,9 @@ namespace LunarPluginInternal
             LogTerminalImpl(table);
         }
 
-        public void LogTerminal(CVar[] cvars)
-        {
-            LogTerminalImpl(cvars);
-        }
-
-        public void LogConsole(Tag tag, LogLevel level, string message, string stackTrace)
-        {
-            Log.LogMessage(tag, level, message, stackTrace);
-        }
-
         public void ClearTerminal()
         {
             ClearTerminalImpl();
-        }
-
-        public void ClearConsole()
-        {
-            ClearConsoleImpl();
         }
 
         public bool ExecuteCommandLine(string commandLine, bool manual = false)

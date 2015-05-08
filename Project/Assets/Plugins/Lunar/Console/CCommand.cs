@@ -24,11 +24,8 @@ namespace LunarPlugin
     {
         void LogTerminal(string message);
         void LogTerminal(string[] table);
-        void LogTerminal(CVar[] cvars);
-        void LogConsole(Tag tag, LogLevel level, string message, string stackTrace);
 
         void ClearTerminal();
-        void ClearConsole();
 
         bool ExecuteCommandLine(string commandLine, bool manual = false);
         void PostNotification(CCommand cmd, string name, params object[] data);
@@ -52,19 +49,7 @@ namespace LunarPlugin
         {
         }
 
-        public void LogTerminal(CVar[] cvars)
-        {
-        }
-
-        public void LogConsole(Tag tag, LogLevel level, string message, string stackTrace)
-        {
-        }
-
         public void ClearTerminal()
-        {
-        }
-
-        public void ClearConsole()
         {
         }
 
@@ -948,11 +933,6 @@ namespace LunarPlugin
             m_delegate.LogTerminal(table);
         }
 
-        protected void Print(params CVar[] cvars)
-        {
-            m_delegate.LogTerminal(cvars);
-        }
-
         protected void PrintIndent(string message)
         {
             m_delegate.LogTerminal("  " + message);
@@ -971,11 +951,6 @@ namespace LunarPlugin
         protected void PrintError(Exception e, string format, params object[] args)
         {
             Print(C(StringUtils.TryFormat(format, args), ColorCode.Error));
-        }
-
-        protected void LogMessage(Tag tag, LogLevel level, string message, string stackTrace)
-        {
-            m_delegate.LogConsole(tag, level, message, stackTrace);
         }
 
         public virtual void PrintUsage(bool showDescription = false)
@@ -1172,11 +1147,6 @@ namespace LunarPlugin
             }
 
             return null;
-        }
-
-        internal void ClearConsole()
-        {
-            m_delegate.ClearConsole();
         }
 
         internal void ClearTerminal()

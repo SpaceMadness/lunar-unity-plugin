@@ -796,20 +796,12 @@ namespace CCommandTests
             }
         }
 
-        public void LogConsole(Tag tag, LogLevel level, string message, string stackTrace)
-        {
-        }
-
         public void LogTerminal(CVar[] cvars)
         {
             throw new NotImplementedException();
         }
 
         public void ClearTerminal()
-        {
-        }
-
-        public void ClearConsole()
         {
         }
 
