@@ -263,7 +263,9 @@ namespace LunarEditor
                     CCommand cmd = CRegistery.FindCommand(command);
                     if (cmd == null)
                     {
-                        CRegistery.Register(new COperationCommand(op, identifier));
+                        cmd = new COperationCommand(op, identifier);
+                        CRegistery.Register(cmd);
+                        cmd.SetFlag(CCommandFlags.System, true);
                     }
 
                     // register opposite operation command
@@ -272,7 +274,9 @@ namespace LunarEditor
                     CCommand oppositeCmd = CRegistery.FindCommand(oppositeCommand);
                     if (oppositeCmd == null)
                     {
-                        CRegistery.Register(new COperationCommand(oppositeOp, identifier));
+                        oppositeCmd = new COperationCommand(oppositeOp, identifier);
+                        CRegistery.Register(oppositeCmd);
+                        oppositeCmd.SetFlag(CCommandFlags.System, true);
                     }
                 }
                 

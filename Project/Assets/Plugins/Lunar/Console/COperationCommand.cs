@@ -22,6 +22,7 @@ namespace LunarPluginInternal
                 throw new ArgumentException("Empty identifier");
             }
 
+            this.Name = operation + identifier;
             this.Identifier = identifier;
             this.Operation = operation;
         }
