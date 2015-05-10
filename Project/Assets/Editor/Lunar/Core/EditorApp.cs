@@ -84,22 +84,28 @@ namespace LunarEditor
 
         #region Scene key handling
 
-        private void SceneKeyDownHandler(KeyCode key)
+        private bool SceneKeyDownHandler(KeyCode key, CModifiers modifiers)
         {
             CBinding binding;
-            if (CBindings.FindBinding(key, out binding))
+            CShortCut shortCut = new CShortCut(key, modifiers);
+            if (CBindings.FindBinding(shortCut, out binding))
             {
-                ExecCommand(binding.cmdKeyDown);
+                return ExecCommand(binding.cmdKeyDown);
             }
+
+            return false;
         }
 
-        private void SceneUpDownHandler(KeyCode key)
+        private bool SceneUpDownHandler(KeyCode key, CModifiers modifiers)
         {
             CBinding binding;
-            if (CBindings.FindBinding(key, out binding) && binding.cmdKeyUp != null)
+            CShortCut shortCut = new CShortCut(key, modifiers);
+            if (CBindings.FindBinding(shortCut, out binding) && binding.cmdKeyUp != null)
             {
-                ExecCommand(binding.cmdKeyUp);
+                return ExecCommand(binding.cmdKeyUp);
             }
+
+            return false;
         }
 
         #endregion

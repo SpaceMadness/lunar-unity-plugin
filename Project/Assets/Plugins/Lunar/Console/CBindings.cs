@@ -2,41 +2,162 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace LunarPluginInternal
 {
-    struct CBinding
+    enum CModifiers
     {
-        private KeyCode m_key;
-        private string m_name;
-        private string m_cmdKeyDown;
-        private string m_cmdKeyUp;
+        Shift   = 1 << 0,
+        Control = 1 << 1,
+        Alt     = 1 << 2,
+        Command = 1 << 3
+    };
 
-        public CBinding(KeyCode key, string cmd, string cmdOpposite)
+    struct CShortCut
+    {
+        public readonly KeyCode key;
+        public readonly CModifiers modifiers;
+
+        public CShortCut(KeyCode key, CModifiers modifiers)
         {
-            m_key = key;
-            m_cmdKeyDown = cmd;
-            m_cmdKeyUp = cmdOpposite;
-            m_name = null;
-
-            UpdateName();
+            this.key = key;
+            this.modifiers = modifiers;
         }
 
-        private void UpdateName()
+        public static bool TryParse(string token, out CShortCut shortCut)
         {
-            m_name = m_key.ToString().ToLower();
+            string[] tokens = token.Split('+');
+
+            CModifiers modifiers = 0;
+            if (tokens.Length > 1)
+            {
+                for (int i = 0; i < tokens.Length - 1; ++i)
+                {
+                    string name = tokens[i].ToLower();
+                    if (name == "ctrl")
+                        modifiers |= CModifiers.Control;
+                    else if (name == "shift")
+                        modifiers |= CModifiers.Shift;
+                    else if (name == "alt")
+                        modifiers |= CModifiers.Alt;
+                    else if (name == "cmd" || name == "command")
+                        modifiers |= CModifiers.Command;
+                    else
+                    {
+                        shortCut = default(CShortCut);
+                        return false;
+                    }
+                }
+            }
+
+            string keyName = tokens[tokens.Length - 1].ToLower();
+            KeyCode key;
+            if (!CBindings.TryParse(keyName, out key))
+            {
+                shortCut = default(CShortCut);
+                return false;
+            }
+
+            shortCut = new CShortCut(key, modifiers);
+            return true;
+        }
+
+        public bool Equals(CShortCut other)
+        {
+            return key == other.key && modifiers == other.modifiers;
+        }
+
+        public bool HasModifier(CModifiers modifier)
+        {
+            return (modifiers & modifier) != 0;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder result = new StringBuilder();
+            if (this.IsCommand) result.Append("cmd+");
+            if (this.IsControl) result.Append("ctrl+");
+            if (this.IsAlt) result.Append("alt+");
+            if (this.IsShift) result.Append("shift+");
+
+            result.Append(CBindings.KeyName(this.key));
+
+            return result.ToString();
         }
 
         #region Properties
 
+        public bool IsControl
+        {
+            get { return HasModifier(CModifiers.Control); }
+        }
+
+        public bool IsAlt
+        {
+            get { return HasModifier(CModifiers.Alt); }
+        }
+
+        public bool IsShift
+        {
+            get { return HasModifier(CModifiers.Shift); }
+        }
+
+        public bool IsCommand
+        {
+            get { return HasModifier(CModifiers.Command); }
+        }
+
+        public bool HasModifiers
+        {
+            get { return modifiers != 0; }
+        }
+
+        #endregion
+    }
+
+    struct CBinding
+    {
+        private const int kShiftModifier   = 1 << 0;
+        private const int kControlModifier = 1 << 1;
+        private const int kAltModifier     = 1 << 2;
+        private const int kCommandModifier = 1 << 3;
+
+        private CShortCut m_shortCut;
+        private string m_cmdKeyDown;
+        private string m_cmdKeyUp;
+
+        public CBinding(CShortCut shortCut, string cmdKeyUp, string cmdKeyDown)
+        {
+            m_shortCut = shortCut;
+            m_cmdKeyDown = cmdKeyUp;
+            m_cmdKeyUp = cmdKeyDown;
+        }
+
+        #region Modifiers
+
+        public bool HasModifiers
+        {
+            get { return m_shortCut.HasModifiers; }
+        }
+
+        public bool IsCommand
+        {
+            get { return m_shortCut.HasModifier(CModifiers.Command); }
+        }
+
+        #endregion
+
+        #region Properties
+
+        public CShortCut shortCut
+        {
+            get { return m_shortCut; }
+        }
+
         public KeyCode key
         {
-            get { return m_key; }
-            set
-            {
-                m_key = value;
-                UpdateName();
-            }
+            get { return m_shortCut.key; }
         }
 
         public string cmdKeyDown
@@ -49,11 +170,6 @@ namespace LunarPluginInternal
         {
             get { return m_cmdKeyUp; }
             set { m_cmdKeyUp = value; }
-        }
-
-        public string name 
-        {
-            get { return m_name; }
         }
 
         #endregion
@@ -69,32 +185,34 @@ namespace LunarPluginInternal
     class CBindings
     {
         private static List<CBinding> m_bindings = new List<CBinding>();
-        private static IDictionary<string, KeyCode> m_keycodeLookup;
 
-        public static void Bind(KeyCode key, string cmd, string cmdOpposite = null)
+        private static IDictionary<string, KeyCode> s_keyCodeLookup;
+        private static IDictionary<KeyCode, string> s_keyNameLookup;
+
+        public static void Bind(CShortCut shortCut, string cmdKeyDown, string cmdKeyUp)
         {
-            if (cmd == null)
+            if (cmdKeyDown == null)
             {
                 throw new NullReferenceException("Command is null");
             }
              
-            int index = IndexOf(key);
+            int index = IndexOf(shortCut);
             if (index != -1)
             {
                 CBinding existing = m_bindings[index];
-                existing.cmdKeyDown = cmd;
-                existing.cmdKeyUp = cmdOpposite;
+                existing.cmdKeyDown = cmdKeyDown;
+                existing.cmdKeyUp = cmdKeyUp;
                 m_bindings[index] = existing;
             }
             else
             {
-                m_bindings.Add(new CBinding(key, cmd, cmdOpposite));
+                m_bindings.Add(new CBinding(shortCut, cmdKeyDown, cmdKeyUp));
             }
         }
 
-        public static bool Unbind(KeyCode key)
+        public static bool Unbind(CShortCut shortCut)
         {
-            int index = IndexOf(key);
+            int index = IndexOf(shortCut);
             if (index != -1)
             {
                 m_bindings.RemoveAt(index);
@@ -109,7 +227,7 @@ namespace LunarPluginInternal
             if (prefix != null)
             {
                 return List(delegate(CBinding binding) {
-                    return StringUtils.StartsWithIgnoreCase(binding.name, prefix);
+                    return StringUtils.StartsWithIgnoreCase(binding.key.ToString(), prefix);
                 });
             }
 
@@ -135,11 +253,11 @@ namespace LunarPluginInternal
             return list;
         }
 
-        public static bool FindBinding(KeyCode key, out CBinding result)
+        public static bool FindBinding(CShortCut shortCut, out CBinding result)
         {
             for (int i = 0; i < m_bindings.Count; ++i)
             {
-                if (m_bindings[i].key == key)
+                if (m_bindings[i].shortCut.Equals(shortCut))
                 {
                     result = m_bindings[i];
                     return true;
@@ -157,12 +275,12 @@ namespace LunarPluginInternal
 
         #region List operations
 
-        // TODO: binary search
-        private static int IndexOf(KeyCode key)
+        // TODO: better lookup
+        private static int IndexOf(CShortCut shortCut)
         {
             for (int i = 0; i < m_bindings.Count; ++i)
             {
-                if (m_bindings[i].key == key)
+                if (m_bindings[i].shortCut.Equals(shortCut))
                 {
                     return i;
                 }
@@ -175,9 +293,10 @@ namespace LunarPluginInternal
 
         #region Lookup
 
-        private static IDictionary<string, KeyCode> CreateLookup()
+        private static IDictionary<string, KeyCode> CreateKeyCodeLookup()
         {
             IDictionary<string, KeyCode> lookup = new Dictionary<string, KeyCode>();
+
             lookup["backspace"] = KeyCode.Backspace;
             lookup["delete"] = KeyCode.Delete;
             lookup["tab"] = KeyCode.Tab;
@@ -342,25 +461,62 @@ namespace LunarPluginInternal
             return lookup;
         }
 
-        public static KeyCode Parse(string name)
+        private static IDictionary<KeyCode, string> CreateKeyNameLookup()
         {
-            if (m_keycodeLookup == null)
+            IDictionary<KeyCode, string> lookup = new Dictionary<KeyCode, string>();
+
+            foreach (KeyValuePair<string, KeyCode> e in keyCodeLookup)
             {
-                m_keycodeLookup = CreateLookup();
+                lookup[e.Value] = e.Key;
             }
 
-            KeyCode code;
-            if (m_keycodeLookup.TryGetValue(name, out code))
+            return lookup;
+        }
+
+        public static bool TryParse(string name, out KeyCode code)
+        {
+            return keyCodeLookup.TryGetValue(name, out code);
+        }
+
+        public static string KeyName(KeyCode key)
+        {
+            string name;
+            if (keyNameLookup.TryGetValue(key, out name))
             {
-                return code;
+                return name;
             }
 
-            return KeyCode.None;
+            return null;
         }
 
         #endregion
 
         #region Properties
+
+        private static IDictionary<string, KeyCode> keyCodeLookup
+        {
+            get
+            {
+                if (s_keyCodeLookup == null)
+                {
+                    s_keyCodeLookup = CreateKeyCodeLookup();
+                }
+                return s_keyCodeLookup;
+            }
+        }
+
+        private static IDictionary<KeyCode, string> keyNameLookup
+        {
+            get
+            {
+                if (s_keyNameLookup == null)
+                {
+                    s_keyNameLookup = CreateKeyNameLookup();
+                }
+
+                return s_keyNameLookup;
+            }
+        }
 
         internal static IList<CBinding> BindingsList
         {
@@ -371,12 +527,7 @@ namespace LunarPluginInternal
         {
             get
             {
-                if (m_keycodeLookup == null)
-                {
-                    m_keycodeLookup = CreateLookup();
-                }
-
-                ICollection<string> keys = m_keycodeLookup.Keys;
+                ICollection<string> keys = keyCodeLookup.Keys;
                 string[] names = new string[keys.Count];
                 keys.CopyTo(names, 0);
 

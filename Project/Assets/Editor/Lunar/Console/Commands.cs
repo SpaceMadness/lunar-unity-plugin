@@ -241,10 +241,10 @@ namespace LunarEditor
             
             if (!string.IsNullOrEmpty(command))
             {
-                KeyCode Code = CBindings.Parse(name);
-                if (Code == KeyCode.None)
+                CShortCut shortCut;
+                if (!CShortCut.TryParse(key, out shortCut))
                 {
-                    PrintError("Unknown key: {0}", name);
+                    PrintError("Invalid shortcut: {0}", name);
                     return false;
                 }
 
@@ -282,7 +282,7 @@ namespace LunarEditor
                     }
                 }
                 
-                CBindings.Bind(Code, StringUtils.UnArg(command), keyUpCommand != null ? StringUtils.UnArg(keyUpCommand) : null);
+                CBindings.Bind(shortCut, StringUtils.UnArg(command), keyUpCommand != null ? StringUtils.UnArg(keyUpCommand) : null);
                 
                 PostNotification(
                     CCommandNotifications.CBindingsChanged,
@@ -334,7 +334,7 @@ namespace LunarEditor
         
         public static string ToString(CBinding b)
         {
-            return string.Format("bind {0} {1}", b.name, StringUtils.Arg(b.cmdKeyDown));
+            return string.Format("bind {0} {1}", b.shortCut.ToString(), StringUtils.Arg(b.cmdKeyDown));
         }
     }
     
@@ -345,14 +345,16 @@ namespace LunarEditor
     {
         bool Execute(string key)
         {
-            KeyCode keyCode = CBindings.Parse(key.ToLower());
-            if (keyCode == KeyCode.None)
+            string token = key.ToLower();
+
+            CShortCut shortCut;
+            if (!CShortCut.TryParse(token, out shortCut))
             {
-                PrintError("Unknown key: {0}", key);
+                PrintError("Invalid shortcut: {0}", token);
                 return false;
             }
             
-            CBindings.Unbind(keyCode);
+            CBindings.Unbind(shortCut);
             
             PostNotification(
                 CCommandNotifications.CBindingsChanged,
@@ -373,7 +375,7 @@ namespace LunarEditor
             IList<CBinding> bindings = CBindings.List(prefix);
             foreach (CBinding b in bindings)
             {
-                PrintIndent("bind {0} \"{1}\"", b.name, b.cmdKeyDown);
+                PrintIndent("bind {0} {1}", b.shortCut.ToString(), StringUtils.Arg(b.cmdKeyDown));
             }
         }
     }
@@ -596,7 +598,7 @@ namespace LunarEditor
             
             for (int i = 0; i < bindings.Count; ++i)
             {
-                lines.Add(string.Format("bind {0} {1}", bindings[i].name, StringUtils.Arg(bindings[i].cmdKeyDown)));
+                lines.Add(string.Format("bind {0} {1}", bindings[i].shortCut.ToString(), StringUtils.Arg(bindings[i].cmdKeyDown)));
             }
         }
         

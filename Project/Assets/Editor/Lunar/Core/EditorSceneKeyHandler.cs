@@ -2,12 +2,13 @@
 
 using UnityEngine;
 using UnityEditor;
+using LunarPluginInternal;
 
 namespace LunarEditor
 {
     static class EditorSceneKeyHandler
     {
-        public delegate void KeyHandler(KeyCode key);
+        public delegate bool KeyHandler(KeyCode key, CModifiers modifiers);
 
         #pragma warning disable 0649
         public static KeyHandler keyDownHandler;
@@ -42,9 +43,9 @@ namespace LunarEditor
                         if (!s_pressedKeyCodeFlags[keyIndex])
                         {
                             s_pressedKeyCodeFlags[keyIndex] = true;
-                            if (keyDownHandler != null)
+                            if (keyDownHandler != null && keyDownHandler(evt.keyCode, GetModifiers(evt)))
                             {
-                                keyDownHandler(evt.keyCode);
+                                evt.Use();
                             }
                         }
                     }
@@ -53,9 +54,9 @@ namespace LunarEditor
                         if (s_pressedKeyCodeFlags[keyIndex])
                         {
                             s_pressedKeyCodeFlags[keyIndex] = false;
-                            if (keyUpHandler != null)
+                            if (keyUpHandler != null && keyUpHandler(evt.keyCode, GetModifiers(evt)))
                             {
-                                keyUpHandler(evt.keyCode);
+                                evt.Use();
                             }
                         }
                     }
@@ -65,6 +66,22 @@ namespace LunarEditor
             {
                 Debug.LogError("Exception while handling scene keys: " +  e.Message);
             }
+        }
+
+        private static CModifiers GetModifiers(Event evt)
+        {
+            CModifiers modifiers = 0;
+
+            if (evt.alt)
+                modifiers |= CModifiers.Alt;
+            if (evt.shift)
+                modifiers |= CModifiers.Shift;
+            if (evt.control)
+                modifiers |= CModifiers.Control;
+            if (evt.command)
+                modifiers |= CModifiers.Command;
+            
+            return modifiers;
         }
     }
 }

@@ -242,18 +242,34 @@ namespace LunarPluginInternal
                 KeyCode key = bindings[i].key;
                 if (Input.GetKeyDown(key))
                 {
-                    string commandLine = bindings[i].cmdKeyDown;
-                    ExecCommand(commandLine, false);
-                }
-                else if (Input.GetKeyUp(key))
-                {
-                    string commandLine = bindings[i].cmdKeyUp;
-                    if (commandLine != null)
+                    if (IsValidModifiers(bindings[i].shortCut))
                     {
+                        string commandLine = bindings[i].cmdKeyDown;
                         ExecCommand(commandLine, false);
                     }
                 }
+                else if (Input.GetKeyUp(key))
+                {
+                    if (IsValidModifiers(bindings[i].shortCut))
+                    {
+                        string commandLine = bindings[i].cmdKeyUp;
+                        if (commandLine != null)
+                        {
+                            ExecCommand(commandLine, false);
+                        }
+                    }
+                }
             }
+        }
+
+        private bool IsValidModifiers(CShortCut shortCut)
+        {
+            if (shortCut.IsShift ^ (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))) return false;
+            if (shortCut.IsControl ^ (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))) return false;
+            if (shortCut.IsAlt ^ (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt))) return false;
+            if (shortCut.IsCommand ^ (Input.GetKey(KeyCode.LeftCommand) || Input.GetKey(KeyCode.RightCommand))) return false;
+
+            return true;
         }
 
         #endregion
