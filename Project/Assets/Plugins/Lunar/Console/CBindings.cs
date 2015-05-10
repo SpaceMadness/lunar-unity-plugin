@@ -213,10 +213,10 @@ namespace LunarPluginInternal
             lookup["keypadplus"] = KeyCode.KeypadPlus;
             lookup["keypadenter"] = KeyCode.KeypadEnter;
             lookup["keypadequals"] = KeyCode.KeypadEquals;
-            lookup["uparrow"] = KeyCode.UpArrow;
-            lookup["downarrow"] = KeyCode.DownArrow;
-            lookup["rightarrow"] = KeyCode.RightArrow;
-            lookup["leftarrow"] = KeyCode.LeftArrow;
+            lookup["up"] = KeyCode.UpArrow;
+            lookup["down"] = KeyCode.DownArrow;
+            lookup["right"] = KeyCode.RightArrow;
+            lookup["left"] = KeyCode.LeftArrow;
             lookup["insert"] = KeyCode.Insert;
             lookup["home"] = KeyCode.Home;
             lookup["end"] = KeyCode.End;
@@ -237,16 +237,6 @@ namespace LunarPluginInternal
             lookup["f13"] = KeyCode.F13;
             lookup["f14"] = KeyCode.F14;
             lookup["f15"] = KeyCode.F15;
-            lookup["alpha0"] = KeyCode.Alpha0;
-            lookup["alpha1"] = KeyCode.Alpha1;
-            lookup["alpha2"] = KeyCode.Alpha2;
-            lookup["alpha3"] = KeyCode.Alpha3;
-            lookup["alpha4"] = KeyCode.Alpha4;
-            lookup["alpha5"] = KeyCode.Alpha5;
-            lookup["alpha6"] = KeyCode.Alpha6;
-            lookup["alpha7"] = KeyCode.Alpha7;
-            lookup["alpha8"] = KeyCode.Alpha8;
-            lookup["alpha9"] = KeyCode.Alpha9;
             lookup["exclaim"] = KeyCode.Exclaim;
             lookup["doublequote"] = KeyCode.DoubleQuote;
             lookup["hash"] = KeyCode.Hash;
@@ -328,106 +318,26 @@ namespace LunarPluginInternal
             lookup["mouse4"] = KeyCode.Mouse4;
             lookup["mouse5"] = KeyCode.Mouse5;
             lookup["mouse6"] = KeyCode.Mouse6;
-            lookup["joystickbutton0"] = KeyCode.JoystickButton0;
-            lookup["joystickbutton1"] = KeyCode.JoystickButton1;
-            lookup["joystickbutton2"] = KeyCode.JoystickButton2;
-            lookup["joystickbutton3"] = KeyCode.JoystickButton3;
-            lookup["joystickbutton4"] = KeyCode.JoystickButton4;
-            lookup["joystickbutton5"] = KeyCode.JoystickButton5;
-            lookup["joystickbutton6"] = KeyCode.JoystickButton6;
-            lookup["joystickbutton7"] = KeyCode.JoystickButton7;
-            lookup["joystickbutton8"] = KeyCode.JoystickButton8;
-            lookup["joystickbutton9"] = KeyCode.JoystickButton9;
-            lookup["joystickbutton10"] = KeyCode.JoystickButton10;
-            lookup["joystickbutton11"] = KeyCode.JoystickButton11;
-            lookup["joystickbutton12"] = KeyCode.JoystickButton12;
-            lookup["joystickbutton13"] = KeyCode.JoystickButton13;
-            lookup["joystickbutton14"] = KeyCode.JoystickButton14;
-            lookup["joystickbutton15"] = KeyCode.JoystickButton15;
-            lookup["joystickbutton16"] = KeyCode.JoystickButton16;
-            lookup["joystickbutton17"] = KeyCode.JoystickButton17;
-            lookup["joystickbutton18"] = KeyCode.JoystickButton18;
-            lookup["joystickbutton19"] = KeyCode.JoystickButton19;
-            lookup["joystick1button0"] = KeyCode.Joystick1Button0;
-            lookup["joystick1button1"] = KeyCode.Joystick1Button1;
-            lookup["joystick1button2"] = KeyCode.Joystick1Button2;
-            lookup["joystick1button3"] = KeyCode.Joystick1Button3;
-            lookup["joystick1button4"] = KeyCode.Joystick1Button4;
-            lookup["joystick1button5"] = KeyCode.Joystick1Button5;
-            lookup["joystick1button6"] = KeyCode.Joystick1Button6;
-            lookup["joystick1button7"] = KeyCode.Joystick1Button7;
-            lookup["joystick1button8"] = KeyCode.Joystick1Button8;
-            lookup["joystick1button9"] = KeyCode.Joystick1Button9;
-            lookup["joystick1button10"] = KeyCode.Joystick1Button10;
-            lookup["joystick1button11"] = KeyCode.Joystick1Button11;
-            lookup["joystick1button12"] = KeyCode.Joystick1Button12;
-            lookup["joystick1button13"] = KeyCode.Joystick1Button13;
-            lookup["joystick1button14"] = KeyCode.Joystick1Button14;
-            lookup["joystick1button15"] = KeyCode.Joystick1Button15;
-            lookup["joystick1button16"] = KeyCode.Joystick1Button16;
-            lookup["joystick1button17"] = KeyCode.Joystick1Button17;
-            lookup["joystick1button18"] = KeyCode.Joystick1Button18;
-            lookup["joystick1button19"] = KeyCode.Joystick1Button19;
-            lookup["joystick2button0"] = KeyCode.Joystick2Button0;
-            lookup["joystick2button1"] = KeyCode.Joystick2Button1;
-            lookup["joystick2button2"] = KeyCode.Joystick2Button2;
-            lookup["joystick2button3"] = KeyCode.Joystick2Button3;
-            lookup["joystick2button4"] = KeyCode.Joystick2Button4;
-            lookup["joystick2button5"] = KeyCode.Joystick2Button5;
-            lookup["joystick2button6"] = KeyCode.Joystick2Button6;
-            lookup["joystick2button7"] = KeyCode.Joystick2Button7;
-            lookup["joystick2button8"] = KeyCode.Joystick2Button8;
-            lookup["joystick2button9"] = KeyCode.Joystick2Button9;
-            lookup["joystick2button10"] = KeyCode.Joystick2Button10;
-            lookup["joystick2button11"] = KeyCode.Joystick2Button11;
-            lookup["joystick2button12"] = KeyCode.Joystick2Button12;
-            lookup["joystick2button13"] = KeyCode.Joystick2Button13;
-            lookup["joystick2button14"] = KeyCode.Joystick2Button14;
-            lookup["joystick2button15"] = KeyCode.Joystick2Button15;
-            lookup["joystick2button16"] = KeyCode.Joystick2Button16;
-            lookup["joystick2button17"] = KeyCode.Joystick2Button17;
-            lookup["joystick2button18"] = KeyCode.Joystick2Button18;
-            lookup["joystick2button19"] = KeyCode.Joystick2Button19;
-            lookup["joystick3button0"] = KeyCode.Joystick3Button0;
-            lookup["joystick3button1"] = KeyCode.Joystick3Button1;
-            lookup["joystick3button2"] = KeyCode.Joystick3Button2;
-            lookup["joystick3button3"] = KeyCode.Joystick3Button3;
-            lookup["joystick3button4"] = KeyCode.Joystick3Button4;
-            lookup["joystick3button5"] = KeyCode.Joystick3Button5;
-            lookup["joystick3button6"] = KeyCode.Joystick3Button6;
-            lookup["joystick3button7"] = KeyCode.Joystick3Button7;
-            lookup["joystick3button8"] = KeyCode.Joystick3Button8;
-            lookup["joystick3button9"] = KeyCode.Joystick3Button9;
-            lookup["joystick3button10"] = KeyCode.Joystick3Button10;
-            lookup["joystick3button11"] = KeyCode.Joystick3Button11;
-            lookup["joystick3button12"] = KeyCode.Joystick3Button12;
-            lookup["joystick3button13"] = KeyCode.Joystick3Button13;
-            lookup["joystick3button14"] = KeyCode.Joystick3Button14;
-            lookup["joystick3button15"] = KeyCode.Joystick3Button15;
-            lookup["joystick3button16"] = KeyCode.Joystick3Button16;
-            lookup["joystick3button17"] = KeyCode.Joystick3Button17;
-            lookup["joystick3button18"] = KeyCode.Joystick3Button18;
-            lookup["joystick3button19"] = KeyCode.Joystick3Button19;
-            lookup["joystick4button0"] = KeyCode.Joystick4Button0;
-            lookup["joystick4button1"] = KeyCode.Joystick4Button1;
-            lookup["joystick4button2"] = KeyCode.Joystick4Button2;
-            lookup["joystick4button3"] = KeyCode.Joystick4Button3;
-            lookup["joystick4button4"] = KeyCode.Joystick4Button4;
-            lookup["joystick4button5"] = KeyCode.Joystick4Button5;
-            lookup["joystick4button6"] = KeyCode.Joystick4Button6;
-            lookup["joystick4button7"] = KeyCode.Joystick4Button7;
-            lookup["joystick4button8"] = KeyCode.Joystick4Button8;
-            lookup["joystick4button9"] = KeyCode.Joystick4Button9;
-            lookup["joystick4button10"] = KeyCode.Joystick4Button10;
-            lookup["joystick4button11"] = KeyCode.Joystick4Button11;
-            lookup["joystick4button12"] = KeyCode.Joystick4Button12;
-            lookup["joystick4button13"] = KeyCode.Joystick4Button13;
-            lookup["joystick4button14"] = KeyCode.Joystick4Button14;
-            lookup["joystick4button15"] = KeyCode.Joystick4Button15;
-            lookup["joystick4button16"] = KeyCode.Joystick4Button16;
-            lookup["joystick4button17"] = KeyCode.Joystick4Button17;
-            lookup["joystick4button18"] = KeyCode.Joystick4Button18;
-            lookup["joystick4button19"] = KeyCode.Joystick4Button19;
+            lookup["joy0"] = KeyCode.JoystickButton0;
+            lookup["joy1"] = KeyCode.JoystickButton1;
+            lookup["joy2"] = KeyCode.JoystickButton2;
+            lookup["joy3"] = KeyCode.JoystickButton3;
+            lookup["joy4"] = KeyCode.JoystickButton4;
+            lookup["joy5"] = KeyCode.JoystickButton5;
+            lookup["joy6"] = KeyCode.JoystickButton6;
+            lookup["joy7"] = KeyCode.JoystickButton7;
+            lookup["joy8"] = KeyCode.JoystickButton8;
+            lookup["joy9"] = KeyCode.JoystickButton9;
+            lookup["joy10"] = KeyCode.JoystickButton10;
+            lookup["joy11"] = KeyCode.JoystickButton11;
+            lookup["joy12"] = KeyCode.JoystickButton12;
+            lookup["joy13"] = KeyCode.JoystickButton13;
+            lookup["joy14"] = KeyCode.JoystickButton14;
+            lookup["joy15"] = KeyCode.JoystickButton15;
+            lookup["joy16"] = KeyCode.JoystickButton16;
+            lookup["joy17"] = KeyCode.JoystickButton17;
+            lookup["joy18"] = KeyCode.JoystickButton18;
+            lookup["joy19"] = KeyCode.JoystickButton19;
 
             return lookup;
         }
@@ -455,6 +365,23 @@ namespace LunarPluginInternal
         internal static IList<CBinding> BindingsList
         {
             get { return m_bindings; }
+        }
+
+        internal static string[] BindingsNames
+        {
+            get
+            {
+                if (m_keycodeLookup == null)
+                {
+                    m_keycodeLookup = CreateLookup();
+                }
+
+                ICollection<string> keys = m_keycodeLookup.Keys;
+                string[] names = new string[keys.Count];
+                keys.CopyTo(names, 0);
+
+                return names;
+            }
         }
 
         #endregion

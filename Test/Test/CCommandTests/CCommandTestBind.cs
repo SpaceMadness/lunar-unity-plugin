@@ -135,33 +135,80 @@ namespace CCommandTests
         [Test]
         public void TestListBindings()
         {
-            Execute("bind JoystickButton1 test-1");
-            Execute("bind Joystick1Button1 test-2");
-            Execute("bind Joystick1Button11 test-3");
+            Execute("bind mouse0 test-1");
+            Execute("bind mouse1 test-2");
+            Execute("bind m test-3");
 
-            IList<CBinding> list = CBindings.List("Joystick");
+            IList<CBinding> list = CBindings.List("m");
             AssertList(list,
-                "bind joystickbutton1 test-1",
-                "bind joystick1button1 test-2",
-                "bind joystick1button11 test-3"
+                "bind mouse0 test-1",
+                "bind mouse1 test-2",
+                "bind m test-3"
             );
 
-            list = CBindings.List("Joystick1");
+            list = CBindings.List("mo");
             AssertList(list,
-                "bind joystick1button1 test-2",
-                "bind joystick1button11 test-3"
+                "bind mouse0 test-1",
+                "bind mouse1 test-2"
             );
 
-            list = CBindings.List("Joystick1Button11");
+            list = CBindings.List("mouse0");
             AssertList(list,
-                "bind joystick1button11 test-3"
+                "bind mouse0 test-1"
             );
 
-            list = CBindings.List("Joystick1Button110");
+            list = CBindings.List("mouse2");
             AssertList(list);
 
             list = CBindings.List("foo");
             AssertList(list);
+        }
+
+        #endregion
+
+        #region Auto Completion
+
+        [Test]
+        public void TestAutocompletionSingleTabSingleChoice()
+        {
+            CommandDelegate del = new CommandDelegate();
+
+            bind cmd = new bind();
+            cmd.Delegate = del;
+
+            string commandLine = "bind del";
+            IList<string> tokens = CommandTokenizer.Tokenize(commandLine);
+
+            Assert.AreEqual("bind delete ", cmd.AutoComplete(commandLine, tokens, false));
+        }
+
+        [Test]
+        public void TestAutocompletionSingleTabMultipleChoice()
+        {
+            CommandDelegate del = new CommandDelegate();
+
+            bind cmd = new bind();
+            cmd.Delegate = del;
+
+            string commandLine = "bind mou";
+            IList<string> tokens = CommandTokenizer.Tokenize(commandLine);
+
+            Assert.AreEqual("bind mouse", cmd.AutoComplete(commandLine, tokens, false));
+        }
+
+        [Test]
+        public void TestAutocompletionDoubleTabMultipleChoice()
+        {
+            CommandDelegate del = new CommandDelegate();
+
+            bind cmd = new bind();
+            cmd.Delegate = del;
+
+            string commandLine = "bind mou";
+            IList<string> tokens = CommandTokenizer.Tokenize(commandLine);
+
+            Assert.AreEqual("bind mouse", cmd.AutoComplete(commandLine, tokens, true));
+            AssertArray(del.table, "mouse0", "mouse1", "mouse2", "mouse3", "mouse4", "mouse5", "mouse6");
         }
 
         #endregion

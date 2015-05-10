@@ -308,6 +308,22 @@ namespace LunarEditor
             return true;
         }
 
+        protected override string[] AutoCompleteArgs(string commandLine, string token)
+        {
+            List<string> suggestions = new List<string>();
+            foreach (string name in CBindings.BindingsNames)
+            {
+                if (name.StartsWith(token, StringComparison.OrdinalIgnoreCase))
+                {
+                    suggestions.Add(name);
+                }
+            }
+
+            suggestions.Sort();
+
+            return suggestions.ToArray();
+        }
+
         private static char OppositeOperation(char op)
         {
             if (op == '+') return '-';
