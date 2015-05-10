@@ -242,8 +242,16 @@ namespace LunarPluginInternal
                 KeyCode key = bindings[i].key;
                 if (Input.GetKeyDown(key))
                 {
-                    string commandLine = bindings[i].cmd;
-                    ExecCommand(commandLine, true);
+                    string commandLine = bindings[i].cmdKeyDown;
+                    ExecCommand(commandLine, false);
+                }
+                else if (Input.GetKeyUp(key))
+                {
+                    string commandLine = bindings[i].cmdKeyUp;
+                    if (commandLine != null)
+                    {
+                        ExecCommand(commandLine, false);
+                    }
                 }
             }
         }

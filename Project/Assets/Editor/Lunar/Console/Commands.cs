@@ -248,8 +248,10 @@ namespace LunarEditor
                     return false;
                 }
 
-                char op = command[0];
-                if (op == '+' || op == '-')
+                string keyUpCommand = null;
+
+                char keyDownOp = command[0];
+                if (keyDownOp == '+' || keyDownOp == '-')
                 {
                     if (command.Length == 1)
                     {
@@ -260,27 +262,27 @@ namespace LunarEditor
                     string identifier = command.Substring(1);
 
                     // register operation command
-                    CCommand cmd = CRegistery.FindCommand(command);
-                    if (cmd == null)
+                    CCommand keyDownCmd = CRegistery.FindCommand(command);
+                    if (keyDownCmd == null)
                     {
-                        cmd = new COperationCommand(op, identifier);
-                        CRegistery.Register(cmd);
-                        cmd.SetFlag(CCommandFlags.System, true);
+                        keyDownCmd = new COperationCommand(keyDownOp, identifier);
+                        CRegistery.Register(keyDownCmd);
+                        keyDownCmd.SetFlag(CCommandFlags.System, true);
                     }
 
                     // register opposite operation command
-                    char oppositeOp = OppositeOperation(op);
-                    string oppositeCommand = oppositeOp + identifier;
-                    CCommand oppositeCmd = CRegistery.FindCommand(oppositeCommand);
-                    if (oppositeCmd == null)
+                    char keyUpOp = OppositeOperation(keyDownOp);
+                    keyUpCommand = keyUpOp + identifier;
+                    CCommand keyUpCmd = CRegistery.FindCommand(keyUpCommand);
+                    if (keyUpCmd == null)
                     {
-                        oppositeCmd = new COperationCommand(oppositeOp, identifier);
-                        CRegistery.Register(oppositeCmd);
-                        oppositeCmd.SetFlag(CCommandFlags.System, true);
+                        keyUpCmd = new COperationCommand(keyUpOp, identifier);
+                        CRegistery.Register(keyUpCmd);
+                        keyUpCmd.SetFlag(CCommandFlags.System, true);
                     }
                 }
                 
-                CBindings.Bind(Code, StringUtils.UnArg(command));
+                CBindings.Bind(Code, StringUtils.UnArg(command), keyUpCommand != null ? StringUtils.UnArg(keyUpCommand) : null);
                 
                 PostNotification(
                     CCommandNotifications.CBindingsChanged,
@@ -316,7 +318,7 @@ namespace LunarEditor
         
         public static string ToString(CBinding b)
         {
-            return string.Format("bind {0} {1}", b.name, StringUtils.Arg(b.cmd));
+            return string.Format("bind {0} {1}", b.name, StringUtils.Arg(b.cmdKeyDown));
         }
     }
     
@@ -355,7 +357,7 @@ namespace LunarEditor
             IList<CBinding> bindings = CBindings.List(prefix);
             foreach (CBinding b in bindings)
             {
-                PrintIndent("bind {0} \"{1}\"", b.name, b.cmd);
+                PrintIndent("bind {0} \"{1}\"", b.name, b.cmdKeyDown);
             }
         }
     }
@@ -578,7 +580,7 @@ namespace LunarEditor
             
             for (int i = 0; i < bindings.Count; ++i)
             {
-                lines.Add(string.Format("bind {0} {1}", bindings[i].name, StringUtils.Arg(bindings[i].cmd)));
+                lines.Add(string.Format("bind {0} {1}", bindings[i].name, StringUtils.Arg(bindings[i].cmdKeyDown)));
             }
         }
         

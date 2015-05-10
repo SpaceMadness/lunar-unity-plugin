@@ -46,6 +46,7 @@ namespace LunarEditor
                 Log.Initialize(); // it's safe to initialize logging
 
                 EditorSceneKeyHandler.keyDownHandler += SceneKeyDownHandler;
+                EditorSceneKeyHandler.keyUpHandler += SceneUpDownHandler;
             });
         }
 
@@ -85,10 +86,19 @@ namespace LunarEditor
 
         private void SceneKeyDownHandler(KeyCode key)
         {
-            string cmd = CBindings.FindCommand(key);
-            if (cmd != null)
+            CBinding binding;
+            if (CBindings.FindBinding(key, out binding))
             {
-                ExecCommand(cmd);
+                ExecCommand(binding.cmdKeyDown);
+            }
+        }
+
+        private void SceneUpDownHandler(KeyCode key)
+        {
+            CBinding binding;
+            if (CBindings.FindBinding(key, out binding) && binding.cmdKeyUp != null)
+            {
+                ExecCommand(binding.cmdKeyUp);
             }
         }
 

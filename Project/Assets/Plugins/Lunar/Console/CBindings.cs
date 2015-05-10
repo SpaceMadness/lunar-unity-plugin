@@ -9,12 +9,14 @@ namespace LunarPluginInternal
     {
         private KeyCode m_key;
         private string m_name;
-        private string m_cmd;
+        private string m_cmdKeyDown;
+        private string m_cmdKeyUp;
 
-        public CBinding(KeyCode key, string cmd)
+        public CBinding(KeyCode key, string cmd, string cmdOpposite)
         {
             m_key = key;
-            m_cmd = cmd;
+            m_cmdKeyDown = cmd;
+            m_cmdKeyUp = cmdOpposite;
             m_name = null;
 
             UpdateName();
@@ -37,10 +39,16 @@ namespace LunarPluginInternal
             }
         }
 
-        public string cmd
+        public string cmdKeyDown
         {
-            get { return m_cmd; }
-            set { m_cmd = value; }
+            get { return m_cmdKeyDown; }
+            set { m_cmdKeyDown = value; }
+        }
+
+        public string cmdKeyUp
+        {
+            get { return m_cmdKeyUp; }
+            set { m_cmdKeyUp = value; }
         }
 
         public string name 
@@ -52,7 +60,7 @@ namespace LunarPluginInternal
 
         public override string ToString()
         {
-            return string.Format("{0} {1}", key, cmd);
+            return string.Format("{0} {1}", key, cmdKeyDown);
         }
     }
 
@@ -63,7 +71,7 @@ namespace LunarPluginInternal
         private static List<CBinding> m_bindings = new List<CBinding>();
         private static IDictionary<string, KeyCode> m_keycodeLookup;
 
-        public static void Bind(KeyCode key, string cmd)
+        public static void Bind(KeyCode key, string cmd, string cmdOpposite = null)
         {
             if (cmd == null)
             {
@@ -74,12 +82,13 @@ namespace LunarPluginInternal
             if (index != -1)
             {
                 CBinding existing = m_bindings[index];
-                existing.cmd = cmd;
+                existing.cmdKeyDown = cmd;
+                existing.cmdKeyUp = cmdOpposite;
                 m_bindings[index] = existing;
             }
             else
             {
-                m_bindings.Add(new CBinding(key, cmd));
+                m_bindings.Add(new CBinding(key, cmd, cmdOpposite));
             }
         }
 
@@ -126,17 +135,19 @@ namespace LunarPluginInternal
             return list;
         }
 
-        public static string FindCommand(KeyCode key)
+        public static bool FindBinding(KeyCode key, out CBinding result)
         {
             for (int i = 0; i < m_bindings.Count; ++i)
             {
                 if (m_bindings[i].key == key)
                 {
-                    return m_bindings[i].cmd;
+                    result = m_bindings[i];
+                    return true;
                 }
             }
 
-            return null;
+            result = default(CBinding);
+            return false;
         }
 
         public static void Clear()
