@@ -1,6 +1,6 @@
 # Lunar plugin for Unity
 
-// TODO: asset store link
+Asset Store: https://www.assetstore.unity3d.com/#!/content/36147
 
 Requires Unity 5
 
@@ -63,6 +63,7 @@ Features:
   
 ## Social media
 
+- Dev Blog: [lunar-plugin.tumblr.com](http://lunar-plugin.tumblr.com/)
 - YouTube Channel: [Space Madness](https://www.youtube.com/channel/UCNZ2ja_pI9wqKsZcnVnt_zQ)
 - Twitter: [@LunarPlugin](https://twitter.com/intent/follow?screen_name=LunarPlugin&user_id=2939274198)
 - Facebook: [Unity Lunar Plugin](https://www.facebook.com/LunarPlugin)
