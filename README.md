@@ -1,6 +1,6 @@
 # Lunar plugin for Unity
 
-Asset Store: https://www.assetstore.unity3d.com/#!/content/36147
+Asset Store: https://www.assetstore.unity3d.com/#!/content/36147  (doesn't seem to work: the plugin is still "Pending for review" since May 5th)
 
 Requires Unity 5
 
