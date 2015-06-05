@@ -121,7 +121,9 @@ namespace LunarPluginInternal
                     parent.Create();
                 }
 
+                #if !UNITY_WEBPLAYER
                 File.WriteAllText(filename, text);
+                #endif
                 return true;
             }
             catch (System.Exception ex)
