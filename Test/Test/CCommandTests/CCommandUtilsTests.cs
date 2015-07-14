@@ -7,6 +7,7 @@ using UnityEngine;
 using LunarPlugin;
 using LunarPluginInternal;
 using LunarEditor;
+using LunarPlugin.Test;
 
 namespace CCommandTests
 {
