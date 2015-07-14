@@ -18,12 +18,10 @@ namespace LunarPluginInternal
     {
         protected static App s_sharedInstance;
 
-        private UpdatableList m_updatables;
-        private TimerManager m_timerManager;
-
-        private NotificationCenter m_notificationCenter;
-
-        private CommandProcessor m_processor;
+        private readonly CommandProcessor m_processor;
+        private readonly TimerManager m_timerManager;
+        private readonly UpdatableList m_updatables;
+        private readonly NotificationCenter m_notificationCenter;
 
         protected App()
         {
@@ -102,18 +100,6 @@ namespace LunarPluginInternal
         //////////////////////////////////////////////////////////////////////////////
         
         #region Life cycle
-
-        private static App CreateInstance()
-        {
-            if (Runtime.IsEditor)
-            {
-                Type editorAppType = ClassUtils.TypeForName("LunarPlugin.EditorApp");
-                PropertyInfo instanceProperty = editorAppType.GetProperty("SharedInstance", BindingFlags.Static | BindingFlags.NonPublic);
-                return (App)instanceProperty.GetValue(null, null);
-            }
-
-            throw new NotImplementedException("Platform not supported");
-        }
 
         public static void Shutdown()
         {
