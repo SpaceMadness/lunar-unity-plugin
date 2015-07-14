@@ -36,6 +36,7 @@ namespace CCommandTests
         public void SetUp()
         {
             base.RunSetUp();
+
             CRegistery.Register(new Cmd_playmode(delegate {
                 AddResult("executed");
             }));
@@ -45,6 +46,7 @@ namespace CCommandTests
         public void TearDown()
         {
             base.RunTearDown();
+
             Runtime.IsPlaying = true;
         }
     }
