@@ -8,9 +8,12 @@ using LunarPlugin;
 using LunarPluginInternal;
 using LunarEditor;
 using LunarPlugin.Test;
+using System.Reflection;
 
 namespace CCommandTests
 {
+    using Assert = NUnit.Framework.Assert;
+
     [TestFixture]
     public class CCommandUtilsTests : TestFixtureBase
     {
@@ -19,51 +22,58 @@ namespace CCommandTests
         {
             Type dummyType = typeof(Dummy);
             
-            assertTrue(CCommandUtils.CanInvokeMethodWithArgsCount(dummyType.GetMethod("canExecute"), 0));
-            assertTrue(CCommandUtils.CanInvokeMethodWithArgsCount(dummyType.GetMethod("canExecute", typeof(String)), 1));
-            assertTrue(CCommandUtils.CanInvokeMethodWithArgsCount(dummyType.GetMethod("canExecute", typeof(String), typeof(String)), 2));
+            AssertCanExecute(0);
+            AssertCanExecute(1, typeof(String));
+            AssertCanExecute(2, typeof(String), typeof(String));
             
-            assertTrue(CCommandUtils.CanInvokeMethodWithArgsCount(dummyType.GetMethod("canExecute", typeof(String[])), 0));
-            assertTrue(CCommandUtils.CanInvokeMethodWithArgsCount(dummyType.GetMethod("canExecute", typeof(String[])), 1));
-            assertTrue(CCommandUtils.CanInvokeMethodWithArgsCount(dummyType.GetMethod("canExecute", typeof(String[])), 2));
+            AssertCanExecute(0, typeof(String[]));
+            AssertCanExecute(1, typeof(String[]));
+            AssertCanExecute(2, typeof(String[]));
             
-            assertTrue(CCommandUtils.CanInvokeMethodWithArgsCount(dummyType.GetMethod("canExecute", typeof(int), typeof(String[])), 1));
-            assertTrue(CCommandUtils.CanInvokeMethodWithArgsCount(dummyType.GetMethod("canExecute", typeof(int), typeof(String[])), 2));
-            assertTrue(CCommandUtils.CanInvokeMethodWithArgsCount(dummyType.GetMethod("canExecute", typeof(int), typeof(String[])), 3));
+            AssertCanExecute(1, typeof(int), typeof(String[]));
+            AssertCanExecute(2, typeof(int), typeof(String[]));
+            AssertCanExecute(3, typeof(int), typeof(String[]));
             
-            assertTrue(CCommandUtils.CanInvokeMethodWithArgsCount(dummyType.GetMethod("canExecute", typeof(bool), typeof(String[])), 1));
-            assertTrue(CCommandUtils.CanInvokeMethodWithArgsCount(dummyType.GetMethod("canExecute", typeof(bool), typeof(String[])), 2));
-            assertTrue(CCommandUtils.CanInvokeMethodWithArgsCount(dummyType.GetMethod("canExecute", typeof(bool), typeof(String[])), 3));
+            AssertCanExecute(1, typeof(bool), typeof(String[]));
+            AssertCanExecute(2, typeof(bool), typeof(String[]));
+            AssertCanExecute(3, typeof(bool), typeof(String[]));
+        }
+
+        private void AssertCanExecute(int argsCount, params Type[] types)
+        {
+            Type type = typeof(Dummy);
+            MethodInfo method = type.GetMethod("CanExecute", types);
+            Assert.IsTrue(CCommandUtils.CanInvokeMethodWithArgsCount(method, argsCount));
         }
 
         class Dummy
         {
-            bool canExecute()
+            public bool CanExecute()
             {
                 return false;
             }
             
-            bool canExecute(String arg)
+            public bool CanExecute(String arg)
             {
                 return false;
             }
             
-            bool canExecute(String arg1, String arg2)
+            public bool CanExecute(String arg1, String arg2)
             {
                 return false;
             }
             
-            bool canExecute(String[] args)
+            public bool CanExecute(String[] args)
             {
                 return false;
             }
             
-            bool canExecute(int arg1, String[] args)
+            public bool CanExecute(int arg1, String[] args)
             {
                 return false;
             }
             
-            bool canExecute(bool arg1, params String[] args)
+            public bool CanExecute(bool arg1, params String[] args)
             {
                 return false;
             }

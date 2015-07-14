@@ -100,8 +100,9 @@ namespace CCommandTests
         {
             RunSetUp();
 
-            CRegistery.Register(new alias());
-            CRegistery.Register(new unalias());
+            registerCommand(typeof(Cmd_alias));
+            registerCommand(typeof(Cmd_unalias));
+
             Lunar.RegisterCommand("echo", delegate(CCommand cmd, string[] args)
             {
                 AddResult(cmd.CommandString);

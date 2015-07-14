@@ -8,6 +8,7 @@ using LunarPlugin;
 using LunarPluginInternal;
 
 using UnityEngine;
+using LunarEditor;
 
 namespace CCommandTests
 {
@@ -431,7 +432,7 @@ namespace CCommandTests
         {
             RunSetUp();
 
-            RegisterCommands(new reset());
+            registerCommand(typeof(Cmd_reset));
         }
 
         [TearDown]

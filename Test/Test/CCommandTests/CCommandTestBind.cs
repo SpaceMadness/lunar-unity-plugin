@@ -171,44 +171,50 @@ namespace CCommandTests
         [Test]
         public void TestAutocompletionSingleTabSingleChoice()
         {
-            CommandDelegate del = new CommandDelegate();
+//            CommandDelegate del = new CommandDelegate();
+//
+//            bind cmd = new bind();
+//            cmd.Delegate = del;
+//
+//            string commandLine = "bind del";
+//            IList<string> tokens = CommandTokenizer.Tokenize(commandLine);
+//
+//            Assert.AreEqual("bind delete ", cmd.AutoComplete(commandLine, tokens, false));
 
-            bind cmd = new bind();
-            cmd.Delegate = del;
-
-            string commandLine = "bind del";
-            IList<string> tokens = CommandTokenizer.Tokenize(commandLine);
-
-            Assert.AreEqual("bind delete ", cmd.AutoComplete(commandLine, tokens, false));
+            throw new NotImplementedException("Implement me");
         }
 
         [Test]
         public void TestAutocompletionSingleTabMultipleChoice()
         {
-            CommandDelegate del = new CommandDelegate();
+//            CommandDelegate del = new CommandDelegate();
+//
+//            bind cmd = new bind();
+//            cmd.Delegate = del;
+//
+//            string commandLine = "bind mou";
+//            IList<string> tokens = CommandTokenizer.Tokenize(commandLine);
+//
+//            Assert.AreEqual("bind mouse", cmd.AutoComplete(commandLine, tokens, false));
 
-            bind cmd = new bind();
-            cmd.Delegate = del;
-
-            string commandLine = "bind mou";
-            IList<string> tokens = CommandTokenizer.Tokenize(commandLine);
-
-            Assert.AreEqual("bind mouse", cmd.AutoComplete(commandLine, tokens, false));
+            throw new NotImplementedException("Implement me");
         }
 
         [Test]
         public void TestAutocompletionDoubleTabMultipleChoice()
         {
-            CommandDelegate del = new CommandDelegate();
+//            CommandDelegate del = new CommandDelegate();
+//
+//            bind cmd = new bind();
+//            cmd.Delegate = del;
+//
+//            string commandLine = "bind mou";
+//            IList<string> tokens = CommandTokenizer.Tokenize(commandLine);
+//
+//            Assert.AreEqual("bind mouse", cmd.AutoComplete(commandLine, tokens, true));
+//            AssertArray(del.table, "mouse0", "mouse1", "mouse2", "mouse3", "mouse4", "mouse5", "mouse6");
 
-            bind cmd = new bind();
-            cmd.Delegate = del;
-
-            string commandLine = "bind mou";
-            IList<string> tokens = CommandTokenizer.Tokenize(commandLine);
-
-            Assert.AreEqual("bind mouse", cmd.AutoComplete(commandLine, tokens, true));
-            AssertArray(del.table, "mouse0", "mouse1", "mouse2", "mouse3", "mouse4", "mouse5", "mouse6");
+            throw new NotImplementedException("Implement me");
         }
 
         #endregion
@@ -220,9 +226,9 @@ namespace CCommandTests
         {
             RunSetUp();
 
-            CRegistery.Register(new bind());
-            CRegistery.Register(new unbind());
-            CRegistery.Register(new bindlist());
+            registerCommand(typeof(Cmd_bind));
+            registerCommand(typeof(Cmd_unbind));
+            registerCommand(typeof(Cmd_bindlist));
 
             Lunar.RegisterCommand("test", delegate(CCommand cmd, string[] args)
             {

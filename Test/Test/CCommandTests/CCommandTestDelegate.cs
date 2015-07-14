@@ -8,6 +8,7 @@ using LunarPlugin;
 using LunarPluginInternal;
 
 using UnityEngine;
+using LunarEditor;
 
 namespace CCommandTests
 {
@@ -1015,8 +1016,8 @@ namespace CCommandTests
             this.IsTrackTerminalLog = true;
             this.IsTrackConsoleLog = true;
 
-            RegisterCommands(
-                new cmdlist()
+            registerCommand(
+                typeof(Cmd_cmdlist)
             );
         }
 

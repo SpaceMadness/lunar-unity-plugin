@@ -6,6 +6,7 @@ using NUnit.Framework;
 using UnityEngine;
 using LunarPlugin;
 using LunarPluginInternal;
+using LunarEditor;
 
 namespace CCommandTests
 {
@@ -24,12 +25,12 @@ namespace CCommandTests
                     "Alias1",//
                     "Alias2",//
                     "Alias3",//
-                    "Var1",  //
-                    "Var12", //
-                    "Var2",  //
                     "test1", //
                     "test2", //
-                    "test3"
+                    "test3", //
+                    "Var1",  //
+                    "Var12", //
+                    "Var2"
             );
         }
 
@@ -271,6 +272,7 @@ namespace CCommandTests
         //////////////////////////////////////////////////////////////////////////////
         // Lifecycle
 
+        [SetUp]
         protected override void RunSetUp()
         {
             base.RunSetUp();
@@ -285,10 +287,9 @@ namespace CCommandTests
             registerCommand(typeof(Cmd_test2), false);
             registerCommand(typeof(Cmd_test3), false);
 
-
-            execute("alias Alias1 test1");
-            execute("alias Alias2 test2");
-            execute("alias Alias3 test3");
+            Execute("alias Alias1 test1");
+            Execute("alias Alias2 test2");
+            Execute("alias Alias3 test3");
         }
 
         //////////////////////////////////////////////////////////////////////////////
@@ -328,7 +329,6 @@ namespace CCommandTests
             
             public Cmd_test1()
             {
-                ResolveOptions(this);
                 this.Values = new string[] {
                     "foo",
                     "val1",
@@ -348,11 +348,6 @@ namespace CCommandTests
             [CCommandOption(ShortName="b")]
             public bool boolOpt;
             
-            public Cmd_test2()
-            {
-                ResolveOptions(this);
-            }
-            
             void Execute()
             {
             }
@@ -365,10 +360,10 @@ namespace CCommandTests
             
             [CCommandOption(ShortName="a", Values="aa1,aa11,aa12,aa13,aa111,aa112,aa113,a2,b")]
             public string act;
-            
+         
             public Cmd_test3()
             {
-                ResolveOptions(this);
+                this.Values = new string[] { "arg1", "arg12", "arg2" };
             }
 
             void Execute()

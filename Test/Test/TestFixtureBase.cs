@@ -15,14 +15,22 @@ namespace LunarPlugin.Test
 
     public abstract class TestFixtureBase
     {
+        private List<String> result;
+
         static TestFixtureBase()
         {
             ThreadUtils.SetMainThread();
         }
 
-        public TestFixtureBase()
+        protected virtual void RunSetUp()
         {
+            result = new List<String>();
             OverrideDebugMode(true);
+        }
+
+        protected virtual void RunTearDown()
+        {
+            result = null;
         }
 
         protected void AssertList<T>(IList<T> actual, params T[] expected) 
@@ -76,6 +84,11 @@ namespace LunarPlugin.Test
         protected void OverrideDebugMode(bool value)
         {
             Config.OverrideIsDebugBuild(value);
+        }
+
+        protected List<String> Result
+        {
+            get { return result; }
         }
     }
 }

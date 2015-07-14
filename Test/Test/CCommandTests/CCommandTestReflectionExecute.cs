@@ -311,18 +311,17 @@ namespace CCommandTests
 
             this.IsTrackTerminalLog = true;
 
-            m_result = new List<string>();
-            RegisterCommands(new Cmd_string(m_result));
-            RegisterCommands(new Cmd_int(m_result));
-            RegisterCommands(new Cmd_float(m_result));
-            RegisterCommands(new Cmd_bool(m_result));
-            RegisterCommands(new Cmd_vector2(m_result));
-            RegisterCommands(new Cmd_vector3(m_result));
-            RegisterCommands(new Cmd_vector4(m_result));
-            RegisterCommands(new Cmd_strings(m_result));
-            RegisterCommands(new Cmd_ints(m_result));
-            RegisterCommands(new Cmd_floats(m_result));
-            RegisterCommands(new Cmd_bools(m_result));
+            RegisterCommands(new Cmd_string(this.Result));
+            RegisterCommands(new Cmd_int(this.Result));
+            RegisterCommands(new Cmd_float(this.Result));
+            RegisterCommands(new Cmd_bool(this.Result));
+            RegisterCommands(new Cmd_vector2(this.Result));
+            RegisterCommands(new Cmd_vector3(this.Result));
+            RegisterCommands(new Cmd_vector4(this.Result));
+            RegisterCommands(new Cmd_strings(this.Result));
+            RegisterCommands(new Cmd_ints(this.Result));
+            RegisterCommands(new Cmd_floats(this.Result));
+            RegisterCommands(new Cmd_bools(this.Result));
         }
 
         [TearDown]

@@ -6,6 +6,7 @@ using NUnit.Framework;
 
 using LunarPlugin;
 using LunarPluginInternal;
+using LunarEditor;
 
 namespace CCommandTests
 {
@@ -282,7 +283,7 @@ namespace CCommandTests
             RunSetUp();
             m_result = new List<string>();
 
-            CRegistery.Register(new reset());
+            registerCommand(typeof(Cmd_reset));
         }
 
         [TearDown]

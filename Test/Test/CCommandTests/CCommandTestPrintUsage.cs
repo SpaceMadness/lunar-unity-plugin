@@ -6,6 +6,7 @@ using NUnit.Framework;
 
 using LunarPlugin;
 using LunarPluginInternal;
+using LunarEditor;
 
 namespace CCommandTests
 {
@@ -67,11 +68,12 @@ namespace CCommandTests
 
             this.IsTrackTerminalLog = true;
 
-            CRegistery.Register(new man());
-            CRegistery.Register(new cmd_test1());
-            CRegistery.Register(new cmd_test2());
-            CRegistery.Register(new cmd_test3());
-            CRegistery.Register(new cmd_test4());
+            registerCommand(typeof(Cmd_man));
+
+            registerCommand(typeof(Cmd_test1), false);
+            registerCommand(typeof(Cmd_test2), false);
+            registerCommand(typeof(Cmd_test3), false);
+            registerCommand(typeof(Cmd_test4), false);
         }
 
         [TearDown]
@@ -84,27 +86,15 @@ namespace CCommandTests
 
         #region Inner classes
 
-        class cmd_test1 : CCommand
+        class Cmd_test1 : CCommand
         {
-            public cmd_test1()
-                : base("test1")
-            {
-                ResolveOptions(this);
-            }
-
             void Execute(string[] args)
             {
             }
         }
 
-        class cmd_test2 : CCommand
+        class Cmd_test2 : CCommand
         {
-            public cmd_test2()
-                : base("test2")
-            {
-                ResolveOptions(this);
-            }
-
             void Execute()
             {
             }
@@ -118,20 +108,14 @@ namespace CCommandTests
             }
         }
 
-        class cmd_test3 : CCommand
+        class Cmd_test3 : CCommand
         {
-            public cmd_test3()
-                : base("test3")
-            {
-                ResolveOptions(this);
-            }
-
             void Execute(string name, string command = null)
             {
             }
         }
 
-        class cmd_test4 : CCommand
+        class Cmd_test4 : CCommand
         {
             [CCommandOption(Name = "str")]
             public string m_str;
@@ -156,12 +140,6 @@ namespace CCommandTests
 
             [CCommandOption()]
             public string[] strings = new string[5];
-
-            public cmd_test4()
-                : base("test4")
-            {
-                ResolveOptions(this);
-            }
 
             void Execute(string arg)
             {

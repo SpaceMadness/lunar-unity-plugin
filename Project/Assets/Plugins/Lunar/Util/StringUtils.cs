@@ -531,12 +531,13 @@ namespace LunarPluginInternal
             return kRichTagRegex.Replace(line, String.Empty);
         }
 
-        internal static void RemoveRichTextTags(IList<string> lines)
+        internal static T RemoveRichTextTags<T>(T lines) where T : IList<String>
         {
             for (int i = 0; i < lines.Count; ++i)
             {
                 lines[i] = RemoveRichTextTags(lines[i]);
             }
+            return lines;
         }
 
         internal static string SetColors(string line, Color[] colorLookup)

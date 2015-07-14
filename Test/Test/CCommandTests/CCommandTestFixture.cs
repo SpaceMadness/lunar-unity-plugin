@@ -18,16 +18,15 @@ namespace CCommandTests
     public abstract class CCommandTestFixture : TestFixtureBase, ICCommandDelegate
     {
         private CommandProcessor m_commandProcessor;
-        protected List<string> m_result;
 
         #region Setup
 
-        protected virtual void RunSetUp()
+        protected override void RunSetUp()
         {
+            base.RunSetUp();
+
             this.IsTrackConsoleLog = false;
             this.IsTrackTerminalLog = false;
-
-            m_result = new List<string>();
 
             CBindings.Clear();
             CRegistery.Clear();
@@ -36,13 +35,14 @@ namespace CCommandTests
             m_commandProcessor.CommandDelegate = this;
         }
 
-        protected virtual void RunTearDown()
+        protected override void RunTearDown()
         {
             CBindings.Clear();
             CRegistery.Clear();
 
             m_commandProcessor = null;
-            m_result = null;
+
+            base.RunTearDown();
         }
 
         #endregion
@@ -92,6 +92,27 @@ namespace CCommandTests
 
         #region Helpers
 
+        protected void registerCommand(Type type, bool hidden = true)
+        {
+            CCommand command = ClassUtils.CreateInstance<CCommand>(type);
+            if (command == null)
+            {
+                throw new ArgumentException("Can't create class instance: " + type.FullName);
+            }
+
+            String commandName = type.Name;
+            if (commandName.StartsWith("Cmd_"))
+            {
+                commandName = commandName.Substring("Cmd_".Length);
+            }
+
+            command.Name = commandName;
+            command.IsHidden = hidden;
+            RuntimeResolver.ResolveOptions(command);
+
+            CRegistery.Register(command);
+        }
+
         protected void RegisterCommands(params string[] names)
         {
             foreach (string name in names)
@@ -113,7 +134,7 @@ namespace CCommandTests
 
         protected void AssertResult(params string[] expected)
         {
-            AssertList(m_result, expected);
+            AssertList(this.Result, expected);
         }
 
         protected bool Execute(string format, params object[] args)
@@ -126,9 +147,18 @@ namespace CCommandTests
             return m_commandProcessor.TryExecute(commandLine, true);
         }
 
+        protected void assertSuggestions(String line, params String[] expected)
+        {
+            int index = line.IndexOf('¶');
+            Assert.IsTrue(index != -1);
+
+            String[] actual = StringUtils.RemoveRichTextTags(CommandAutocompletion.getSuggestions(line.Replace("¶", ""), index));
+            Assert.AreEqual(actual, expected);
+        }
+
         protected void AddResult(string format, params object[] args)
         {
-            m_result.Add(StringUtils.RemoveRichTextTags(string.Format(format, args)));
+            this.Result.Add(StringUtils.RemoveRichTextTags(string.Format(format, args)));
         }
 
         #endregion
@@ -139,165 +169,6 @@ namespace CCommandTests
         protected bool IsTrackTerminalLog { get; set; }
 
         #endregion
-    }
-
-    class cmdlist : Cmd_cmdlist
-    {
-        public cmdlist()
-        {
-            this.Name = "cmdlist";
-            this.IsHidden = true;
-            ResolveOptions(this, typeof(Cmd_cmdlist));
-        }
-
-        public override Type GetCommandType()
-        {
-            return typeof(Cmd_cmdlist);
-        }
-    }
-
-    class cvarlist : Cmd_cvarlist
-    {
-        public cvarlist()
-        {
-            this.Name = "cvarlist";
-            this.IsHidden = true;
-            ResolveOptions(this, typeof(Cmd_cvarlist));
-        }
-
-        public override Type GetCommandType()
-        {
-            return typeof(Cmd_cvarlist);
-        }
-    }
-
-    class reset : Cmd_reset
-    {
-        public reset()
-        {
-            this.Name = "reset";
-            this.IsHidden = true;
-            ResolveOptions(this, typeof(Cmd_reset));
-        }
-
-        public override Type GetCommandType()
-        {
-            return typeof(Cmd_reset);
-        }
-    }
-
-    class alias : Cmd_alias
-    {
-        public alias()
-        {
-            this.Name = "alias";
-            this.IsHidden = true;
-            ResolveOptions(this, typeof(Cmd_alias));
-        }
-
-        public override Type GetCommandType()
-        {
-            return typeof(Cmd_alias);
-        }
-    }
-
-    class aliaslist : Cmd_aliaslist
-    {
-        public aliaslist()
-        {
-            this.Name = "aliaslist";
-            this.IsHidden = true;
-            ResolveOptions(this, typeof(Cmd_aliaslist));
-        }
-
-        public override Type GetCommandType()
-        {
-            return typeof(Cmd_aliaslist);
-        }
-    }
-
-    class unalias : Cmd_unalias
-    {
-        public unalias()
-        {
-            this.Name = "unalias";
-            this.IsHidden = true;
-        }
-
-        public override Type GetCommandType()
-        {
-            return typeof(Cmd_unalias);
-        }
-    }
-
-    class bind : Cmd_bind
-    {
-        public bind()
-        {
-            this.Name = "bind";
-            this.IsHidden = true;
-        }
-
-        public override Type GetCommandType()
-        {
-            return typeof(Cmd_bind);
-        }
-    }
-
-    class unbind : Cmd_unbind
-    {
-        public unbind()
-        {
-            this.Name = "unbind";
-            this.IsHidden = true;
-        }
-
-        public override Type GetCommandType()
-        {
-            return typeof(Cmd_unbind);
-        }
-    }
-
-    class bindlist : Cmd_bindlist
-    {
-        public bindlist()
-        {
-            this.Name = "bindlist";
-            this.IsHidden = true;
-        }
-
-        public override Type GetCommandType()
-        {
-            return typeof(Cmd_bindlist);
-        }
-    }
-
-    class unbindall : Cmd_unbindall
-    {
-        public unbindall()
-        {
-            this.Name = "unbindall";
-            this.IsHidden = true;
-        }
-
-        public override Type GetCommandType()
-        {
-            return typeof(Cmd_unbindall);
-        }
-    }
-
-    class man : Cmd_man
-    {
-        public man()
-        {
-            this.Name = "man";
-            this.IsHidden = true;
-        }
-
-        public override Type GetCommandType()
-        {
-            return typeof(Cmd_man);
-        }
     }
 }
 

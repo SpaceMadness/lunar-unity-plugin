@@ -6,6 +6,7 @@ using NUnit.Framework;
 using UnityEngine;
 using LunarPlugin;
 using LunarPluginInternal;
+using LunarEditor;
 
 namespace CCommandTests
 {
@@ -341,11 +342,12 @@ namespace CCommandTests
 
             this.IsTrackTerminalLog = true;
 
+            registerCommand(typeof(Cmd_cmdlist));
+            registerCommand(typeof(Cmd_cvarlist));
+            registerCommand(typeof(Cmd_alias));
+            registerCommand(typeof(Cmd_aliaslist));
+
             RegisterCommands(
-                new cmdlist(),
-                new cvarlist(),
-                new alias(),
-                new aliaslist(),
                 new cmd_hidden("hidden_cmd"),
                 new cmd_system("cmd_system_1"),
                 new cmd_system("cmd_system_12"),
