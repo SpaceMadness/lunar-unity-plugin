@@ -93,6 +93,29 @@ namespace CCommandTests
             );
         }
 
+        #region Config
+
+        [Test]
+        public void TestWriteConfig()
+        {
+            Execute("alias a1 'echo \"alias 1\"'");
+            Execute("alias a2 \"echo 'alias 2'\"");
+            Execute("alias a3 \"echo \\\"alias 3\\\"\"");
+
+            ConfigReadFilter filter = delegate(string line)
+            {
+                return line.StartsWith("alias ");
+            };
+
+            AssertConfig(filter,
+                "alias a1 \"echo \\\"alias 1\\\"\"",
+                "alias a2 \"echo \\\"alias 2\\\"\"",
+                "alias a3 \"echo \\\"alias 3\\\"\""
+            );
+        }
+
+        #endregion
+
         #region Setup
 
         [SetUp]

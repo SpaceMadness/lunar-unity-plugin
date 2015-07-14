@@ -20,8 +20,6 @@ namespace CCommandTests
         [Test]
         public void TestCanInvokeMethodWithArgsCount()
         {
-            Type dummyType = typeof(Dummy);
-            
             AssertCanExecute(0);
             AssertCanExecute(1, typeof(String));
             AssertCanExecute(2, typeof(String), typeof(String));

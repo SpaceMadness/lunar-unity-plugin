@@ -15,6 +15,8 @@ namespace CCommandTests
     using Assert = NUnit.Framework.Assert;
     using Option = CCommand.Option;
 
+    public delegate bool ConfigReadFilter(string line);
+
     public abstract class CCommandTestFixture : TestFixtureBase, ICCommandDelegate
     {
         private CommandProcessor m_commandProcessor;
@@ -24,6 +26,8 @@ namespace CCommandTests
         protected override void RunSetUp()
         {
             base.RunSetUp();
+
+            ConfigHelper.DeleteConfigs();
 
             this.IsTrackConsoleLog = false;
             this.IsTrackTerminalLog = false;
@@ -159,6 +163,25 @@ namespace CCommandTests
         protected void AddResult(string format, params object[] args)
         {
             this.Result.Add(StringUtils.RemoveRichTextTags(string.Format(format, args)));
+        }
+
+        #endregion
+
+        #region Config
+
+        protected void AssertConfig(ConfigReadFilter filter, params string[] expected)
+        {
+            IList<string> lines = ConfigHelper.ReadConfig("default.cfg");
+            IList<string> actual = new List<string>();
+            foreach (string line in lines)
+            {
+                if (filter(line))
+                {
+                    actual.Add(line);
+                }
+            }
+
+            AssertList(actual, expected);
         }
 
         #endregion

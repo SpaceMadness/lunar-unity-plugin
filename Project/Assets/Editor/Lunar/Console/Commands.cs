@@ -545,7 +545,7 @@ namespace LunarEditor
     [CCommand("writeconfig", Description="Writes a config file.")]
     class Cmd_writeconfig : CCommand
     {
-        void Execute(string filename = "default.cfg")
+        bool Execute(string filename = "default.cfg")
         {
             IList<string> lines = ReusableLists.NextAutoRecycleList<string>();
             
@@ -557,15 +557,18 @@ namespace LunarEditor
             
             // aliases
             ListAliases(lines);
-            
-            if (CCommandHelper.WriteConfig(filename, lines))
+
+            try
             {
+                ConfigHelper.WriteConfig(filename, lines);
                 return true;
             }
-
-            if (this.IsManualMode)
+            catch (Exception e)
             {
-                PrintError("Can't write config: " + lines);
+                if (this.IsManualMode)
+                {
+                    PrintError("Can't write config: " + e.Message);
+                }
             }
 
             return false;
@@ -574,7 +577,7 @@ namespace LunarEditor
         private static void ListCvars(IList<string> lines)
         {
             IList<CVar> cvars = CRegistery.ListVars(delegate(CVarCommand cmd)
-                                                    {
+            {
                 return !cmd.IsDefault && !cmd.HasFlag(CFlags.NoArchive);
             });
             

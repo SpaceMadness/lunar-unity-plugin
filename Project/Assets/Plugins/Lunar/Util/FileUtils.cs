@@ -40,98 +40,79 @@ namespace LunarPluginInternal
 
         public static IList<string> Read(string path)
         {
-            try
+            string absolutePath = GetAbsolutePath(path);
+            
+            if (!FileExists(absolutePath))
             {
-                string absolutePath = GetAbsolutePath(path);
-                
-                if (!FileExists(absolutePath))
-                {
-                    Log.e("File does not exist: " + path);
-                    return null;
-                }
-                
-                using (StreamReader reader = new StreamReader(absolutePath, Encoding.UTF8))
-                {
-                    IList<string> lines = ReusableLists.NextAutoRecycleList<string>();
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        lines.Add(line);
-                    }
-                    
-                    return lines;
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.error(ex, "Unable to read file: " + path);
+                throw new IOException("File does not exist: " + path);
             }
             
-            return null;
+            using (StreamReader reader = new StreamReader(absolutePath, Encoding.UTF8))
+            {
+                IList<string> lines = new List<string>();
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    lines.Add(line);
+                }
+                
+                return lines;
+            }
         }
         
-        public static bool Write(string filename, IList<string> lines)
+        public static void Write(string filename, IList<string> lines)
         {
-            try
+            string path = GetAbsolutePath(filename);
+
+            DirectoryInfo parent = Directory.GetParent(path);
+            if (parent == null)
             {
-                string path = GetAbsolutePath(filename);
-                DirectoryInfo parent = Directory.GetParent(path);
-                if (parent == null)
-                {
-                    Log.e("Unable to write file: can't resolve parent directory");
-                    return false;
-                }
+                throw new IOException("Can't resolve parent directory: " + path);
+            }
+
+            if (!parent.Exists)
+            {
+                parent.Create();
 
                 if (!parent.Exists)
                 {
-                    parent.Create();
+                    throw new IOException("Can't create parent directory: " + parent);
                 }
+            }
 
-                using (StreamWriter writer = new StreamWriter(path, false, Encoding.UTF8))
+            using (StreamWriter writer = new StreamWriter(path, false, Encoding.UTF8))
+            {
+                foreach (string line in lines)
                 {
-                    foreach (string line in lines)
-                    {
-                        writer.WriteLine(line);
-                    }
-                    return true;
+                    writer.WriteLine(line);
                 }
             }
-            catch (System.Exception ex)
-            {
-                Log.error(ex, "Unable to write file: " + filename);
-            }
-            
-            return false;
         }
 
-        public static bool Write(string filename, string text)
+        public static void Write(string filename, string text)
         {
-            try
+            string path = GetAbsolutePath(filename);
+
+            DirectoryInfo parent = Directory.GetParent(path);
+            if (parent == null)
             {
-                string path = GetAbsolutePath(filename);
-                DirectoryInfo parent = Directory.GetParent(path);
-                if (parent == null)
-                {
-                    Log.e("Unable to write file: can't resolve parent directory");
-                    return false;
-                }
+                throw new IOException("Can't resolve parent directory: " + path);
+            }
+
+            if (!parent.Exists)
+            {
+                parent.Create();
 
                 if (!parent.Exists)
                 {
-                    parent.Create();
+                    throw new IOException("Can't create parent directory: " + parent);
                 }
-
-                #if !UNITY_WEBPLAYER
-                File.WriteAllText(filename, text);
-                #endif
-                return true;
             }
-            catch (System.Exception ex)
+
+            using (StreamWriter writer = new StreamWriter(path, false, Encoding.UTF8))
             {
-                Log.error(ex, "Unable to write file: " + filename);
+                writer.Write(text);
             }
-
-            return false;
         }
         
         public static System.IO.Stream OpenRead(string path)
