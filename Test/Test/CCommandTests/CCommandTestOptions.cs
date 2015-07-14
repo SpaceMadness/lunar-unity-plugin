@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -14,7 +14,7 @@ namespace CCommandTests
     using CommandActionEx = CommandAction<CCommand, string[]>;
 
     [TestFixture]
-    public class CCommandTestOptions : CCommandTest
+    public class CCommandTestOptions : CCommandTestFixture
     {
         #region List options
 

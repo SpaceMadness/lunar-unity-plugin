@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -13,7 +13,7 @@ namespace CCommandTests
     using Option = CCommand.Option;
 
     [TestFixture]
-    public class CCommandTestMultipleCommands : CCommandTest
+    public class CCommandTestMultipleCommands : CCommandTestFixture
     {
         [Test]
         public void TestMultipleCommands()

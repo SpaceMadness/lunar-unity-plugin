@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -15,7 +15,7 @@ namespace CCommandTests
     using Option = CCommand.Option;
 
     [TestFixture]
-    public class CCommandTestDelegate : CCommandTest
+    public class CCommandTestDelegate : CCommandTestFixture
     {
         #region Registry
 

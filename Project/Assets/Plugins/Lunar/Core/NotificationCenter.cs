@@ -335,20 +335,28 @@ namespace LunarPluginInternal
         
         public void NotifyDelegates(Notification notification)
         {
-            int delegatesCount = list.Count;
-            for (int i = 0; i < delegatesCount; ++i)
+            try
             {
-                NotificationDelegate del = list[i];
-                try
+                Lock();
+                
+                int delegatesCount = list.Count;
+                for (int i = 0; i < delegatesCount; ++i)
                 {
-                    del(notification);
-                }
-                catch (Exception e)
-                {
-                    Log.error(e, "Error while notifying delegate");
+                    NotificationDelegate del = list[i];
+                    try
+                    {
+                        del(notification);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.error(e, "Error while notifying delegate");
+                    }
                 }
             }
-            ClearRemoved();
+            finally
+            {
+                Unlock();
+            }
         }
         
         private static void NullNotificationDelegate(Notification notification)

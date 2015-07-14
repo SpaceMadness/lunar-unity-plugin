@@ -1,26 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    abstract class BaseList<T> : IBaseCollection<T> where T : class
+    abstract class BaseList<T> : IBaseCollection<T> where T : class // TODO: thread safety
     {
-        protected List<T> list;
-
-        protected T nullElement;
-        protected int removedCount;
-
+        protected readonly List<T> list;
+        
+        private readonly T nullElement;
+        private int removedCount;
+        private bool locked;
+        
         protected BaseList(T nullElement)
             : this(nullElement, 0)
         {
         }
-
+        
         protected BaseList(T nullElement, int capacity)
             : this(new List<T>(capacity), nullElement)
         {   
+            if (nullElement == null)
+            {
+                throw new ArgumentNullException("Null element is null");
+            }
         }
-
+        
         protected BaseList(List<T> list, T nullElement)
         {
             this.list = list;
@@ -29,8 +35,14 @@ namespace LunarPluginInternal
 
         public virtual bool Add(T e)
         {
+            if (e == null)
+            {
+                throw new ArgumentNullException("Element is null");
+            }
+            
             Assert.NotContains(e, list);
             list.Add(e);
+            
             return true;
         }
 
@@ -42,42 +54,56 @@ namespace LunarPluginInternal
                 RemoveAt(index);
                 return true;
             }
-
+            
             return false;
         }
-
+        
         public virtual T Get(int index)
         {
             return list[index];
         }
-
+        
         public virtual int IndexOf(T e)
         {
             return list.IndexOf(e);
         }
-
+        
         public virtual void RemoveAt(int index)
         {
-            ++removedCount;
-            list[index] = nullElement;
+            if (locked)
+            {
+                ++removedCount;
+                list[index] = nullElement;
+            }
+            else
+            {
+                list.RemoveAt(index);
+            }
         }
-
+        
         public virtual void Clear()
         {
-            list.Clear();
+            if (locked)
+            {
+                for (int i = 0; i < list.Count; ++i)
+                {
+                    list[i] = nullElement;
+                }
+                removedCount = list.Count;
+            }
+            else
+            {
+                list.Clear();
+                removedCount = 0;
+            }
         }
-
+        
         public virtual bool Contains(T e)
         {
             return list.Contains(e);
         }
-
-        public virtual bool IsNull()
-        {
-            return false;
-        }
-
-        protected void ClearRemoved()
+        
+        private void ClearRemoved()
         {
             for (int i = list.Count - 1; removedCount > 0 && i >= 0; --i)
             {
@@ -88,10 +114,23 @@ namespace LunarPluginInternal
                 }
             }
         }
-
+        
         public virtual int Count
         {
             get { return list.Count - removedCount; }
+        }
+        
+        protected void Lock()
+        {
+            Assert.IsFalse(locked);
+            locked = true;
+        }
+        
+        protected void Unlock()
+        {
+            Assert.IsTrue(locked);
+            ClearRemoved();
+            locked = false;
         }
     }
 }

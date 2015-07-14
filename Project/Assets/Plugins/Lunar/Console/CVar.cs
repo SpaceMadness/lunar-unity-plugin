@@ -588,20 +588,27 @@ namespace LunarPlugin
 
         public void NotifyValueChanged(CVar cvar)
         {
-            int elementsCount = list.Count;
-            for (int i = 0; i < elementsCount; ++i) // do not update added items on that tick
+            try
             {
-                try
+                Lock();
+                
+                int elementsCount = list.Count;
+                for (int i = 0; i < elementsCount; ++i) // do not update added items on that tick
                 {
-                    list[i](cvar);
-                }
-                catch (Exception e)
-                {
-                    Log.error(e);
+                    try
+                    {
+                        list[i](cvar);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.error(e);
+                    }
                 }
             }
-
-            ClearRemoved();
+            finally
+            {
+                Unlock();
+            }
         }
 
         static void NullCVarChangedDelegate(CVar cvar)

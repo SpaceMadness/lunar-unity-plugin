@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -14,7 +14,7 @@ namespace CCommandTests
     using Assert = NUnit.Framework.Assert;
 
     [TestFixture]
-    public class CCommandTestCvar : CCommandTest
+    public class CCommandTestCvar : CCommandTestFixture
     {
         [Test]
         public void TestCvarBool()

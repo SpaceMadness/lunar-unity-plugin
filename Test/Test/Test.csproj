@@ -52,7 +52,6 @@
     <Compile Include="TimerManager\TimerTest.cs" />
     <Compile Include="TimerManager\TestTimer.cs" />
     <Compile Include="Debug\AssertTest.cs" />
-    <Compile Include="CCommandTests\CCommandTest.cs" />
     <Compile Include="CCommandTests\CCommandTestDelegate.cs" />
     <Compile Include="CCommandTests\CCommandTestOptions.cs" />
     <Compile Include="CCommandTests\CCommandTestCommandProcessor.cs" />
@@ -85,6 +84,9 @@
     <Compile Include="CCommandTests\CCommandPlayModeOnlyTest.cs" />
     <Compile Include="CCommandTests\CCommandTestCvar.cs" />
     <Compile Include="CCommandTests\CCommandTestReflectionExecute.cs" />
+    <Compile Include="CCommandTests\CCommandTestFixture.cs" />
+    <Compile Include="CCommandTests\CCommandUtilsTests.cs" />
+    <Compile Include="CCommandTests\CommandAutocompletionTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

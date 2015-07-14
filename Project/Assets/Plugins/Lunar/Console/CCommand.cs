@@ -79,6 +79,8 @@ namespace LunarPlugin
 
         private Dictionary<string, Option> m_optionsLookup;
 
+        private MethodInfo[] executeMethods;
+
         private List<Option> m_options;
         private string[] m_values;
 
@@ -212,29 +214,68 @@ namespace LunarPlugin
             }
 
             string[] args = argsList.Count > 0 ? argsList.ToArray() : EMPTY_COMMAND_ARGS;
-            MethodInfo[] methods = ClassUtils.ListInstanceMethods(GetCommandType(), delegate(MethodInfo method)
-            {
-                if (method.Name != "Execute")
-                {
-                    return false;
-                }
-
-                if (method.IsAbstract)
-                {
-                    return false;
-                }
-
-                return CCommandUtils.CanInvokeMethodWithArgsCount(method, args.Length);
-            });
-
-            if (methods.Length != 1)
+            MethodInfo executeMethod = resolveExecuteMethod(args);
+            if (executeMethod == null)
             {
                 PrintError("Wrong arguments");
                 PrintUsage();
                 return false;
             }
 
-            return CCommandUtils.Invoke(this, methods[0], args);
+            return CCommandUtils.Invoke(this, executeMethod, args);
+        }
+
+        private MethodInfo resolveExecuteMethod(String[] args)
+        {
+            if (executeMethods == null)
+            {
+                executeMethods = resolveExecuteMethods();
+            }
+            
+            MethodInfo method = null;
+            foreach (MethodInfo m in executeMethods)
+            {
+                if (CCommandUtils.CanInvokeMethodWithArgsCount(m, args.Length))
+                {
+                    if (method != null) // multiple methods found
+                    {
+                        return null;
+                    }
+                    
+                    method = m;
+                }
+            }
+            
+            return method;
+        }
+        
+        private MethodInfo[] resolveExecuteMethods()
+        {
+            List<MethodInfo> result = new List<MethodInfo>();
+
+            ListMethodsFilter filter = delegate(MethodInfo method)
+            {
+                if (method.Name != "Execute")
+                {
+                    return false;
+                }
+                
+                if (method.IsAbstract)
+                {
+                    return false;
+                }
+
+                return method.ReturnType == typeof(void) || method.ReturnType == typeof(bool);
+            };
+            
+            Type type = GetCommandType();
+            while (type != null)
+            {
+                ClassUtils.ListInstanceMethods(result, type, filter);
+                type = type.BaseType;
+            }
+            
+            return result.ToArray();
         }
 
         private Option ParseOption(Iterator<string> iter, string name)
@@ -391,6 +432,8 @@ namespace LunarPlugin
 
                         throw new CCommandParseException("'{0}' is an invalid value for the option '{1}'", value, opt.Name);
                     }
+
+                    return true;
                 }
 
                 return false;
@@ -531,7 +574,7 @@ namespace LunarPlugin
             return opt.ShortName != null;
         }
 
-        private Option FindOption(string name)
+        internal Option FindOption(string name)
         {
             if (name.Length == 0)
             {
@@ -547,6 +590,43 @@ namespace LunarPlugin
                 }
             }
 
+            return null;
+        }
+
+        internal Option FindNonAmbiguousOption(string name, bool useShort)
+        {
+            if (name.Length == 0)
+            {
+                return null;
+            }
+            
+            if (m_options != null)
+            {
+                Option targetOpt = null;
+                foreach (Option opt in m_options)
+                {
+                    String optName = useShort ? opt.ShortName : opt.Name;
+                    if (optName == null)
+                    {
+                        continue;
+                    }
+                    
+                    if (targetOpt == null)
+                    {
+                        if (StringUtils.EqualsIgnoreCase(optName, name))
+                        {
+                            targetOpt = opt;
+                        }
+                    }
+                    else if (StringUtils.StartsWithIgnoreCase(optName, name))
+                    {
+                        return null;
+                    }
+                }
+                
+                return targetOpt;
+            }
+            
             return null;
         }
 
@@ -854,6 +934,11 @@ namespace LunarPlugin
             }
 
             return null;
+        }
+
+        internal string[] AutoCompleteCustomArgs(string commandLine, string token)
+        {
+            return AutoCompleteArgs(commandLine, token);
         }
 
         protected virtual string[] AutoCompleteArgs(string commandLine, string token)
@@ -1175,35 +1260,18 @@ namespace LunarPlugin
                 return new String[] { " " + StringUtils.Join(m_values, "|") };
             }
 
-            MethodInfo[] executeMethods = ClassUtils.ListInstanceMethods(GetCommandType(), delegate(MethodInfo method)
+            if (executeMethods == null)
             {
-                if (method.Name != "Execute")
-                {
-                    return false;
-                }
-
-                if (method.IsAbstract)
-                {
-                    return false;
-                }
-
-                Type returnType = method.ReturnType;
-                if (returnType != typeof(bool) && returnType != typeof(void))
-                {
-                    return false;
-                }
-
-                return true;
-            });
+                executeMethods = resolveExecuteMethods();
+            }
 
             if (executeMethods.Length > 0)
             {
-                string[] result = new string[executeMethods.Length];
+                String[] result = new String[executeMethods.Length];
                 for (int i = 0; i < result.Length; ++i)
                 {
                     result[i] = CCommandUtils.GetMethodParamsUsage(executeMethods[i]);
                 }
-
                 return result;
             }
 
@@ -1250,20 +1318,7 @@ namespace LunarPlugin
 
         internal bool StartsWith(string prefix)
         {
-            if (prefix.Length <= Name.Length)
-            {
-                for (int i = 0; i < prefix.Length; ++i)
-                {
-                    char pc = char.ToLower(prefix[i]);
-                    char nc = char.ToLower(Name[i]);
-
-                    if (pc != nc) return false;
-                }
-
-                return true;
-            }
-
-            return false;
+            return StringUtils.StartsWithIgnoreCase(Name, prefix);
         }
 
         internal static string Arg(string value) { return StringUtils.Arg(value); }
@@ -1379,7 +1434,12 @@ namespace LunarPlugin
                     {
                         return StringUtils.IsNumeric(value); // but can be a negative number
                     }
-                    return true;
+                    if (value.Equals("&&") || value.Equals("||"))
+                    {
+                        return false;
+                    }
+                    
+                    return value.Length > 0; // can't be empty
                 }
 
                 if (type == typeof(int))
@@ -1398,6 +1458,28 @@ namespace LunarPlugin
             public bool HasValues()
             {
                 return Values != null && Values.Length > 0;
+            }
+
+            public override string ToString()
+            {
+                StringBuilder result = new StringBuilder();
+                result.Append(Target.GetType().Name);
+                result.Append(" ");
+                result.Append(Name);
+                if (ShortName != null)
+                {
+                    result.Append("(");
+                    result.Append(ShortName);
+                    result.Append(")");
+                }
+                
+                if (DefaultValue != null)
+                {
+                    result.Append(" = ");
+                    result.Append(DefaultValue.ToString());
+                }
+                
+                return result.ToString();
             }
 
             //////////////////////////////////////////////////////////////////////////////
@@ -1425,7 +1507,7 @@ namespace LunarPlugin
                     for (int i = 0; i < Values.Length; ++i)
                     {
                         string str = Values[i];
-                        if (token == null || str.StartsWith(token, false, null))
+                        if (token == null || StringUtils.StartsWithIgnoreCase(str, token))
                         {
                             list.Add(str);
                         }

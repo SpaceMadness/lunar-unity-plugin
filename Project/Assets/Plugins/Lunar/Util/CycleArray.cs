@@ -14,16 +14,20 @@ namespace LunarPluginInternal
             m_internalArray = new E[capacity];
         }
 
-        public void Add(E e)
+        public E Add(E e)
         {
             int arrayIndex = ToArrayIndex(Length);
+            E oldItem = m_internalArray[arrayIndex];
             m_internalArray[arrayIndex] = e;
             ++Length;
 
             if (Length - HeadIndex > m_internalArray.Length)
             {
                 ++HeadIndex;
+                return oldItem;
             }
+            
+            return default(E); // no items were destroyed
         }
 
         public void Clear()

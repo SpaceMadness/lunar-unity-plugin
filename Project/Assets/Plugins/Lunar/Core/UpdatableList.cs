@@ -120,11 +120,6 @@ namespace LunarPluginInternal
             return false;
         }
 
-        public override bool IsNull()
-        {
-            return true;
-        }
-
         public override int Count
         {
             get { return 0; }

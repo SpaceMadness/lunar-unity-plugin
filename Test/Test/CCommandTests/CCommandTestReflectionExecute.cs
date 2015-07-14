@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace CCommandTests
     using Option = CCommand.Option;
 
     [TestFixture]
-    public class CCommandTestReflectionExecute : CCommandTest
+    public class CCommandTestReflectionExecute : CCommandTestFixture
     {
         [Test]
         public void TestExecuteStringNoArgs()

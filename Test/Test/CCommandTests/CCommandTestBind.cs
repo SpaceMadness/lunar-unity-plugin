@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 using NUnit.Framework;
@@ -13,7 +13,7 @@ namespace CCommandTests
     using Assert = NUnit.Framework.Assert;
 
     [TestFixture]
-    public class CCommandTestBind : CCommandTest
+    public class CCommandTestBind : CCommandTestFixture
     {
         #region Binds
 

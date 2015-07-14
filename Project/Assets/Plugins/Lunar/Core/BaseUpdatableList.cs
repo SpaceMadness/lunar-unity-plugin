@@ -21,13 +21,20 @@ namespace LunarPluginInternal
 
         public virtual void Update(float delta)
         {
-            int elementsCount = list.Count;
-            for (int i = 0; i < elementsCount; ++i) // do not update added items on that tick
+            try
             {
-                list[i].Update(delta);
+                Lock();
+                
+                int elementsCount = list.Count;
+                for (int i = 0; i < elementsCount; ++i) // do not update added items on that tick
+                {
+                    list[i].Update(delta);
+                }
             }
-            
-            ClearRemoved();
+            finally
+            {
+                Unlock();
+            }
         }
     }
 }

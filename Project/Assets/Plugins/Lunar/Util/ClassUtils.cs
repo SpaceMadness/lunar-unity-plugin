@@ -67,12 +67,17 @@ namespace LunarPluginInternal
             return null;
         }
 
-        public static MethodInfo[] ListInstanceMethods(Type type, ListMethodsFilter filter)
+        public static List<MethodInfo> ListInstanceMethods(Type type, ListMethodsFilter filter)
         {
-            return ListMethods(type, filter, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            return ListInstanceMethods(new List<MethodInfo>(), type, filter);
         }
 
-        public static MethodInfo[] ListMethods(Type type, ListMethodsFilter filter, BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
+        public static List<MethodInfo> ListInstanceMethods(List<MethodInfo> outList, Type type, ListMethodsFilter filter)
+        {
+            return ListMethods(outList, type, filter, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+        }
+
+        public static List<MethodInfo> ListMethods(List<MethodInfo> outList, Type type, ListMethodsFilter filter, BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
         {
             Assert.IsNotNull(type, "Type is null");
 
@@ -80,18 +85,18 @@ namespace LunarPluginInternal
 
             if (filter == null)
             {
-                return methods;
+                outList.AddRange(methods);
+                return outList;
             }
 
-            List<MethodInfo> list = new List<MethodInfo>(methods.Length);
             foreach (MethodInfo m in methods)
             {
                 if (filter(m))
                 {
-                    list.Add(m);
+                    outList.Add(m);
                 }
             }
-            return list.ToArray();
+            return outList;
         }
 
         public static bool ShouldListMethod(MethodInfo m, string prefix)

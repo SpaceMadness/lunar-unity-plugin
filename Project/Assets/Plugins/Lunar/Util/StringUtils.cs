@@ -39,6 +39,11 @@ namespace LunarPluginInternal
             return str != null && prefix != null && str.StartsWith(prefix, StringComparison.OrdinalIgnoreCase);
         }
 
+        public static bool EqualsIgnoreCase(string a, string b)
+        {
+            return string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
+        }
+
         //////////////////////////////////////////////////////////////////////////////
 
         #region Parsing

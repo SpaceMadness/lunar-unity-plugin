@@ -7,18 +7,20 @@ namespace LunarPluginInternal
 {
     class CommandTokenizer
     {
+        public const int OPTION_IGNORE_MISSING_QUOTES = 1; // FIXME: use enum
+
         private const char DoubleQuote  = '"';
         private const char SingleQuote  = '\'';
         private const char EscapeSymbol = '\\';
 
-        public static IList<string> Tokenize(string str)
+        public static IList<string> Tokenize(string str, int options = 0)
         {
             IList<string> list = ReusableLists.NextAutoRecycleList<string>();
-            Tokenize(str, list);
+            Tokenize(str, list, options);
             return list;
         }
 
-        public static void Tokenize(string str, IList<string> tokens)
+        public static void Tokenize(string str, IList<string> tokens, int options = 0)
         {
             StringBuilder tokenBuffer = StringBuilderPool.NextAutoRecycleBuilder();
 
@@ -130,17 +132,17 @@ namespace LunarPluginInternal
                     tokenBuffer.Append(ch);
                 }
             }
-
-            if (insideDoubleQuotes)
+            
+            if (insideDoubleQuotes && !HasOption(options, OPTION_IGNORE_MISSING_QUOTES))
             {
                 throw new TokenizeException("Missing closing double quote: " + str);
             }
-
-            if (insideSingleQuotes)
+            
+            if (insideSingleQuotes && !HasOption(options, OPTION_IGNORE_MISSING_QUOTES))
             {
                 throw new TokenizeException("Missing closing single quote: " + str);
             }
-
+            
             AddToken(tokenBuffer, tokens);
         }
 
@@ -151,6 +153,11 @@ namespace LunarPluginInternal
                 list.Add(buffer.ToString());
                 buffer.Length = 0;
             }
+        }
+
+        private static bool HasOption(int options, int option)
+        {
+            return (options & option) != 0;
         }
     }
 }

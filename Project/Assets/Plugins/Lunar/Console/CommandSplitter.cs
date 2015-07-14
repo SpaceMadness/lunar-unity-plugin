@@ -7,19 +7,21 @@ namespace LunarPluginInternal
 {
     class CommandSplitter
     {
+        public const int OPTION_IGNORE_MISSING_QUOTES = 1; // TODO: use enum
+    
         private const char Space        = ' ';
         private const char DoubleQuote  = '"';
         private const char SingleQuote  = '\'';
         private const char EscapeSymbol = '\\';
 
-        public static IList<string> Split(string str)
+        public static IList<string> Split(string str, int options = 0)
         {
             IList<string> list = ReusableLists.NextAutoRecycleList<string>();
-            Split(str, list);
+            Split(str, list, options);
             return list;
         }
 
-        public static void Split(string str, IList<string> list)
+        public static void Split(string str, IList<string> list, int options = 0)
         {
             StringBuilder commandBuffer = StringBuilderPool.NextAutoRecycleBuilder();
 
@@ -76,12 +78,12 @@ namespace LunarPluginInternal
                 }
             }
 
-            if (insideDoubleQuotes)
+            if (insideDoubleQuotes && !HasOption(options, OPTION_IGNORE_MISSING_QUOTES))
             {
                 throw new TokenizeException("Missing closing double quote");
             }
 
-            if (insideSingleQuotes)
+            if (insideSingleQuotes && !HasOption(options, OPTION_IGNORE_MISSING_QUOTES))
             {
                 throw new TokenizeException("Missing closing single quote");
             }
@@ -102,6 +104,11 @@ namespace LunarPluginInternal
 
             list.Add(command);
             buffer.Length = 0;
+        }
+        
+        private static bool HasOption(int options, int option)
+        {
+            return (options & option) != 0;
         }
     }
 }

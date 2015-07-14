@@ -15,14 +15,14 @@ namespace CCommandTests
     using Assert = NUnit.Framework.Assert;
     using Option = CCommand.Option;
 
-    public abstract class CCommandTest : TestFixtureBase, ICCommandDelegate
+    public abstract class CCommandTestFixture : TestFixtureBase, ICCommandDelegate
     {
         private CommandProcessor m_commandProcessor;
         protected List<string> m_result;
 
         #region Setup
 
-        protected void RunSetUp()
+        protected virtual void RunSetUp()
         {
             this.IsTrackConsoleLog = false;
             this.IsTrackTerminalLog = false;
@@ -36,7 +36,7 @@ namespace CCommandTests
             m_commandProcessor.CommandDelegate = this;
         }
 
-        protected void RunTearDown()
+        protected virtual void RunTearDown()
         {
             CBindings.Clear();
             CRegistery.Clear();

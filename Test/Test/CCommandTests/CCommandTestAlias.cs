@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 using NUnit.Framework;
@@ -12,7 +12,7 @@ namespace CCommandTests
     using Assert = NUnit.Framework.Assert;
 
     [TestFixture]
-    public class CCommandTestAlias : CCommandTest
+    public class CCommandTestAlias : CCommandTestFixture
     {
         [Test]
         public void TestSingleAlias()
