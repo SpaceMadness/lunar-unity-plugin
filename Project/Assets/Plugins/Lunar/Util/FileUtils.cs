@@ -84,7 +84,7 @@ namespace LunarPluginInternal
             {
                 parent.Create();
 
-                if (!parent.Exists)
+                if (!Directory.Exists(parent.FullName))
                 {
                     throw new IOException("Can't create parent directory: " + parent);
                 }

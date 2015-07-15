@@ -37,7 +37,7 @@ namespace CCommandTests
             base.RunTearDown();
         }
 
-        protected void Clear(bool deleteConfigs = true)
+        protected virtual void Clear(bool deleteConfigs = true)
         {
             CBindings.Clear();
             CRegistery.Clear();
@@ -140,6 +140,11 @@ namespace CCommandTests
             }
 
             AssertList(actual, expected);
+        }
+
+        protected void WriteConfig(params string[] lines)
+        {
+            ConfigHelper.WriteConfig("default.cfg", lines);
         }
 
         #endregion
