@@ -13,6 +13,8 @@ namespace CCommandTests
     [TestFixture]
     public class TestDefaultConfig : CCommandTestFixture
     {
+        #region Config vars
+
         [Test]
         public void TestWriteConfigVars()
         {
@@ -141,19 +143,6 @@ namespace CCommandTests
             );
         }
 
-        private void RegisterCommands()
-        {
-            RegisterCommand(typeof(Cmd_alias));
-            RegisterCommand(typeof(Cmd_unalias));
-            RegisterCommand(typeof(Cmd_bind));
-            RegisterCommand(typeof(Cmd_unbind));
-            RegisterCommand(typeof(Cmd_toggle));
-            RegisterCommand(typeof(Cmd_reset));
-            RegisterCommand(typeof(Cmd_resetAll));
-            RegisterCommand(typeof(Cmd_exec));
-            RegisterCommand(typeof(Cmd_writeconfig));
-        }
-
         private void WriteVarsConfig()
         {
             WriteConfig(
@@ -163,6 +152,8 @@ namespace CCommandTests
                 "string \"New value\""
             );
         }
+
+        #endregion
 
         private new void AssertConfig(params string[] expected)
         {
@@ -176,6 +167,19 @@ namespace CCommandTests
         {
             base.Clear(false);
             RegisterCommands();
+        }
+
+        private void RegisterCommands()
+        {
+            RegisterCommand(typeof(Cmd_alias));
+            RegisterCommand(typeof(Cmd_unalias));
+            RegisterCommand(typeof(Cmd_bind));
+            RegisterCommand(typeof(Cmd_unbind));
+            RegisterCommand(typeof(Cmd_toggle));
+            RegisterCommand(typeof(Cmd_reset));
+            RegisterCommand(typeof(Cmd_resetAll));
+            RegisterCommand(typeof(Cmd_exec));
+            RegisterCommand(typeof(Cmd_writeconfig));
         }
 
         [SetUp]
