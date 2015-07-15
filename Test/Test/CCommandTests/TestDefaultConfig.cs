@@ -123,6 +123,45 @@ namespace CCommandTests
         }
 
         [Test]
+        public void TestResetAllConfigVarsFiltered()
+        {
+            WriteVarsConfig();
+
+            new CVar("int", 10);
+            new CVar("bool", true);
+            new CVar("float", 3.14f);
+            new CVar("string", "Default string");
+
+            // load default config
+            Execute("exec default.cfg"); // TODO: make a convinience method for it
+
+            // reset variables
+            Execute("resetAll f");
+            AssertConfig(
+                "// cvars",
+                "bool 0",
+                "int 20",
+                "string \"New value\""
+            );
+
+            Execute("resetAll i");
+            AssertConfig(
+                "// cvars",
+                "bool 0",
+                "string \"New value\""
+            );
+
+            Execute("resetAll b");
+            AssertConfig(
+                "// cvars",
+                "string \"New value\""
+            );
+
+            Execute("resetAll s");
+            AssertConfig();
+        }
+
+        [Test]
         public void TestToggleConfigVars()
         {
             new CVar("bool", true);
@@ -206,6 +245,27 @@ namespace CCommandTests
 
             Execute("unbindAll");
             AssertConfig();
+        }
+
+        [Test]
+        public void TestWriteBindingsAndUnbindAllFiltered()
+        {
+            Execute("bind f1 cmdlist");
+            Execute("bind f2 cmdlist");
+            Execute("bind c cmdlist");
+
+            AssertConfig(
+                "// bindings",
+                "bind f1 cmdlist",
+                "bind f2 cmdlist",
+                "bind c cmdlist"
+            );
+
+            Execute("unbindAll f");
+            AssertConfig(
+                "// bindings",
+                "bind c cmdlist"
+            );
         }
 
         #endregion

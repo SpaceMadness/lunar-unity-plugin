@@ -395,12 +395,34 @@ namespace LunarEditor
     {
         void Execute()
         {
-            CBindings.Clear();
-            
-            PostNotification(
-                CCommandNotifications.CBindingsChanged,
-                CCommandNotifications.KeyManualMode, this.IsManualMode
-            );
+            if (CBindings.Count > 0)
+            {
+                CBindings.Clear();
+                PostNotification();
+            }
+        }
+
+        void Execute(string prefix)
+        {
+            if (CBindings.Count > 0)
+            {
+                IList<CBinding> bindings = CBindings.List(prefix);
+                if (bindings.Count > 0)
+                {
+                    foreach (CBinding binding in bindings)
+                    {
+                        CBindings.Unbind(binding.shortCut);
+                    }
+
+                    PostNotification();
+                }
+            }
+        }
+
+        void PostNotification()
+        {
+            PostNotification(CCommandNotifications.CBindingsChanged, 
+                CCommandNotifications.KeyManualMode, this.IsManualMode);
         }
     }
     
@@ -501,6 +523,30 @@ namespace LunarEditor
                 PostNotification(
                     CCommandNotifications.CAliasesChanged, 
                     CCommandNotifications.KeyName, name,
+                    CCommandNotifications.KeyManualMode, this.IsManualMode
+                );
+            }
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    [CCommand("unaliasAll", Description="Remove all command aliases")]
+    class Cmd_unaliasAll : CCommand
+    {
+        void Execute(string prefix = null)
+        {
+            IList<CAliasCommand> aliases = CRegistery.ListAliases(prefix);
+
+            if (aliases.Count > 0)
+            {
+                foreach (CAliasCommand alias in aliases)
+                {
+                    CRegistery.RemoveAlias(alias.Name);
+                }
+
+                PostNotification(
+                    CCommandNotifications.CAliasesChanged, 
                     CCommandNotifications.KeyManualMode, this.IsManualMode
                 );
             }

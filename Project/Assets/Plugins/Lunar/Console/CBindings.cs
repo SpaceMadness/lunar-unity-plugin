@@ -523,6 +523,11 @@ namespace LunarPluginInternal
             get { return m_bindings; }
         }
 
+        internal static int Count
+        {
+            get { return m_bindings.Count; }
+        }
+
         internal static string[] BindingsNames
         {
             get
