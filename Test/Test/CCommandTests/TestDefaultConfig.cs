@@ -120,6 +120,27 @@ namespace CCommandTests
             AssertConfig();
         }
 
+        [Test]
+        public void TestToggleConfigVars()
+        {
+            new CVar("bool", true);
+
+            Execute("toggle bool");
+            AssertConfig(
+                "// cvars",
+                "bool 0"
+            );
+
+            Execute("toggle bool");
+            AssertConfig();
+
+            Execute("toggle bool");
+            AssertConfig(
+                "// cvars",
+                "bool 0"
+            );
+        }
+
         private void RegisterCommands()
         {
             RegisterCommand(typeof(Cmd_alias));

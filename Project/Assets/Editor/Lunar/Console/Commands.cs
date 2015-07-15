@@ -134,8 +134,11 @@ namespace LunarEditor
                 PrintError("Can't toggle non-int value");
                 return false;
             }
-            
+
+            cmd.ParentCommand = this;
             cmd.SetValue(cmd.BoolValue ? 0 : 1);
+            cmd.ParentCommand = null;
+
             return true;
         }
         
