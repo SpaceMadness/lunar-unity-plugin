@@ -182,6 +182,13 @@ namespace CCommandTests
             );
         }
 
+        [Test]
+        [Ignore("Should add tests for this case")]
+        public void TestConfigVarsWithSpecialCharacters()
+        {
+            Assert.Fail("Implement me");
+        }
+
         private void WriteVarsConfig()
         {
             WriteConfig(
