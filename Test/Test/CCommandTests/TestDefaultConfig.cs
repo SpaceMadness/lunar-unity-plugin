@@ -275,6 +275,13 @@ namespace CCommandTests
             );
         }
 
+        [Test]
+        [Ignore("Should add tests for this case")]
+        public void TestBindingsWithSpecialCharacters()
+        {
+            Assert.Fail("Implement me");
+        }
+
         #endregion
 
         private new void AssertConfig(params string[] expected)
