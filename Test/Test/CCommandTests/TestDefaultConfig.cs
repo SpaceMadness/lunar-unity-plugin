@@ -273,6 +273,9 @@ namespace CCommandTests
                 "// bindings",
                 "bind c cmdlist"
             );
+
+            Execute("unbindAll c");
+            AssertConfig();
         }
 
         [Test]
@@ -356,6 +359,9 @@ namespace CCommandTests
                 "// aliases",
                 "alias a2 cmdlist"
             );
+
+            Execute("unaliasAll a");
+            AssertConfig();
         }
 
         [Test]
