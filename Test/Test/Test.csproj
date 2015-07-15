@@ -87,6 +87,10 @@
     <Compile Include="CCommandTests\CCommandTestFixture.cs" />
     <Compile Include="CCommandTests\CCommandUtilsTests.cs" />
     <Compile Include="CCommandTests\CommandAutocompletionTest.cs" />
+    <Compile Include="TestApp.cs" />
+    <Compile Include="TestAppImp.cs" />
+    <Compile Include="AppTestFixtureBase.cs" />
+    <Compile Include="CCommandTests\TestDefaultConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

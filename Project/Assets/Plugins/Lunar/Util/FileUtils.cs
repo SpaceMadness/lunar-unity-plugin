@@ -4,6 +4,9 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using System.Reflection;
+
+using UnityEngine;
 
 using LunarPlugin;
 
@@ -26,13 +29,20 @@ namespace LunarPluginInternal
             return Path.GetFullPath(path);
         }
 
-        public static bool Delete(string path)
+        public static bool Delete(string filename)
         {
-            string absolutePath = GetAbsolutePath(path);
-            if (FileExists(absolutePath))
+            string path = GetAbsolutePath(filename);
+
+            if (Directory.Exists(path))
             {
-                System.IO.File.Delete(absolutePath);
-                return !FileExists(absolutePath);
+                Directory.Delete(path, true);
+                return true;
+            }
+
+            if (FileExists(path))
+            {
+                File.Delete(path);
+                return true;
             }
 
             return false;
@@ -195,7 +205,17 @@ namespace LunarPluginInternal
 
         public static string DataPath
         {
-            get { return Path.Combine(UnityEngine.Application.persistentDataPath, "Lunar"); }
+            get
+            {
+                try
+                {
+                    return Path.Combine(Application.persistentDataPath, "Lunar");
+                }
+                catch (MissingMethodException)
+                {
+                    return Path.Combine(Path.GetTempPath(), "Lunar"); // TODO: use platform to resolve path
+                }
+            }
         }
     }
 }

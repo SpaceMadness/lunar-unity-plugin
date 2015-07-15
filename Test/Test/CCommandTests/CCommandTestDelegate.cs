@@ -59,7 +59,7 @@ namespace CCommandTests
 
             CRegistery.Unregister("action");
 
-            Execute("action");
+            Execute("action", false);
             AssertResult("action: command not found"); // FIXME);
         }
 
@@ -102,7 +102,7 @@ namespace CCommandTests
 
             CRegistery.Unregister("action");
 
-            Execute("action");
+            Execute("action", false);
             AssertResult("action: command not found"); // FIXME);
         }
 
@@ -956,7 +956,7 @@ namespace CCommandTests
                 return false;
             });
 
-            Execute("action1 && action2 && action3");
+            Execute("action1 && action2 && action3", false);
             AssertResult("action1", "action2");
         }
 
@@ -974,7 +974,7 @@ namespace CCommandTests
                 Assert.Fail("Command should not get executed");
             });
 
-            Execute("action arg");
+            Execute("action arg", false);
             AssertResult("  Wrong number of arguments", "  usage: action");
         }
 
@@ -986,7 +986,7 @@ namespace CCommandTests
                 Assert.Fail("Command should not get executed");
             });
 
-            Execute("action arg1 arg2");
+            Execute("action arg1 arg2", false);
             AssertResult("  Wrong number of arguments", "  usage: action <arg>");
         }
 
@@ -998,7 +998,7 @@ namespace CCommandTests
                 Assert.Fail("Command should not get executed");
             });
 
-            Execute("action arg1 arg2 arg3");
+            Execute("action arg1 arg2 arg3", false);
             AssertResult("  Wrong number of arguments", "  usage: action <arg1> <arg2>");
         }
 
@@ -1016,7 +1016,7 @@ namespace CCommandTests
             this.IsTrackTerminalLog = true;
             this.IsTrackConsoleLog = true;
 
-            registerCommand(
+            RegisterCommand(
                 typeof(Cmd_cmdlist)
             );
         }

@@ -27,7 +27,7 @@ namespace CCommandTests
         public void TestRunInEditorMode()
         {
             Runtime.IsPlaying = false;
-            Execute("playmode");
+            Execute("playmode", false);
 
             AssertResult();
         }

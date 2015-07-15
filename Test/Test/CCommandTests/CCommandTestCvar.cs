@@ -432,7 +432,7 @@ namespace CCommandTests
         {
             RunSetUp();
 
-            registerCommand(typeof(Cmd_reset));
+            RegisterCommand(typeof(Cmd_reset));
         }
 
         [TearDown]

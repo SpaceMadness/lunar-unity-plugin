@@ -68,12 +68,12 @@ namespace CCommandTests
 
             this.IsTrackTerminalLog = true;
 
-            registerCommand(typeof(Cmd_man));
+            RegisterCommand(typeof(Cmd_man));
 
-            registerCommand(typeof(Cmd_test1), false);
-            registerCommand(typeof(Cmd_test2), false);
-            registerCommand(typeof(Cmd_test3), false);
-            registerCommand(typeof(Cmd_test4), false);
+            RegisterCommand(typeof(Cmd_test1), false);
+            RegisterCommand(typeof(Cmd_test2), false);
+            RegisterCommand(typeof(Cmd_test3), false);
+            RegisterCommand(typeof(Cmd_test4), false);
         }
 
         [TearDown]

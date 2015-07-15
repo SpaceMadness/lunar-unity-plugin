@@ -15,14 +15,8 @@ namespace LunarEditor
     class EditorApp : App
     {
         private static double m_lastUpdateTime;
-
         private static EditorApp s_editorInstance; // keep another reference to avoid casts
-
         private static readonly IDictionary<string, URLHandler> s_urlHandlers;
-
-        private readonly Terminal m_terminal;
-
-        private readonly Preferences m_preferences;
 
         static EditorApp()
         {
@@ -36,8 +30,6 @@ namespace LunarEditor
 
         private EditorApp()
         {
-            m_preferences = CreatePreferences();
-            m_terminal = CreateTerminal(CVars.c_historySize.IntValue);
             m_lastUpdateTime = EditorApplication.timeSinceStartup;
 
             TimerManager.ScheduleTimer(() =>
@@ -50,37 +42,25 @@ namespace LunarEditor
             });
         }
 
-        public new static void Update()
+        public static void Update()
         {
             float delta = (float)(EditorApplication.timeSinceStartup - m_lastUpdateTime);
-            s_editorInstance.UpdateInstance(delta);
+            s_editorInstance.Update(delta);
             m_lastUpdateTime = EditorApplication.timeSinceStartup;
         }
 
-        protected override void LogTerminalImpl(string line)
+        //////////////////////////////////////////////////////////////////////////////
+
+        #region AppImp
+
+        protected override AppImp CreateAppImp()
         {
-            m_terminal.Add(line);
+            return new EditorAppImp();
         }
 
-        protected override void LogTerminalImpl(string[] table)
-        {
-            m_terminal.Add(table);
-        }
+        #endregion
 
-        protected override void LogTerminalImpl(Exception e, string message)
-        {
-            m_terminal.Add(e, message);
-        }
-
-        protected override void ClearTerminalImpl()
-        {
-            m_terminal.Clear();
-        }
-
-        private Terminal CreateTerminal(int capacity)
-        {
-            return new FormattedTerminal(capacity);
-        }
+        //////////////////////////////////////////////////////////////////////////////
 
         #region Scene key handling
 
@@ -109,6 +89,8 @@ namespace LunarEditor
         }
 
         #endregion
+
+        //////////////////////////////////////////////////////////////////////////////
 
         #region URL handling
 
@@ -183,6 +165,8 @@ namespace LunarEditor
 
         #endregion
 
+        //////////////////////////////////////////////////////////////////////////////
+
         #region Properties
 
         internal static EditorApp EditorInstance
@@ -190,30 +174,14 @@ namespace LunarEditor
             get { return s_editorInstance; }
         }
 
-        internal static Preferences Prefs
-        {
-            get { return s_editorInstance.m_preferences; }
-        }
-
         internal static Terminal Terminal
         {
-            get { return s_editorInstance.m_terminal; }
+            get { return Imp.Terminal; }
         }
 
-        #endregion
-
-        #region Preferences
-
-        private static Preferences CreatePreferences()
+        protected new static EditorAppImp Imp
         {
-            if (Runtime.IsOSXEditor)
-            {
-                string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "/Library/Preferences/unity." + PlayerSettings.companyName + "." + PlayerSettings.productName + ".lunar.plist";
-                return new Preferences(path);
-            }
-
-            Debug.LogError("Unable to create preferences: platform is not supported");
-            return new Preferences();
+            get { return (EditorAppImp)App.Imp; }
         }
 
         #endregion

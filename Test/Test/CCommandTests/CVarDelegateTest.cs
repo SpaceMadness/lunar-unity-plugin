@@ -283,7 +283,7 @@ namespace CCommandTests
             RunSetUp();
             m_result = new List<string>();
 
-            registerCommand(typeof(Cmd_reset));
+            RegisterCommand(typeof(Cmd_reset));
         }
 
         [TearDown]

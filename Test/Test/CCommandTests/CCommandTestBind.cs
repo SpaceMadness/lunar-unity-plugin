@@ -226,9 +226,9 @@ namespace CCommandTests
         {
             RunSetUp();
 
-            registerCommand(typeof(Cmd_bind));
-            registerCommand(typeof(Cmd_unbind));
-            registerCommand(typeof(Cmd_bindlist));
+            RegisterCommand(typeof(Cmd_bind));
+            RegisterCommand(typeof(Cmd_unbind));
+            RegisterCommand(typeof(Cmd_bindlist));
 
             Lunar.RegisterCommand("test", delegate(CCommand cmd, string[] args)
             {

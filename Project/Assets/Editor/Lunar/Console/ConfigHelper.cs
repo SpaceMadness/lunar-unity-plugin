@@ -43,11 +43,7 @@ namespace LunarEditor
 
         public static void DeleteConfigs()
         {
-            string path = ConfigPath;
-            if (Directory.Exists(path))
-            {
-                Directory.Delete(path);
-            }
+            FileUtils.Delete(ConfigPath);
         }
 
         public static string GetConfigPath(string filename)

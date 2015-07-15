@@ -342,10 +342,10 @@ namespace CCommandTests
 
             this.IsTrackTerminalLog = true;
 
-            registerCommand(typeof(Cmd_cmdlist));
-            registerCommand(typeof(Cmd_cvarlist));
-            registerCommand(typeof(Cmd_alias));
-            registerCommand(typeof(Cmd_aliaslist));
+            RegisterCommand(typeof(Cmd_cmdlist));
+            RegisterCommand(typeof(Cmd_cvarlist));
+            RegisterCommand(typeof(Cmd_alias));
+            RegisterCommand(typeof(Cmd_aliaslist));
 
             RegisterCommands(
                 new cmd_hidden("hidden_cmd"),

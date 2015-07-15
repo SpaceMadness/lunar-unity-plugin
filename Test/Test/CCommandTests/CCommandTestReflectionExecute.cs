@@ -48,7 +48,7 @@ namespace CCommandTests
         [Test]
         public void TestExecuteStringMultipleArgsWrongCount()
         {
-            Execute("int 10 20 and up");
+            Execute("int 10 20 and up", false);
             AssertResult(
                 "  Wrong arguments",
                 "  usage: int\n" +
@@ -89,7 +89,7 @@ namespace CCommandTests
         [Test]
         public void TestExecuteIntMultipleArgsWrongCount()
         {
-            Execute("int 10 20 30 40");
+            Execute("int 10 20 30 40", false);
             AssertResult(
                 "  Wrong arguments",
                 "  usage: int\n" +
@@ -130,7 +130,7 @@ namespace CCommandTests
         [Test]
         public void TestExecuteFloatMultipleArgsWrongCount()
         {
-            Execute("float 1.0 2.0 3.0 4.0");
+            Execute("float 1.0 2.0 3.0 4.0", false);
             AssertResult(
                 "  Wrong arguments",
                 "  usage: float\n" +
@@ -171,7 +171,7 @@ namespace CCommandTests
         [Test]
         public void TestExecuteBoolMultipleArgsWrongCount()
         {
-            Execute("bool 1 0 1 0");
+            Execute("bool 1 0 1 0", false);
             AssertResult(
                 "  Wrong arguments",
                 "  usage: bool\n" +
@@ -212,7 +212,7 @@ namespace CCommandTests
         [Test]
         public void TestExecuteVector2MultipleArgsWrongCount()
         {
-            Execute("vector2  1 2  5 6  9 10  13 14");
+            Execute("vector2  1 2  5 6  9 10  13 14", false);
             AssertResult(
                 "  Wrong arguments",
                 "  usage: vector2\n" +
@@ -253,7 +253,7 @@ namespace CCommandTests
         [Test]
         public void TestExecuteVector3MultipleArgsWrongCount()
         {
-            Execute("vector3  1 2 3  5 6 7  9 10 11  13 14 15");
+            Execute("vector3  1 2 3  5 6 7  9 10 11  13 14 15", false);
             AssertResult(
                 "  Wrong arguments",
                 "  usage: vector3\n" +
@@ -294,7 +294,7 @@ namespace CCommandTests
         [Test]
         public void TestExecuteVector4MultipleArgsWrongCount()
         {
-            Execute("vector4  1 2 3 4  5 6 7 8  9 10 11 12  13 14 15 16");
+            Execute("vector4  1 2 3 4  5 6 7 8  9 10 11 12  13 14 15 16", false);
             AssertResult(
                 "  Wrong arguments",
                 "  usage: vector4\n" +

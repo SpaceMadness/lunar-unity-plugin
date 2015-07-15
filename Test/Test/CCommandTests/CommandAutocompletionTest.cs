@@ -281,11 +281,11 @@ namespace CCommandTests
             new CVar("Var12", false);
             new CVar("Var2", false);
 
-            registerCommand(typeof(Cmd_alias));
+            RegisterCommand(typeof(Cmd_alias));
 
-            registerCommand(typeof(Cmd_test1), false);
-            registerCommand(typeof(Cmd_test2), false);
-            registerCommand(typeof(Cmd_test3), false);
+            RegisterCommand(typeof(Cmd_test1), false);
+            RegisterCommand(typeof(Cmd_test2), false);
+            RegisterCommand(typeof(Cmd_test3), false);
 
             Execute("alias Alias1 test1");
             Execute("alias Alias2 test2");

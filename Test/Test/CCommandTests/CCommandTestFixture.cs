@@ -17,86 +17,42 @@ namespace CCommandTests
 
     public delegate bool ConfigReadFilter(string line);
 
-    public abstract class CCommandTestFixture : TestFixtureBase, ICCommandDelegate
+    public abstract class CCommandTestFixture : AppTestFixtureBase
     {
-        private CommandProcessor m_commandProcessor;
-
         #region Setup
 
         protected override void RunSetUp()
         {
             base.RunSetUp();
 
-            ConfigHelper.DeleteConfigs();
-
             this.IsTrackConsoleLog = false;
             this.IsTrackTerminalLog = false;
 
-            CBindings.Clear();
-            CRegistery.Clear();
-
-            m_commandProcessor = new CommandProcessor();
-            m_commandProcessor.CommandDelegate = this;
+            Clear();
         }
 
         protected override void RunTearDown()
         {
-            CBindings.Clear();
-            CRegistery.Clear();
-
-            m_commandProcessor = null;
-
+            Clear();
             base.RunTearDown();
         }
 
-        #endregion
-
-        #region ICCommandDelegate
-
-        public void LogTerminal(string message)
+        protected void Clear(bool deleteConfigs = true)
         {
-            if (IsTrackTerminalLog)
+            CBindings.Clear();
+            CRegistery.Clear();
+
+            if (deleteConfigs)
             {
-                AddResult(message);
+                ConfigHelper.DeleteConfigs();
             }
-        }
-
-        public void LogTerminal(string[] table)
-        {
-            if (IsTrackTerminalLog)
-            {
-                AddResult(StringUtils.Join(table));
-            }
-        }
-
-        public void LogTerminal(Exception e, string message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ClearTerminal()
-        {
-        }
-
-        public bool ExecuteCommandLine(string commandLine, bool manualMode = false)
-        {
-            return m_commandProcessor.TryExecute(commandLine, manualMode);
-        }
-
-        public void PostNotification(CCommand cmd, string name, params object[] data)
-        {
-        }
-
-        public bool IsPromptEnabled
-        {
-            get { return false; }
         }
 
         #endregion
 
         #region Helpers
 
-        protected void registerCommand(Type type, bool hidden = true)
+        protected void RegisterCommand(Type type, bool hidden = true)
         {
             CCommand command = ClassUtils.CreateInstance<CCommand>(type);
             if (command == null)
@@ -146,9 +102,11 @@ namespace CCommandTests
             return Execute(string.Format(format, args));
         }
 
-        protected bool Execute(string commandLine)
+        protected bool Execute(string commandLine, bool shouldSucceed = true)
         {
-            return m_commandProcessor.TryExecute(commandLine, true);
+            bool result = App.ExecCommand(commandLine, true);
+            Assert.IsFalse(result ^ shouldSucceed, "Command should " + (shouldSucceed ? "succeed" : "fail") + " \n" + commandLine);
+            return result;
         }
 
         protected void assertSuggestions(String line, params String[] expected)
@@ -160,14 +118,14 @@ namespace CCommandTests
             Assert.AreEqual(actual, expected);
         }
 
-        protected void AddResult(string format, params object[] args)
-        {
-            this.Result.Add(StringUtils.RemoveRichTextTags(string.Format(format, args)));
-        }
-
         #endregion
 
         #region Config
+
+        protected void AssertConfig(params string[] expected)
+        {
+            AssertConfig(delegate(string line) { return true; }, expected);
+        }
 
         protected void AssertConfig(ConfigReadFilter filter, params string[] expected)
         {
@@ -183,13 +141,6 @@ namespace CCommandTests
 
             AssertList(actual, expected);
         }
-
-        #endregion
-
-        #region Properties
-
-        protected bool IsTrackConsoleLog { get; set; }
-        protected bool IsTrackTerminalLog { get; set; }
 
         #endregion
     }

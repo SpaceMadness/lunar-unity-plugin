@@ -197,8 +197,8 @@ namespace LunarEditor
 
     //////////////////////////////////////////////////////////////////////////////
 
-    [CCommand("cvar_restart", Description="Resets all cvars to their default values.")]
-    class Cmd_cvar_restart : CCommand
+    [CCommand("resetAll", Description="Resets all cvars to their default values.")]
+    class Cmd_resetAll : CCommand
     {
         void Execute(string prefix = null)
         {
@@ -412,14 +412,16 @@ namespace LunarEditor
             );
         }
         
-        public static void ListAliasesConfig(IList<string> lines)
+        public static IList<string> ListAliasesConfig()
         {
             IList<CAliasCommand> aliases = CRegistery.ListAliases();
-            
+
+            IList<string> entries = new List<string>();
             for (int i = 0; i < aliases.Count; ++i)
             {
-                lines.Add(ToString(aliases[i]));
+                entries.Add(ToString(aliases[i]));
             }
+            return entries;
         }
         
         private static string ToString(CAliasCommand cmd)
@@ -550,13 +552,13 @@ namespace LunarEditor
             IList<string> lines = ReusableLists.NextAutoRecycleList<string>();
             
             // cvars
-            ListCvars(lines);
+            AddEntries(lines, ListCvars(), "cvars");
             
             // bindings
-            ListBindings(lines);
+            AddEntries(lines, ListBindings(), "bindings");
             
             // aliases
-            ListAliases(lines);
+            AddEntries(lines, ListAliases(), "aliases");
 
             try
             {
@@ -573,52 +575,63 @@ namespace LunarEditor
 
             return false;
         }
-        
-        private static void ListCvars(IList<string> lines)
+
+        private static void AddEntries(IList<string> outList, IList<string> entries, string groupName)
+        {
+            if (entries.Count > 0)
+            {
+                if (outList.Count > 0)
+                {
+                    outList.Add("");
+                }
+
+                outList.Add("// " + groupName);
+                foreach (string entry in entries)
+                {
+                    outList.Add(entry);
+                }
+            }
+        }
+
+        private static IList<string> ListCvars()
         {
             IList<CVar> cvars = CRegistery.ListVars(delegate(CVarCommand cmd)
             {
                 return !cmd.IsDefault && !cmd.HasFlag(CFlags.NoArchive);
             });
-            
-            if (cvars.Count > 0)
+
+            IList<string> entries = new List<string>(cvars.Count);
+            foreach (CVar cvar in cvars)
             {
-                lines.Add("// cvars");
-            }
-            
-            for (int i = 0; i < cvars.Count; ++i)
-            {
-                CVar c = cvars[i];
-                if (c.Value != null)
+                if (cvar.Value != null)
                 {
-                    lines.Add(string.Format("{0} {1}", c.Name, StringUtils.Arg(c.Value)));
+                    entries.Add(string.Format("{0} {1}", cvar.Name, StringUtils.Arg(cvar.Value)));
                 }
                 else
                 {
-                    lines.Add("null " + c.Name);
+                    entries.Add("null " + cvar.Name);
                 }
             }
+
+            return entries;
         }
         
-        private static void ListBindings(IList<string> lines)
+        private static IList<string> ListBindings()
         {
             IList<CBinding> bindings = CBindings.List();
-            if (bindings.Count > 0)
+
+            IList<string> entries = new List<string>(bindings.Count);
+            foreach (CBinding binding in bindings)
             {
-                lines.Add("// key bindings");
+                entries.Add(string.Format("bind {0} {1}", binding.shortCut.ToString(), StringUtils.Arg(binding.cmdKeyDown)));
             }
-            
-            for (int i = 0; i < bindings.Count; ++i)
-            {
-                lines.Add(string.Format("bind {0} {1}", bindings[i].shortCut.ToString(), StringUtils.Arg(bindings[i].cmdKeyDown)));
-            }
+
+            return entries;
         }
         
-        private static void ListAliases(IList<string> lines)
+        private static IList<string> ListAliases()
         {
-            lines.Add("");
-            lines.Add("// aliases");
-            Cmd_alias.ListAliasesConfig(lines);
+            return Cmd_alias.ListAliasesConfig();
         }
     }
     
@@ -897,76 +910,7 @@ namespace LunarEditor
             return t1.Name.CompareTo(t2.Name);
         }
     }
-    
-    [CCommand("clearprefs")]
-    class Cmd_clearprefs : CCommand
-    {
-        void Execute()
-        {
-            EditorApp.Prefs.DeleteAll();
-        }
-    }
 
-    [CCommand("prefs")]
-    class Cmd_prefs : CCommand
-    {
-        private static readonly string[] kSystemNames = {
-            // lunar
-            "com.lunarplugin.AppUniqueIdentifier",
-            
-            // unity
-            "Screenmanager Resolution Height",
-            "NSWindow Frame ScreenSetup",
-            "Screenmanager Resolution Width",
-            "Screenmanager Is Fullscreen mode",
-            "UnityGraphicsQuality",
-            "Screenmanager Press alt to display"
-        };
-        
-        void Execute()
-        {
-        }
-        
-        protected override string[] AutoCompleteArgs(string commandLine, string token)
-        {
-            List<string> list = new List<string>();
-            foreach (KeyValuePair<string, object> e in ListPreferences(token))
-            {
-                if (IsSystemName(e.Key))
-                {
-                    break;
-                }
-                
-                list.Add(e.Key);
-            }
-            
-            string[] names = list.ToArray();
-            Array.Sort(names);
-            
-            for (int i = 0; i < names.Length; ++i)
-            {
-                names[i] = StringUtils.C(names[i], ColorCode.TableVar);
-            }
-            
-            return names;
-        }
-        
-        #region Helpers
-        
-        internal static IDictionary<string, object> ListPreferences(string token)
-        {
-            PlayerPrefsHelper.Reload();
-            return PlayerPrefsHelper.ListPreferences(token);
-        }
-        
-        private static bool IsSystemName(string name)
-        {
-            return name != null && Array.IndexOf(kSystemNames, name) != -1;
-        }
-        
-        #endregion
-    }
-    
     [CCommand("colors")]
     class Cmd_colors : CCommand
     {

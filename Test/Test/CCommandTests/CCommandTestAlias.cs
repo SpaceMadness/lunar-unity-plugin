@@ -60,61 +60,10 @@ namespace CCommandTests
             Execute("alias test \"echo 'some string'\"");
             Execute("test");
             Execute("unalias test");
-            Execute("test");
+            Execute("test", false);
 
             AssertResult("echo 'some string'");
         }
-
-        [Test]
-        public void TestConfigAliases()
-        {
-            Execute("alias a1 'echo \"alias 1\"'");
-            Execute("alias a2 \"echo 'alias 2'\"");
-            Execute("alias a3 \"echo \\\"alias 3\\\"\"");
-
-            List<string> lines = new List<string>();
-            Cmd_alias.ListAliasesConfig(lines);
-
-            SetUp(); // reset everything
-
-            foreach (string cmd in lines)
-            {
-                Execute(cmd);
-            }
-
-            Execute("a1");
-            Execute("a2");
-            Execute("a3");
-
-            AssertResult(
-                "echo \"alias 1\"",
-                "echo 'alias 2'",
-                "echo \"alias 3\""
-            );
-        }
-
-        #region Config
-
-        [Test]
-        public void TestWriteConfig()
-        {
-            Execute("alias a1 'echo \"alias 1\"'");
-            Execute("alias a2 \"echo 'alias 2'\"");
-            Execute("alias a3 \"echo \\\"alias 3\\\"\"");
-
-            ConfigReadFilter filter = delegate(string line)
-            {
-                return line.StartsWith("alias ");
-            };
-
-            AssertConfig(filter,
-                "alias a1 \"echo \\\"alias 1\\\"\"",
-                "alias a2 \"echo \\\"alias 2\\\"\"",
-                "alias a3 \"echo \\\"alias 3\\\"\""
-            );
-        }
-
-        #endregion
 
         #region Setup
 
@@ -123,8 +72,8 @@ namespace CCommandTests
         {
             RunSetUp();
 
-            registerCommand(typeof(Cmd_alias));
-            registerCommand(typeof(Cmd_unalias));
+            RegisterCommand(typeof(Cmd_alias));
+            RegisterCommand(typeof(Cmd_unalias));
 
             Lunar.RegisterCommand("echo", delegate(CCommand cmd, string[] args)
             {

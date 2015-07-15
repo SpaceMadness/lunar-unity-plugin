@@ -8,14 +8,14 @@ namespace LunarPluginInternal
 {
     static class CCommandNotifications
     {
-        public static readonly string CVarValueChanged = "CVarValueChanged";
+        public static readonly string CVarValueChanged              = "CVarValueChanged";
         public static readonly string CVarValueChangedKeyVar        = "var"; // CVar
         public static readonly string CVarValueChangedKeyOldValue   = "old_value"; // string
 
-        public static readonly string CBindingsChanged = "CBindingsChanged";
-        public static readonly string CAliasesChanged = "CAliasesChanged";
+        public static readonly string CBindingsChanged              = "CBindingsChanged";
+        public static readonly string CAliasesChanged               = "CAliasesChanged";
 
-        public static readonly string ConfigLoaded = "ConfigLoaded";
+        public static readonly string ConfigLoaded                  = "ConfigLoaded";
 
         public static readonly string KeyManualMode = "manual_mode"; // bool
         public static readonly string KeyName = "name"; // string
