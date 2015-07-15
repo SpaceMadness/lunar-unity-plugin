@@ -211,7 +211,9 @@ namespace LunarEditor
                 CVarCommand cvarCmd = cmd as CVarCommand;
                 if (cvarCmd != null)
                 {
+                    cvarCmd.ParentCommand = this;
                     cvarCmd.SetDefault();
+                    cvarCmd.ParentCommand = null;
                 }
             }
         }

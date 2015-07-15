@@ -77,6 +77,49 @@ namespace CCommandTests
             AssertConfig();
         }
 
+        [Test]
+        public void TestResetSomeConfigVars()
+        {
+            WriteVarsConfig();
+
+            new CVar("int", 10);
+            new CVar("bool", true);
+            new CVar("float", 3.14f);
+            new CVar("string", "Default string");
+
+            // load default config
+            Execute("exec default.cfg"); // TODO: make a convinience method for it
+
+            // reset variables
+            Execute("reset int");
+            Execute("reset bool");
+            Execute("reset float");
+
+            AssertConfig(
+                "// cvars",
+                "string \"New value\""
+            );
+        }
+
+        [Test]
+        public void TestResetAllConfigVars()
+        {
+            WriteVarsConfig();
+
+            new CVar("int", 10);
+            new CVar("bool", true);
+            new CVar("float", 3.14f);
+            new CVar("string", "Default string");
+
+            // load default config
+            Execute("exec default.cfg"); // TODO: make a convinience method for it
+
+            // reset variables
+            Execute("resetAll");
+
+            AssertConfig();
+        }
+
         private void RegisterCommands()
         {
             RegisterCommand(typeof(Cmd_alias));
@@ -108,9 +151,9 @@ namespace CCommandTests
             base.AssertConfig(expected);
         }
 
-        protected override void Clear(bool deleteConfigs = true)
+        protected void ClearElements()
         {
-            base.Clear(true);
+            base.Clear(false);
             RegisterCommands();
         }
 
