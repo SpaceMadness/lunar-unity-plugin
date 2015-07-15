@@ -173,8 +173,11 @@ namespace LunarEditor
                 PrintError("Can't find cvar: '{0}'", name);
                 return false;
             }
-            
+
+            cmd.ParentCommand = this;
             cmd.SetDefault();
+            cmd.ParentCommand = null;
+
             return true;
         }
         

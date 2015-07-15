@@ -1331,6 +1331,23 @@ namespace LunarPlugin
 
         #region Properties
 
+        public CCommand ParentCommand
+        {
+            set
+            {
+                if (value != null)
+                {
+                    this.IsManualMode = value.IsManualMode;
+                    this.Delegate = value.Delegate;
+                }
+                else
+                {
+                    this.IsManualMode = false;
+                    this.Delegate = null;
+                }
+            }
+        }
+
         public string Name { get; internal protected set; }
         public string Description { get; set; }
 
