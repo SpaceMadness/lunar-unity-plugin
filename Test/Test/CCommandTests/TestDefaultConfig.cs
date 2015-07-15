@@ -284,6 +284,89 @@ namespace CCommandTests
 
         #endregion
 
+        #region Aliases
+
+        [Test]
+        public void TestWriteAliases()
+        {
+            Execute("alias c cmdlist");
+            Execute("alias v cvarlist");
+
+            AssertConfig(
+                "// aliases",
+                "alias c cmdlist",
+                "alias v cvarlist"
+            );
+        }
+
+        [Test]
+        public void TestWriteAliasesAndUnalias()
+        {
+            Execute("alias c cmdlist");
+            Execute("alias v cvarlist");
+
+            AssertConfig(
+                "// aliases",
+                "alias c cmdlist",
+                "alias v cvarlist"
+            );
+
+            Execute("unalias c");
+            AssertConfig(
+                "// aliases",
+                "alias v cvarlist"
+            );
+
+            Execute("unalias v");
+            AssertConfig();
+        }
+
+        [Test]
+        public void TestWriteAliasesAndUnaliasAll()
+        {
+            Execute("alias c cmdlist");
+            Execute("alias v cvarlist");
+
+            AssertConfig(
+                "// aliases",
+                "alias c cmdlist",
+                "alias v cvarlist"
+            );
+
+            Execute("unaliasAll");
+            AssertConfig();
+        }
+
+        [Test]
+        public void TestWriteAliasesAndUnaliasAllFiltered()
+        {
+            Execute("alias a1 cmdlist");
+            Execute("alias a12 cmdlist");
+            Execute("alias a2 cmdlist");
+
+            AssertConfig(
+                "// aliases",
+                "alias a1 cmdlist",
+                "alias a12 cmdlist",
+                "alias a2 cmdlist"
+            );
+
+            Execute("unaliasAll a1");
+            AssertConfig(
+                "// aliases",
+                "alias a2 cmdlist"
+            );
+        }
+
+        [Test]
+        [Ignore("Should add tests for this case")]
+        public void TestAliasesWithSpecialCharacters()
+        {
+            Assert.Fail("Implement me");
+        }
+
+        #endregion
+
         private new void AssertConfig(params string[] expected)
         {
             RunUpdate(); // dispatch notifications
@@ -302,6 +385,7 @@ namespace CCommandTests
         {
             RegisterCommand(typeof(Cmd_alias));
             RegisterCommand(typeof(Cmd_unalias));
+            RegisterCommand(typeof(Cmd_unaliasAll));
             RegisterCommand(typeof(Cmd_bind));
             RegisterCommand(typeof(Cmd_unbind));
             RegisterCommand(typeof(Cmd_unbindAll));
