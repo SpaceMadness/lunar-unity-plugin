@@ -1,5 +1,7 @@
 using System;
 
+using UnityEngine;
+
 using LunarPluginInternal;
 
 namespace LunarPlugin.Test
@@ -67,6 +69,21 @@ namespace LunarPlugin.Test
             {
                 Delegate.ClearTerminal();
             }
+        }
+
+        protected override bool GetKeyDown(KeyCode key)
+        {
+            return false;
+        }
+
+        protected override bool GetKeyUp(KeyCode key)
+        {
+            return false;
+        }
+
+        protected override bool GetKey(KeyCode key)
+        {
+            return false;
         }
 
         TestAppConfig Config

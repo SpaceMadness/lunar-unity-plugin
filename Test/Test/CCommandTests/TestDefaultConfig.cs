@@ -155,6 +155,61 @@ namespace CCommandTests
 
         #endregion
 
+        #region Config vars
+
+        [Test]
+        public void TestWriteBindings()
+        {
+            Execute("bind c cmdlist");
+            Execute("bind v cvarlist");
+
+            AssertConfig(
+                "// bindings",
+                "bind c cmdlist",
+                "bind v cvarlist"
+            );
+        }
+
+        [Test]
+        public void TestWriteBindingsAndUnbind()
+        {
+            Execute("bind c cmdlist");
+            Execute("bind v cvarlist");
+
+            AssertConfig(
+                "// bindings",
+                "bind c cmdlist",
+                "bind v cvarlist"
+            );
+
+            Execute("unbind c");
+            AssertConfig(
+                "// bindings",
+                "bind v cvarlist"
+            );
+
+            Execute("unbind v");
+            AssertConfig();
+        }
+
+        [Test]
+        public void TestWriteBindingsAndUnbindAll()
+        {
+            Execute("bind c cmdlist");
+            Execute("bind v cvarlist");
+
+            AssertConfig(
+                "// bindings",
+                "bind c cmdlist",
+                "bind v cvarlist"
+            );
+
+            Execute("unbindAll");
+            AssertConfig();
+        }
+
+        #endregion
+
         private new void AssertConfig(params string[] expected)
         {
             RunUpdate(); // dispatch notifications
@@ -175,6 +230,7 @@ namespace CCommandTests
             RegisterCommand(typeof(Cmd_unalias));
             RegisterCommand(typeof(Cmd_bind));
             RegisterCommand(typeof(Cmd_unbind));
+            RegisterCommand(typeof(Cmd_unbindAll));
             RegisterCommand(typeof(Cmd_toggle));
             RegisterCommand(typeof(Cmd_reset));
             RegisterCommand(typeof(Cmd_resetAll));

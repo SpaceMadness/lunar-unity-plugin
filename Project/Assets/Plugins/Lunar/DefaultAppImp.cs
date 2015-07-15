@@ -232,7 +232,7 @@ namespace LunarPluginInternal
             for (int i = 0; i < bindings.Count; ++i)
             {
                 KeyCode key = bindings[i].key;
-                if (Input.GetKeyDown(key))
+                if (GetKeyDown(key))
                 {
                     if (IsValidModifiers(bindings[i].shortCut))
                     {
@@ -240,7 +240,7 @@ namespace LunarPluginInternal
                         ExecCommand(commandLine, false);
                     }
                 }
-                else if (Input.GetKeyUp(key))
+                else if (GetKeyUp(key))
                 {
                     if (IsValidModifiers(bindings[i].shortCut))
                     {
@@ -256,12 +256,27 @@ namespace LunarPluginInternal
 
         private bool IsValidModifiers(CShortCut shortCut)
         {
-            if (shortCut.IsShift ^ (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))) return false;
-            if (shortCut.IsControl ^ (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))) return false;
-            if (shortCut.IsAlt ^ (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt))) return false;
-            if (shortCut.IsCommand ^ (Input.GetKey(KeyCode.LeftCommand) || Input.GetKey(KeyCode.RightCommand))) return false;
+            if (shortCut.IsShift ^ (GetKey(KeyCode.LeftShift) || GetKey(KeyCode.RightShift))) return false;
+            if (shortCut.IsControl ^ (GetKey(KeyCode.LeftControl) || GetKey(KeyCode.RightControl))) return false;
+            if (shortCut.IsAlt ^ (GetKey(KeyCode.LeftAlt) || GetKey(KeyCode.RightAlt))) return false;
+            if (shortCut.IsCommand ^ (GetKey(KeyCode.LeftCommand) || GetKey(KeyCode.RightCommand))) return false;
 
             return true;
+        }
+
+        protected virtual bool GetKeyDown(KeyCode key)
+        {
+            return Input.GetKeyDown(key);
+        }
+
+        protected virtual bool GetKeyUp(KeyCode key)
+        {
+            return Input.GetKeyUp(key);
+        }
+
+        protected virtual bool GetKey(KeyCode key)
+        {
+            return Input.GetKey(key);
         }
 
         #endregion

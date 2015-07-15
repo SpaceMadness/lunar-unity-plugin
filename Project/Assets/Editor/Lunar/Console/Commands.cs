@@ -390,8 +390,8 @@ namespace LunarEditor
     
     //////////////////////////////////////////////////////////////////////////////
     
-    [CCommand("unbindall", Description="Unbinds all keys.\t")]
-    class Cmd_unbindall : CCommand
+    [CCommand("unbindAll", Description="Unbinds all keys.\t")]
+    class Cmd_unbindAll : CCommand
     {
         void Execute()
         {
