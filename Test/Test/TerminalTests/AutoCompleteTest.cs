@@ -664,6 +664,59 @@ namespace TerminalTests
             AssertSuggestions();
         }
 
+        [Test]
+        public void TestShortOptionsMultiple()
+        {
+            string suggestion = DoAutoComplete("test1 -o1 -o12 ");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestShortOptionsMultipleDoubleTab()
+        {
+            string suggestion = DoAutoComplete("test1 -o1 -o12 ", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestShortOptionsMultipleWithValue()
+        {
+            string suggestion = DoAutoComplete("test1 -o1 -o2 ");
+
+            Assert.AreEqual("test1 -o1 -o2 val", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestShortOptionsMultipleWithValueDoubleTab()
+        {
+            string suggestion = DoAutoComplete("test1 -o1 -o2 ", true);
+
+            Assert.AreEqual("test1 -o1 -o2 val", suggestion);
+            AssertSuggestions("val1", "val12", "val2");
+        }
+
+        [Test]
+        public void TestShortOptionsMultipleWithValueAndArgs()
+        {
+            string suggestion = DoAutoComplete("test1 -o1 -o2 val1 ");
+
+            Assert.AreEqual("test1 -o1 -o2 val1 arg", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestShortOptionsMultipleWithValueAndArgsDoubleTab()
+        {
+            string suggestion = DoAutoComplete("test1 -o1 -o2 val1 ", true);
+
+            Assert.AreEqual("test1 -o1 -o2 val1 arg", suggestion);
+            AssertSuggestions("arg1", "arg12", "arg2");
+        }
 
         #endregion
 
