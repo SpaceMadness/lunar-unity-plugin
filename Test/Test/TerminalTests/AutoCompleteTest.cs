@@ -8,86 +8,413 @@ using LunarEditor;
 using LunarPluginInternal;
 
 using LunarPlugin.Test;
+using CCommandTests;
 
 namespace TerminalTests
 {
     using Assert = NUnit.Framework.Assert;
 
     [TestFixture]
-    public class AutoCompleteTest : TestFixtureBase, IConsoleDelegate
+    public class AutoCompleteTest : CCommandTestFixture, IConsoleDelegate
     {
         private Terminal terminal;
         private List<string> terminalTableOutput;
 
-        [SetUp]
-        public void SetUp()
+        #region Command Autocompletion
+
+        [Test]
+        public void TestAutoCompleteCommandsEmptyLine()
         {
-            CRegistery.Clear();
+            string suggestion = DoAutoComplete("");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCommandsDoubleTabEmptyLine()
+        {
+            string suggestion = DoAutoComplete("", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions("test1", "test12", "test2");
+        }
+
+        [Test]
+        public void TestAutoCompleteCommands1()
+        {
+            string suggestion = DoAutoComplete("t");
+
+            Assert.AreEqual("test", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCommandsDoubleTab1()
+        {
+            string suggestion = DoAutoComplete("t", true);
+
+            Assert.AreEqual("test", suggestion);
+            AssertSuggestions("test1", "test12", "test2");
+        }
+
+        [Test]
+        public void TestAutoCompleteCommands2()
+        {
+            string suggestion = DoAutoComplete("test1");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCommandsDoubleTab2()
+        {
+            string suggestion = DoAutoComplete("test1", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions("test1", "test12");
+        }
+
+        [Test]
+        public void TestAutoCompleteCommands3()
+        {
+            string suggestion = DoAutoComplete("test12");
+
+            Assert.AreEqual("test12 ", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCommandsDoubleTab3()
+        {
+            string suggestion = DoAutoComplete("test12", true);
+
+            Assert.AreEqual("test12 ", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCommands4()
+        {
+            string suggestion = DoAutoComplete("test123");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCommandsDoubleTab4()
+        {
+            string suggestion = DoAutoComplete("test123", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        #endregion
+
+        //////////////////////////////////////////////////////////////////////////////
+
+        #region Arguments autocompletion
+
+        [Test]
+        public void TestAutoCompleteArgumentsEmptyLine()
+        {
+            string suggestion = DoAutoComplete("test1 ");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteArgumentsDoubleTabEmptyLine()
+        {
+            string suggestion = DoAutoComplete("test1 ", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions("arg1", "arg12", "arg2");
+        }
+
+        [Test]
+        public void TestAutoCompleteArguments1()
+        {
+            string suggestion = DoAutoComplete("test1 a");
+
+            Assert.AreEqual("test1 arg", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteArgumentsDoubleTab1()
+        {
+            string suggestion = DoAutoComplete("test1 a", true);
+
+            Assert.AreEqual("test1 arg", suggestion);
+            AssertSuggestions("arg1", "arg12", "arg2");
+        }
+
+        [Test]
+        public void TestAutoCompleteArguments2()
+        {
+            string suggestion = DoAutoComplete("test1 arg1");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteArgumentsDoubleTab2()
+        {
+            string suggestion = DoAutoComplete("test1 arg1", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions("arg1", "arg12");
+        }
+
+        [Test]
+        public void TestAutoCompleteArguments3()
+        {
+            string suggestion = DoAutoComplete("test1 arg12");
+
+            Assert.AreEqual("test1 arg12 ", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteArgumentsDoubleTab3()
+        {
+            string suggestion = DoAutoComplete("test1 arg12", true);
+
+            Assert.AreEqual("test1 arg12 ", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteArguments4()
+        {
+            string suggestion = DoAutoComplete("test1 arg123");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteArgumentsDoubleTab4()
+        {
+            string suggestion = DoAutoComplete("test1 arg123", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteArguments5()
+        {
+            string suggestion = DoAutoComplete("test1 arg1 ");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteArgumentsDoubleTab5()
+        {
+            string suggestion = DoAutoComplete("test1 arg1 ", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCustomArguments1()
+        {
+            string suggestion = DoAutoComplete("test12 a");
+
+            Assert.AreEqual("test12 arg", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCustomArgumentsDoubleTab1()
+        {
+            string suggestion = DoAutoComplete("test12 a", true);
+
+            Assert.AreEqual("test12 arg", suggestion);
+            AssertSuggestions("arg1", "arg12", "arg2");
+        }
+
+        [Test]
+        public void TestAutoCompleteCustomArguments2()
+        {
+            string suggestion = DoAutoComplete("test12 arg1");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCustomArgumentsDoubleTab2()
+        {
+            string suggestion = DoAutoComplete("test12 arg1", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions("arg1", "arg12");
+        }
+
+        [Test]
+        public void TestAutoCompleteCustomArguments3()
+        {
+            string suggestion = DoAutoComplete("test12 arg12");
+
+            Assert.AreEqual("test12 arg12 ", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCustomArgumentsDoubleTab3()
+        {
+            string suggestion = DoAutoComplete("test12 arg12", true);
+
+            Assert.AreEqual("test12 arg12 ", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCustomArguments4()
+        {
+            string suggestion = DoAutoComplete("test12 arg123");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCustomArgumentsDoubleTab4()
+        {
+            string suggestion = DoAutoComplete("test12 arg123", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCustomArguments5()
+        {
+            string suggestion = DoAutoComplete("test12 arg1 ");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCustomArgumentsDoubleTab5()
+        {
+            string suggestion = DoAutoComplete("test12 arg1 ", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteArgumentsWithException()
+        {
+            string suggestion = DoAutoComplete("test2 a");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteArgumentsWithExceptionDoubleTab()
+        {
+            string suggestion = DoAutoComplete("test2 a", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        #endregion
+
+        //////////////////////////////////////////////////////////////////////////////
+
+        #region Auto
+
+        [Test]
+        public void TestAutoCompleteShortOptionsEmptyLine()
+        {
+            string suggestion = DoAutoComplete("test1 -");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsEmptyLineDoubleTab()
+        {
+            string suggestion = DoAutoComplete("test1 -", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions("-e", "-o1", "-o12", "-o2");
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptions1()
+        {
+            string suggestion = DoAutoComplete("test1 -o");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsDoubleTab1()
+        {
+            string suggestion = DoAutoComplete("test1 -o", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions("-o1", "-o12", "-o2");
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptions2()
+        {
+            string suggestion = DoAutoComplete("test1 -o12");
+
+            Assert.AreEqual("test1 -o12 ", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsDoubleTab2()
+        {
+            string suggestion = DoAutoComplete("test1 -o12", true);
+
+            Assert.AreEqual("test1 -o12 ", suggestion);
+            AssertSuggestions();
+        }
+
+        #endregion
+
+        //////////////////////////////////////////////////////////////////////////////
+
+        #region Setup
+
+        [SetUp]
+        protected override void RunSetUp()
+        {
+            base.RunSetUp();
+
+            RegisterCommand(typeof(Cmd_test1), false);
+            RegisterCommand(typeof(Cmd_test12), false);
+            RegisterCommand(typeof(Cmd_test2), false);
 
             terminal = new Terminal(1024);
             terminal.Delegate = this;
             terminalTableOutput = new List<string>();
         }
 
-        [Test]
-        public void TestEmptyTextCvarsAutoComplete()
-        {
-            new CVar("c1", "value");
-            new CVar("c12", "value");
-            new CVar("c123", "value");
-            new CVar("c14", "value");
-
-            string expected = "";
-            string actual = DoAutoComplete("");
-
-            Assert.AreEqual(expected, actual);
-            AssertList(terminalTableOutput);
-        }
-
-        [Test]
-        public void TestEmptyTextCvarsAutoCompleteDoubleTap()
-        {
-            new CVar("c14", "value");
-            new CVar("c123", "value");
-            new CVar("c1", "value");
-            new CVar("c12", "value");
-
-            string expected = "";
-            string actual = DoAutoComplete("", true);
-
-            Assert.AreEqual(expected, actual);
-            AssertList(terminalTableOutput, "c1", "c12", "c123", "c14");
-        }
-
-        [Test]
-        public void TestTextCvarsAutoComplete()
-        {
-            new CVar("c14", "value");
-            new CVar("c123", "value");
-            new CVar("c1", "value");
-            new CVar("c12", "value");
-
-            string expected = "c1";
-            string actual = DoAutoComplete("c", false);
-
-            Assert.AreEqual(expected, actual);
-            AssertList(terminalTableOutput);
-        }
-
-        [Test]
-        public void TestTextCvarsAutoCompleteDoubleTap()
-        {
-            new CVar("c14", "value");
-            new CVar("c123", "value");
-            new CVar("c1", "value");
-            new CVar("c12", "value");
-
-            string expected = "c1";
-            string actual = DoAutoComplete("c", true);
-
-            Assert.AreEqual(expected, actual);
-            AssertList(terminalTableOutput, "c1", "c12", "c123", "c14");
-        }
+        #endregion
 
         //////////////////////////////////////////////////////////////////////////////
 
@@ -95,7 +422,15 @@ namespace TerminalTests
 
         private string DoAutoComplete(string text, bool isDoubleTap = false)
         {
-            return terminal.DoAutoComplete(text, isDoubleTap);
+            int index = text.IndexOf('¶');
+            index = index == -1 ? text.Length : index;
+
+            return terminal.DoAutoComplete(text, index, isDoubleTap);
+        }
+
+        private void AssertSuggestions(params string[] expected)
+        {
+            AssertList(terminalTableOutput, expected);
         }
 
         #endregion
@@ -118,6 +453,84 @@ namespace TerminalTests
 
         public void OnConsoleCleared(AbstractConsole console)
         {
+        }
+
+        #endregion
+
+        //////////////////////////////////////////////////////////////////////////////
+
+        #region Test commands
+
+        class Cmd_test1 : CCommand
+        {
+            [CCommandOption(ShortName="o1")]
+            private bool opt1;
+
+            [CCommandOption(ShortName="o12")]
+            private String opt12;
+
+            [CCommandOption(ShortName="o2", Values="val1,val12,val2")]
+            private String opt2;
+
+            [CCommandOption(ShortName="e")]
+            private String ext;
+
+            public Cmd_test1()
+            {
+                this.Values = new string[]
+                {
+                    "arg1",
+                    "arg12",
+                    "arg2",
+                };
+            }
+
+            void Execute(string arg)
+            {
+            }
+        }
+
+        class Cmd_test12 : CCommand
+        {
+            [CCommandOption]
+            private bool opt1;
+
+            void Execute(string arg)
+            {
+            }
+
+            protected override string[] AutoCompleteArgs(string commandLine, string token)
+            {
+                string[] values = new string[]
+                {
+                    "arg1",
+                    "arg12",
+                    "arg2",
+                };
+
+                List<string> suggestions = new List<string>();
+                foreach (string val in values)
+                {
+                    if (StringUtils.StartsWithIgnoreCase(val, token))
+                    {
+                        suggestions.Add(val);
+                    }
+                }
+
+                return suggestions.ToArray();
+            }
+        }
+
+        class Cmd_test2 : CCommand
+        {
+            void Execute()
+            {
+            }
+
+            protected override string[] AutoCompleteArgs(string commandLine, string token)
+            {
+                throw new Exception("Uh-oh");
+            }
         }
 
         #endregion

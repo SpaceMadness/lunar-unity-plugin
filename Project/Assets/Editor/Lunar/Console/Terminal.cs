@@ -10,7 +10,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class Terminal : AbstractConsole, ICCommandDelegate
+    class Terminal : AbstractConsole
     {
         public Terminal(int capacity)
             : base(capacity)
@@ -35,167 +35,34 @@ namespace LunarEditor
 
         //////////////////////////////////////////////////////////////////////////////
 
-        #region Auto Complete
+        #region Autocomplete
 
-        public string DoAutoComplete(string text, bool isDoubleTab)
+        public string DoAutoComplete(string line, int index, bool isDoubleTab)
         {
-            // TODO: add unit tests
-
-            ReusableList<string> tokensList = ReusableLists.NextAutoRecycleList<string>();
-            CommandTokenizer.Tokenize(text, tokensList);
-
-            if (tokensList.Count == 1)
+            try
             {
-                string newText = DoAutoComplete(text, tokensList[0], isDoubleTab);
-                if (newText != null && newText != text)
+                TerminalAutocompletion.Result result = TerminalAutocompletion.Autocomplete(line, index);
+
+                if (isDoubleTab && result.suggestions != null)
                 {
-                    return newText;
-                }
-            }
-
-            if (tokensList.Count > 0)
-            {
-                return DoAutoComplete(text, tokensList, isDoubleTab);
-            }
-
-            return DoAutoCompleteNoToken(text, isDoubleTab);
-        }
-
-        private string DoAutoComplete(string text, string token, bool isDoubleTab)
-        {
-            IList<CCommand> suggestedCommands = CRegistery.ListCommands(token);
-            if (suggestedCommands.Count == 1)
-            {
-                return suggestedCommands[0].Name + " ";
-            }
-
-            if (suggestedCommands.Count > 1)
-            {
-                if (isDoubleTab)
-                {
-                    string[] names = new string[suggestedCommands.Count];
-                    for (int i = 0; i < suggestedCommands.Count; ++i)
-                    {
-                        CCommand cmd = suggestedCommands[i];
-                        ColorCode color = cmd is CVarCommand ? ColorCode.TableVar : cmd.ColorCode;
-                        names[i] = StringUtils.C(cmd.Name, color);
-                    }
-
-                    Array.Sort(names);
-                    Add(CCommand.Prompt(token));
-                    Add(names);
+                    Add(CCommand.Prompt(line));
+                    Add(result.suggestions);
                 }
 
-                return GetSuggestedText(token, suggestedCommands);
+                return result.line;
             }
-
-            return text;
-        }
-
-        private string DoAutoComplete(string text, IList<string> tokensList, bool isDoubleTab)
-        {
-            string name = tokensList[0];
-            CCommand command = CRegistery.FindCommand(name);
-            if (command != null)
+            catch (CommandAutoCompleteException e)
             {
-                command.Delegate = this; // FIXME: split ICCommandDelegate interface
-                string newText = command.AutoComplete(text, tokensList, isDoubleTab);
-                command.Delegate = null;
-                if (newText != null)
-                {
-                    return newText;
-                }
+                Add(CCommand.Prompt(line));
+                Add(e.InnerException, "Exception while auto completing args");
             }
-
-            return text;
-        }
-
-        private string DoAutoCompleteNoToken(string text, bool isDoubleTab)
-        {
-            if (isDoubleTab)
+            catch (Exception e)
             {
-                IList<CCommand> commands = CRegistery.ListCommands();
-                string[] names = new string[commands.Count];
-                for (int i = 0; i < commands.Count; ++i)
-                {
-                    CCommand cmd = commands[i];
-                    ColorCode color = cmd is CVarCommand ? ColorCode.TableVar : cmd.ColorCode;
-                    names[i] = StringUtils.C(cmd.Name, color);
-                }
-
-                Add(names);
+                Add(CCommand.Prompt(line));
+                Add(e, "Inner command auto completion error");
             }
 
-            return text;
-        }
-
-        private static string GetSuggestedText(string token, IList<CCommand> commands)
-        {
-            string firstCommandName = commands[0].Name;
-
-            if (firstCommandName.Length > token.Length)
-            {
-                StringBuilder suggestedToken = new StringBuilder(token);
-                for (int charIndex = token.Length; charIndex < firstCommandName.Length; ++charIndex)
-                {
-                    char chr = firstCommandName[charIndex];
-                    char chrLower = char.ToLower(chr);
-                    for (int commandIndex = 1; commandIndex < commands.Count; ++commandIndex)
-                    {
-                        string otherCommandName = commands[commandIndex].Name;
-                        if (char.ToLower(otherCommandName[charIndex]) != chrLower)
-                        {
-                            return suggestedToken.ToString();
-                        }
-                    }
-                    suggestedToken.Append(chr);
-                }
-
-                return suggestedToken.ToString();
-            }
-
-            return token;
-        }
-
-        #endregion
-
-        //////////////////////////////////////////////////////////////////////////////
-
-        #region ICCommandDelegate
-
-        public void LogTerminal(string message)
-        {
-            Add(message);
-        }
-
-        public void LogTerminal(string[] table)
-        {
-            Add(table);
-        }
-
-        public void LogTerminal(Exception e, string message)
-        {
-            
-        }
-
-        public void ClearTerminal()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool ExecuteCommandLine(string commandLine, bool manual = false)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void PostNotification(CCommand cmd, string name, params object[] data)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsPromptEnabled
-        {
-            get { return true; }
+            return null;
         }
 
         #endregion

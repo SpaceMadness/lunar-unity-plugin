@@ -109,6 +109,11 @@ namespace LunarEditor
                     return getSuggestedOptions(iter, cmd, optionName, "-");
                 }
 
+                if (iter.HasNext())
+                {
+                    return EMPTY_SUGGESTIONS; // TODO: add multiple args suggestion support
+                }
+
                 return getSuggestedArgs(commandLine, cmd, token);
             }
 

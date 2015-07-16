@@ -1028,21 +1028,6 @@ namespace LunarEditor
         }
     }
 
-    [CCommand("test")]
-    class Cmd_test : CCommand
-    {
-        bool Execute()
-        {
-            Log.d("Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug Debug");
-            Log.w("Warning Warning Warning Warning Warning Warning Warning Warning Warning Warning Warning Warning Warning Warning Warning");
-            Log.i("Info Info Info Info Info Info Info Info Info Info Info Info Info Info Info Info Info Info Info Info Info Info Info ");
-            Log.v("Verbose Verbose Verbose Verbose Verbose Verbose Verbose Verbose Verbose Verbose Verbose Verbose Verbose Verbose Verbose ");
-            Log.e("Error Error Error Error Error Error Error Error Error Error Error Error Error Error Error Error Error Error Error ");
-            
-            return true;
-        }
-    }
-    
     [CCommand("throw_exception")]
     class Cmd_throw_exception : CCommand
     {

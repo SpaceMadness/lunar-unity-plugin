@@ -360,17 +360,17 @@ namespace LunarPluginInternal
 
         private static List<string> s_tempList;
 
-        internal static string GetSuggestedText(string token, string[] strings)
+        internal static string GetSuggestedText(string token, string[] strings, bool removeTags = false)
         {
-            return GetSuggestedText0(token, strings);
+            return GetSuggestedText0(token, strings, removeTags);
         }
 
-        internal static string GetSuggestedText(string token, IList<string> strings)
+        internal static string GetSuggestedText(string token, IList<string> strings, bool removeTags = false)
         {
-            return GetSuggestedText0(token, (IList)strings);
+            return GetSuggestedText0(token, (IList)strings, removeTags);
         }
 
-        private static string GetSuggestedText0(string token, IList strings)
+        private static string GetSuggestedText0(string token, IList strings, bool removeTags)
         {
             if (token == null || token.Length == 0)
             {
@@ -382,9 +382,10 @@ namespace LunarPluginInternal
 
             foreach (string str in strings)
             {
-                if (str.StartsWith(token, true, null))
+                string temp = removeTags ? RemoveRichTextTags(str) : str;
+                if (StartsWithIgnoreCase(temp, token))
                 {
-                    s_tempList.Add(str);
+                    s_tempList.Add(temp);
                 }
             }
 

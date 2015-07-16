@@ -33,10 +33,10 @@
     <Reference Include="System" />
     <Reference Include="nunit.framework" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEngine.dll</HintPath>
+      <HintPath>\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>..\..\..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.dll</HintPath>
+      <HintPath>\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -56,7 +56,6 @@
     <Compile Include="CCommandTests\CCommandTestOptions.cs" />
     <Compile Include="CCommandTests\CCommandTestCommandProcessor.cs" />
     <Compile Include="CCommandTests\CCommandTestCRegistryTest.cs" />
-    <Compile Include="CCommandTests\CCommandTestAutoComplete.cs" />
     <Compile Include="CCommandTests\CCommandTestMultipleCommands.cs" />
     <Compile Include="CCommandTests\CCommandTestCommandSplitter.cs" />
     <Compile Include="CCommandTests\CCommandTestBind.cs" />

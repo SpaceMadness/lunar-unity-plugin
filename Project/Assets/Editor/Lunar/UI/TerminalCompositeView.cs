@@ -108,7 +108,11 @@ namespace LunarEditor
 
                         case KeyCode.Tab:
                         {
-                            tf.Text = Terminal.DoAutoComplete(tf.Text, IsDoubleTab());
+                            string line = Terminal.DoAutoComplete(tf.Text, tf.CaretPos, IsDoubleTab());
+                            if (line != null)
+                            {
+                                tf.Text = line;
+                            }
                             m_lastTabTimestamp = Time.realtimeSinceStartup;
                             return true;
                         }
