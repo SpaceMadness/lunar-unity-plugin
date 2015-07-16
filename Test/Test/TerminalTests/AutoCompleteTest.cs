@@ -23,7 +23,7 @@ namespace TerminalTests
         #region Command Autocompletion
 
         [Test]
-        public void TestAutoCompleteCommandsEmptyLine()
+        public void TestCommandsEmptyLine()
         {
             string suggestion = DoAutoComplete("");
 
@@ -32,7 +32,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommandsDoubleTabEmptyLine()
+        public void TestCommandsDoubleTabEmptyLine()
         {
             string suggestion = DoAutoComplete("", true);
 
@@ -41,7 +41,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommands1()
+        public void TestCommands1()
         {
             string suggestion = DoAutoComplete("t");
 
@@ -50,7 +50,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommandsDoubleTab1()
+        public void TestCommandsDoubleTab1()
         {
             string suggestion = DoAutoComplete("t", true);
 
@@ -59,7 +59,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommands2()
+        public void TestCommands2()
         {
             string suggestion = DoAutoComplete("test");
 
@@ -68,7 +68,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommandsDoubleTab2()
+        public void TestCommandsDoubleTab2()
         {
             string suggestion = DoAutoComplete("test", true);
 
@@ -77,7 +77,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommands3()
+        public void TestCommands3()
         {
             string suggestion = DoAutoComplete("test1");
 
@@ -86,7 +86,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommandsDoubleTab3()
+        public void TestCommandsDoubleTab3()
         {
             string suggestion = DoAutoComplete("test1", true);
 
@@ -95,7 +95,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommands4()
+        public void TestCommands4()
         {
             string suggestion = DoAutoComplete("test12");
 
@@ -104,7 +104,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommandsDoubleTab4()
+        public void TestCommandsDoubleTab4()
         {
             string suggestion = DoAutoComplete("test12", true);
 
@@ -113,7 +113,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommands5()
+        public void TestCommands5()
         {
             string suggestion = DoAutoComplete("test123");
 
@@ -122,7 +122,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommandsDoubleTab5()
+        public void TestCommandsDoubleTab5()
         {
             string suggestion = DoAutoComplete("test123", true);
 
@@ -137,7 +137,7 @@ namespace TerminalTests
         #region Arguments autocompletion
 
         [Test]
-        public void TestAutoCompleteArgumentsEmptyLine()
+        public void TestArgumentsEmptyLine()
         {
             string suggestion = DoAutoComplete("test1 ");
 
@@ -146,7 +146,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteArgumentsDoubleTabEmptyLine()
+        public void TestArgumentsDoubleTabEmptyLine()
         {
             string suggestion = DoAutoComplete("test1 ", true);
 
@@ -155,7 +155,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteArguments1()
+        public void TestArguments1()
         {
             string suggestion = DoAutoComplete("test1 a");
 
@@ -164,7 +164,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteArgumentsDoubleTab1()
+        public void TestArgumentsDoubleTab1()
         {
             string suggestion = DoAutoComplete("test1 a", true);
 
@@ -173,7 +173,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteArguments2()
+        public void TestArguments2()
         {
             string suggestion = DoAutoComplete("test1 arg1");
 
@@ -182,7 +182,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteArgumentsDoubleTab2()
+        public void TestArgumentsDoubleTab2()
         {
             string suggestion = DoAutoComplete("test1 arg1", true);
 
@@ -191,7 +191,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteArguments3()
+        public void TestArguments3()
         {
             string suggestion = DoAutoComplete("test1 arg12");
 
@@ -200,7 +200,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteArgumentsDoubleTab3()
+        public void TestArgumentsDoubleTab3()
         {
             string suggestion = DoAutoComplete("test1 arg12", true);
 
@@ -209,7 +209,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteArguments4()
+        public void TestArguments4()
         {
             string suggestion = DoAutoComplete("test1 arg123");
 
@@ -218,7 +218,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteArgumentsDoubleTab4()
+        public void TestArgumentsDoubleTab4()
         {
             string suggestion = DoAutoComplete("test1 arg123", true);
 
@@ -227,7 +227,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteArguments5()
+        public void TestArguments5()
         {
             string suggestion = DoAutoComplete("test1 arg1 ");
 
@@ -236,7 +236,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteArgumentsDoubleTab5()
+        public void TestArgumentsDoubleTab5()
         {
             string suggestion = DoAutoComplete("test1 arg1 ", true);
 
@@ -245,7 +245,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCustomArguments1()
+        public void TestCustomArguments1()
         {
             string suggestion = DoAutoComplete("test12 a");
 
@@ -254,7 +254,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCustomArgumentsDoubleTab1()
+        public void TestCustomArgumentsDoubleTab1()
         {
             string suggestion = DoAutoComplete("test12 a", true);
 
@@ -263,7 +263,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCustomArguments2()
+        public void TestCustomArguments2()
         {
             string suggestion = DoAutoComplete("test12 arg1");
 
@@ -272,7 +272,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCustomArgumentsDoubleTab2()
+        public void TestCustomArgumentsDoubleTab2()
         {
             string suggestion = DoAutoComplete("test12 arg1", true);
 
@@ -281,7 +281,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCustomArguments3()
+        public void TestCustomArguments3()
         {
             string suggestion = DoAutoComplete("test12 arg12");
 
@@ -290,7 +290,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCustomArgumentsDoubleTab3()
+        public void TestCustomArgumentsDoubleTab3()
         {
             string suggestion = DoAutoComplete("test12 arg12", true);
 
@@ -299,7 +299,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCustomArguments4()
+        public void TestCustomArguments4()
         {
             string suggestion = DoAutoComplete("test12 arg123");
 
@@ -308,7 +308,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCustomArgumentsDoubleTab4()
+        public void TestCustomArgumentsDoubleTab4()
         {
             string suggestion = DoAutoComplete("test12 arg123", true);
 
@@ -317,7 +317,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCustomArguments5()
+        public void TestCustomArguments5()
         {
             string suggestion = DoAutoComplete("test12 arg1 ");
 
@@ -326,7 +326,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCustomArgumentsDoubleTab5()
+        public void TestCustomArgumentsDoubleTab5()
         {
             string suggestion = DoAutoComplete("test12 arg1 ", true);
 
@@ -335,7 +335,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteArgumentsWithException()
+        public void TestArgumentsWithException()
         {
             string suggestion = DoAutoComplete("test2 a");
 
@@ -344,7 +344,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteArgumentsWithExceptionDoubleTab()
+        public void TestArgumentsWithExceptionDoubleTab()
         {
             string suggestion = DoAutoComplete("test2 a", true);
 
@@ -359,7 +359,7 @@ namespace TerminalTests
         #region Auto
 
         [Test]
-        public void TestAutoCompleteShortOptionsEmptyLine()
+        public void TestShortOptionsEmptyLine()
         {
             string suggestion = DoAutoComplete("test1 -");
 
@@ -368,7 +368,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsEmptyLineDoubleTab()
+        public void TestShortOptionsEmptyLineDoubleTab()
         {
             string suggestion = DoAutoComplete("test1 -", true);
 
@@ -377,7 +377,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptions1()
+        public void TestShortOptions1()
         {
             string suggestion = DoAutoComplete("test1 -o");
 
@@ -386,7 +386,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsDoubleTab1()
+        public void TestShortOptionsDoubleTab1()
         {
             string suggestion = DoAutoComplete("test1 -o", true);
 
@@ -395,7 +395,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptions2()
+        public void TestShortOptions2()
         {
             string suggestion = DoAutoComplete("test1 -o12");
 
@@ -404,7 +404,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsDoubleTab2()
+        public void TestShortOptionsDoubleTab2()
         {
             string suggestion = DoAutoComplete("test1 -o12", true);
 
@@ -413,7 +413,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptions3()
+        public void TestShortOptions3()
         {
             string suggestion = DoAutoComplete("test1 -o123");
 
@@ -422,7 +422,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsDoubleTab3()
+        public void TestShortOptionsDoubleTab3()
         {
             string suggestion = DoAutoComplete("test1 -o123", true);
 
@@ -431,7 +431,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptions4()
+        public void TestShortOptions4()
         {
             string suggestion = DoAutoComplete("test1 -o123");
 
@@ -440,7 +440,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsDoubleTab4()
+        public void TestShortOptionsDoubleTab4()
         {
             string suggestion = DoAutoComplete("test1 -o123", true);
 
@@ -449,7 +449,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValue1()
+        public void TestShortOptionsWithValue1()
         {
             string suggestion = DoAutoComplete("test1 -o2 ");
 
@@ -458,7 +458,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueDoubleTab1()
+        public void TestShortOptionsWithValueDoubleTab1()
         {
             string suggestion = DoAutoComplete("test1 -o2 ", true);
 
@@ -467,7 +467,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValue2()
+        public void TestShortOptionsWithValue2()
         {
             string suggestion = DoAutoComplete("test1 -o2 v");
 
@@ -476,7 +476,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueDoubleTab2()
+        public void TestShortOptionsWithValueDoubleTab2()
         {
             string suggestion = DoAutoComplete("test1 -o2 v", true);
 
@@ -485,7 +485,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValue3()
+        public void TestShortOptionsWithValue3()
         {
             string suggestion = DoAutoComplete("test1 -o2 val");
 
@@ -494,7 +494,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueDoubleTab3()
+        public void TestShortOptionsWithValueDoubleTab3()
         {
             string suggestion = DoAutoComplete("test1 -o2 val", true);
 
@@ -503,7 +503,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValue4()
+        public void TestShortOptionsWithValue4()
         {
             string suggestion = DoAutoComplete("test1 -o2 val1");
 
@@ -512,7 +512,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueDoubleTab4()
+        public void TestShortOptionsWithValueDoubleTab4()
         {
             string suggestion = DoAutoComplete("test1 -o2 val1", true);
 
@@ -521,7 +521,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValue5()
+        public void TestShortOptionsWithValue5()
         {
             string suggestion = DoAutoComplete("test1 -o2 val12");
 
@@ -530,7 +530,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueDoubleTab5()
+        public void TestShortOptionsWithValueDoubleTab5()
         {
             string suggestion = DoAutoComplete("test1 -o2 val12", true);
 
@@ -539,7 +539,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValue6()
+        public void TestShortOptionsWithValue6()
         {
             string suggestion = DoAutoComplete("test1 -o2 x");
 
@@ -548,7 +548,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueDoubleTab6()
+        public void TestShortOptionsWithValueDoubleTab6()
         {
             string suggestion = DoAutoComplete("test1 -o2 x", true);
 
@@ -557,7 +557,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueAndArgs()
+        public void TestShortOptionsWithValueAndArgs()
         {
             string suggestion = DoAutoComplete("test1 -o2 val1 ");
 
@@ -566,7 +566,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueAndArgsDoubleTab()
+        public void TestShortOptionsWithValueAndArgsDoubleTab()
         {
             string suggestion = DoAutoComplete("test1 -o2 val1 ", true);
 
@@ -575,7 +575,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueAndArgs1()
+        public void TestShortOptionsWithValueAndArgs1()
         {
             string suggestion = DoAutoComplete("test1 -o2 val1 a");
 
@@ -584,7 +584,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueAndArgsDoubleTab1()
+        public void TestShortOptionsWithValueAndArgsDoubleTab1()
         {
             string suggestion = DoAutoComplete("test1 -o2 val1 a", true);
 
@@ -593,7 +593,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueAndArgs2()
+        public void TestShortOptionsWithValueAndArgs2()
         {
             string suggestion = DoAutoComplete("test1 -o2 val1 arg1");
 
@@ -602,7 +602,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueAndArgsDoubleTab2()
+        public void TestShortOptionsWithValueAndArgsDoubleTab2()
         {
             string suggestion = DoAutoComplete("test1 -o2 val1 arg1", true);
 
@@ -611,7 +611,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueAndArgs3()
+        public void TestShortOptionsWithValueAndArgs3()
         {
             string suggestion = DoAutoComplete("test1 -o2 val1 arg12");
 
@@ -620,7 +620,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueAndArgsDoubleTab3()
+        public void TestShortOptionsWithValueAndArgsDoubleTab3()
         {
             string suggestion = DoAutoComplete("test1 -o2 val1 arg12", true);
 
@@ -629,7 +629,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueAndArgs4()
+        public void TestShortOptionsWithValueAndArgs4()
         {
             string suggestion = DoAutoComplete("test1 -o2 val1 arg123");
 
@@ -638,7 +638,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueAndArgsDoubleTab4()
+        public void TestShortOptionsWithValueAndArgsDoubleTab4()
         {
             string suggestion = DoAutoComplete("test1 -o2 val1 arg123", true);
 
@@ -647,7 +647,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueAndArgs5()
+        public void TestShortOptionsWithValueAndArgs5()
         {
             string suggestion = DoAutoComplete("test1 -o2 val1 arg1 ");
 
@@ -656,13 +656,14 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteShortOptionsWithValueAndArgsDoubleTab5()
+        public void TestShortOptionsWithValueAndArgsDoubleTab5()
         {
             string suggestion = DoAutoComplete("test1 -o2 val1 arg1 ", true);
 
             Assert.IsNull(suggestion);
             AssertSuggestions();
         }
+
 
         #endregion
 
