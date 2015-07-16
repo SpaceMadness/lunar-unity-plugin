@@ -146,6 +146,40 @@ namespace LunarPluginInternal
             AddToken(tokenBuffer, tokens);
         }
 
+        public static string GetAutoCompleteToken(string line)
+        {
+            int index = GetAutoCompleteTokenStartIndex(line);
+            return line.Substring(index);
+        }
+
+        private static int GetAutoCompleteTokenStartIndex(string line)
+        {
+            bool insideSingleQuotes = false;
+            bool insideDoubleQuotes = false;
+
+            int index = line.Length - 1;
+            for (; index >= 0; --index)
+            {
+                char ch = line[index];
+                if (char.IsWhiteSpace(ch))
+                {
+                    if (!insideDoubleQuotes && !insideSingleQuotes)
+                    {
+                        return index + 1;
+                    }
+                }
+                else if (ch == DoubleQuote)
+                {
+
+                }
+                else if (ch == SingleQuote)
+                {
+                }
+            }
+
+            return 0;
+        }
+
         private static void AddToken(StringBuilder buffer, IList<string> list, bool addEmpty = false)
         {
             if (buffer.Length > 0 || addEmpty)

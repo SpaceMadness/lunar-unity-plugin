@@ -394,6 +394,60 @@ namespace TerminalTests
             AssertSuggestions();
         }
 
+        [Test]
+        public void TestAutoCompleteShortOptions3()
+        {
+            string suggestion = DoAutoComplete("test1 -o123");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsDoubleTab3()
+        {
+            string suggestion = DoAutoComplete("test1 -o123", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptions4()
+        {
+            string suggestion = DoAutoComplete("test1 -o123");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsDoubleTab4()
+        {
+            string suggestion = DoAutoComplete("test1 -o123", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsWithValue1()
+        {
+            string suggestion = DoAutoComplete("test1 -o2 ");
+
+            Assert.AreEqual("test1 -o2 val", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsWithValueDoubleTab1()
+        {
+            string suggestion = DoAutoComplete("test1 -o2 ", true);
+
+            Assert.AreEqual("test1 -o2 val", suggestion);
+            AssertSuggestions("val1", "val2", "val3");
+        }
+
         #endregion
 
         //////////////////////////////////////////////////////////////////////////////
