@@ -27,7 +27,7 @@ namespace TerminalTests
         {
             string suggestion = DoAutoComplete("");
 
-            Assert.IsNull(suggestion);
+            Assert.AreEqual("test", suggestion);
             AssertSuggestions();
         }
 
@@ -36,7 +36,7 @@ namespace TerminalTests
         {
             string suggestion = DoAutoComplete("", true);
 
-            Assert.IsNull(suggestion);
+            Assert.AreEqual("test", suggestion);
             AssertSuggestions("test1", "test12", "test2");
         }
 
@@ -123,7 +123,7 @@ namespace TerminalTests
         {
             string suggestion = DoAutoComplete("test1 ");
 
-            Assert.IsNull(suggestion);
+            Assert.AreEqual("test1 arg", suggestion);
             AssertSuggestions();
         }
 
@@ -132,7 +132,7 @@ namespace TerminalTests
         {
             string suggestion = DoAutoComplete("test1 ", true);
 
-            Assert.IsNull(suggestion);
+            Assert.AreEqual("test1 arg", suggestion);
             AssertSuggestions("arg1", "arg12", "arg2");
         }
 
@@ -445,7 +445,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 ", true);
 
             Assert.AreEqual("test1 -o2 val", suggestion);
-            AssertSuggestions("val1", "val2", "val3");
+            AssertSuggestions("val1", "val12", "val2");
         }
 
         #endregion

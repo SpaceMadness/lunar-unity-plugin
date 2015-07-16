@@ -154,26 +154,13 @@ namespace LunarPluginInternal
 
         private static int GetAutoCompleteTokenStartIndex(string line)
         {
-            bool insideSingleQuotes = false;
-            bool insideDoubleQuotes = false;
-
             int index = line.Length - 1;
             for (; index >= 0; --index)
             {
                 char ch = line[index];
                 if (char.IsWhiteSpace(ch))
                 {
-                    if (!insideDoubleQuotes && !insideSingleQuotes)
-                    {
-                        return index + 1;
-                    }
-                }
-                else if (ch == DoubleQuote)
-                {
-
-                }
-                else if (ch == SingleQuote)
-                {
+                    return index + 1;
                 }
             }
 

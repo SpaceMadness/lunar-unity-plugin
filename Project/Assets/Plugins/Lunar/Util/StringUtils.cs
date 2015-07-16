@@ -372,18 +372,18 @@ namespace LunarPluginInternal
 
         private static string GetSuggestedText0(string token, IList strings, bool removeTags)
         {
-            if (token == null || token.Length == 0)
+            if (token == null)
             {
                 return null;
             }
 
-            if (s_tempList == null) s_tempList = new List<string>();
+            if (s_tempList == null) s_tempList = new List<string>(); // TODO: use 'recyclable' list
             else s_tempList.Clear();
 
             foreach (string str in strings)
             {
                 string temp = removeTags ? RemoveRichTextTags(str) : str;
-                if (StartsWithIgnoreCase(temp, token))
+                if (token.Length == 0 || StartsWithIgnoreCase(temp, token))
                 {
                     s_tempList.Add(temp);
                 }

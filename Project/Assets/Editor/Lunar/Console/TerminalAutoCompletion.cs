@@ -57,13 +57,7 @@ namespace LunarEditor
 
         private static string GetToken(string line)
         {
-            if (line.Length == 0)
-            {
-                return string.Empty;
-            }
-
-            IList<string> tokens = CommandTokenizer.Tokenize(line, CommandTokenizer.OPTION_IGNORE_MISSING_QUOTES);
-            return tokens.Count > 0 ? tokens[tokens.Count - 1] : null;
+            return CommandTokenizer.GetAutoCompleteToken(line);
         }
 
         private static string ReplaceToken(string line, string token, string suggestion)
