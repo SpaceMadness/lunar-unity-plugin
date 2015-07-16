@@ -61,7 +61,7 @@ namespace TerminalTests
         [Test]
         public void TestAutoCompleteCommands2()
         {
-            string suggestion = DoAutoComplete("test1");
+            string suggestion = DoAutoComplete("test");
 
             Assert.IsNull(suggestion);
             AssertSuggestions();
@@ -70,6 +70,24 @@ namespace TerminalTests
         [Test]
         public void TestAutoCompleteCommandsDoubleTab2()
         {
+            string suggestion = DoAutoComplete("test", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions("test1", "test12", "test2");
+        }
+
+        [Test]
+        public void TestAutoCompleteCommands3()
+        {
+            string suggestion = DoAutoComplete("test1");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteCommandsDoubleTab3()
+        {
             string suggestion = DoAutoComplete("test1", true);
 
             Assert.IsNull(suggestion);
@@ -77,7 +95,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommands3()
+        public void TestAutoCompleteCommands4()
         {
             string suggestion = DoAutoComplete("test12");
 
@@ -86,7 +104,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommandsDoubleTab3()
+        public void TestAutoCompleteCommandsDoubleTab4()
         {
             string suggestion = DoAutoComplete("test12", true);
 
@@ -95,7 +113,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommands4()
+        public void TestAutoCompleteCommands5()
         {
             string suggestion = DoAutoComplete("test123");
 
@@ -104,7 +122,7 @@ namespace TerminalTests
         }
 
         [Test]
-        public void TestAutoCompleteCommandsDoubleTab4()
+        public void TestAutoCompleteCommandsDoubleTab5()
         {
             string suggestion = DoAutoComplete("test123", true);
 
@@ -446,6 +464,96 @@ namespace TerminalTests
 
             Assert.AreEqual("test1 -o2 val", suggestion);
             AssertSuggestions("val1", "val12", "val2");
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsWithValue2()
+        {
+            string suggestion = DoAutoComplete("test1 -o2 v");
+
+            Assert.AreEqual("test1 -o2 val", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsWithValueDoubleTab2()
+        {
+            string suggestion = DoAutoComplete("test1 -o2 v", true);
+
+            Assert.AreEqual("test1 -o2 val", suggestion);
+            AssertSuggestions("val1", "val12", "val2");
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsWithValue3()
+        {
+            string suggestion = DoAutoComplete("test1 -o2 val");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsWithValueDoubleTab3()
+        {
+            string suggestion = DoAutoComplete("test1 -o2 val", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions("val1", "val12", "val2");
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsWithValue4()
+        {
+            string suggestion = DoAutoComplete("test1 -o2 val1");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsWithValueDoubleTab4()
+        {
+            string suggestion = DoAutoComplete("test1 -o2 val1", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions("val1", "val12");
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsWithValue5()
+        {
+            string suggestion = DoAutoComplete("test1 -o2 val12");
+
+            Assert.AreEqual("test1 -o2 val12 ", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsWithValueDoubleTab5()
+        {
+            string suggestion = DoAutoComplete("test1 -o2 val12", true);
+
+            Assert.AreEqual("test1 -o2 val12 ", suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsWithValue6()
+        {
+            string suggestion = DoAutoComplete("test1 -o2 x");
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
+        }
+
+        [Test]
+        public void TestAutoCompleteShortOptionsWithValueDoubleTab6()
+        {
+            string suggestion = DoAutoComplete("test1 -o2 x", true);
+
+            Assert.IsNull(suggestion);
+            AssertSuggestions();
         }
 
         #endregion
