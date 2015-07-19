@@ -1,3 +1,24 @@
+//
+//  CCommandUtils.cs
+//
+//  Lunar Plugin for Unity: a command line solution for your game.
+//  https://github.com/SpaceMadness/lunar-unity-plugin
+//
+//  Copyright 2015 Alex Lementuev, SpaceMadness.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -17,7 +38,7 @@ namespace LunarPluginInternal
         {
             if (method == null)
             {
-                throw new ArgumentNullException("Method is null");
+                throw new ArgumentNullException("method");
             }
 
             Type returnType = method.ReturnType;
@@ -28,7 +49,7 @@ namespace LunarPluginInternal
 
             ParameterInfo[] parameters = method.GetParameters();
 
-            int realParamsLength = 0;
+            int normalizedArgsCount = argsCount;
             int optionalParamsCount = 0;
             for (int i = 0; i < parameters.Length; ++i)
             {
@@ -39,10 +60,9 @@ namespace LunarPluginInternal
                 }
 
                 Type paramType = param.ParameterType;
-                if (paramType == typeof(Vector2)) realParamsLength += 2;
-                else if (paramType == typeof(Vector3)) realParamsLength += 3;
-                else if (paramType == typeof(Vector4)) realParamsLength += 4;
-                else realParamsLength += 1;
+                if (paramType == typeof(Vector2)) normalizedArgsCount -= 1; 
+                else if (paramType == typeof(Vector3)) normalizedArgsCount -= 2;
+                else if (paramType == typeof(Vector4)) normalizedArgsCount -= 3;
 
                 if (param.IsOptional)
                 {
@@ -50,19 +70,24 @@ namespace LunarPluginInternal
                 }
             }
 
-            if (realParamsLength == argsCount)
+            if (normalizedArgsCount == parameters.Length) // exact match
             {
                 return true;
             }
 
-            if (realParamsLength == 1 && parameters[0].ParameterType.IsArray)
+            if (parameters.Length > 0 && parameters[parameters.Length - 1].ParameterType.IsArray) // last param is array?
             {
-                return true; // a single array param
+                if (normalizedArgsCount > parameters.Length) // more args than method can accept
+                {
+                    return true;
+                }
+
+                return normalizedArgsCount == parameters.Length - 1; // no args passed to the array
             }
 
             if (optionalParamsCount > 0 && 
-                argsCount >= realParamsLength - optionalParamsCount &&
-                argsCount <= realParamsLength)
+                normalizedArgsCount >= parameters.Length - optionalParamsCount &&
+                normalizedArgsCount <= parameters.Length)
             {
                 return true;
             }
@@ -74,7 +99,7 @@ namespace LunarPluginInternal
         {
             if (del == null)
             {
-                throw new ArgumentNullException("Delegate is null");
+                throw new ArgumentNullException("del");
             }
 
             return Invoke(del.Target, del.Method, invokeArgs);
@@ -103,7 +128,7 @@ namespace LunarPluginInternal
         {
             if (del == null)
             {
-                throw new ArgumentNullException("Delegate is null");
+                throw new ArgumentNullException("del");
             }
 
             return Invoke(del.Target, del.Method, invokeArgs);
@@ -314,7 +339,10 @@ namespace LunarPluginInternal
 
         public static bool IsValidArg(string arg)
         {
-            return !arg.StartsWith("-") || StringUtils.IsNumeric(arg);
+            // TODO: think about a better way of checking args
+            // check is omitted since it messes up with operation commands (e.g. "bind x -variable")
+            // return !arg.StartsWith("-") || StringUtils.IsNumeric(arg);
+            return true;
         }
     }
 }

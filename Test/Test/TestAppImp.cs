@@ -73,17 +73,17 @@ namespace LunarPlugin.Test
 
         protected override bool GetKeyDown(KeyCode key)
         {
-            return false;
+            return m_app.GetKeyDown(key);
         }
 
         protected override bool GetKeyUp(KeyCode key)
         {
-            return false;
+            return m_app.GetKeyUp(key);
         }
 
         protected override bool GetKey(KeyCode key)
         {
-            return false;
+            return m_app.GetKey(key);
         }
 
         TestAppConfig Config

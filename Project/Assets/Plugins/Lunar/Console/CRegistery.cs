@@ -1,3 +1,24 @@
+//
+//  CRegistery.cs
+//
+//  Lunar Plugin for Unity: a command line solution for your game.
+//  https://github.com/SpaceMadness/lunar-unity-plugin
+//
+//  Copyright 2015 Alex Lementuev, SpaceMadness.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -64,7 +85,6 @@ namespace LunarPluginInternal
 
         #region Commands resolver
 
-        [System.Diagnostics.Conditional("UNITY_EDITOR")]
         public static void ResolveCommands()
         {
             List<CCommand> commands = RuntimeResolver.ResolveCommands();
@@ -241,7 +261,7 @@ namespace LunarPluginInternal
         {
             if (action == null)
             {
-                throw new ArgumentNullException("Action is null");
+                throw new ArgumentNullException("action");
             }
 
             return RegisterDelegate(action.Method.Name, action);
@@ -251,12 +271,12 @@ namespace LunarPluginInternal
         {
             if (name == null)
             {
-                throw new ArgumentNullException("Name is null");
+                throw new ArgumentNullException("name");
             }
             
             if (action == null)
             {
-                throw new ArgumentNullException("Action is null");
+                throw new ArgumentNullException("action");
             }
 
             CCommand existingCmd = FindCommand(name);
@@ -398,12 +418,12 @@ namespace LunarPluginInternal
         {
             if (alias == null)
             {
-                throw new ArgumentNullException("Alias is null");
+                throw new ArgumentNullException("alias");
             }
 
             if (commandLine == null)
             {
-                throw new ArgumentNullException("Command line is null");
+                throw new ArgumentNullException("commandLine");
             }
 
             CCommand existingCmd = FindCommand(alias);

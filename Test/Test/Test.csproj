@@ -91,6 +91,8 @@
     <Compile Include="AppTestFixtureBase.cs" />
     <Compile Include="CCommandTests\TestDefaultConfig.cs" />
     <Compile Include="CCommandTests\CommandTokenizerTest.cs" />
+    <Compile Include="TestInput.cs" />
+    <Compile Include="ClassUtilsEx.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

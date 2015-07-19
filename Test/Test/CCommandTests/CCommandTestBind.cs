@@ -219,6 +219,216 @@ namespace CCommandTests
 
         #endregion
 
+        #region Input
+
+        [Test]
+        public void TestKeyDown()
+        {
+            Execute("bind t 'test arg'");
+
+            TapKeys(KeyCode.T);
+            AssertResult("test arg");
+
+            RunUpdate();
+            AssertResult();
+        }
+
+        [Test]
+        public void TestModifierShiftKeyDown()
+        {
+            Execute("bind shift+t 'test arg'");
+
+            TapKeys(KeyCode.LeftShift, KeyCode.T);
+            AssertResult("test arg");
+
+            RunUpdate();
+            AssertResult();
+
+            TapKeys(KeyCode.RightShift, KeyCode.T);
+            AssertResult("test arg");
+        }
+
+        [Test]
+        public void TestModifierCtrlKeyDown()
+        {
+            Execute("bind ctrl+t 'test arg'");
+
+            TapKeys(KeyCode.LeftControl, KeyCode.T);
+            AssertResult("test arg");
+
+            RunUpdate();
+            AssertResult();
+
+            TapKeys(KeyCode.RightControl, KeyCode.T);
+            AssertResult("test arg");
+        }
+
+        [Test]
+        public void TestModifierAltKeyDown()
+        {
+            Execute("bind alt+t 'test arg'");
+
+            TapKeys(KeyCode.LeftAlt, KeyCode.T);
+            AssertResult("test arg");
+
+            RunUpdate();
+            AssertResult();
+
+            TapKeys(KeyCode.RightAlt, KeyCode.T);
+            AssertResult("test arg");
+        }
+
+        [Test]
+        public void TestMultipleModifiersKeyDown()
+        {
+            Execute("bind ctrl+shift+alt+t 'test arg'");
+
+            TapKeys(KeyCode.LeftControl, KeyCode.LeftShift, KeyCode.LeftAlt, KeyCode.T);
+            AssertResult("test arg");
+
+            RunUpdate();
+            AssertResult();
+
+            TapKeys(KeyCode.LeftControl, KeyCode.LeftShift, KeyCode.T);
+            AssertResult();
+
+            TapKeys(KeyCode.LeftControl, KeyCode.T);
+            AssertResult();
+
+            TapKeys(KeyCode.T);
+            AssertResult();
+        }
+
+        #endregion
+
+        #region +/- bindings
+
+        [Test]
+        public void TestListOperationCommands()
+        {
+            Execute("bind mouse0 +bool");
+
+            Assert.AreEqual(0, CRegistery.ListCommands("+bool").Count);
+            Assert.AreEqual(0, CRegistery.ListCommands("-bool").Count);
+        }
+
+        [Test]
+        public void TestListSystemCommands()
+        {
+            Execute("bind mouse0 +bool");
+
+            Assert.AreEqual(1, CRegistery.ListCommands("+bool", CommandListOptions.System).Count);
+            Assert.AreEqual(1, CRegistery.ListCommands("-bool", CommandListOptions.System).Count);
+        }
+
+        [Test]
+        public void TestHoldPositiveKeyBoolVar()
+        {
+            CVar cvar = new CVar("bool", false);
+
+            Execute("bind mouse0 +bool");
+
+            PressKeys(KeyCode.Mouse0);
+            Assert.IsTrue(cvar.BoolValue);
+
+            RunUpdate();
+            Assert.IsTrue(cvar.BoolValue);
+
+            RunUpdate();
+            Assert.IsTrue(cvar.BoolValue);
+
+            ReleaseKeys(KeyCode.Mouse0);
+            Assert.IsFalse(cvar.BoolValue);
+        }
+
+        [Test]
+        public void TestHoldNegativeKeyBoolVar()
+        {
+            CVar cvar = new CVar("bool", true);
+
+            Execute("bind mouse0 -bool");
+
+            PressKeys(KeyCode.Mouse0);
+            Assert.IsFalse(cvar.BoolValue);
+
+            RunUpdate();
+            Assert.IsFalse(cvar.BoolValue);
+
+            RunUpdate();
+            Assert.IsFalse(cvar.BoolValue);
+
+            ReleaseKeys(KeyCode.Mouse0);
+            Assert.IsTrue(cvar.BoolValue);
+        }
+
+        [Test]
+        public void TestHoldKeyUnsupportedVarType()
+        {
+            new CVar("int", 0);
+
+            this.IsTrackTerminalLog = true;
+
+            Execute("bind mouse0 +int");
+
+            PressKeys(KeyCode.Mouse0);
+            AssertResult("  Boolean variable expected: 'int'");
+        }
+
+        [Test]
+        public void TestHoldKeyMissingVar()
+        {
+            this.IsTrackTerminalLog = true;
+
+            Execute("bind mouse0 +foo");
+
+            PressKeys(KeyCode.Mouse0);
+
+            AssertResult("  Can't find boolean variable: 'foo'");
+        }
+
+        #endregion
+
+        #region Variable Delegates
+
+        [Test]
+        public void TestDelegates()
+        {
+            bool delegateCalled = false;
+
+            CVar cvar = new CVar("var", "Default value");
+            cvar.AddDelegate(delegate(CVar v)
+            {
+                delegateCalled = true;
+            });
+
+            Execute("bind v 'var value'");
+
+            TapKeys(KeyCode.V);
+            Assert.IsTrue(delegateCalled);
+        }
+
+        [Test]
+        public void TestDelegatesOperationCommand()
+        {
+            string delegateValue = null;
+
+            CVar cvar = new CVar("var", false);
+            cvar.AddDelegate(delegate(CVar v)
+            {
+                delegateValue = v.BoolValue.ToString();
+            });
+
+            Execute("bind v +var");
+
+            PressKeys(KeyCode.V);
+            Assert.AreEqual("True", delegateValue);
+
+            ReleaseKeys(KeyCode.V);
+            Assert.AreEqual("False", delegateValue);
+        }
+
+        #endregion
+
         #region Setup
 
         [SetUp]
@@ -253,6 +463,12 @@ namespace CCommandTests
             {
                 Assert.AreEqual(expected[i], Cmd_bind.ToString(actual[i]));
             }
+        }
+
+        protected new void AssertResult(params string[] expected)
+        {
+            base.AssertResult(expected);
+            ClearResult();
         }
 
         #endregion

@@ -1,3 +1,24 @@
+//
+//  CCommand.cs
+//
+//  Lunar Plugin for Unity: a command line solution for your game.
+//  https://github.com/SpaceMadness/lunar-unity-plugin
+//
+//  Copyright 2015 Alex Lementuev, SpaceMadness.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -96,7 +117,7 @@ namespace LunarPlugin
         {
             if (name == null)
             {
-                throw new ArgumentNullException("Name is null");
+                throw new ArgumentNullException("name");
             }
             this.Name = name;
         }
@@ -157,17 +178,7 @@ namespace LunarPlugin
                 string token = StringUtils.UnArg(iter.Next());
 
                 // first, try to parse options
-                if (token.StartsWith("--"))
-                {
-                    string optionName = token.Substring(2);
-                    ParseOption(iter, optionName);
-                }
-                else if (token.StartsWith("-") && !StringUtils.IsNumeric(token))
-                {
-                    string optionName = token.Substring(1);
-                    ParseOption(iter, optionName);
-                }
-                else
+                if (!TryParseOption(iter, token))
                 {
                     // consume the rest of the args
                     argsList.Add(token);
@@ -276,6 +287,31 @@ namespace LunarPlugin
             }
             
             return result.ToArray();
+        }
+
+        private bool TryParseOption(Iterator<string> iter, string token)
+        {
+            if (this.IsIgnoreOptions)
+            {
+                return false;
+            }
+
+            // first, try to parse options
+            if (token.StartsWith("--"))
+            {
+                string optionName = token.Substring(2);
+                ParseOption(iter, optionName);
+                return true;
+            }
+
+            if (token.StartsWith("-") && !StringUtils.IsNumeric(token))
+            {
+                string optionName = token.Substring(1);
+                ParseOption(iter, optionName);
+                return true;
+            }
+
+            return false;
         }
 
         private Option ParseOption(Iterator<string> iter, string name)
@@ -1044,10 +1080,7 @@ namespace LunarPlugin
         public string Name { get; internal protected set; }
         public string Description { get; set; }
 
-        #if LUNAR_DEVELOPMENT
-        public virtual 
-        #endif
-        Type GetCommandType()
+        private Type GetCommandType()
         {
             return GetType();
         }
@@ -1094,6 +1127,8 @@ namespace LunarPlugin
         }
 
         internal bool IsManualMode { get; set; }
+
+        protected bool IsIgnoreOptions { get; set; }
 
         internal ColorCode ColorCode
         {

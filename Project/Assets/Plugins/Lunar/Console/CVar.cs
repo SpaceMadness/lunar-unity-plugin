@@ -1,3 +1,24 @@
+//
+//  CVar.cs
+//
+//  Lunar Plugin for Unity: a command line solution for your game.
+//  https://github.com/SpaceMadness/lunar-unity-plugin
+//
+//  Copyright 2015 Alex Lementuev, SpaceMadness.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -210,10 +231,12 @@ namespace LunarPlugin
 
         #region Registry
 
-        [System.Diagnostics.Conditional("UNITY_EDITOR")]
         private static void Register(CVar cvar)
         {
-            CRegistery.Register(cvar);
+            if (Config.isFullFeatured)
+            {
+                CRegistery.Register(cvar);
+            }
         }
 
         #endregion
@@ -222,26 +245,27 @@ namespace LunarPlugin
 
         #region Delegates
 
-        [System.Diagnostics.Conditional("UNITY_EDITOR")]
         public void AddDelegate(CVarChangedDelegate del)
         {
-            if (del == null)
+            if (Config.isFullFeatured)
             {
-                throw new ArgumentNullException("Delegate is null");
-            }
+                if (del == null)
+                {
+                    throw new ArgumentNullException("del");
+                }
 
-            if (m_delegateList == null)
-            {
-                m_delegateList = new CVarChangedDelegateList(1);
-                m_delegateList.Add(del);
-            }
-            else if (!m_delegateList.Contains(del))
-            {
-                m_delegateList.Add(del);
+                if (m_delegateList == null)
+                {
+                    m_delegateList = new CVarChangedDelegateList(1);
+                    m_delegateList.Add(del);
+                }
+                else if (!m_delegateList.Contains(del))
+                {
+                    m_delegateList.Add(del);
+                }
             }
         }
 
-        [System.Diagnostics.Conditional("UNITY_EDITOR")]
         public void RemoveDelegate(CVarChangedDelegate del)
         {
             if (del != null && m_delegateList != null)
@@ -255,7 +279,6 @@ namespace LunarPlugin
             }
         }
 
-        [System.Diagnostics.Conditional("UNITY_EDITOR")]
         public void RemoveDelegates(object target)
         {
             if (target != null && m_delegateList != null)

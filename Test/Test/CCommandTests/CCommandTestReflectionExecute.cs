@@ -17,6 +17,8 @@ namespace CCommandTests
     [TestFixture]
     public class CCommandTestReflectionExecute : CCommandTestFixture
     {
+        #region Types
+
         [Test]
         public void TestExecuteStringNoArgs()
         {
@@ -304,6 +306,35 @@ namespace CCommandTests
             );
         }
 
+        #endregion
+
+        #region Optionals
+
+        [Test]
+        public void TestExecuteOptionalArgs()
+        {
+            Execute("optionals");
+            AssertResult("");
+        }
+
+        [Test]
+        public void TestExecuteOptionalArgs1()
+        {
+            Execute("optionals arg");
+            AssertResult("arg");
+        }
+
+        [Test]
+        public void TestExecuteOptionalArgs2()
+        {
+            Execute("optionals arg1 arg2");
+            AssertResult("arg1, arg2, null");
+        }
+
+        #endregion
+
+        #region Setup
+
         [SetUp]
         public void SetUp()
         {
@@ -322,6 +353,7 @@ namespace CCommandTests
             RegisterCommands(new Cmd_ints(this.Result));
             RegisterCommands(new Cmd_floats(this.Result));
             RegisterCommands(new Cmd_bools(this.Result));
+            RegisterCommands(new Cmd_optionals(this.Result));
         }
 
         [TearDown]
@@ -329,6 +361,8 @@ namespace CCommandTests
         {
             RunTearDown();
         }
+
+        #endregion
 
         class GenericArgumentsCmd<T> : CCommand
         {
@@ -358,11 +392,6 @@ namespace CCommandTests
             void Execute(T value1, T value2, T value3)
             {
                 m_result.Add(this.Name + " " + value1 + " " + value2 + " " + value3);
-            }
-
-            public override Type GetCommandType()
-            {
-                return typeof(GenericArgumentsCmd<T>);
             }
         }
 
@@ -503,6 +532,37 @@ namespace CCommandTests
             void Execute(bool[] args)
             {
                 m_result.Add("bools " + StringUtils.Join(args));
+            }
+        }
+
+        class Cmd_optionals : CCommand
+        {
+            private List<string> m_result;
+
+            public Cmd_optionals(List<string> result)
+                : base("optionals")
+            {
+                m_result = result;
+            }
+
+            void Execute()
+            {
+                m_result.Add("");
+            }
+
+            void Execute(string arg1)
+            {
+                m_result.Add(ToArg(arg1));
+            }
+
+            void Execute(string arg1, string arg2, string arg3 = null)
+            {
+                m_result.Add(ToArg(arg1) + ", " + ToArg(arg2) + ", " + ToArg(arg3));
+            }
+
+            String ToArg(string arg)
+            {
+                return arg != null ? arg : "null";
             }
         }
     }

@@ -1,3 +1,24 @@
+//
+//  Commands.cs
+//
+//  Lunar Plugin for Unity: a command line solution for your game.
+//  https://github.com/SpaceMadness/lunar-unity-plugin
+//
+//  Copyright 2015 Alex Lementuev, SpaceMadness.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+
 ﻿using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
@@ -243,14 +264,19 @@ namespace LunarEditor
     [CCommand("bind", Description="Assigns a key to command(s).")]
     class Cmd_bind : CCommand
     {
-        bool Execute(string key, string command = null)
+        public Cmd_bind()
         {
-            string name = key.ToLower();
+            this.IsIgnoreOptions = true; // we don't want to miss negative operation commands
+        }
+
+        bool Execute(string stroke, string command = null) // TODO: refactor me!
+        {
+            string name = stroke.ToLower();
             
             if (!string.IsNullOrEmpty(command))
             {
                 CShortCut shortCut;
-                if (!CShortCut.TryParse(key, out shortCut))
+                if (!CShortCut.TryParse(stroke, out shortCut))
                 {
                     PrintError("Invalid shortcut: {0}", name);
                     return false;
@@ -362,7 +388,7 @@ namespace LunarEditor
                 return false;
             }
             
-            CBindings.Unbind(shortCut);
+            CBindings.Unbind(shortCut); // TODO: unbind 'operation' commands
             
             PostNotification(
                 CCommandNotifications.CBindingsChanged,
@@ -560,39 +586,33 @@ namespace LunarEditor
     {
         bool Execute(string filename)
         {
-            string path = CCommandHelper.GetConfigPath(filename);
-            if (!FileUtils.FileExists(path))
+            try
             {
-                if (this.IsManualMode)
+                IList<string> lines = ConfigHelper.ReadConfig(filename);
+                foreach (string line in lines)
                 {
-                    PrintError("Can't exec config: file not found");
-                }
-                return false;
-            }
-            
-            IList<string> lines = FileUtils.Read(path);
-            if (lines == null)
-            {
-                if (this.IsManualMode)
-                {
-                    PrintError("Can't exec config: error reading file");
-                }
-                return false;
-            }
-            
-            foreach (string line in lines)
-            {
-                string trim = line.Trim();
-                if (trim.Length == 0 || trim.StartsWith("//"))
-                {
-                    continue;
+                    string trim = line.Trim();
+                    if (trim.Length == 0 || trim.StartsWith("//"))
+                    {
+                        continue;
+                    }
+                    
+                    ExecCommand(line);
                 }
                 
-                ExecCommand(line);
-            }
+                PostNotification(CCommandNotifications.ConfigLoaded);
             
-            PostNotification(CCommandNotifications.ConfigLoaded);
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                if (this.IsManualMode)
+                {
+                    PrintError("Can't load config: {0}", e);
+                }
+
+                return false;
+            }
         }
     }
 
@@ -699,27 +719,28 @@ namespace LunarEditor
 
         bool Execute(string filename = null)
         {
-            string name = filename != null ? filename : "default.cfg";
-            
-            string path = CCommandHelper.GetConfigPath(name);
-            if (!FileUtils.FileExists(path))
+            try
             {
-                PrintError("Can't find config file: '{0}'", path);
+                string name = filename != null ? filename : "default.cfg";
+                
+                IList<string> lines = ConfigHelper.ReadConfig(name);
+                if (verbose)
+                {
+                    Print(name);
+                }
+
+                foreach (string line in lines)
+                {
+                    PrintIndent(line);
+                }
+                
+                return true;
+            }
+            catch (Exception e)
+            {
+                PrintIndent("Can't read config: {0}", e.Message);
                 return false;
             }
-
-            if (verbose)
-            {
-                Print(path);
-            }
-
-            IList<string> lines = FileUtils.Read(path);
-            foreach (string line in lines)
-            {
-                PrintIndent(line);
-            }
-            
-            return true;
         }
     }
 
@@ -1063,37 +1084,6 @@ namespace LunarEditor
             }
 
             return buffer.ToString();
-        }
-
-        public static bool WriteConfig(string filename, IList<string> lines)
-        {
-            try
-            {
-                string path = GetConfigPath(filename);
-                FileUtils.Write(path, lines);
-                return true;
-            }
-            catch (Exception e)
-            {
-                // FIXME: log error
-                return false;
-            }
-        }
-
-        public static string GetConfigPath(string filename)
-        {
-            string path = FileUtils.ChangeExtension(filename, ".cfg");
-            if (FileUtils.IsPathRooted(path))
-            {
-                return path;
-            }
-
-            return System.IO.Path.Combine(ConfigPath, path);
-        }
-
-        public static string ConfigPath
-        {
-            get { return System.IO.Path.Combine(FileUtils.DataPath, "configs"); }
         }
     }
 }

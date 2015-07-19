@@ -83,7 +83,7 @@ namespace LunarPlugin.Test
 
         protected void OverrideDebugMode(bool value)
         {
-            Config.OverrideIsDebugBuild(value);
+            ClassUtilsEx.SetField(typeof(Config), "isDebugBuild", value);
         }
 
         protected List<String> Result

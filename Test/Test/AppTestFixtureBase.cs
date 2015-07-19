@@ -2,6 +2,7 @@
 
 using LunarPlugin;
 using LunarPluginInternal;
+using UnityEngine;
 
 namespace LunarPlugin.Test
 {
@@ -75,6 +76,39 @@ namespace LunarPlugin.Test
 
         public void ClearTerminal()
         {
+        }
+
+        #endregion
+
+        //////////////////////////////////////////////////////////////////////////////
+
+        #region Input
+
+        protected void TapKeys(params KeyCode[] keys)
+        {
+            foreach (KeyCode key in keys)
+            {
+                m_app.PressKey(key);
+            }
+            RunUpdate();
+        }
+
+        protected void PressKeys(params KeyCode[] keys)
+        {
+            foreach (KeyCode key in keys)
+            {
+                m_app.PressKey(key, true);
+            }
+            RunUpdate();
+        }
+
+        protected void ReleaseKeys(params KeyCode[] keys)
+        {
+            foreach (KeyCode key in keys)
+            {
+                m_app.ReleaseKey(key);
+            }
+            RunUpdate();
         }
 
         #endregion

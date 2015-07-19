@@ -18,62 +18,249 @@ namespace CCommandTests
     public class CCommandUtilsTests : TestFixtureBase
     {
         [Test]
-        public void TestCanInvokeMethodWithArgsCount()
+        public void TestCanInvokeNoArgMethod()
         {
-            AssertCanExecute(0);
-            AssertCanExecute(1, typeof(String));
-            AssertCanExecute(2, typeof(String), typeof(String));
-            
-            AssertCanExecute(0, typeof(String[]));
-            AssertCanExecute(1, typeof(String[]));
-            AssertCanExecute(2, typeof(String[]));
-            
-            AssertCanExecute(1, typeof(int), typeof(String[]));
-            AssertCanExecute(2, typeof(int), typeof(String[]));
-            AssertCanExecute(3, typeof(int), typeof(String[]));
-            
-            AssertCanExecute(1, typeof(bool), typeof(String[]));
-            AssertCanExecute(2, typeof(bool), typeof(String[]));
-            AssertCanExecute(3, typeof(bool), typeof(String[]));
+            AssertCanExecute<NoArg>(0);
+            AssertCanNotExecute<NoArg>(1);
         }
 
-        private void AssertCanExecute(int argsCount, params Type[] types)
+        [Test]
+        public void TestCanInvokeSingleArgMethod()
         {
-            Type type = typeof(Dummy);
-            MethodInfo method = type.GetMethod("CanExecute", types);
-            Assert.IsTrue(CCommandUtils.CanInvokeMethodWithArgsCount(method, argsCount));
+            AssertCanExecute<SingleArg>(1);
+
+            AssertCanNotExecute<SingleArg>(0);
+            AssertCanNotExecute<SingleArg>(2);
         }
 
-        class Dummy
+        [Test]
+        public void TestCanInvokeMultipleArgMethod()
         {
-            public bool CanExecute()
+            AssertCanExecute<MultipleArgs>(2);
+
+            AssertCanNotExecute<MultipleArgs>(0);
+            AssertCanNotExecute<MultipleArgs>(1);
+            AssertCanNotExecute<MultipleArgs>(3);
+        }
+
+        [Test]
+        public void TestCanInvokeArrayArgMethod()
+        {
+            AssertCanExecute<ArrayArg>(0);
+            AssertCanExecute<ArrayArg>(1);
+            AssertCanExecute<ArrayArg>(2);
+            AssertCanExecute<ArrayArg>(3);
+        }
+
+        [Test]
+        public void TestCanInvokeVarArgMethod()
+        {
+            AssertCanExecute<VarArgs>(0);
+            AssertCanExecute<VarArgs>(1);
+            AssertCanExecute<VarArgs>(2);
+            AssertCanExecute<VarArgs>(3);
+        }
+
+        [Test]
+        public void TestCanInvokeSingleArgAndArrayMethod()
+        {
+            AssertCanExecute<SingleArgAndArray>(1);
+            AssertCanExecute<SingleArgAndArray>(2);
+            AssertCanExecute<SingleArgAndArray>(3);
+
+            AssertCanNotExecute<SingleArgAndArray>(0);
+        }
+
+        [Test]
+        public void TestCanInvokeOptionalArgsMethod()
+        {
+            AssertCanExecute<OptionalArg>(0);
+            AssertCanExecute<OptionalArg>(1);
+
+            AssertCanNotExecute<OptionalArg>(2);
+            AssertCanNotExecute<OptionalArg>(3);
+        }
+
+        [Test]
+        public void TestCanInvokeArgAndOptionalArgMethod()
+        {
+            AssertCanExecute<ArgAndOptionalArg>(1);
+            AssertCanExecute<ArgAndOptionalArg>(2);
+
+            AssertCanNotExecute<ArgAndOptionalArg>(0);
+            AssertCanNotExecute<ArgAndOptionalArg>(3);
+        }
+
+        [Test]
+        public void TestCanInvokeArgAndOptionalArgsMethod()
+        {
+            AssertCanExecute<ArgAndOptionalArgs>(1);
+            AssertCanExecute<ArgAndOptionalArgs>(2);
+            AssertCanExecute<ArgAndOptionalArgs>(3);
+
+            AssertCanNotExecute<ArgAndOptionalArgs>(0);
+            AssertCanNotExecute<ArgAndOptionalArgs>(4);
+        }
+
+        [Test]
+        public void TestCanInvokeArgsAndOptionalArgMethod()
+        {   
+            AssertCanExecute<ArgsAndOptionalArg>(2);
+            AssertCanExecute<ArgsAndOptionalArg>(3);
+
+            AssertCanNotExecute<ArgsAndOptionalArg>(0);
+            AssertCanNotExecute<ArgsAndOptionalArg>(1);
+            AssertCanNotExecute<ArgsAndOptionalArg>(4);
+        }
+
+        [Test]
+        public void TestCanInvokeVector2ArgMethod()
+        {   
+            AssertCanExecute<Vector2Arg>(2);
+
+            AssertCanNotExecute<Vector2Arg>(0);
+            AssertCanNotExecute<Vector2Arg>(1);
+            AssertCanNotExecute<Vector2Arg>(3);
+        }
+
+        [Test]
+        public void TestCanInvokeArgAndVector2ArgMethod()
+        {   
+            AssertCanExecute<ArgAndVector2Arg>(3);
+
+            AssertCanNotExecute<ArgAndVector2Arg>(0);
+            AssertCanNotExecute<ArgAndVector2Arg>(1);
+            AssertCanNotExecute<ArgAndVector2Arg>(2);
+            AssertCanNotExecute<ArgAndVector2Arg>(4);
+        }
+
+        [Test]
+        public void TestCanInvokeVector2ArgAndArgMethod()
+        {   
+            AssertCanExecute<Vector2ArgAndArg>(3);
+
+            AssertCanNotExecute<Vector2ArgAndArg>(0);
+            AssertCanNotExecute<Vector2ArgAndArg>(1);
+            AssertCanNotExecute<Vector2ArgAndArg>(2);
+            AssertCanNotExecute<Vector2ArgAndArg>(4);
+        }
+
+        #region Helpers
+
+        private void AssertCanExecute<T>(int argsCount) where T : class
+        {
+            Assert.IsTrue(CanExecute<T>(argsCount));
+        }
+
+        private void AssertCanNotExecute<T>(int argsCount) where T : class
+        {
+            Assert.IsFalse(CanExecute<T>(argsCount));
+        }
+
+        private bool CanExecute<T>(int argsCount) where T : class
+        {
+            Type type = typeof(T);
+
+            List<MethodInfo> methods = ClassUtils.ListInstanceMethods(type, delegate(MethodInfo method)
             {
-                return false;
+                return method.Name.Equals("Execute");
+            });
+
+            Assert.AreEqual(1, methods.Count);
+
+            return CCommandUtils.CanInvokeMethodWithArgsCount(methods[0], argsCount);
+        }
+
+        #endregion
+
+        class NoArg
+        {
+            public void Execute()
+            {
             }
-            
-            public bool CanExecute(String arg)
+        }
+
+        class SingleArg
+        {
+            public void Execute(string arg)
             {
-                return false;
             }
-            
-            public bool CanExecute(String arg1, String arg2)
+        }
+
+        class MultipleArgs
+        {
+            public void Execute(string arg1, string arg2)
             {
-                return false;
             }
-            
-            public bool CanExecute(String[] args)
+        }
+
+        class ArrayArg
+        {
+            public void Execute(string[] args)
             {
-                return false;
             }
-            
-            public bool CanExecute(int arg1, String[] args)
+        }
+
+        class VarArgs
+        {
+            public void Execute(params string[] args)
             {
-                return false;
             }
-            
-            public bool CanExecute(bool arg1, params String[] args)
+        }
+
+        class SingleArgAndArray
+        {
+            public void Execute(string arg, params string[] args)
             {
-                return false;
+            }
+        }
+
+        class OptionalArg
+        {
+            public void Execute(string arg = null)
+            {
+            }
+        }
+
+        class ArgAndOptionalArg
+        {
+            public void Execute(string arg1, string arg2 = null)
+            {
+            }
+        }
+
+        class ArgAndOptionalArgs
+        {
+            public void Execute(string arg1, string arg2 = null, string arg3 = null)
+            {
+            }
+        }
+
+        class ArgsAndOptionalArg
+        {
+            public void Execute(string arg1, string arg2, string arg3 = null)
+            {
+            }
+        }
+
+        class Vector2Arg
+        {
+            public void Execute(Vector2 arg)
+            {
+            }
+        }
+
+        class ArgAndVector2Arg
+        {
+            public void Execute(string arg1, Vector2 arg2)
+            {
+            }
+        }
+
+        class Vector2ArgAndArg
+        {
+            public void Execute(Vector2 arg1, string arg2)
+            {
             }
         }
     }

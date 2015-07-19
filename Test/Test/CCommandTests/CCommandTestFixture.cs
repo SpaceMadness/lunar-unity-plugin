@@ -97,6 +97,11 @@ namespace CCommandTests
             AssertList(this.Result, expected);
         }
 
+        protected void ClearResult()
+        {
+            this.Result.Clear();
+        }
+
         protected bool Execute(string format, params object[] args)
         {
             return Execute(string.Format(format, args));

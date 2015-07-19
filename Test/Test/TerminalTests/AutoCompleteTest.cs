@@ -788,16 +788,16 @@ namespace TerminalTests
         class Cmd_test1 : CCommand
         {
             [CCommandOption(ShortName="o1")]
-            private bool opt1;
+            public bool opt1;
 
             [CCommandOption(ShortName="o12")]
-            private String opt12;
+            public String opt12;
 
             [CCommandOption(ShortName="o2", Values="val1,val12,val2")]
-            private String opt2;
+            public String opt2;
 
             [CCommandOption(ShortName="e")]
-            private String ext;
+            public String ext;
 
             public Cmd_test1()
             {
@@ -817,7 +817,7 @@ namespace TerminalTests
         class Cmd_test12 : CCommand
         {
             [CCommandOption]
-            private bool opt1;
+            public bool opt1;
 
             void Execute(string arg)
             {
