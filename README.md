@@ -6,7 +6,9 @@ Requires Unity 5
 
 ## Project Goals
 
-Lunar Plugin for Unity aims to improve game developing/testing process by bringing UNIX/Quake3 style terminal into the editor application.
+Imagine, you've just added this new cool feature and want to test it but keep losing the game before you actually get there. Maybe it would be easier if zombies die faster, things go slower or you simply can't get killed? Or maybe you just want to skip all of these and jump straight into the action? On top of that, you don't really want to mess around with Editor, modify scenes or "break" anything.
+
+If so - you should give Lunar a try! It's a free and open source Quake3-flavored-Unix-style command line solution for your game.
 
 - Create custom commands and execute them from the terminal window
 - Bind commands to the hot keys
