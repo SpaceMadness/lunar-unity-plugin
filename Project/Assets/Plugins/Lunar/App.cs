@@ -59,6 +59,12 @@ namespace LunarPluginInternal
                 throw new ArgumentNullException("commandLine");
             }
 
+            if (s_sharedInstance == null)
+            {
+                Log.e("Can't execute command: app is not initialized");
+                return false;
+            }
+
             return Imp.ExecCommand(commandLine, manual);
         }
 

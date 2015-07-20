@@ -28,8 +28,6 @@ namespace LunarPluginInternal
 {
     static class Config
     {
-        public static readonly bool isFullFeatured;
-
         public static readonly bool isUnityFree;
         public static readonly bool isUnityPro;
 
@@ -40,7 +38,6 @@ namespace LunarPluginInternal
         {
             try
             {
-                isFullFeatured = Application.isEditor;
                 isDebugBuild = Debug.isDebugBuild;
                 isUnityPro = Application.HasProLicense();
                 isUnityFree = !isUnityPro;
@@ -48,7 +45,6 @@ namespace LunarPluginInternal
             }
             catch (Exception)
             {
-                isFullFeatured = true;
                 isUnityFree = isUnityPro = false;
                 isDebugBuild = true;
                 isUnityBuild = false;

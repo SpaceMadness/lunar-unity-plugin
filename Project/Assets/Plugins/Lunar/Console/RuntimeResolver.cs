@@ -19,7 +19,7 @@
 //  limitations under the License.
 //
 
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -51,10 +51,9 @@ namespace LunarPluginInternal
                 {
                     foreach (Type type in assembly.GetTypes())
                     {
-                        object[] attrs = type.GetCustomAttributes(typeof(CCommandAttribute), true);
-                        if (attrs != null && attrs.Length == 1)
+                        CCommandAttribute cmdAttr = GetCustomAttribute<CCommandAttribute>(type);
+                        if (cmdAttr != null)
                         {
-                            CCommandAttribute cmdAttr = (CCommandAttribute)attrs[0];
                             string commandName = cmdAttr.Name;
                             if (!IsCorrectPlatform(cmdAttr.Flags))
                             {
@@ -80,6 +79,25 @@ namespace LunarPluginInternal
                                 Log.e("Unable to register command: name={0} type={1}", commandName, type);
                             }
                         }
+                        else
+                        {
+                            CVarContainerAttribute cvarAttr = GetCustomAttribute<CVarContainerAttribute>(type);
+                            if (cvarAttr != null)
+                            {
+                                try
+                                {
+                                    FieldInfo[] fields = type.GetFields(BindingFlags.Static|BindingFlags.Public);
+                                    if (fields != null && fields.Length > 0)
+                                    {
+                                        fields[0].GetValue(null);
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    Log.error(e, "Unable to initialize cvar container: {0}", type);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -100,6 +118,12 @@ namespace LunarPluginInternal
             }
 
             return list;
+        }
+
+        private static T GetCustomAttribute<T>(Type type) where T : Attribute
+        {
+            object[] attributes = type.GetCustomAttributes(typeof(T), false);
+            return attributes != null && attributes.Length == 1 ? attributes[0] as T : null;
         }
 
         public static void ResolveOptions(CCommand command)

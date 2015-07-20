@@ -231,12 +231,10 @@ namespace LunarPlugin
 
         #region Registry
 
+        [System.Diagnostics.Conditional("UNITY_EDITOR")]
         private static void Register(CVar cvar)
         {
-            if (Config.isFullFeatured)
-            {
-                CRegistery.Register(cvar);
-            }
+            CRegistery.Register(cvar);
         }
 
         #endregion
@@ -245,24 +243,22 @@ namespace LunarPlugin
 
         #region Delegates
 
+        [System.Diagnostics.Conditional("UNITY_EDITOR")]
         public void AddDelegate(CVarChangedDelegate del)
         {
-            if (Config.isFullFeatured)
+            if (del == null)
             {
-                if (del == null)
-                {
-                    throw new ArgumentNullException("del");
-                }
+                throw new ArgumentNullException("del");
+            }
 
-                if (m_delegateList == null)
-                {
-                    m_delegateList = new CVarChangedDelegateList(1);
-                    m_delegateList.Add(del);
-                }
-                else if (!m_delegateList.Contains(del))
-                {
-                    m_delegateList.Add(del);
-                }
+            if (m_delegateList == null)
+            {
+                m_delegateList = new CVarChangedDelegateList(1);
+                m_delegateList.Add(del);
+            }
+            else if (!m_delegateList.Contains(del))
+            {
+                m_delegateList.Add(del);
             }
         }
 
