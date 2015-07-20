@@ -16,8 +16,74 @@ Lunar Plugin for Unity aims to improve game developing/testing process by bringi
 
 ## Quick Start
 
-// TBD
+###Open Terminal window (see: [Getting Started](https://github.com/SpaceMadness/lunar-unity-plugin/wiki/Getting-Started))
+Use Editor's menu:  Window ▶ Lunar ▶ Terminal
 
+###Create command (see: [Commands](https://github.com/SpaceMadness/lunar-unity-plugin/wiki/Commands))
+* Create new C# script `Commands.cs` in `Assets/Editor` folder:  
+```
+using LunarPlugin;
+
+[CCommand("test")]
+class Cmd_test : CCommand
+{
+    void Execute()
+    {
+        PrintIndent("Hello, Unity!");
+    }
+}
+```
+* Open terminal window and type command's name:  
+```
+> test
+  Hello, Unity!
+```
+* List commands:
+```
+> cmdlist
+```
+
+###Create key bindings (see: [Key Binding](https://github.com/SpaceMadness/lunar-unity-plugin/wiki/Key-Binding))
+* Bind to a single key:
+```
+> bind t test
+```
+* Bind command to a short cut:
+```
+> bind ctrl+t test
+```
+
+###Create config variable (see: [Config Variables](https://github.com/SpaceMadness/lunar-unity-plugin/wiki/Config-Variables))
+* Create new C# script `CVars.cs` in `Assets/Scripts` folder:  
+```
+using LunarPlugin;
+
+[CVarContainer]
+static class Cvars
+{
+	public static readonly CVar myBool = new CVar("myBool", false);
+	public static readonly CVar myInt = new CVar("myInt", 10);
+	public static readonly CVar myFloat = new CVar("myFloat", 3.14f);
+	public static readonly CVar myString = new CVar("myString", "Hello!");
+}
+```
+* Open terminal window and list variables:  
+```
+> cvarlist
+  myBool 0
+  myFloat 3.14
+  myInt 10
+  myString Hello!
+```
+* Set variable's value:  
+```
+> myString "Hello, Lunar!"
+```
+* Get variable's value:
+```
+> myString
+  myString is:"Hello, Lunar!" default:"Hello!"
+```
 ## User Guide
 
 Check [wiki](https://github.com/SpaceMadness/lunar-unity-plugin/wiki) page for more detailed guide.
