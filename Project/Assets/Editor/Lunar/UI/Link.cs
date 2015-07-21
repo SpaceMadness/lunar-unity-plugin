@@ -68,9 +68,11 @@ namespace LunarEditor
             }
             EndGroup();
 
+            #if !UNITY_4_6
             Rect linkFrame = this.Frame;
             linkFrame.height = this.Style.font.ascent;
             UIHelper.DrawUnderLine(linkFrame, this.Style.normal.textColor);
+            #endif
         }
     }
 }

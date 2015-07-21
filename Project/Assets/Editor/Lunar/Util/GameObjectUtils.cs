@@ -47,6 +47,7 @@ public static class GameObjectUtils
         return list;
     }
 
+    #if !UNITY_4_6
     public static IList<GameObject> ListChildren(string name, GameObjectFilter filter)
     {
         GameObject obj = GameObject.Find(name);
@@ -68,6 +69,7 @@ public static class GameObjectUtils
 
         return list;
     }
+    #endif // !UNITY_4_6
 
     public static bool ShouldListObject(GameObject obj, string prefix)
     {

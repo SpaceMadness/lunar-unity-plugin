@@ -98,9 +98,11 @@ namespace LunarEditor
 
         public static void DrawUnderLine(Rect rect, GUIStyle style)
         {
+            #if !UNITY_4_6
             Rect pos = new Rect(rect.x, rect.y + style.font.ascent, rect.width, 0.5f);
             Texture2D tex = Create1x1ColorTexture(style.normal.textColor);
             GUI.DrawTexture(pos, tex);
+            #endif
         }
     }
 

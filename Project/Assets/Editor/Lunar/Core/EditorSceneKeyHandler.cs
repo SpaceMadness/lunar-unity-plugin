@@ -40,7 +40,14 @@ namespace LunarEditor
 
         static EditorSceneKeyHandler()
         {
-            int keysCount = (int)KeyCode.Joystick8Button19 + 1;
+            KeyCode lastKeyCode;
+            #if UNITY_4_6
+            lastKeyCode = KeyCode.Joystick4Button19;
+            #else
+            lastKeyCode = KeyCode.Joystick8Button19;
+            #endif
+
+            int keysCount = (int)lastKeyCode + 1;
             s_pressedKeyCodeFlags = new bool[keysCount];
 
             SceneView.onSceneGUIDelegate += HandleOnSceneFunc;
