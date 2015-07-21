@@ -23,11 +23,11 @@ namespace LunarPlugin.Test
             }
         }
 
-        protected override void ExecDefaultConfig()
+        protected override void ExecStartupConfigs()
         {
             if (Config.shouldExecDefaultConfig)
             {
-                base.ExecDefaultConfig();
+                base.ExecStartupConfigs();
             }
         }
 

@@ -322,8 +322,8 @@ namespace LunarEditor
                 return getSuggestedArgs(values, token);
             }
 
-            string[] customValues = cmd.AutoCompleteCustomArgs(commandLine, token);
-            if (customValues != null && customValues.Length > 0)
+            IList<string> customValues = cmd.AutoCompleteCustomArgs(commandLine, token);
+            if (customValues != null && customValues.Count > 0)
             {
                 return getSuggestedArgs(customValues, token);
             }
@@ -331,11 +331,11 @@ namespace LunarEditor
             return EMPTY_SUGGESTIONS;
         }
 
-        private static string[] getSuggestedArgs(string[] values, string token)
+        private static string[] getSuggestedArgs(IList<string> values, string token)
         {
             // we need to keep suggested values in a sorted order
-            List<string> sortedValues = new List<string>(values.Length);
-            for (int i = 0; i < values.Length; ++i)
+            List<string> sortedValues = new List<string>(values.Count);
+            for (int i = 0; i < values.Count; ++i)
             {
                 if (token.Length == 0 || StringUtils.StartsWithIgnoreCase(StringUtils.RemoveRichTextTags(values[i]), token))
                 {

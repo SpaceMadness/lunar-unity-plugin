@@ -35,6 +35,27 @@ namespace LunarEditor
 {
     static class ConfigHelper
     {
+        public static IList<string> ListConfigs(string token = null)
+        {
+            List<string> result = new List<string>();
+
+            string configsPath = ConfigPath;
+            if (Directory.Exists(configsPath))
+            {
+                string[] files = Directory.GetFiles(configsPath, "*.cfg");
+                foreach (string file in files)
+                {
+                    string filename = FileUtils.GetFileName(file);
+                    if (token == null || StringUtils.StartsWithIgnoreCase(filename, token))
+                    {
+                        result.Add(filename);
+                    }
+                }
+            }
+
+            return result;
+        }
+
         public static void WriteConfig(string filename, IList<string> lines)
         {
             if (filename == null)
@@ -78,7 +99,7 @@ namespace LunarEditor
             return Path.Combine(ConfigPath, path);
         }
 
-        public static string ConfigPath
+        public static string ConfigPath // FIXME: cache the value
         {
             get
             {

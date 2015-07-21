@@ -55,7 +55,7 @@ namespace LunarPluginInternal
 
             TimerManager.ScheduleTimerOnce(delegate()
             {
-                ExecDefaultConfig();
+                ExecStartupConfigs();
                 RegisterCommandNotifications();
             });
         }
@@ -73,12 +73,13 @@ namespace LunarPluginInternal
 
         protected virtual void ResolveCommands()
         {
-            CRegistery.ResolveCommands();
+            CRegistery.ResolveElements();
         }
 
-        protected virtual void ExecDefaultConfig()
+        protected virtual void ExecStartupConfigs()
         {
-            App.ExecCommand("exec default.cfg");
+            App.ExecCommand("exec " + Constants.ConfigDefault);
+            App.ExecCommand("exec " + Constants.ConfigAutoExec);
         }
 
         protected virtual void RegisterCommandNotifications()
@@ -238,7 +239,7 @@ namespace LunarPluginInternal
 
         protected virtual void SaveConfig()
         {
-            App.ExecCommand("writeconfig default.cfg");
+            App.ExecCommand("writeconfig " + Constants.ConfigDefault);
         }
 
         #endregion

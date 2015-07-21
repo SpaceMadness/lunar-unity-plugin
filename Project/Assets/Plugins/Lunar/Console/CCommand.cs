@@ -699,7 +699,7 @@ namespace LunarPlugin
 
         //////////////////////////////////////////////////////////////////////////////
 
-        internal string[] AutoCompleteCustomArgs(string commandLine, string token)
+        internal IList<string> AutoCompleteCustomArgs(string commandLine, string token)
         {
             try
             {
@@ -711,7 +711,7 @@ namespace LunarPlugin
             }
         }
 
-        protected virtual string[] AutoCompleteArgs(string commandLine, string token)
+        protected virtual IList<string> AutoCompleteArgs(string commandLine, string token)
         {
             return null;
         }

@@ -85,13 +85,41 @@ namespace LunarPluginInternal
 
         #region Commands resolver
 
-        public static void ResolveCommands()
+        public static void ResolveElements()
         {
-            List<CCommand> commands = RuntimeResolver.ResolveCommands();
+            RuntimeResolver.Result result = RuntimeResolver.Resolve();
+
+            IList<CCommand> commands = result.Commands;
             for (int i = 0; i < commands.Count; ++i)
             {
                 Register(commands[i]);
             }
+
+            IList<Type> containerTypes = result.CvarContainersTypes;
+            if (containerTypes != null)
+            {
+                foreach (Type type in containerTypes)
+                {
+                    ForceStaticInit(type);
+                }
+            }
+        }
+
+        private static void ForceStaticInit(Type type)
+        {
+            try
+            {
+                FieldInfo[] fields = type.GetFields(BindingFlags.Static|BindingFlags.Public);
+                if (fields != null && fields.Length > 0)
+                {
+                    fields[0].GetValue(null);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.error(e, "Unable to initialize cvar container: {0}", type);
+            }
+
         }
 
         #endregion

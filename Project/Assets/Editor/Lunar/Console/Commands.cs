@@ -163,7 +163,7 @@ namespace LunarEditor
             return true;
         }
         
-        protected override string[] AutoCompleteArgs(string commandLine, string prefix)
+        protected override IList<string> AutoCompleteArgs(string commandLine, string prefix)
         {
             IList<CVar> vars = CRegistery.ListVars(delegate(CVarCommand cmd)
             {
@@ -205,7 +205,7 @@ namespace LunarEditor
             return true;
         }
         
-        protected override string[] AutoCompleteArgs(string commandLine, string prefix)
+        protected override IList<string> AutoCompleteArgs(string commandLine, string prefix)
         {
             IList<CVar> vars = CRegistery.ListVars(prefix);
             if (vars.Count == 0)
@@ -242,7 +242,7 @@ namespace LunarEditor
             }
         }
         
-        protected override string[] AutoCompleteArgs(string commandLine, string prefix)
+        protected override IList<string> AutoCompleteArgs(string commandLine, string prefix)
         {
             IList<CVar> vars = CRegistery.ListVars(prefix);
             if (vars.Count == 0)
@@ -342,7 +342,7 @@ namespace LunarEditor
             return true;
         }
 
-        protected override string[] AutoCompleteArgs(string commandLine, string token)
+        protected override IList<string> AutoCompleteArgs(string commandLine, string token)
         {
             List<string> suggestions = new List<string>();
             foreach (string name in CBindings.BindingsNames)
@@ -355,7 +355,7 @@ namespace LunarEditor
 
             suggestions.Sort();
 
-            return suggestions.ToArray();
+            return suggestions;
         }
 
         private static char OppositeOperation(char op)
@@ -614,14 +614,19 @@ namespace LunarEditor
                 return false;
             }
         }
+
+        protected override IList<string> AutoCompleteArgs(string commandLine, string token)
+        {
+            return ConfigHelper.ListConfigs(token);
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////
-    
+
     [CCommand("writeconfig", Description="Writes a config file.")]
     class Cmd_writeconfig : CCommand
     {
-        bool Execute(string filename = "default.cfg")
+        bool Execute(string filename)
         {
             IList<string> lines = ReusableLists.NextAutoRecycleList<string>();
             
@@ -648,6 +653,21 @@ namespace LunarEditor
             }
 
             return false;
+        }
+
+        protected override IList<string> AutoCompleteArgs(string commandLine, string token) // TODO: better autocompletion
+        {
+            string[] configs = { Constants.ConfigDefault, Constants.ConfigAutoExec };
+            List<string> suggested = new List<string>();
+            foreach (string config in configs)
+            {
+                if (StringUtils.StartsWithIgnoreCase(config, token))
+                {
+                    suggested.Add(config);
+                }
+            }
+
+            return suggested;
         }
 
         private static void AddEntries(IList<string> outList, IList<string> entries, string groupName)
@@ -714,21 +734,29 @@ namespace LunarEditor
     [CCommand("cat", Description="Prints the content of a config file")]
     class Cmd_cat : CCommand
     {
-        [CCommandOption(ShortName="v")]
-        bool verbose;
+        [CCommandOption(ShortName="e", Description="Opens config editor")]
+        bool edit;
 
         bool Execute(string filename = null)
         {
             try
             {
-                string name = filename != null ? filename : "default.cfg";
+                string name = filename != null ? filename : Constants.ConfigDefault;
+
+                if (edit)
+                {
+                    string configPath = ConfigHelper.GetConfigPath(name);
+                    if (!FileUtils.FileExists(configPath))
+                    {
+                        PrintError("File does not exist: {0}", configPath);
+                        return false;
+                    }
+
+                    EditorUtility.OpenWithDefaultApp(configPath);
+                    return true;
+                }
                 
                 IList<string> lines = ConfigHelper.ReadConfig(name);
-                if (verbose)
-                {
-                    Print(name);
-                }
-
                 foreach (string line in lines)
                 {
                     PrintIndent(line);
@@ -741,6 +769,11 @@ namespace LunarEditor
                 PrintIndent("Can't read config: {0}", e.Message);
                 return false;
             }
+        }
+
+        protected override IList<string> AutoCompleteArgs(string commandLine, string token)
+        {
+            return ConfigHelper.ListConfigs(token);
         }
     }
 
@@ -765,7 +798,7 @@ namespace LunarEditor
             return true;
         }
         
-        protected override string[] AutoCompleteArgs(string commandLine, string token)
+        protected override IList<string> AutoCompleteArgs(string commandLine, string token)
         {
             // TODO: add unit tests
             

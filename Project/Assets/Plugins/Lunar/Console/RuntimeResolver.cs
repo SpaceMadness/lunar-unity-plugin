@@ -41,9 +41,9 @@ namespace LunarPluginInternal
 
     internal static class RuntimeResolver // TODO: remove this class
     {
-        public static List<CCommand> ResolveCommands()
+        public static Result Resolve()
         {
-            List<CCommand> list = new List<CCommand>();
+            Result result = new Result();
 
             try
             {
@@ -51,52 +51,14 @@ namespace LunarPluginInternal
                 {
                     foreach (Type type in assembly.GetTypes())
                     {
-                        CCommandAttribute cmdAttr = GetCustomAttribute<CCommandAttribute>(type);
-                        if (cmdAttr != null)
+                        CCommand cmd;
+                        if ((cmd = ResolveCommand(type)) != null)
                         {
-                            string commandName = cmdAttr.Name;
-                            if (!IsCorrectPlatform(cmdAttr.Flags))
-                            {
-                                Debug.LogWarning("Skipping command: " + commandName);
-                                continue;
-                            }
-
-                            CCommand command = ClassUtils.CreateInstance<CCommand>(type);
-                            if (command != null)
-                            {
-                                command.Name = commandName;
-                                command.Description = cmdAttr.Description;
-                                if (cmdAttr.Values != null)
-                                {
-                                    command.Values = cmdAttr.Values.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                                }
-                                command.Flags |= cmdAttr.Flags;
-                                ResolveOptions(command);
-                                list.Add(command);
-                            }
-                            else
-                            {
-                                Log.e("Unable to register command: name={0} type={1}", commandName, type);
-                            }
+                            result.AddCommand(cmd);
                         }
-                        else
+                        else if (IsCVarContainer(type))
                         {
-                            CVarContainerAttribute cvarAttr = GetCustomAttribute<CVarContainerAttribute>(type);
-                            if (cvarAttr != null)
-                            {
-                                try
-                                {
-                                    FieldInfo[] fields = type.GetFields(BindingFlags.Static|BindingFlags.Public);
-                                    if (fields != null && fields.Length > 0)
-                                    {
-                                        fields[0].GetValue(null);
-                                    }
-                                }
-                                catch (Exception e)
-                                {
-                                    Log.error(e, "Unable to initialize cvar container: {0}", type);
-                                }
-                            }
+                            result.AddContainer(type);
                         }
                     }
                 }
@@ -117,7 +79,47 @@ namespace LunarPluginInternal
                 throw new LunarRuntimeResolverException("Unable to resolve Lunar commands", e);
             }
 
-            return list;
+            return result;
+        }
+
+        private static CCommand ResolveCommand(Type type)
+        {
+            CCommandAttribute cmdAttr = GetCustomAttribute<CCommandAttribute>(type);
+            if (cmdAttr != null)
+            {
+                string commandName = cmdAttr.Name;
+                if (!IsCorrectPlatform(cmdAttr.Flags))
+                {
+                    Debug.LogWarning("Skipping command: " + commandName);
+                    return null;
+                }
+
+                CCommand command = ClassUtils.CreateInstance<CCommand>(type);
+                if (command != null)
+                {
+                    command.Name = commandName;
+                    command.Description = cmdAttr.Description;
+                    if (cmdAttr.Values != null)
+                    {
+                        command.Values = cmdAttr.Values.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    }
+                    command.Flags |= cmdAttr.Flags;
+                    ResolveOptions(command);
+
+                    return command;
+                }
+                else
+                {
+                    Log.e("Unable to register command: name={0} type={1}", commandName, type);
+                }
+            }
+
+            return null;
+        }
+
+        private static bool IsCVarContainer(Type type)
+        {
+            return GetCustomAttribute<CVarContainerAttribute>(type) != null;
         }
 
         private static T GetCustomAttribute<T>(Type type) where T : Attribute
@@ -249,6 +251,40 @@ namespace LunarPluginInternal
             }
 
             return value is ICloneable ? ((ICloneable)value).Clone() : value;
+        }
+
+        public class Result
+        {
+            private IList<CCommand> commands;
+            private IList<Type> cvarContainersTypes;
+
+            public Result()
+            {
+                commands = new List<CCommand>();
+            }
+
+            public void AddCommand(CCommand cmd)
+            {
+                commands.Add(cmd);
+            }
+
+            public void AddContainer(Type type)
+            {
+                if (cvarContainersTypes == null)
+                    cvarContainersTypes = new List<Type>();
+
+                cvarContainersTypes.Add(type);
+            }
+
+            public IList<CCommand> Commands
+            {
+                get { return commands; }
+            }
+
+            public IList<Type> CvarContainersTypes
+            {
+                get { return cvarContainersTypes; }
+            }
         }
     }
 }

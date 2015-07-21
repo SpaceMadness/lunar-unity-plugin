@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
 
+using System.Collections.Generic;
+
 using LunarPlugin;
 using LunarPluginInternal;
 using LunarEditor;
@@ -48,7 +50,7 @@ namespace CCommandTests
             CVar c_string = new CVar("string", "Default string");
 
             // load default config
-            Execute("exec default.cfg"); // TODO: make a convinience method for it
+            Execute("exec " + Constants.ConfigDefault); // TODO: make a convinience method for it
 
             // check loaded values
             Assert.AreEqual(20, c_int.IntValue);
@@ -68,7 +70,7 @@ namespace CCommandTests
             new CVar("string", "Default string");
 
             // load default config
-            Execute("exec default.cfg"); // TODO: make a convinience method for it
+            Execute("exec " + Constants.ConfigDefault); // TODO: make a convinience method for it
 
             // reset variables
             Execute("reset int");
@@ -90,7 +92,7 @@ namespace CCommandTests
             new CVar("string", "Default string");
 
             // load default config
-            Execute("exec default.cfg"); // TODO: make a convinience method for it
+            Execute("exec " + Constants.ConfigDefault); // TODO: make a convinience method for it
 
             // reset variables
             Execute("reset int");
@@ -114,7 +116,7 @@ namespace CCommandTests
             new CVar("string", "Default string");
 
             // load default config
-            Execute("exec default.cfg"); // TODO: make a convinience method for it
+            Execute("exec " + Constants.ConfigDefault); // TODO: make a convinience method for it
 
             // reset variables
             Execute("resetAll");
@@ -133,7 +135,7 @@ namespace CCommandTests
             new CVar("string", "Default string");
 
             // load default config
-            Execute("exec default.cfg"); // TODO: make a convinience method for it
+            Execute("exec " + Constants.ConfigDefault); // TODO: make a convinience method for it
 
             // reset variables
             Execute("resetAll f");
@@ -369,6 +371,50 @@ namespace CCommandTests
         public void TestAliasesWithSpecialCharacters()
         {
             Assert.Fail("Implement me");
+        }
+
+        #endregion
+
+        #region Test List configs
+
+        [Test]
+        public void TestListConfigs()
+        {
+            IList<string> configs = ConfigHelper.ListConfigs();
+            Assert.AreEqual(0, configs.Count);
+
+            Execute("bind t test"); // create a dummy config to write into files
+            Execute("writeconfig " + Constants.ConfigDefault);
+
+            configs = ConfigHelper.ListConfigs();
+            Assert.AreEqual(1, configs.Count);
+            Assert.AreEqual(Constants.ConfigDefault, configs[0]);
+
+            Execute("writeconfig " + Constants.ConfigAutoExec);
+
+            configs = ConfigHelper.ListConfigs();
+            Assert.AreEqual(2, configs.Count);
+            Assert.AreEqual(Constants.ConfigAutoExec, configs[0]);
+            Assert.AreEqual(Constants.ConfigDefault, configs[1]);
+        }
+
+        [Test]
+        public void TestListConfigsFiltered()
+        {
+            Execute("bind t test"); // create a dummy config to write into files
+            Execute("writeconfig " + Constants.ConfigDefault);
+            Execute("writeconfig " + Constants.ConfigAutoExec);
+
+            IList<string> configs = ConfigHelper.ListConfigs("default");
+            Assert.AreEqual(1, configs.Count);
+            Assert.AreEqual(Constants.ConfigDefault, configs[0]);
+
+            configs = ConfigHelper.ListConfigs("auto");
+            Assert.AreEqual(1, configs.Count);
+            Assert.AreEqual(Constants.ConfigAutoExec, configs[0]);
+
+            configs = ConfigHelper.ListConfigs("foo");
+            Assert.AreEqual(0, configs.Count);
         }
 
         #endregion

@@ -823,7 +823,7 @@ namespace TerminalTests
             {
             }
 
-            protected override string[] AutoCompleteArgs(string commandLine, string token)
+            protected override IList<string> AutoCompleteArgs(string commandLine, string token)
             {
                 string[] values = new string[]
                 {
@@ -841,7 +841,7 @@ namespace TerminalTests
                     }
                 }
 
-                return suggestions.ToArray();
+                return suggestions;
             }
         }
 
@@ -851,7 +851,7 @@ namespace TerminalTests
             {
             }
 
-            protected override string[] AutoCompleteArgs(string commandLine, string token)
+            protected override IList<string> AutoCompleteArgs(string commandLine, string token)
             {
                 throw new Exception("Uh-oh");
             }
