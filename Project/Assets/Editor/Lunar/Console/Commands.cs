@@ -765,15 +765,13 @@ namespace LunarEditor
         [CCommandOption(ShortName="e", Description="Opens config editor")]
         bool edit;
 
-        bool Execute(string filename = null)
+        bool Execute(string filename)
         {
             try
             {
-                string name = filename != null ? filename : Constants.ConfigDefault;
-
                 if (edit)
                 {
-                    string configPath = ConfigHelper.GetConfigPath(name);
+                    string configPath = ConfigHelper.GetConfigPath(filename);
                     if (!FileUtils.FileExists(configPath))
                     {
                         PrintError("File does not exist: {0}", configPath);
@@ -784,7 +782,7 @@ namespace LunarEditor
                     return true;
                 }
                 
-                IList<string> lines = ConfigHelper.ReadConfig(name);
+                IList<string> lines = ConfigHelper.ReadConfig(filename);
                 foreach (string line in lines)
                 {
                     PrintIndent(line);
