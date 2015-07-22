@@ -698,5 +698,78 @@ namespace LunarPlugin.Test
         }
 
         #endregion
+
+        #region Filter
+
+        [Test]
+        public void TestFilter()
+        {
+            string[] strings =
+            {
+                "Line1",
+                "LINE12",
+                "line2",
+                "line3",
+                "foo"
+            };
+
+            string[] expected =
+            {
+                "Line1",
+                "LINE12"
+            };
+
+            Assert.AreEqual(expected, StringUtils.Filter(strings, "LINE1"));
+        }
+
+        [Test]
+        public void TestFilterEmptyPrefix()
+        {
+            string[] strings =
+            {
+                "Line1",
+                "LINE12",
+                "line2",
+                "line3",
+                "foo"
+            };
+
+            string[] expected =
+            {
+                "Line1",
+                "LINE12",
+                "line2",
+                "line3",
+                "foo"
+            };
+
+            Assert.AreEqual(expected, StringUtils.Filter(strings, ""));
+        }
+
+        [Test]
+        public void TestFilterNullPrefix()
+        {
+            string[] strings =
+            {
+                "Line1",
+                "LINE12",
+                "line2",
+                "line3",
+                "foo"
+            };
+
+            string[] expected =
+            {
+                "Line1",
+                "LINE12",
+                "line2",
+                "line3",
+                "foo"
+            };
+
+            Assert.AreEqual(expected, StringUtils.Filter(strings, null));
+        }
+
+        #endregion
     }
 }

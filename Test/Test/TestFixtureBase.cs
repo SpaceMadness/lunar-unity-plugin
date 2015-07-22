@@ -86,6 +86,16 @@ namespace LunarPlugin.Test
             ClassUtilsEx.SetField(typeof(Config), "isDebugBuild", value);
         }
 
+        protected void AssertResult(params string[] expected)
+        {
+            AssertList(result, expected);
+        }
+
+        protected void AddResult(string str)
+        {
+            result.Add(str);
+        }
+
         protected List<String> Result
         {
             get { return result; }

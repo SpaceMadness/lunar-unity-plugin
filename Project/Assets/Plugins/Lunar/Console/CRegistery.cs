@@ -416,6 +416,21 @@ namespace LunarPluginInternal
             return outList;
         }
 
+        public static IList<string> ListVarNames(string prefix = null, CommandListOptions options = CommandListOptions.None)
+        {
+            IList<CVar> cvars = ListVars(ReusableLists.NextAutoRecycleList<CVar>(), prefix, options);
+
+            string[] names = new string[cvars.Count];
+
+            int index = 0;
+            foreach (CVar cvar in cvars)
+            {
+                names[index++] = cvar.Name;
+            }
+
+            return names;
+        }
+
         internal static CVarCommand FindCvarCommand(string name)
         {
             foreach (CCommand cmd in m_commands)

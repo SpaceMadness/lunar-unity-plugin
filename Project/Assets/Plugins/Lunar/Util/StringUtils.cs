@@ -65,6 +65,25 @@ namespace LunarPluginInternal
             return string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
         }
 
+        public static IList<string> Filter(IList<string> strings, string prefix)
+        {
+            if (string.IsNullOrEmpty(prefix))
+            {
+                return strings;
+            }
+
+            IList<string> result = new List<string>();
+            foreach (string str in strings)
+            {
+                if (StartsWithIgnoreCase(str, prefix))
+                {
+                    result.Add(str);
+                }
+            }
+
+            return result;
+        }
+
         //////////////////////////////////////////////////////////////////////////////
 
         #region Parsing
@@ -379,6 +398,8 @@ namespace LunarPluginInternal
 
         //////////////////////////////////////////////////////////////////////////////
 
+        #region Suggestion
+
         private static List<string> s_tempList;
 
         internal static string GetSuggestedText(string token, string[] strings, bool removeTags = false)
@@ -463,6 +484,8 @@ namespace LunarPluginInternal
             
             return suggestedToken.Length > 0 ? suggestedToken.ToString() : null;
         }
+
+        #endregion
 
         //////////////////////////////////////////////////////////////////////////////
 

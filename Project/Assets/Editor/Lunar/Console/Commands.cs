@@ -19,7 +19,7 @@
 //  limitations under the License.
 //
 
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
 
@@ -42,33 +42,33 @@ namespace LunarEditor
         
         bool Execute(string prefix = null)
         {
-            CommandListOptions options = CommandListOptions.None;
-            if (Config.isDebugBuild)
-            {
-                options |= CommandListOptions.Debug;
-            }
+            CommandListOptions options = CCommand.DefaultListOptions;
             if (includeSystem)
             {
                 options |= CommandListOptions.System;
             }
             
+            Print(ListCommandNames(prefix, options));
+            
+            return true;
+        }
+
+        protected override IList<string> AutoCompleteArgs(string commandLine, string token)
+        {
+            return ListCommandNames(token, CCommand.DefaultListOptions);
+        }
+
+        private string[] ListCommandNames(string prefix, CommandListOptions options)
+        {
             IList<CCommand> commands = CRegistery.ListCommands(delegate(CCommand cmd)
             {
                 return !(cmd is CVarCommand) && CRegistery.ShouldListCommand(cmd, prefix, options);
             });
-            
-            if (commands.Count > 0)
+
+            return Collection.Map(commands, delegate(CCommand cmd)
             {
-                string[] names = new string[commands.Count];
-                for (int i = 0; i < commands.Count; ++i)
-                {
-                    CCommand cmd = commands[i];
-                    names[i] = C(cmd.Name, cmd.ColorCode);
-                }
-                Print(names);
-            }
-            
-            return true;
+                return C(cmd.Name, cmd.ColorCode);
+            });
         }
     }
     
@@ -85,11 +85,7 @@ namespace LunarEditor
         
         bool Execute(string prefix = null)
         {
-            CommandListOptions options = CommandListOptions.None;
-            if (Config.isDebugBuild)
-            {
-                options |= CommandListOptions.Debug;
-            }
+            CommandListOptions options = CCommand.DefaultListOptions;
             if (includeSystem)
             {
                 options |= CommandListOptions.System;
@@ -101,11 +97,9 @@ namespace LunarEditor
             {
                 if (shortList)
                 {
-                    string[] names = new string[vars.Count];
-                    for (int i = 0; i < vars.Count; ++i)
-                    {
-                        names[i] = StringUtils.C(vars[i].Name, ColorCode.TableVar);
-                    }
+                    string[] names = Collection.Map(vars, delegate(CVar cvar) {
+                        return StringUtils.C(cvar.Name, ColorCode.TableVar);
+                    });
                     Print(names);
                 }
                 else
@@ -133,6 +127,11 @@ namespace LunarEditor
             }
             
             return true;
+        }
+
+        protected override IList<string> AutoCompleteArgs(string commandLine, string token)
+        {
+            return CRegistery.ListVarNames(token, CCommand.DefaultListOptions);
         }
     }
 
@@ -167,20 +166,17 @@ namespace LunarEditor
         {
             IList<CVar> vars = CRegistery.ListVars(delegate(CVarCommand cmd)
             {
-                return cmd.IsBool && CRegistery.ShouldListCommand(cmd, prefix);
+                return cmd.IsBool && CRegistery.ShouldListCommand(cmd, prefix, CCommand.DefaultListOptions);
             });
             
             if (vars.Count == 0)
             {
                 return null;
             }
-            
-            string[] values = new string[vars.Count];
-            for (int i = 0; i < vars.Count; ++i)
-            {
-                values[i] = StringUtils.C(vars[i].Name, ColorCode.TableVar);
-            }
-            return values;
+
+            return Collection.Map(vars, delegate(CVar cvar) {
+                return StringUtils.C(cvar.Name, ColorCode.TableVar);
+            });
         }
     }
     
@@ -207,18 +203,21 @@ namespace LunarEditor
         
         protected override IList<string> AutoCompleteArgs(string commandLine, string prefix)
         {
-            IList<CVar> vars = CRegistery.ListVars(prefix);
+            return AutoCompleteArgs(prefix);
+        }
+
+        internal static IList<string> AutoCompleteArgs(string prefix)
+        {
+            IList<CVar> vars = CRegistery.ListVars(prefix, CCommand.DefaultListOptions);
             if (vars.Count == 0)
             {
                 return null;
             }
-            
-            string[] values = new string[vars.Count];
-            for (int i = 0; i < vars.Count; ++i)
+
+            return Collection.Map(vars, delegate(CVar cvar)
             {
-                values[i] = StringUtils.C(vars[i].Name, ColorCode.TableVar);
-            }
-            return values;
+                return StringUtils.C(cvar.Name, ColorCode.TableVar);
+            });
         }
     }
 
@@ -241,21 +240,10 @@ namespace LunarEditor
                 }
             }
         }
-        
+
         protected override IList<string> AutoCompleteArgs(string commandLine, string prefix)
         {
-            IList<CVar> vars = CRegistery.ListVars(prefix);
-            if (vars.Count == 0)
-            {
-                return null;
-            }
-            
-            string[] values = new string[vars.Count];
-            for (int i = 0; i < vars.Count; ++i)
-            {
-                values[i] = StringUtils.C(vars[i].Name, ColorCode.TableVar);
-            }
-            return values;
+            return Cmd_reset.AutoCompleteArgs(prefix);
         }
     }
     
@@ -344,18 +332,7 @@ namespace LunarEditor
 
         protected override IList<string> AutoCompleteArgs(string commandLine, string token)
         {
-            List<string> suggestions = new List<string>();
-            foreach (string name in CBindings.BindingsNames)
-            {
-                if (name.StartsWith(token, StringComparison.OrdinalIgnoreCase))
-                {
-                    suggestions.Add(name);
-                }
-            }
-
-            suggestions.Sort();
-
-            return suggestions;
+            return StringUtils.Filter(CBindings.BindingsNames, token);
         }
 
         private static char OppositeOperation(char op)
@@ -369,6 +346,31 @@ namespace LunarEditor
         public static string ToString(CBinding b)
         {
             return string.Format("bind {0} {1}", b.shortCut.ToString(), StringUtils.Arg(b.cmdKeyDown));
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    [CCommand("bindlist", Description="List all currently bound keys and what command they are bound to.")]
+    class Cmd_bindlist : CCommand
+    {
+        void Execute(string prefix = null)
+        {
+            IList<CBinding> bindings = CBindings.List(prefix);
+            foreach (CBinding b in bindings)
+            {
+                PrintIndent("bind {0} {1}", b.shortCut.ToString(), StringUtils.Arg(b.cmdKeyDown));
+            }
+        }
+
+        protected override IList<string> AutoCompleteArgs(string commandLine, string token)
+        {
+            return AutoCompleteArgs(token);
+        }
+
+        internal static IList<string> AutoCompleteArgs(string token)
+        {
+            return CBindings.ListShortCuts(token);
         }
     }
     
@@ -397,26 +399,16 @@ namespace LunarEditor
             
             return true;
         }
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////
-    
-    [CCommand("bindlist", Description="List all currently bound keys and what command they are bound to.")]
-    class Cmd_bindlist : CCommand
-    {
-        void Execute(string prefix = null)
+
+        protected override IList<string> AutoCompleteArgs(string commandLine, string token)
         {
-            IList<CBinding> bindings = CBindings.List(prefix);
-            foreach (CBinding b in bindings)
-            {
-                PrintIndent("bind {0} {1}", b.shortCut.ToString(), StringUtils.Arg(b.cmdKeyDown));
-            }
+            return Cmd_bindlist.AutoCompleteArgs(token);
         }
     }
-    
+
     //////////////////////////////////////////////////////////////////////////////
-    
-    [CCommand("unbindAll", Description="Unbinds all keys.\t")]
+
+    [CCommand("unbindAll", Description="Unbinds all keys.")]
     class Cmd_unbindAll : CCommand
     {
         void Execute()
@@ -445,6 +437,11 @@ namespace LunarEditor
             }
         }
 
+        protected override IList<string> AutoCompleteArgs(string commandLine, string token)
+        {
+            return Cmd_bindlist.AutoCompleteArgs(token);
+        }
+
         void PostNotification()
         {
             PostNotification(CCommandNotifications.CBindingsChanged, 
@@ -454,7 +451,7 @@ namespace LunarEditor
     
     //////////////////////////////////////////////////////////////////////////////
     
-    [CCommand("alias", Description="Creates an alias name for command(s)")]
+    [CCommand("alias", Description="Creates an alias name for command(s).")]
     class Cmd_alias : CCommand
     {
         void Execute(string name, string commands)
@@ -467,17 +464,32 @@ namespace LunarEditor
                 CCommandNotifications.KeyManualMode, this.IsManualMode
             );
         }
+
+        protected override IList<string> AutoCompleteArgs(string commandLine, string token)
+        {
+            return AutoCompleteArgs(token);
+        }
+
+        internal static IList<string> AutoCompleteArgs(string token)
+        {
+            IList<CAliasCommand> aliases = CRegistery.ListAliases();
+            if (aliases != null && aliases.Count > 0)
+            {
+                return Collection.Map(aliases, delegate(CAliasCommand alias)
+                {
+                    return alias.Name;
+                });
+            }
+
+            return null;
+        }
         
         public static IList<string> ListAliasesConfig()
         {
-            IList<CAliasCommand> aliases = CRegistery.ListAliases();
-
-            IList<string> entries = new List<string>();
-            for (int i = 0; i < aliases.Count; ++i)
+            return Collection.Map(CRegistery.ListAliases(), delegate(CAliasCommand alias)
             {
-                entries.Add(ToString(aliases[i]));
-            }
-            return entries;
+                return ToString(alias);
+            });
         }
         
         private static string ToString(CAliasCommand cmd)
@@ -488,7 +500,7 @@ namespace LunarEditor
 
     //////////////////////////////////////////////////////////////////////////////
 
-    [CCommand("aliaslist", Description="List current aliases")]
+    [CCommand("aliaslist", Description="List current aliases.")]
     class Cmd_aliaslist : CCommand
     {
         [CCommandOption(Name="short", ShortName="s", Description="Outputs only names")]
@@ -501,11 +513,10 @@ namespace LunarEditor
             {
                 if (shortList)
                 {
-                    string[] names = new string[cmds.Count];
-                    for (int i = 0; i < cmds.Count; ++i)
+                    string[] names = Collection.Map(cmds, delegate(CAliasCommand cmd)
                     {
-                        names[i] = cmds[i].Name;
-                    }
+                        return cmd.Name;
+                    });
                     Print(names);
                 }
                 else
@@ -518,6 +529,11 @@ namespace LunarEditor
             }
             
             return true;
+        }
+
+        protected override IList<string> AutoCompleteArgs(string commandLine, string token)
+        {
+            return Cmd_alias.AutoCompleteArgs(token);
         }
         
         public static void ListAliasesConfig(IList<string> lines)
@@ -553,6 +569,11 @@ namespace LunarEditor
                 );
             }
         }
+
+        protected override IList<string> AutoCompleteArgs(string commandLine, string token)
+        {
+            return Cmd_alias.AutoCompleteArgs(token);
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////
@@ -576,6 +597,11 @@ namespace LunarEditor
                     CCommandNotifications.KeyManualMode, this.IsManualMode
                 );
             }
+        }
+
+        protected override IList<string> AutoCompleteArgs(string commandLine, string token)
+        {
+            return Cmd_alias.AutoCompleteArgs(token);
         }
     }
 
@@ -657,17 +683,19 @@ namespace LunarEditor
 
         protected override IList<string> AutoCompleteArgs(string commandLine, string token) // TODO: better autocompletion
         {
-            string[] configs = { Constants.ConfigDefault, Constants.ConfigAutoExec };
-            List<string> suggested = new List<string>();
-            foreach (string config in configs)
+            List<string> configs = new List<string>(ConfigHelper.ListConfigs(token));
+
+            // TODO: refactor this
+            if (!configs.Contains(Constants.ConfigDefault))
             {
-                if (StringUtils.StartsWithIgnoreCase(config, token))
-                {
-                    suggested.Add(config);
-                }
+                configs.Add(Constants.ConfigDefault);
+            }
+            if (!configs.Contains(Constants.ConfigAutoExec))
+            {
+                configs.Add(Constants.ConfigAutoExec);
             }
 
-            return suggested;
+            return StringUtils.Filter(configs, token);
         }
 
         private static void AddEntries(IList<string> outList, IList<string> entries, string groupName)
@@ -800,27 +828,23 @@ namespace LunarEditor
         
         protected override IList<string> AutoCompleteArgs(string commandLine, string token)
         {
-            // TODO: add unit tests
-            
             IList<CCommand> commands = CRegistery.ListCommands(delegate(CCommand command)
             {
                 return !(command is CVarCommand) && 
                        !(command is CDelegateCommand) && 
                        !(command is CAliasCommand) &&
-                       CRegistery.ShouldListCommand(command, token);
+                       CRegistery.ShouldListCommand(command, token, CCommand.DefaultListOptions);
             });
             
             if (commands.Count == 0)
             {
                 return null;
             }
-            
-            string[] values = new string[commands.Count];
-            for (int i = 0; i < commands.Count; ++i)
+
+            return Collection.Map(commands, delegate(CCommand cmd)
             {
-                values[i] = StringUtils.C(commands[i].Name, commands[i].ColorCode);
-            }
-            return values;
+                return StringUtils.C(cmd.Name, cmd.ColorCode);
+            });
         }
     }
 

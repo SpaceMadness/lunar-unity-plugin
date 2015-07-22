@@ -115,7 +115,7 @@ namespace LunarEditor
         protected virtual void DrawVisibleCells()
         {
             #if LUNAR_DEVELOPMENT
-            if (CVars.g_drawVisibleCells.BoolValue)
+            if (CVarsLunar.g_drawVisibleCells.BoolValue)
             {
                 if (FirstVisibleCell != null)
                 {

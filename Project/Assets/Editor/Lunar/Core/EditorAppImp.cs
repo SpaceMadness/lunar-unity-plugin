@@ -32,7 +32,7 @@ namespace LunarEditor
 
         public EditorAppImp()
         {
-            m_terminal = CreateTerminal(CVars.c_historySize.IntValue);
+            m_terminal = CreateTerminal(CVarsLunar.c_historySize.IntValue);
         }
 
         //////////////////////////////////////////////////////////////////////////////

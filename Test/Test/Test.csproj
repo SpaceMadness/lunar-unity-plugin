@@ -93,6 +93,21 @@
     <Compile Include="CCommandTests\CommandTokenizerTest.cs" />
     <Compile Include="TestInput.cs" />
     <Compile Include="ClassUtilsEx.cs" />
+    <Compile Include="AutoCompleteTestFixture.cs" />
+    <Compile Include="TerminalTests\AutoCompleteManTest.cs" />
+    <Compile Include="TerminalTests\AutoCompleteCmdlistTest.cs" />
+    <Compile Include="TerminalTests\AutoCompleteCvarlistTest.cs" />
+    <Compile Include="TerminalTests\AutoCompleteToggleTest.cs" />
+    <Compile Include="TerminalTests\AutoCompleteResetTest.cs" />
+    <Compile Include="TerminalTests\AutoCompleteResetAllTest.cs" />
+    <Compile Include="TerminalTests\AutoCompleteBindTest.cs" />
+    <Compile Include="TerminalTests\AutoCompleteUnbindTest.cs" />
+    <Compile Include="TerminalTests\AutoCompleteUnbindAllTest.cs" />
+    <Compile Include="CollectionTest.cs" />
+    <Compile Include="TerminalTests\AutoCompleteAliasTest.cs" />
+    <Compile Include="TerminalTests\AutoCompleteAliaslistTest.cs" />
+    <Compile Include="TerminalTests\AutoCompleteUnaliasTest.cs" />
+    <Compile Include="TerminalTests\AutoCompleteUnaliasAllTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -8,7 +8,7 @@ include Common
 
 task :init do
 
-  $bin_release_unity = resolve_path '/Applications/Unity-5.0.0/Unity.app/Contents/MacOS/Unity'
+  $bin_release_unity = resolve_path '/Applications/Unity4/Unity.app/Contents/MacOS/Unity'
 
   $dir_builder = File.expand_path '.'
   $dir_publisher_project = resolve_path "#{$dir_builder}/PublisherProject"

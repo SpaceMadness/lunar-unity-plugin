@@ -15,11 +15,8 @@ namespace TerminalTests
     using Assert = NUnit.Framework.Assert;
 
     [TestFixture]
-    public class AutoCompleteTest : CCommandTestFixture, IConsoleDelegate
+    public class AutoCompleteTest : AutoCompleteTestFixture
     {
-        private Terminal terminal;
-        private List<string> terminalTableOutput;
-
         #region Command Autocompletion
 
         [Test]
@@ -28,7 +25,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("");
 
             Assert.AreEqual("test", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -37,7 +34,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("", true);
 
             Assert.AreEqual("test", suggestion);
-            AssertSuggestions("test1", "test12", "test2");
+            AssertDoubleTabSuggestions("test1", "test12", "test2");
         }
 
         [Test]
@@ -46,7 +43,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("t");
 
             Assert.AreEqual("test", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -55,7 +52,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("t", true);
 
             Assert.AreEqual("test", suggestion);
-            AssertSuggestions("test1", "test12", "test2");
+            AssertDoubleTabSuggestions("test1", "test12", "test2");
         }
 
         [Test]
@@ -64,7 +61,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -73,7 +70,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions("test1", "test12", "test2");
+            AssertDoubleTabSuggestions("test1", "test12", "test2");
         }
 
         [Test]
@@ -82,7 +79,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -91,7 +88,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions("test1", "test12");
+            AssertDoubleTabSuggestions("test1", "test12");
         }
 
         [Test]
@@ -100,7 +97,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test12");
 
             Assert.AreEqual("test12 ", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -109,7 +106,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test12", true);
 
             Assert.AreEqual("test12 ", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -118,7 +115,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test123");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -127,7 +124,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test123", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         #endregion
@@ -142,7 +139,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 ");
 
             Assert.AreEqual("test1 arg", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -151,7 +148,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 ", true);
 
             Assert.AreEqual("test1 arg", suggestion);
-            AssertSuggestions("arg1", "arg12", "arg2");
+            AssertDoubleTabSuggestions("arg1", "arg12", "arg2");
         }
 
         [Test]
@@ -160,7 +157,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 a");
 
             Assert.AreEqual("test1 arg", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -169,7 +166,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 a", true);
 
             Assert.AreEqual("test1 arg", suggestion);
-            AssertSuggestions("arg1", "arg12", "arg2");
+            AssertDoubleTabSuggestions("arg1", "arg12", "arg2");
         }
 
         [Test]
@@ -178,7 +175,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 arg1");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -187,7 +184,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 arg1", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions("arg1", "arg12");
+            AssertDoubleTabSuggestions("arg1", "arg12");
         }
 
         [Test]
@@ -196,7 +193,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 arg12");
 
             Assert.AreEqual("test1 arg12 ", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -205,7 +202,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 arg12", true);
 
             Assert.AreEqual("test1 arg12 ", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -214,7 +211,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 arg123");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -223,7 +220,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 arg123", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -232,7 +229,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 arg1 ");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -241,7 +238,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 arg1 ", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -250,7 +247,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test12 a");
 
             Assert.AreEqual("test12 arg", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -259,7 +256,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test12 a", true);
 
             Assert.AreEqual("test12 arg", suggestion);
-            AssertSuggestions("arg1", "arg12", "arg2");
+            AssertDoubleTabSuggestions("arg1", "arg12", "arg2");
         }
 
         [Test]
@@ -268,7 +265,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test12 arg1");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -277,7 +274,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test12 arg1", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions("arg1", "arg12");
+            AssertDoubleTabSuggestions("arg1", "arg12");
         }
 
         [Test]
@@ -286,7 +283,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test12 arg12");
 
             Assert.AreEqual("test12 arg12 ", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -295,7 +292,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test12 arg12", true);
 
             Assert.AreEqual("test12 arg12 ", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -304,7 +301,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test12 arg123");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -313,7 +310,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test12 arg123", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -322,7 +319,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test12 arg1 ");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -331,7 +328,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test12 arg1 ", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -340,7 +337,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test2 a");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -349,7 +346,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test2 a", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         #endregion
@@ -364,7 +361,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -373,7 +370,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions("-e", "-o1", "-o12", "-o2");
+            AssertDoubleTabSuggestions("-e", "-o1", "-o12", "-o2");
         }
 
         [Test]
@@ -382,7 +379,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -391,7 +388,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions("-o1", "-o12", "-o2");
+            AssertDoubleTabSuggestions("-o1", "-o12", "-o2");
         }
 
         [Test]
@@ -400,7 +397,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o12");
 
             Assert.AreEqual("test1 -o12 ", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -409,7 +406,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o12", true);
 
             Assert.AreEqual("test1 -o12 ", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -418,7 +415,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o123");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -427,7 +424,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o123", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -436,7 +433,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o123");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -445,7 +442,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o123", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -454,7 +451,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 ");
 
             Assert.AreEqual("test1 -o2 val", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -463,7 +460,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 ", true);
 
             Assert.AreEqual("test1 -o2 val", suggestion);
-            AssertSuggestions("val1", "val12", "val2");
+            AssertDoubleTabSuggestions("val1", "val12", "val2");
         }
 
         [Test]
@@ -472,7 +469,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 v");
 
             Assert.AreEqual("test1 -o2 val", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -481,7 +478,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 v", true);
 
             Assert.AreEqual("test1 -o2 val", suggestion);
-            AssertSuggestions("val1", "val12", "val2");
+            AssertDoubleTabSuggestions("val1", "val12", "val2");
         }
 
         [Test]
@@ -490,7 +487,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -499,7 +496,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions("val1", "val12", "val2");
+            AssertDoubleTabSuggestions("val1", "val12", "val2");
         }
 
         [Test]
@@ -508,7 +505,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val1");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -517,7 +514,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val1", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions("val1", "val12");
+            AssertDoubleTabSuggestions("val1", "val12");
         }
 
         [Test]
@@ -526,7 +523,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val12");
 
             Assert.AreEqual("test1 -o2 val12 ", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -535,7 +532,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val12", true);
 
             Assert.AreEqual("test1 -o2 val12 ", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -544,7 +541,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 x");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -553,7 +550,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 x", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -562,7 +559,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val1 ");
 
             Assert.AreEqual("test1 -o2 val1 arg", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -571,7 +568,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val1 ", true);
 
             Assert.AreEqual("test1 -o2 val1 arg", suggestion);
-            AssertSuggestions("arg1", "arg12", "arg2");
+            AssertDoubleTabSuggestions("arg1", "arg12", "arg2");
         }
 
         [Test]
@@ -580,7 +577,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val1 a");
 
             Assert.AreEqual("test1 -o2 val1 arg", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -589,7 +586,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val1 a", true);
 
             Assert.AreEqual("test1 -o2 val1 arg", suggestion);
-            AssertSuggestions("arg1", "arg12", "arg2");
+            AssertDoubleTabSuggestions("arg1", "arg12", "arg2");
         }
 
         [Test]
@@ -598,7 +595,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val1 arg1");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -607,7 +604,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val1 arg1", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions("arg1", "arg12");
+            AssertDoubleTabSuggestions("arg1", "arg12");
         }
 
         [Test]
@@ -616,7 +613,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val1 arg12");
 
             Assert.AreEqual("test1 -o2 val1 arg12 ", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -625,7 +622,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val1 arg12", true);
 
             Assert.AreEqual("test1 -o2 val1 arg12 ", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -634,7 +631,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val1 arg123");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -643,7 +640,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val1 arg123", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -652,7 +649,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val1 arg1 ");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -661,7 +658,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o2 val1 arg1 ", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -670,7 +667,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o1 -o12 ");
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -679,7 +676,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o1 -o12 ", true);
 
             Assert.IsNull(suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -688,7 +685,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o1 -o2 ");
 
             Assert.AreEqual("test1 -o1 -o2 val", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -697,7 +694,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o1 -o2 ", true);
 
             Assert.AreEqual("test1 -o1 -o2 val", suggestion);
-            AssertSuggestions("val1", "val12", "val2");
+            AssertDoubleTabSuggestions("val1", "val12", "val2");
         }
 
         [Test]
@@ -706,7 +703,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o1 -o2 val1 ");
 
             Assert.AreEqual("test1 -o1 -o2 val1 arg", suggestion);
-            AssertSuggestions();
+            AssertDoubleTabSuggestions();
         }
 
         [Test]
@@ -715,7 +712,7 @@ namespace TerminalTests
             string suggestion = DoAutoComplete("test1 -o1 -o2 val1 ", true);
 
             Assert.AreEqual("test1 -o1 -o2 val1 arg", suggestion);
-            AssertSuggestions("arg1", "arg12", "arg2");
+            AssertDoubleTabSuggestions("arg1", "arg12", "arg2");
         }
 
         #endregion
@@ -732,51 +729,6 @@ namespace TerminalTests
             RegisterCommand(typeof(Cmd_test1), false);
             RegisterCommand(typeof(Cmd_test12), false);
             RegisterCommand(typeof(Cmd_test2), false);
-
-            terminal = new Terminal(1024);
-            terminal.Delegate = this;
-            terminalTableOutput = new List<string>();
-        }
-
-        #endregion
-
-        //////////////////////////////////////////////////////////////////////////////
-
-        #region Helpers
-
-        private string DoAutoComplete(string text, bool isDoubleTap = false)
-        {
-            int index = text.IndexOf('¶');
-            index = index == -1 ? text.Length : index;
-
-            return terminal.DoAutoComplete(text, index, isDoubleTap);
-        }
-
-        private void AssertSuggestions(params string[] expected)
-        {
-            AssertList(terminalTableOutput, expected);
-        }
-
-        #endregion
-
-        //////////////////////////////////////////////////////////////////////////////
-
-        #region IConsoleDelegate implementation
-
-        public void OnConsoleEntryAdded(AbstractConsole console, ref ConsoleViewCellEntry entry)
-        {
-            if (entry.IsTable)
-            {
-                string[] table = entry.Table;
-                foreach (string item in table)
-                {
-                    terminalTableOutput.Add(StringUtils.RemoveRichTextTags(item));
-                }
-            }
-        }
-
-        public void OnConsoleCleared(AbstractConsole console)
-        {
         }
 
         #endregion
@@ -832,16 +784,7 @@ namespace TerminalTests
                     "arg2",
                 };
 
-                List<string> suggestions = new List<string>();
-                foreach (string val in values)
-                {
-                    if (StringUtils.StartsWithIgnoreCase(val, token))
-                    {
-                        suggestions.Add(val);
-                    }
-                }
-
-                return suggestions;
+                return StringUtils.Filter(values, token);
             }
         }
 

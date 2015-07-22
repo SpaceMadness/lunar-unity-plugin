@@ -209,6 +209,7 @@ namespace LunarPluginInternal
 
         private static IDictionary<string, KeyCode> s_keyCodeLookup;
         private static IDictionary<KeyCode, string> s_keyNameLookup;
+        private static string[] s_names;
 
         public static void Bind(CShortCut shortCut, string cmdKeyDown, string cmdKeyUp)
         {
@@ -243,12 +244,12 @@ namespace LunarPluginInternal
             return false;
         }
 
-        public static IList<CBinding> List(string prefix = null)
+        public static IList<CBinding> List(string prefix = null) // TODO: unit tests
         {
             if (prefix != null)
             {
                 return List(delegate(CBinding binding) {
-                    return StringUtils.StartsWithIgnoreCase(binding.key.ToString(), prefix);
+                    return StringUtils.StartsWithIgnoreCase(binding.shortCut.ToString(), prefix);
                 });
             }
 
@@ -272,6 +273,20 @@ namespace LunarPluginInternal
             }
 
             return list;
+        }
+
+        public static IList<string> ListShortCuts(string prefix = null) // TODO: unit tests
+        {
+            IList<CBinding> bindings = CBindings.List(prefix);
+            string[] shortcuts = new string[bindings.Count];
+
+            int index = 0;
+            foreach (CBinding b in bindings)
+            {
+                shortcuts[index++] = b.shortCut.ToString();
+            }
+
+            return shortcuts;
         }
 
         public static bool FindBinding(CShortCut shortCut, out CBinding result)
@@ -321,11 +336,11 @@ namespace LunarPluginInternal
             lookup["backspace"] = KeyCode.Backspace;
             lookup["delete"] = KeyCode.Delete;
             lookup["tab"] = KeyCode.Tab;
-            lookup["clear"] = KeyCode.Clear;
-            lookup["return"] = KeyCode.Return;
+            lookup["enter"] = KeyCode.Return;
             lookup["pause"] = KeyCode.Pause;
             lookup["escape"] = KeyCode.Escape;
             lookup["space"] = KeyCode.Space;
+
             lookup["num0"] = KeyCode.Keypad0;
             lookup["num1"] = KeyCode.Keypad1;
             lookup["num2"] = KeyCode.Keypad2;
@@ -336,6 +351,7 @@ namespace LunarPluginInternal
             lookup["num7"] = KeyCode.Keypad7;
             lookup["num8"] = KeyCode.Keypad8;
             lookup["num9"] = KeyCode.Keypad9;
+
             lookup["0"] = KeyCode.Alpha0;
             lookup["1"] = KeyCode.Alpha1;
             lookup["2"] = KeyCode.Alpha2;
@@ -346,22 +362,26 @@ namespace LunarPluginInternal
             lookup["7"] = KeyCode.Alpha7;
             lookup["8"] = KeyCode.Alpha8;
             lookup["9"] = KeyCode.Alpha9;
-            lookup["keypadperiod"] = KeyCode.KeypadPeriod;
-            lookup["keypaddivide"] = KeyCode.KeypadDivide;
-            lookup["keypadmultiply"] = KeyCode.KeypadMultiply;
-            lookup["keypadminus"] = KeyCode.KeypadMinus;
-            lookup["keypadplus"] = KeyCode.KeypadPlus;
-            lookup["keypadenter"] = KeyCode.KeypadEnter;
-            lookup["keypadequals"] = KeyCode.KeypadEquals;
+
+            lookup["kp_period"] = KeyCode.KeypadPeriod;
+            lookup["kp_divide"] = KeyCode.KeypadDivide;
+            lookup["kp_multiply"] = KeyCode.KeypadMultiply;
+            lookup["kp_minus"] = KeyCode.KeypadMinus;
+            lookup["kp_plus"] = KeyCode.KeypadPlus;
+            lookup["kp_enter"] = KeyCode.KeypadEnter;
+            lookup["kp_equals"] = KeyCode.KeypadEquals;
+
             lookup["up"] = KeyCode.UpArrow;
             lookup["down"] = KeyCode.DownArrow;
             lookup["right"] = KeyCode.RightArrow;
             lookup["left"] = KeyCode.LeftArrow;
+
             lookup["insert"] = KeyCode.Insert;
             lookup["home"] = KeyCode.Home;
             lookup["end"] = KeyCode.End;
             lookup["pageup"] = KeyCode.PageUp;
             lookup["pagedown"] = KeyCode.PageDown;
+
             lookup["f1"] = KeyCode.F1;
             lookup["f2"] = KeyCode.F2;
             lookup["f3"] = KeyCode.F3;
@@ -377,33 +397,23 @@ namespace LunarPluginInternal
             lookup["f13"] = KeyCode.F13;
             lookup["f14"] = KeyCode.F14;
             lookup["f15"] = KeyCode.F15;
-            lookup["exclaim"] = KeyCode.Exclaim;
-            lookup["doublequote"] = KeyCode.DoubleQuote;
-            lookup["hash"] = KeyCode.Hash;
-            lookup["dollar"] = KeyCode.Dollar;
-            lookup["ampersand"] = KeyCode.Ampersand;
-            lookup["quote"] = KeyCode.Quote;
-            lookup["leftparen"] = KeyCode.LeftParen;
-            lookup["rightparen"] = KeyCode.RightParen;
-            lookup["asterisk"] = KeyCode.Asterisk;
-            lookup["plus"] = KeyCode.Plus;
-            lookup["comma"] = KeyCode.Comma;
-            lookup["minus"] = KeyCode.Minus;
-            lookup["period"] = KeyCode.Period;
-            lookup["slash"] = KeyCode.Slash;
-            lookup["colon"] = KeyCode.Colon;
-            lookup["semicolon"] = KeyCode.Semicolon;
-            lookup["less"] = KeyCode.Less;
-            lookup["equals"] = KeyCode.Equals;
-            lookup["greater"] = KeyCode.Greater;
-            lookup["question"] = KeyCode.Question;
-            lookup["at"] = KeyCode.At;
-            lookup["leftbracket"] = KeyCode.LeftBracket;
-            lookup["backslash"] = KeyCode.Backslash;
-            lookup["rightbracket"] = KeyCode.RightBracket;
-            lookup["caret"] = KeyCode.Caret;
-            lookup["underscore"] = KeyCode.Underscore;
-            lookup["backquote"] = KeyCode.BackQuote;
+
+            // FIXME: add support for ' and "
+            // lookup["doublequote"] = KeyCode.DoubleQuote;
+            // lookup["quote"] = KeyCode.Quote;
+
+            lookup[","] = KeyCode.Comma;
+            lookup["-"] = KeyCode.Minus;
+            lookup["="] = KeyCode.Equals;
+            lookup["."] = KeyCode.Period;
+            lookup["/"] = KeyCode.Slash;
+            lookup[";"] = KeyCode.Semicolon;
+
+            lookup["["] = KeyCode.LeftBracket;
+            lookup["\\"] = KeyCode.Backslash;
+            lookup["]"] = KeyCode.RightBracket;
+            lookup["~"] = KeyCode.BackQuote;
+
             lookup["a"] = KeyCode.A;
             lookup["b"] = KeyCode.B;
             lookup["c"] = KeyCode.C;
@@ -430,27 +440,21 @@ namespace LunarPluginInternal
             lookup["x"] = KeyCode.X;
             lookup["y"] = KeyCode.Y;
             lookup["z"] = KeyCode.Z;
+
             lookup["numlock"] = KeyCode.Numlock;
             lookup["capslock"] = KeyCode.CapsLock;
             lookup["scrolllock"] = KeyCode.ScrollLock;
             lookup["rightshift"] = KeyCode.RightShift;
             lookup["leftshift"] = KeyCode.LeftShift;
-            lookup["rightcontrol"] = KeyCode.RightControl;
-            lookup["leftcontrol"] = KeyCode.LeftControl;
+            lookup["rightctrl"] = KeyCode.RightControl;
+            lookup["leftctrl"] = KeyCode.LeftControl;
             lookup["rightalt"] = KeyCode.RightAlt;
             lookup["leftalt"] = KeyCode.LeftAlt;
-            lookup["leftcommand"] = KeyCode.LeftCommand;
-            lookup["leftapple"] = KeyCode.LeftApple;
-            lookup["leftwindows"] = KeyCode.LeftWindows;
-            lookup["rightcommand"] = KeyCode.RightCommand;
-            lookup["rightapple"] = KeyCode.RightApple;
-            lookup["rightwindows"] = KeyCode.RightWindows;
-            lookup["altgr"] = KeyCode.AltGr;
-            lookup["help"] = KeyCode.Help;
+            lookup["leftcmd"] = KeyCode.LeftCommand;
+            lookup["rightcmd"] = KeyCode.RightCommand;
             lookup["print"] = KeyCode.Print;
-            lookup["sysreq"] = KeyCode.SysReq;
             lookup["break"] = KeyCode.Break;
-            lookup["menu"] = KeyCode.Menu;
+
             lookup["mouse0"] = KeyCode.Mouse0;
             lookup["mouse1"] = KeyCode.Mouse1;
             lookup["mouse2"] = KeyCode.Mouse2;
@@ -458,6 +462,7 @@ namespace LunarPluginInternal
             lookup["mouse4"] = KeyCode.Mouse4;
             lookup["mouse5"] = KeyCode.Mouse5;
             lookup["mouse6"] = KeyCode.Mouse6;
+
             lookup["joy0"] = KeyCode.JoystickButton0;
             lookup["joy1"] = KeyCode.JoystickButton1;
             lookup["joy2"] = KeyCode.JoystickButton2;
@@ -553,11 +558,15 @@ namespace LunarPluginInternal
         {
             get
             {
-                ICollection<string> keys = keyCodeLookup.Keys;
-                string[] names = new string[keys.Count];
-                keys.CopyTo(names, 0);
+                if (s_names == null)
+                {
+                    ICollection<string> keys = keyCodeLookup.Keys;
+                    s_names = new string[keys.Count];
+                    keys.CopyTo(s_names, 0);
+                    Array.Sort(s_names);
+                }
 
-                return names;
+                return s_names;
             }
         }
 

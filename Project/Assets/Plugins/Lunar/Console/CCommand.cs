@@ -328,7 +328,7 @@ namespace LunarPlugin
             }
         }
 
-        private void ParseOption(Iterator<string> iter, Option opt)
+        private void ParseOption(Iterator<string> iter, Option opt) // FIXME: fix '-' and '--' args
         {
             Type type = opt.Target.FieldType;
             opt.IsHandled = true;
@@ -774,7 +774,10 @@ namespace LunarPlugin
         /// </summary>
         protected void Print(string[] table)
         {
-            m_delegate.LogTerminal(table);
+            if (table != null && table.Length > 0)
+            {
+                m_delegate.LogTerminal(table);
+            }
         }
 
         /// <summary>
@@ -1127,6 +1130,20 @@ namespace LunarPlugin
         }
 
         internal bool IsManualMode { get; set; }
+
+        internal static CommandListOptions DefaultListOptions
+        {
+            get
+            {
+                CommandListOptions options = CommandListOptions.None;
+                if (Config.isDebugBuild)
+                {
+                    options |= CommandListOptions.Debug;
+                }
+
+                return options;
+            }
+        }
 
         protected bool IsIgnoreOptions { get; set; }
 

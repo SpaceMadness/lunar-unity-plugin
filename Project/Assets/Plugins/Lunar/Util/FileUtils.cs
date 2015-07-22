@@ -54,8 +54,12 @@ namespace LunarPluginInternal
 
             if (Directory.Exists(path))
             {
+                #if !UNITY_WEBPLAYER
                 Directory.Delete(path, true);
                 return true;
+                #else
+                return false;
+                #endif
             }
 
             if (FileExists(path))

@@ -21,7 +21,7 @@ namespace CCommandTests
         [Test]
         public void testCommandsSuggestion()
         {
-            assertSuggestions("¶", //
+            AssertSuggestions("¶", //
                     "Alias1",//
                     "Alias2",//
                     "Alias3",//
@@ -37,7 +37,7 @@ namespace CCommandTests
         [Test]
         public void testCommandsSuggestionFiltered1()
         {
-            assertSuggestions("a¶", //
+            AssertSuggestions("a¶", //
                     "Alias1",//
                     "Alias2",//
                     "Alias3"
@@ -47,7 +47,7 @@ namespace CCommandTests
         [Test]
         public void testCommandsSuggestionFiltered2()
         {
-            assertSuggestions("t¶", //
+            AssertSuggestions("t¶", //
                     "test1", //
                     "test2", //
                     "test3"
@@ -57,7 +57,7 @@ namespace CCommandTests
         [Test]
         public void testCommandsSuggestionFiltered3()
         {
-            assertSuggestions("v¶", //
+            AssertSuggestions("v¶", //
                     "Var1",  //
                     "Var12", //
                     "Var2"
@@ -67,7 +67,7 @@ namespace CCommandTests
         [Test]
         public void testCommandsSuggestionFiltered4()
         {
-            assertSuggestions("var1¶", //
+            AssertSuggestions("var1¶", //
                     "Var1",  //
                     "Var12"
             );
@@ -76,7 +76,7 @@ namespace CCommandTests
         [Test]
         public void testCommandsSuggestionFiltered5()
         {
-            assertSuggestions("var12¶", //
+            AssertSuggestions("var12¶", //
                     "Var12"
             );
         }
@@ -84,7 +84,7 @@ namespace CCommandTests
         [Test]
         public void testCommandsSuggestionFiltered6()
         {
-            assertSuggestions("Var123¶");
+            AssertSuggestions("Var123¶");
         }
 
         //////////////////////////////////////////////////////////////////////////////
@@ -93,7 +93,7 @@ namespace CCommandTests
         [Test]
         public void testOptionsSuggestion()
         {
-            assertSuggestions("test1 --¶", //
+            AssertSuggestions("test1 --¶", //
                     "--boolOpt1", //
                     "--boolOpt12", //
                     "--boolOpt2", //
@@ -110,7 +110,7 @@ namespace CCommandTests
         [Test]
         public void testOptionsSuggestionMultiple()
         {
-            assertSuggestions("test1 --boolOpt1 --¶", //
+            AssertSuggestions("test1 --boolOpt1 --¶", //
                     "--boolOpt1", //
                     "--boolOpt12", //
                     "--boolOpt2", //
@@ -127,7 +127,7 @@ namespace CCommandTests
         [Test]
         public void testOptionsSuggestionMultipleWithValue()
         {
-            assertSuggestions("test1 --boolOpt1 --op1 value1 --¶", //
+            AssertSuggestions("test1 --boolOpt1 --op1 value1 --¶", //
                     "--boolOpt1", //
                     "--boolOpt12", //
                     "--boolOpt2", //
@@ -144,7 +144,7 @@ namespace CCommandTests
         [Test]
         public void testOptionsSuggestionMultipleWithIncorrectValue()
         {
-            assertSuggestions("test1 --boolOpt1 --op1 foo --¶", //
+            AssertSuggestions("test1 --boolOpt1 --op1 foo --¶", //
                     "--boolOpt1", //
                     "--boolOpt12", //
                     "--boolOpt2", //
@@ -161,7 +161,7 @@ namespace CCommandTests
         [Test]
         public void testOptionsSuggestionMultipleWithArg()
         {
-            assertSuggestions("test1 --boolOpt1 --op12 arg --¶", //
+            AssertSuggestions("test1 --boolOpt1 --op12 arg --¶", //
                     "--boolOpt1", //
                     "--boolOpt12", //
                     "--boolOpt2", //
@@ -178,7 +178,7 @@ namespace CCommandTests
         [Test]
         public void testOptionsSuggestionFiltered1()
         {
-            assertSuggestions("test1 --b¶", //
+            AssertSuggestions("test1 --b¶", //
                     "--boolOpt1", //
                     "--boolOpt12", //
                     "--boolOpt2"
@@ -188,7 +188,7 @@ namespace CCommandTests
         [Test]
         public void testOptionsSuggestionFiltered2()
         {
-            assertSuggestions("test1 --boolOpt1¶", //
+            AssertSuggestions("test1 --boolOpt1¶", //
                     "--boolOpt1", //
                     "--boolOpt12"
             );
@@ -197,7 +197,7 @@ namespace CCommandTests
         [Test]
         public void testOptionsSuggestionFiltered3()
         {
-            assertSuggestions("test1 --boolOpt12¶", //
+            AssertSuggestions("test1 --boolOpt12¶", //
                     "--boolOpt12"
             );
         }
@@ -205,19 +205,19 @@ namespace CCommandTests
         [Test]
         public void testOptionsSuggestionFiltered4()
         {
-            assertSuggestions("test2 --boolOpt ¶");
+            AssertSuggestions("test2 --boolOpt ¶");
         }
 
         [Test]
         public void testOptionsSuggestionFiltered5()
         {
-            assertSuggestions("test1 --boolOpt123¶");
+            AssertSuggestions("test1 --boolOpt123¶");
         }
 
         [Test]
         public void testOptionsSuggestionFilteredWithArgs()
         {
-            assertSuggestions("test1 --boolOpt12 ¶", //
+            AssertSuggestions("test1 --boolOpt12 ¶", //
                     "foo", //
                     "val1", //
                     "val12", //
@@ -229,7 +229,7 @@ namespace CCommandTests
         [Test]
         public void testOptionValuesSuggestion()
         {
-            assertSuggestions("test3 --opt ¶", //
+            AssertSuggestions("test3 --opt ¶", //
                     "a2", "aa1", "aa11", "aa111", "aa112", "aa113", "aa12", "aa13", "b"
             );
         }
@@ -237,7 +237,7 @@ namespace CCommandTests
         [Test]
         public void testOptionValuesSuggestionFiltered1()
         {
-            assertSuggestions("test3 --opt a¶", //
+            AssertSuggestions("test3 --opt a¶", //
                     "a2", "aa1", "aa11", "aa111", "aa112", "aa113", "aa12", "aa13"
             );
         }
@@ -245,7 +245,7 @@ namespace CCommandTests
         [Test]
         public void testOptionValuesSuggestionFiltered2()
         {
-            assertSuggestions("test3 --opt aa111¶", //
+            AssertSuggestions("test3 --opt aa111¶", //
                     "aa111"
             );
         }
@@ -253,7 +253,7 @@ namespace CCommandTests
         [Test]
         public void testOptionValuesSuggestionFilteredWithArgs1()
         {
-            assertSuggestions("test3 --opt aa111 ¶",
+            AssertSuggestions("test3 --opt aa111 ¶",
                     "arg1", //
                     "arg12", //
                     "arg2"
@@ -263,11 +263,24 @@ namespace CCommandTests
         [Test]
         public void testOptionValuesSuggestionFilteredWithArgs2()
         {
-            assertSuggestions("test3 --opt aa111 arg1¶",
+            AssertSuggestions("test3 --opt aa111 arg1¶",
                     "arg1", //
                     "arg12"
             );
         }
+
+        #region Helpers
+
+        private void AssertSuggestions(String line, params String[] expected)
+        {
+            int index = line.IndexOf('¶');
+            Assert.IsTrue(index != -1);
+
+            String[] actual = StringUtils.RemoveRichTextTags(CommandAutocompletion.getSuggestions(line.Replace("¶", ""), index));
+            Assert.AreEqual(actual, expected);
+        }
+
+        #endregion
 
         //////////////////////////////////////////////////////////////////////////////
         // Lifecycle

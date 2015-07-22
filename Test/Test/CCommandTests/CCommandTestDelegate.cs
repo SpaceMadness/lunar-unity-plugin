@@ -60,7 +60,7 @@ namespace CCommandTests
             CRegistery.Unregister("action");
 
             Execute("action", false);
-            AssertResult("action: command not found"); // FIXME);
+            AssertResult("action: command not found"); // FIXME
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace CCommandTests
             CRegistery.Unregister("action");
 
             Execute("action", false);
-            AssertResult("action: command not found"); // FIXME);
+            AssertResult("action: command not found"); // FIXME
         }
 
         #endregion

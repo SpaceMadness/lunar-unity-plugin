@@ -166,59 +166,6 @@ namespace CCommandTests
 
         #endregion
 
-        #region Auto Completion
-
-        [Test]
-        public void TestAutocompletionSingleTabSingleChoice()
-        {
-//            CommandDelegate del = new CommandDelegate();
-//
-//            bind cmd = new bind();
-//            cmd.Delegate = del;
-//
-//            string commandLine = "bind del";
-//            IList<string> tokens = CommandTokenizer.Tokenize(commandLine);
-//
-//            Assert.AreEqual("bind delete ", cmd.AutoComplete(commandLine, tokens, false));
-
-            throw new NotImplementedException("Implement me");
-        }
-
-        [Test]
-        public void TestAutocompletionSingleTabMultipleChoice()
-        {
-//            CommandDelegate del = new CommandDelegate();
-//
-//            bind cmd = new bind();
-//            cmd.Delegate = del;
-//
-//            string commandLine = "bind mou";
-//            IList<string> tokens = CommandTokenizer.Tokenize(commandLine);
-//
-//            Assert.AreEqual("bind mouse", cmd.AutoComplete(commandLine, tokens, false));
-
-            throw new NotImplementedException("Implement me");
-        }
-
-        [Test]
-        public void TestAutocompletionDoubleTabMultipleChoice()
-        {
-//            CommandDelegate del = new CommandDelegate();
-//
-//            bind cmd = new bind();
-//            cmd.Delegate = del;
-//
-//            string commandLine = "bind mou";
-//            IList<string> tokens = CommandTokenizer.Tokenize(commandLine);
-//
-//            Assert.AreEqual("bind mouse", cmd.AutoComplete(commandLine, tokens, true));
-//            AssertArray(del.table, "mouse0", "mouse1", "mouse2", "mouse3", "mouse4", "mouse5", "mouse6");
-
-            throw new NotImplementedException("Implement me");
-        }
-
-        #endregion
-
         #region Input
 
         [Test]

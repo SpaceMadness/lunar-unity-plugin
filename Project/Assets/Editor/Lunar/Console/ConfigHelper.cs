@@ -35,6 +35,8 @@ namespace LunarEditor
 {
     static class ConfigHelper
     {
+        private static string configPath;
+
         public static IList<string> ListConfigs(string token = null)
         {
             List<string> result = new List<string>();
@@ -99,18 +101,27 @@ namespace LunarEditor
             return Path.Combine(ConfigPath, path);
         }
 
-        public static string ConfigPath // FIXME: cache the value
+        public static string ConfigPath
         {
             get
             {
-                try
+                if (configPath == null)
                 {
-                    return Path.Combine(FileUtils.DataPath, "configs");
+                    configPath = ResolveConfigsPath();
                 }
-                catch (MissingMethodException)
-                {
-                    return Path.Combine(Path.GetTempPath(), "configs");
-                }
+                return configPath;
+            }
+        }
+
+        private static string ResolveConfigsPath()
+        {
+            try
+            {
+                return Path.Combine(FileUtils.DataPath, "configs");
+            }
+            catch (MissingMethodException)
+            {
+                return Path.Combine(Path.GetTempPath(), "configs");
             }
         }
     }

@@ -92,11 +92,6 @@ namespace CCommandTests
             }
         }
 
-        protected void AssertResult(params string[] expected)
-        {
-            AssertList(this.Result, expected);
-        }
-
         protected void ClearResult()
         {
             this.Result.Clear();
@@ -112,15 +107,6 @@ namespace CCommandTests
             bool result = App.ExecCommand(commandLine, true);
             Assert.IsFalse(result ^ shouldSucceed, "Command should " + (shouldSucceed ? "succeed" : "fail") + ": " + commandLine);
             return result;
-        }
-
-        protected void assertSuggestions(String line, params String[] expected)
-        {
-            int index = line.IndexOf('¶');
-            Assert.IsTrue(index != -1);
-
-            String[] actual = StringUtils.RemoveRichTextTags(CommandAutocompletion.getSuggestions(line.Replace("¶", ""), index));
-            Assert.AreEqual(actual, expected);
         }
 
         #endregion
