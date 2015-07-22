@@ -1,4 +1,4 @@
-# Lunar plugin for Unity v0.0.3b
+# Lunar plugin for Unity v0.0.3b (C) 2015 Alex Lementuev, SpaceMadness
 
 https://github.com/SpaceMadness/lunar-unity-plugin
 
