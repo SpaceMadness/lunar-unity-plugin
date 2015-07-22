@@ -2,7 +2,7 @@
 
 Download it from the [Asset Store](https://goo.gl/xo5IIf)
 
-Requires Unity 5
+Requires Unity 4.6 or later.
 
 ## Project Goals
 
