@@ -1,6 +1,6 @@
 # Lunar Changelog
 
-## v.0.0.3 - TBA
+## v.0.0.3 - Jul 23, 2015
 **Improvements**
 * Better and more accurate autocompletion.
 * Faster commands execution (generates less garbage).
