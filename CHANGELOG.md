@@ -1,5 +1,9 @@
 # Lunar Changelog
 
+## v.0.0.4 - TBA
+**Improvements**
+* Added support for 'playmode' config.
+
 ## v.0.0.3 - Jul 23, 2015
 **Improvements**
 * Better and more accurate autocompletion.
