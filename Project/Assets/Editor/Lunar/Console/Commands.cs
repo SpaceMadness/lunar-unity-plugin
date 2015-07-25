@@ -694,6 +694,10 @@ namespace LunarEditor
             {
                 configs.Add(Constants.ConfigAutoExec);
             }
+            if (!configs.Contains(Constants.ConfigPlayMode))
+            {
+                configs.Add(Constants.ConfigPlayMode);
+            }
 
             return StringUtils.Filter(configs, token);
         }

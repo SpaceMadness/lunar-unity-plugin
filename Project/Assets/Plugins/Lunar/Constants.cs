@@ -25,5 +25,6 @@
     {
         public static readonly string ConfigDefault = "default.cfg";
         public static readonly string ConfigAutoExec = "autoexec.cfg";
+        public static readonly string ConfigPlayMode = "playmode.cfg";
     }
 }

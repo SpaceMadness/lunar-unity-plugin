@@ -78,8 +78,13 @@ namespace LunarPluginInternal
 
         protected virtual void ExecStartupConfigs()
         {
+            // TODO: unit tests
             App.ExecCommand("exec " + Constants.ConfigDefault);
             App.ExecCommand("exec " + Constants.ConfigAutoExec);
+            if (Runtime.IsPlaying)
+            {
+                App.ExecCommand("exec " + Constants.ConfigPlayMode);
+            }
         }
 
         protected virtual void RegisterCommandNotifications()
