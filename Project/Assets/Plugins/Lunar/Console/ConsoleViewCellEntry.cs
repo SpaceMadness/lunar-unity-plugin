@@ -433,7 +433,7 @@ namespace LunarPluginInternal
         {
             /*
             FIXME
-            Color color = EditorSkin.GetColor(stackLine.sourcePathExists ? ColorCode.Link : ColorCode.LinkInnactive);
+            Color color = SkinColors.GetColor(stackLine.sourcePathExists ? ColorCode.Link : ColorCode.LinkInnactive);
             
             int sourceStart = stackLine.sourcePathStart;
             int sourceEnd = stackLine.sourcePathEnd;
