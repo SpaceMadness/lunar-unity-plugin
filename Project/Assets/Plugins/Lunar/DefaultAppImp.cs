@@ -29,6 +29,8 @@ namespace LunarPluginInternal
 {
     class DefaultAppImp : AppImp, IUpdatable, IDestroyable, ICCommandDelegate
     {
+        private readonly Terminal m_terminal;
+
         private readonly CommandProcessor m_processor;
         private readonly TimerManager m_timerManager;
         private readonly NotificationCenter m_notificationCenter;
@@ -36,6 +38,8 @@ namespace LunarPluginInternal
 
         public DefaultAppImp()
         {
+            m_terminal = CreateTerminal(CVarsLunar.c_historySize.IntValue);
+
             m_timerManager = CreateTimerManager();
             m_notificationCenter = CreateNotificationCenter();
             m_processor = CreateCommandProcessor();
@@ -155,18 +159,22 @@ namespace LunarPluginInternal
 
         public virtual void LogTerminal(string message)
         {
+            this.Terminal.Add(message);
         }
 
         public virtual void LogTerminal(string[] table)
         {
+            this.Terminal.Add(table);
         }
 
         public virtual void LogTerminal(System.Exception e, string message)
         {
+            this.Terminal.Add(e, message);
         }
 
         public virtual void ClearTerminal()
         {
+            this.Terminal.Clear();
         }
 
         public virtual bool ExecuteCommandLine(string commandLine, bool manual = false)
@@ -181,7 +189,7 @@ namespace LunarPluginInternal
 
         public virtual bool IsPromptEnabled
         {
-            get { return false; }
+            get { return true; }
         }
 
         #endregion
@@ -189,6 +197,11 @@ namespace LunarPluginInternal
         //////////////////////////////////////////////////////////////////////////////
 
         #region Factory methods
+
+        protected virtual Terminal CreateTerminal(int capacity)
+        {
+            return new FormattedTerminal(capacity);
+        }
 
         protected virtual TimerManager CreateTimerManager()
         {
@@ -306,6 +319,17 @@ namespace LunarPluginInternal
             return Input.GetKey(key);
         }
 
+        #endregion
+
+        //////////////////////////////////////////////////////////////////////////////
+        
+        #region Properties
+        
+        public Terminal Terminal
+        {
+            get { return m_terminal; }
+        }
+        
         #endregion
     }
 }
