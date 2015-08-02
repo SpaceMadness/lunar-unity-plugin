@@ -28,6 +28,10 @@ namespace LunarEditor
 {
     class EditorAppImp : DefaultAppImp
     {
+        public override bool IsPromptEnabled
+        {
+            get { return true; }
+        }
     }
 }
 

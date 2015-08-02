@@ -189,7 +189,7 @@ namespace LunarPluginInternal
 
         public virtual bool IsPromptEnabled
         {
-            get { return true; }
+            get { return false; }
         }
 
         #endregion
