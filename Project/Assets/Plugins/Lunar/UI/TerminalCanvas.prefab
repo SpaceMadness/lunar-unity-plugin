@@ -178,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46cf8670597b34ae3ac60d93554b31ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 11472768}
 --- !u!114 &11426320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -626,6 +627,10 @@ Prefab:
       propertyPath: m_LineType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: input
+      value: 
+      objectReference: {fileID: 11472768}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 171638}
