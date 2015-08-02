@@ -195,11 +195,6 @@ namespace LunarEditor
             get { return s_editorInstance; }
         }
 
-        internal static Terminal Terminal
-        {
-            get { return Imp.Terminal; }
-        }
-
         protected new static EditorAppImp Imp
         {
             get { return (EditorAppImp)App.Imp; }
