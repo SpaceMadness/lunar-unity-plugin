@@ -1074,7 +1074,7 @@ namespace LunarEditor
             if (index >= 0 && index < values.Length)
             {
                 Color color = ColorUtils.FromRGB(value);
-                EditorSkin.SetColor(values[index], color);
+                SkinColors.SetColor(values[index], color);
                 
                 Print("{0}: {1}", index, StringUtils.C(values[index].ToString(), values[index]));
             }

@@ -27,9 +27,8 @@ using System.Collections.Generic;
 using System.Text;
 
 using LunarPlugin;
-using LunarPluginInternal;
 
-namespace LunarEditor
+namespace LunarPluginInternal
 {
     class Terminal : AbstractConsole
     {
@@ -122,14 +121,14 @@ namespace LunarEditor
         
         private string FormatLine(string line)
         {
-            return EditorSkin.SetColors(line);
+            return SkinColors.SetColors(line);
         }
         
         private string[] FormatLines(string[] lines)
         {
             for (int i = 0; i < lines.Length; ++i)
             {
-                lines[i] = EditorSkin.SetColors(lines[i]);
+                lines[i] = SkinColors.SetColors(lines[i]);
             }
             return lines;
         }

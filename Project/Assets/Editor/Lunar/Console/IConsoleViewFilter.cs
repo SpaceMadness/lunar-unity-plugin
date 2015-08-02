@@ -23,6 +23,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
+using LunarPluginInternal;
+
 namespace LunarEditor
 {
     interface IConsoleViewFilter

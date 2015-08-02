@@ -25,7 +25,7 @@ using System.Collections.Generic;
 
 using LunarPluginInternal;
 
-namespace LunarEditor
+namespace LunarPluginInternal
 {
     interface IConsoleDelegate
     {
@@ -157,12 +157,5 @@ namespace LunarEditor
         }
 
         #endregion
-    }
-
-    interface ITextMeasure
-    {
-        Vector2 CalcSize(string text);
-        float CalcHeight(string text, float width);
-        float LineHeight { get; }
     }
 }

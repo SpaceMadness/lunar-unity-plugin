@@ -25,15 +25,14 @@ using UnityEditor;
 using UnityEngine;
 
 using LunarPlugin;
-using LunarPluginInternal;
 
-namespace LunarEditor
+namespace LunarPluginInternal
 {
-    static class EditorSkin
+    static class SkinColors
     {
         private static Colors colors;
 
-        static EditorSkin()
+        static SkinColors()
         {
             ResolveColors();
         }

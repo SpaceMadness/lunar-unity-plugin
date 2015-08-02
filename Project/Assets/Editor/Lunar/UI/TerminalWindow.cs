@@ -30,7 +30,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class TerminalWindow : Window, ITerminalCompositeViewDelegate
+    class TerminalWindow : Window, ITerminalViewDelegate
     {
         public TerminalWindow()
             : base("Terminal")
@@ -42,7 +42,7 @@ namespace LunarEditor
 
         protected override void CreateUI()
         {
-            TerminalCompositeView terminalView = new TerminalCompositeView(this, this.Width, this.Height);
+            TerminalEditorView terminalView = new TerminalEditorView(this, this.Width, this.Height);
             AddSubview(terminalView);
         }
 

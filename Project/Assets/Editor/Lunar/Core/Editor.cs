@@ -27,6 +27,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
 
+using LunarPluginInternal;
+
 namespace LunarEditor
 {
     static partial class Editor

@@ -30,24 +30,18 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    interface ITerminalCompositeViewDelegate
-    {
-        void ExecCommand(string commandLine);
-        Terminal Terminal { get; }
-    }
-
-    class TerminalCompositeView : View
+    class TerminalEditorView : View, ITerminalView
     {
         private ConsoleView m_consoleView;
         private TextField m_commandField;
         private ToolBarLabel m_infoLabel;
 
-        private ITerminalCompositeViewDelegate m_delegate;
+        private ITerminalViewDelegate m_delegate;
 
         private float m_lastTabTimestamp;
         private string m_lastUserInput;
 
-        public TerminalCompositeView(ITerminalCompositeViewDelegate del, float width, float height)
+        public TerminalEditorView(ITerminalViewDelegate del, float width, float height)
             : base(width, height)
         {
             if (del == null)

@@ -25,9 +25,8 @@ using System;
 using System.Collections.Generic;
 
 using LunarPlugin;
-using LunarPluginInternal;
 
-namespace LunarEditor
+namespace LunarPluginInternal
 {
     using Option = CCommand.Option;
 
