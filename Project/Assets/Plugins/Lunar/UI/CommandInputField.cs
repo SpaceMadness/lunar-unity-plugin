@@ -52,7 +52,11 @@ namespace LunarPluginInternal
         void Submit()
         {
             print(this.InputField.text);
-            this.InputField.text = "";
+            if (this.Delegate != null)
+            {
+                this.Delegate.ExecuteCommand(this, this.Text);
+                this.Text = "";
+            }
         }
 
         void AutoComplete()

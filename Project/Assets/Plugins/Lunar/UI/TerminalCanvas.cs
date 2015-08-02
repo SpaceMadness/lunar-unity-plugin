@@ -6,15 +6,10 @@ namespace LunarPluginInternal
     public class TerminalCanvas : MonoBehaviour, ITerminalView, ICommandInputFieldDelegate
     {
         [SerializeField]
-        CommandInputField input; // FIXME
-
-        private Terminal m_terminal;
+        private CommandInputField input; // FIXME
 
         void OnEnable()
         {
-            if (m_terminal == null)
-                m_terminal = new FormattedTerminal(1024); // FIXME
-
             if (input == null)
             {
                 Debug.LogError("Missing command input");
@@ -33,11 +28,20 @@ namespace LunarPluginInternal
 
         public void AutoComplete(CommandInputField input, string commandLine, int index, bool doubleTab)
         {
-            string line = m_terminal.DoAutoComplete(commandLine, index, doubleTab);
+            string line = this.Terminal.DoAutoComplete(commandLine, index, doubleTab);
             if (line != null)
             {
                 input.Text = line;
             }
+        }
+
+        #endregion
+
+        #region Properties
+
+        private Terminal Terminal
+        {
+            get { return App.Terminal; }
         }
 
         #endregion

@@ -125,6 +125,11 @@ namespace LunarPluginInternal
             get { return s_sharedInstance.m_appImp; }
         }
 
+        internal static Terminal Terminal
+        {
+            get { return Imp.Terminal; }
+        }
+
         #endregion
     }
 }

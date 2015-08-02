@@ -29,6 +29,8 @@ namespace LunarPluginInternal
         void Stop();
 
         bool ExecCommand(string commandLine, bool manual);
+
+        Terminal Terminal { get; }
     }
 }
 
