@@ -13,21 +13,16 @@ class CommandInputField : MonoBehaviour
 
     void OnEnable()
     {
-        if (m_inputField == null)
+        // disable tab characters
+        this.InputField.onValidateInput = delegate(string text, int charIndex, char addedChar)
         {
-            m_inputField = GetComponent<InputField>();
-
-            // disable tab characters
-            m_inputField.onValidateInput += delegate(string text, int charIndex, char addedChar)
+            if (addedChar == '\t')
             {
-                if (addedChar == '\t')
-                {
-                    return '\0';
-                }
+                return '\0';
+            }
 
-                return addedChar;
-            };
-        }
+            return addedChar;
+        };
     }
 
     void Update ()
@@ -48,12 +43,27 @@ class CommandInputField : MonoBehaviour
 
     void Submit()
     {
-        print(m_inputField.text);
-        m_inputField.text = "";
+        print(this.InputField.text);
+        this.InputField.text = "";
     }
 
     void AutoComplete()
     {
+    }
+
+    #endregion
+
+    #region Properties
+
+    private InputField InputField
+    {
+        get
+        {
+            if (m_inputField == null)
+                m_inputField = GetComponent<InputField>();
+
+            return m_inputField;
+        }
     }
 
     #endregion
