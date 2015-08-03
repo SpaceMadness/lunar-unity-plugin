@@ -108,6 +108,7 @@
     <Compile Include="TerminalTests\AutoCompleteAliaslistTest.cs" />
     <Compile Include="TerminalTests\AutoCompleteUnaliasTest.cs" />
     <Compile Include="TerminalTests\AutoCompleteUnaliasAllTest.cs" />
+    <Compile Include="UI\MonospaceTextMeasureTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -142,6 +143,7 @@
     <Folder Include="TableViewTests\" />
     <Folder Include="TerminalTests\" />
     <Folder Include="Preferences\" />
+    <Folder Include="UI\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="unity_test_player_prefs.plist">

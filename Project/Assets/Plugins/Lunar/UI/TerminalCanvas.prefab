@@ -82,7 +82,7 @@ GameObject:
   - 224: {fileID: 22414350}
   - 222: {fileID: 22255620}
   - 114: {fileID: 11436774}
-  - 114: {fileID: 11471758}
+  - 114: {fileID: 11497282}
   m_Layer: 5
   m_Name: Output
   m_TagString: Untagged
@@ -371,26 +371,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: -2
---- !u!114 &11471758
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 145724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1297475563, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 5
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 6
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 0
 --- !u!114 &11472768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -444,6 +424,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11497282
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f20905894f11461fb56054b1e7253ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entryPrefab: {fileID: 11408118, guid: 483b5e5372598429c91edceaa79055df, type: 2}
 --- !u!222 &22209372
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -631,6 +623,15 @@ Prefab:
       propertyPath: input
       value: 
       objectReference: {fileID: 11472768}
+    - target: {fileID: 0}
+      propertyPath: m_MinHeight
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: entryPrefab
+      value: 
+      objectReference: {fileID: 11408118, guid: 483b5e5372598429c91edceaa79055df,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 171638}
