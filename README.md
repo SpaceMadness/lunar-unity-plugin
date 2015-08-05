@@ -90,6 +90,10 @@ static class Cvars
 
 Check [wiki](https://github.com/SpaceMadness/lunar-unity-plugin/wiki) page for more detailed guide.
 
+## Plugin Talk
+
+[Seattle Unity User Group - Lunar Plugin Talk (7/30/2015)](https://youtu.be/QmhfoxK9qJE)
+
 ## Showcases
 
 - [Project: Unity 2D Roguelike](http://goo.gl/je1cpc)  
