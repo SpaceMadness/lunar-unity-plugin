@@ -64,7 +64,7 @@ namespace LunarEditor
         [MenuItem("Window/Lunar/Request Feature...")]
         private static void ShowRequestFeature()
         {
-			RequestFeature.Open();
+            RequestFeature.Open();
         }
     }
 }
