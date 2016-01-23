@@ -218,7 +218,13 @@ namespace LunarEditor
             set 
             { 
                 m_text = value;
+                #if UNITY_5_1 || UNITY_5_0 || UNITY_4_6
                 CaretPos = value != null ? value.Length + 1 : 0;
+                #else
+                TimerManager.ScheduleTimer(delegate() {
+                    CaretPos = value != null ? value.Length + 1 : 0;
+                });
+                #endif
             }
         }
 
@@ -235,15 +241,24 @@ namespace LunarEditor
             get 
             {
                 TextEditor editor = (TextEditor) GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
+                #if UNITY_5_1 || UNITY_5_0 || UNITY_4_6
                 return editor.pos;
+                #else
+                return editor.cursorIndex;
+                #endif
             }
             set
             {
                 TextEditor editor = (TextEditor) GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
 
                 int pos = Mathf.Max(0, Mathf.Min(value, Text.Length + 1));
+                #if UNITY_5_1 || UNITY_5_0 || UNITY_4_6
                 editor.selectPos = pos;
                 editor.pos = pos;
+                #else
+                editor.selectIndex = pos;
+                editor.cursorIndex = pos;
+                #endif
             }
         }
 
