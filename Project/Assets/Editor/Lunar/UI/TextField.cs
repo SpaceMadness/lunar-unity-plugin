@@ -241,7 +241,7 @@ namespace LunarEditor
             get 
             {
                 TextEditor editor = (TextEditor) GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
-                #if UNITY_5_1 || UNITY_5_0 || UNITY_4_6
+                #if UNITY_5_1 || UNITY_5_0 || UNITY_4_7 || UNITY_4_6 || UNITY_4_5 || UNITY_4_4 || UNITY_4_3 || UNITY_4_2 || UNITY_4_1 || UNITY_4
                 return editor.pos;
                 #else
                 return editor.cursorIndex;
@@ -252,7 +252,7 @@ namespace LunarEditor
                 TextEditor editor = (TextEditor) GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
 
                 int pos = Mathf.Max(0, Mathf.Min(value, Text.Length + 1));
-                #if UNITY_5_1 || UNITY_5_0 || UNITY_4_6
+                #if UNITY_5_1 || UNITY_5_0 || UNITY_4_7 || UNITY_4_6 || UNITY_4_5 || UNITY_4_4 || UNITY_4_3 || UNITY_4_2 || UNITY_4_1 || UNITY_4
                 editor.selectPos = pos;
                 editor.pos = pos;
                 #else

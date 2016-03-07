@@ -262,7 +262,7 @@ namespace LunarPlugin
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void Initialize()
         {
-            #if UNITY_4_6 || UNITY_4_5 || UNITY_4_4 || UNITY_4_3 || UNITY_4_2 || UNITY_4_1 || UNITY_4
+            #if UNITY_4_7 || UNITY_4_6 || UNITY_4_5 || UNITY_4_4 || UNITY_4_3 || UNITY_4_2 || UNITY_4_1 || UNITY_4
             UnityEngine.Application.RegisterLogCallback(UnityLogCallbackHandler);
             #else
             UnityEngine.Application.logMessageReceived += UnityLogCallbackHandler;

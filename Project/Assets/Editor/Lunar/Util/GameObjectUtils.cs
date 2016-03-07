@@ -47,7 +47,7 @@ public static class GameObjectUtils
         return list;
     }
 
-    #if !UNITY_4_6
+    #if !(UNITY_4_7 || UNITY_4_6 || UNITY_4_5 || UNITY_4_4 || UNITY_4_3 || UNITY_4_2 || UNITY_4_1 || UNITY_4)
     public static IList<GameObject> ListChildren(string name, GameObjectFilter filter)
     {
         GameObject obj = GameObject.Find(name);
@@ -69,7 +69,7 @@ public static class GameObjectUtils
 
         return list;
     }
-    #endif // !UNITY_4_6
+    #endif // !(UNITY_4_7 || UNITY_4_6 || UNITY_4_5 || UNITY_4_4 || UNITY_4_3 || UNITY_4_2 || UNITY_4_1 || UNITY_4)
 
     public static bool ShouldListObject(GameObject obj, string prefix)
     {
