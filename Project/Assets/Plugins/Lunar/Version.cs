@@ -19,7 +19,10 @@
 //  limitations under the License.
 //
 
-﻿public static class Version
+namespace LunarPluginInternal
 {
-    public static readonly string VERSION = "0.0.7b";
+    static class Version
+    {
+        public static readonly string VERSION = "0.0.7b";
+    }
 }
