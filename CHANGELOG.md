@@ -3,6 +3,7 @@
 ## v.0.0.7 - Jan 24, 2016
 **Fixes**
 * Fixed key bindings in the Game View for Unity 5.x.
+* Added support for Unity 4.7
 
 ## v.0.0.5 - Jan 24, 2016
 **Fixes**
