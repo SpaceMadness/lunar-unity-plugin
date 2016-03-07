@@ -13,6 +13,7 @@ namespace LunarPlugin.Test
         public TestAppImp(TestApp app)
         {
             m_app = app;
+            AddUpdatable(UpdateBindings);
         }
 
         protected override void ResolveCommands()
@@ -69,6 +70,11 @@ namespace LunarPlugin.Test
             {
                 Delegate.ClearTerminal();
             }
+        }
+
+        void UpdateBindings(float dt)
+        {
+            UpdateKeyBindings();
         }
 
         protected override bool GetKeyDown(KeyCode key)

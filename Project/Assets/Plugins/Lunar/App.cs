@@ -68,6 +68,14 @@ namespace LunarPluginInternal
             return Imp.ExecCommand(commandLine, manual);
         }
 
+        internal static void UpdateKeyBindings()
+        {
+            if (s_sharedInstance != null)
+            {
+                Imp.UpdateKeyBindings();
+            }
+        }
+
         #endregion
 
         //////////////////////////////////////////////////////////////////////////////

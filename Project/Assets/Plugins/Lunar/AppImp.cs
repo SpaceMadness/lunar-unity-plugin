@@ -27,6 +27,7 @@ namespace LunarPluginInternal
     {
         void Start();
         void Stop();
+        void UpdateKeyBindings();
 
         bool ExecCommand(string commandLine, bool manual);
     }

@@ -21,5 +21,5 @@
 
 ﻿public static class Version
 {
-    public static readonly string VERSION = "0.0.6b";
+    public static readonly string VERSION = "0.0.7b";
 }

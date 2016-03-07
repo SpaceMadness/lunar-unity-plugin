@@ -33,7 +33,6 @@ namespace LunarPluginInternal
         private readonly TimerManager m_timerManager;
         private readonly NotificationCenter m_notificationCenter;
         private readonly UpdatableList m_updatables;
-        private readonly bool[] m_pressedKeys;
 
         public DefaultAppImp()
         {
@@ -43,9 +42,6 @@ namespace LunarPluginInternal
 
             m_updatables = new UpdatableList(2);
             m_updatables.Add(m_timerManager);
-            m_updatables.Add(UpdateBindings);
-
-            m_pressedKeys = new bool[(int)KeyCode.Joystick8Button19];
         }
 
         //////////////////////////////////////////////////////////////////////////////
@@ -127,6 +123,26 @@ namespace LunarPluginInternal
         public void Update(float dt)
         {
             m_updatables.Update(dt);
+        }
+
+        protected void AddUpdatable(IUpdatable updatable)
+        {
+            m_updatables.Add(updatable);
+        }
+
+        protected void AddUpdatable(UpdatableDelegate updatable)
+        {
+            m_updatables.Add(updatable);
+        }
+
+        protected void RemoveUpdatable(IUpdatable updatable)
+        {
+            m_updatables.Remove(updatable);
+        }
+
+        protected void RemoveUpdatable(UpdatableDelegate updatable)
+        {
+            m_updatables.Remove(updatable);
         }
 
         #endregion
@@ -256,17 +272,13 @@ namespace LunarPluginInternal
 
         #region Bindings
 
-        private void UpdateBindings(float delta)
+        public void UpdateKeyBindings()
         {
             IList<CBinding> bindings = CBindings.BindingsList;
             for (int i = 0; i < bindings.Count; ++i)
             {
                 KeyCode key = bindings[i].key;
-                bool keyPressed = GetKey(key);
-                bool keyWasPressed = m_pressedKeys[(int) key];
-                m_pressedKeys[(int) key] = keyPressed;
-
-                if (keyPressed && !keyWasPressed)
+                if (GetKeyDown(key))
                 {
                     if (IsValidModifiers(bindings[i].shortCut))
                     {
@@ -274,7 +286,7 @@ namespace LunarPluginInternal
                         ExecCommand(commandLine, false);
                     }
                 }
-                else if (!keyPressed && keyWasPressed)
+                else if (GetKeyUp(key))
                 {
                     if (IsValidModifiers(bindings[i].shortCut))
                     {

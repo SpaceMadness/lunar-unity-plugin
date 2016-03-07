@@ -188,6 +188,24 @@ namespace LunarEditor
 
         //////////////////////////////////////////////////////////////////////////////
 
+        #region Playmode
+
+        internal static void OnPlayModeChanged(bool isPlaying)
+        {
+            Editor.OnPlayModeChanged(isPlaying);
+
+            if (isPlaying)
+            {
+                // create a runtime object to properly handle key bindings
+                GameObject runtimeObj = new GameObject("Lunar Runtime Behaviour");
+                runtimeObj.AddComponent<LunarRuntimeBehaviour>();
+            }
+        }
+
+        #endregion
+
+        //////////////////////////////////////////////////////////////////////////////
+
         #region Properties
 
         internal static EditorApp EditorInstance
