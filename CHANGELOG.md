@@ -1,6 +1,14 @@
 # Lunar Changelog
 
-## v.0.0.4 - TBA
+## v.0.0.7 - Jan 24, 2016
+**Fixes**
+* Fixed key bindings in the Game View for Unity 5.x.
+
+## v.0.0.5 - Jan 24, 2016
+**Fixes**
+* Fixed support for Unity 5.2+.
+
+## v.0.0.4 - Jul 27, 2015
 **Improvements**
 * Added support for 'playmode' config.
 
