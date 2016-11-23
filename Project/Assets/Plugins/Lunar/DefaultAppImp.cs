@@ -120,7 +120,7 @@ namespace LunarPluginInternal
 
         #region IUpdatable
 
-        public void Update(float dt)
+        public virtual void Update(float dt)
         {
             m_updatables.Update(dt);
         }
@@ -161,7 +161,7 @@ namespace LunarPluginInternal
 
         #region Commands
 
-        public bool ExecCommand(string commandLine, bool manual)
+        public virtual bool ExecCommand(string commandLine, bool manual)
         {
             return m_processor.TryExecute(commandLine, manual);
         }

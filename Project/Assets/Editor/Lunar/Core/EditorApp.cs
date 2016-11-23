@@ -218,7 +218,7 @@ namespace LunarEditor
             get { return Imp.Terminal; }
         }
 
-        protected new static EditorAppImp Imp
+        public new static EditorAppImp Imp
         {
             get { return (EditorAppImp)App.Imp; }
         }
