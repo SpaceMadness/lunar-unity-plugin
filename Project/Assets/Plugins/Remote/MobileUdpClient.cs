@@ -7,12 +7,6 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    // TODO:
-    // 0. live in EditorApp
-    // 1. discover server list
-    // 2. connect/disconnect to server
-    // 3. send command(called by EditorApp)
-    // 4. receive result(send to EditorAppImp)
     class MobileUdpClient
     {
         public class Server : IEquatable<Server>
