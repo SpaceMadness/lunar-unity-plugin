@@ -19,19 +19,11 @@
 //  limitations under the License.
 //
 
-﻿using UnityEngine;
-using UnityEditor;
-using UnityEditorInternal;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
-using LunarPlugin;
-using LunarPluginInternal;
-
-namespace LunarEditor
+namespace LunarPluginInternal
 {
     static class ConfigHelper
     {

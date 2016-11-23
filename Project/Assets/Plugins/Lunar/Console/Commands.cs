@@ -20,17 +20,17 @@
 //
 
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-using UnityEditorInternal;
+#endif // UNITY_EDITOR
 
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 using LunarPlugin;
-using LunarPluginInternal;
 
-namespace LunarEditor
+namespace LunarPluginInternal
 {
     //////////////////////////////////////////////////////////////////////////////
     
@@ -760,9 +760,10 @@ namespace LunarEditor
             return Cmd_alias.ListAliasesConfig();
         }
     }
-    
+
     //////////////////////////////////////////////////////////////////////////////
-    
+
+    #if UNITY_EDITOR
     [CCommand("cat", Description="Prints the content of a config file")]
     class Cmd_cat : CCommand
     {
@@ -806,6 +807,7 @@ namespace LunarEditor
             return ConfigHelper.ListConfigs(token);
         }
     }
+    #endif // UNITY_EDITOR
 
     //////////////////////////////////////////////////////////////////////////////
     
@@ -863,6 +865,7 @@ namespace LunarEditor
 
     //////////////////////////////////////////////////////////////////////////////
 
+    #if UNITY_EDITOR
     [CCommand("menu", Description="Invokes the menu item in the specified path")]
     class Cmd_menu : CCommand
     {
@@ -871,6 +874,7 @@ namespace LunarEditor
             return EditorApplication.ExecuteMenuItem(menuItemPath);
         }
     }
+    #endif // UNITY_EDITOR
 
     //////////////////////////////////////////////////////////////////////////////
     

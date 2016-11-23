@@ -23,17 +23,52 @@
 
 using LunarPlugin;
 using LunarPluginInternal;
+using Lidgren.Network;
 
 namespace LunarEditor
 {
     class EditorAppImp : DefaultAppImp
     {
         private readonly Terminal m_terminal;
+        private MobileUdpClient m_udpClient;
+
+        public MobileUdpClient udpClient { get { return m_udpClient; } }
 
         public EditorAppImp()
         {
             m_terminal = CreateTerminal(CVarsLunar.c_historySize.IntValue);
+            m_udpClient = new MobileUdpClient(this);
         }
+
+        //////////////////////////////////////////////////////////////////////////////
+
+        #region IUpdatable
+        public override void Update(float dt)
+        {
+            base.Update(dt);
+            m_udpClient.Update();
+        }
+
+        #endregion IUpdatable
+
+        //////////////////////////////////////////////////////////////////////////////
+
+        #region Commands
+
+        public override bool ExecCommand(string commandLine, bool manual)
+        {
+            if (m_udpClient.connectionStatus == NetConnectionStatus.Connected)
+            {
+                m_udpClient.Send(commandLine, manual);
+                return true;
+            }
+            else
+            {
+                return base.ExecCommand(commandLine, manual);
+            }
+        }
+
+        #endregion
 
         //////////////////////////////////////////////////////////////////////////////
 
