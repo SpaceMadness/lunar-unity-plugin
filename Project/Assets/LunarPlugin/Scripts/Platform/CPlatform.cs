@@ -44,10 +44,10 @@ namespace LunarPluginInternal
             {
                 if (Application.isEditor)
                 {
-                    Type type = ClassUtils.TypeForName(EditorPlatformType);
+                    Type type = CClassUtils.TypeForName(EditorPlatformType);
                     if (type != null)
                     {
-                        return ClassUtils.CreateInstance<CPlatformImpl>(type);
+                        return CClassUtils.CreateInstance<CPlatformImpl>(type);
                     }
                     else
                     {
@@ -60,8 +60,8 @@ namespace LunarPluginInternal
             catch (MissingMethodException) // FIXME: I don't like this
             {
                 // unit test running
-                Type type = ClassUtils.TypeForName("LunarPluginInternal.TestingPlatform");
-                return ClassUtils.CreateInstance<CPlatformImpl>(type);
+                Type type = CClassUtils.TypeForName("LunarPluginInternal.TestingPlatform");
+                return CClassUtils.CreateInstance<CPlatformImpl>(type);
             }
         }
 

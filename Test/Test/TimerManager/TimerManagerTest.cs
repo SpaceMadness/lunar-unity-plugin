@@ -362,7 +362,7 @@ namespace LunarPlugin.Test.Timers
 
         private static CTimer NextTimer(CTimer timer)
         {
-            return ClassUtils.GetObjectField<CTimer>(timer, "next");
+            return CClassUtils.GetObjectField<CTimer>(timer, "next");
         }
     }
 

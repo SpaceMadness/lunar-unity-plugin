@@ -161,7 +161,7 @@ namespace CCommandTests
         {
             Type type = typeof(T);
 
-            List<MethodInfo> methods = ClassUtils.ListInstanceMethods(type, delegate(MethodInfo method)
+            List<MethodInfo> methods = CClassUtils.ListInstanceMethods(type, delegate(MethodInfo method)
             {
                 return method.Name.Equals("Execute");
             });

@@ -54,7 +54,7 @@ namespace CCommandTests
 
         protected void RegisterCommand(Type type, bool hidden = true)
         {
-            CCommand command = ClassUtils.CreateInstance<CCommand>(type);
+            CCommand command = CClassUtils.CreateInstance<CCommand>(type);
             if (command == null)
             {
                 throw new ArgumentException("Can't create class instance: " + type.FullName);

@@ -94,7 +94,7 @@ namespace LunarPluginInternal
                     return null;
                 }
 
-                CCommand command = ClassUtils.CreateInstance<CCommand>(type);
+                CCommand command = CClassUtils.CreateInstance<CCommand>(type);
                 if (command != null)
                 {
                     command.Name = commandName;

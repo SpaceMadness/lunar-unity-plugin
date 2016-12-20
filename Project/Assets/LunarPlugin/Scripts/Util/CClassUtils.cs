@@ -31,9 +31,9 @@ using UnityEngine;
 
 namespace LunarPluginInternal
 {
-    delegate bool ListMethodsFilter(MethodInfo method);
+    delegate bool CMethodsFilter(MethodInfo method);
 
-    static class ClassUtils
+    static class CClassUtils
     {
         public static T Cast<T>(object obj) where T : class
         {
@@ -88,17 +88,17 @@ namespace LunarPluginInternal
             return null;
         }
 
-        public static List<MethodInfo> ListInstanceMethods(Type type, ListMethodsFilter filter)
+        public static List<MethodInfo> ListInstanceMethods(Type type, CMethodsFilter filter)
         {
             return ListInstanceMethods(new List<MethodInfo>(), type, filter);
         }
 
-        public static List<MethodInfo> ListInstanceMethods(List<MethodInfo> outList, Type type, ListMethodsFilter filter)
+        public static List<MethodInfo> ListInstanceMethods(List<MethodInfo> outList, Type type, CMethodsFilter filter)
         {
             return ListMethods(outList, type, filter, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
         }
 
-        public static List<MethodInfo> ListMethods(List<MethodInfo> outList, Type type, ListMethodsFilter filter, BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
+        public static List<MethodInfo> ListMethods(List<MethodInfo> outList, Type type, CMethodsFilter filter, BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
         {
             CAssert.IsNotNull(type, "Type is null");
 

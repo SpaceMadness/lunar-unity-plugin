@@ -273,7 +273,7 @@ namespace LunarPluginInternal
             CAssert.IsTrue(pairs.Length % 2 == 0);
             for (int i = 0; i < pairs.Length;)
             {
-                string key = ClassUtils.Cast<string>(pairs [i++]);
+                string key = CClassUtils.Cast<string>(pairs [i++]);
                 object value = pairs [i++];
 
                 this.Set(key, value);

@@ -101,7 +101,7 @@ namespace LunarPluginInternal
 
         public T UserData<T>() where T : class
         {
-            return ClassUtils.Cast<T>(userData);
+            return CClassUtils.Cast<T>(userData);
         }
 
         public bool IsRepeated

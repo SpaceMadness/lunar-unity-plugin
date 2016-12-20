@@ -264,7 +264,7 @@ namespace LunarPlugin
         {
             List<MethodInfo> result = new List<MethodInfo>();
 
-            ListMethodsFilter filter = delegate(MethodInfo method)
+            CMethodsFilter filter = delegate(MethodInfo method)
             {
                 if (method.Name != "Execute")
                 {
@@ -282,7 +282,7 @@ namespace LunarPlugin
             Type type = GetCommandType();
             while (type != null)
             {
-                ClassUtils.ListInstanceMethods(result, type, filter);
+                CClassUtils.ListInstanceMethods(result, type, filter);
                 type = type.BaseType;
             }
             
@@ -954,7 +954,7 @@ namespace LunarPlugin
                 if (arr != null)
                 {
                     int length = arr.Length;
-                    string elementTypeName = ClassUtils.TypeShortName(arr.GetType().GetElementType());
+                    string elementTypeName = CClassUtils.TypeShortName(arr.GetType().GetElementType());
 
                     StringBuilder result = new StringBuilder();
                     for (int i = 0; i < length; ++i)
@@ -969,7 +969,7 @@ namespace LunarPlugin
                 }
             }
 
-            string typename = ClassUtils.TypeShortName(type);
+            string typename = CClassUtils.TypeShortName(type);
             return typename != null ? typename : "opt";
         }
 
