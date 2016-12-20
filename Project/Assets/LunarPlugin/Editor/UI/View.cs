@@ -820,7 +820,7 @@ namespace LunarEditor
                 if (m_consoleTextStyle == null)
                 {
                     m_consoleTextStyle = new GUIStyle(GUI.skin.label);
-                    m_consoleTextStyle.font = (Font) UnityEditor.AssetDatabase.LoadAssetAtPath(Constants.PluginHome + "/Editor/Menlo-Regular.ttf", typeof(Font)); // FIXME: embed in configuration
+                    m_consoleTextStyle.font = (Font) UnityEditor.AssetDatabase.LoadAssetAtPath(LPConstants.PluginHome + "/Editor/Menlo-Regular.ttf", typeof(Font)); // FIXME: embed in configuration
                     m_consoleTextStyle.fontSize = 12;
                     m_consoleTextStyle.normal.textColor = EditorSkin.GetColor(ColorCode.Plain);
                     m_consoleTextStyle.richText = true;

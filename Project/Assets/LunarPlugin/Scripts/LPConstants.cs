@@ -21,7 +21,7 @@
 
 ﻿namespace LunarPluginInternal
 {
-    static class Constants
+    static class LPConstants
     {
         public static readonly string PluginHome = "Assets/LunarPlugin";
         public static readonly string ConfigDefault = "default.cfg";

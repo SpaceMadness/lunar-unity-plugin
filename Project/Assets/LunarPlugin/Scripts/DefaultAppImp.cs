@@ -78,11 +78,11 @@ namespace LunarPluginInternal
         protected virtual void ExecStartupConfigs()
         {
             // TODO: unit tests
-            App.ExecCommand("exec " + Constants.ConfigDefault);
-            App.ExecCommand("exec " + Constants.ConfigAutoExec);
+            App.ExecCommand("exec " + LPConstants.ConfigDefault);
+            App.ExecCommand("exec " + LPConstants.ConfigAutoExec);
             if (Runtime.IsPlaying)
             {
-                App.ExecCommand("exec " + Constants.ConfigPlayMode);
+                App.ExecCommand("exec " + LPConstants.ConfigPlayMode);
             }
         }
 
@@ -263,7 +263,7 @@ namespace LunarPluginInternal
 
         protected virtual void SaveConfig()
         {
-            App.ExecCommand("writeconfig " + Constants.ConfigDefault);
+            App.ExecCommand("writeconfig " + LPConstants.ConfigDefault);
         }
 
         #endregion
