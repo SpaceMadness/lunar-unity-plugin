@@ -28,19 +28,19 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class ConsoleFilteredDelegate : ConsoleViewCompositeFilter, ITableViewDataSource, ITableViewDelegate, ICConsoleDelegate
+    class CConsoleFilteredDelegate : ConsoleViewCompositeFilter, ITableViewDataSource, ITableViewDelegate, ICConsoleDelegate
     {
         private ConsoleView m_consoleView;
 
         private CCycleArray<int> m_filteredIndices;
 
-        private ConsoleViewLogLevelFilter m_levelFilter;
-        private ConsoleViewTagFilter m_tagFilter;
-        private ConsoleViewTextFilter m_textFilter;
+        private CConsoleViewLogLevelFilter m_levelFilter;
+        private CConsoleViewTagFilter m_tagFilter;
+        private CConsoleViewTextFilter m_textFilter;
 
         private int m_oldConsoleEntriesHeadIndex;
 
-        public ConsoleFilteredDelegate(ConsoleView consoleView)
+        public CConsoleFilteredDelegate(ConsoleView consoleView)
         {
             m_consoleView = consoleView;
             m_oldConsoleEntriesHeadIndex = Entries.HeadIndex;
@@ -54,7 +54,7 @@ namespace LunarEditor
             {
                 if (m_levelFilter == null)
                 {
-                    m_levelFilter = new ConsoleViewLogLevelFilter(level);
+                    m_levelFilter = new CConsoleViewLogLevelFilter(level);
                     bool shouldAppend = this.HasFilters; // not the first filter
 
                     AddFilter(m_levelFilter);
@@ -95,7 +95,7 @@ namespace LunarEditor
 
             if (m_tagFilter == null)
             {
-                m_tagFilter = new ConsoleViewTagFilter();
+                m_tagFilter = new CConsoleViewTagFilter();
                 AddFilter(m_tagFilter);
             }
 
@@ -125,7 +125,7 @@ namespace LunarEditor
 
             if (m_tagFilter == null)
             {
-                m_tagFilter = new ConsoleViewTagFilter();
+                m_tagFilter = new CConsoleViewTagFilter();
                 AddFilter(m_tagFilter);
             }
 
@@ -190,7 +190,7 @@ namespace LunarEditor
                     return ApplyFilter(this);
                 }
 
-                m_textFilter = new ConsoleViewTextFilter(filterText);
+                m_textFilter = new CConsoleViewTextFilter(filterText);
                 bool shouldAppend = this.HasFilters; // not the first filter
 
                 AddFilter(m_textFilter);
@@ -349,11 +349,11 @@ namespace LunarEditor
         #endregion
     }
 
-    class ConsoleViewTextFilter : ConsoleViewFilterBase
+    class CConsoleViewTextFilter : ConsoleViewFilterBase
     {
         private string m_text;
 
-        public ConsoleViewTextFilter(string text)
+        public CConsoleViewTextFilter(string text)
             : base(0)
         {
             this.Text = text;
@@ -378,11 +378,11 @@ namespace LunarEditor
         }
     }
 
-    class ConsoleViewTagFilter : ConsoleViewFilterBase
+    class CConsoleViewTagFilter : ConsoleViewFilterBase
     {
         private HashSet<CTag> m_tags;
 
-        public ConsoleViewTagFilter()
+        public CConsoleViewTagFilter()
             : base(1)
         {
             m_tags = new HashSet<CTag>();
@@ -431,11 +431,11 @@ namespace LunarEditor
         }
     }
 
-    class ConsoleViewLogLevelFilter : ConsoleViewFilterBase
+    class CConsoleViewLogLevelFilter : ConsoleViewFilterBase
     {
         private CLogLevel m_level;
 
-        public ConsoleViewLogLevelFilter(CLogLevel level)
+        public CConsoleViewLogLevelFilter(CLogLevel level)
             : base(2)
         {
             this.Level = level;

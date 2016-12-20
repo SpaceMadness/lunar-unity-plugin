@@ -37,7 +37,7 @@ namespace LunarEditor
     {
         private readonly CAbstractConsole m_console;
 
-        private ConsoleFilteredDelegate m_filteredDelegate;
+        private CConsoleFilteredDelegate m_filteredDelegate;
 
         private ICTextMeasure m_textMeasure;
         private float m_overridenContentWidth;
@@ -53,7 +53,7 @@ namespace LunarEditor
 
             m_textMeasure = CreateTextMeasure();
 
-            m_filteredDelegate = new ConsoleFilteredDelegate(this);
+            m_filteredDelegate = new CConsoleFilteredDelegate(this);
 
             ReloadData();
         }
@@ -331,7 +331,7 @@ namespace LunarEditor
             SetFilteredDelegate(m_filteredDelegate, needReload);
         }
 
-        private void SetFilteredDelegate(ConsoleFilteredDelegate del, bool needReload = true)
+        private void SetFilteredDelegate(CConsoleFilteredDelegate del, bool needReload = true)
         {
             if (del == null || !del.HasFilters)
             {
