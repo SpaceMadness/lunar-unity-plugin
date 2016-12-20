@@ -221,7 +221,7 @@ namespace LunarPluginInternal
                 return false;
             }
 
-            return prefix == null || StringUtils.StartsWithIgnoreCase(cmd.Name, prefix);
+            return prefix == null || CStringUtils.StartsWithIgnoreCase(cmd.Name, prefix);
         }
 
         private static bool AddCommand(CCommand cmd)

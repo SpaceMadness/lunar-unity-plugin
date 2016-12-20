@@ -276,7 +276,7 @@ namespace CCommandTests
             int index = line.IndexOf('¶');
             Assert.IsTrue(index != -1);
 
-            String[] actual = StringUtils.RemoveRichTextTags(CommandAutocompletion.getSuggestions(line.Replace("¶", ""), index));
+            String[] actual = CStringUtils.RemoveRichTextTags(CommandAutocompletion.getSuggestions(line.Replace("¶", ""), index));
             Assert.AreEqual(actual, expected);
         }
 

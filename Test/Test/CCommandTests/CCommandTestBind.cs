@@ -405,7 +405,7 @@ namespace CCommandTests
 
         internal void AssertList(IList<CBinding> actual, params string[] expected)
         {
-            Assert.AreEqual(actual.Count, expected.Length, StringUtils.TryFormat("Expected: [{0}]\nActual: [{1}]"), Join(", ", expected), Join(", ", actual));
+            Assert.AreEqual(actual.Count, expected.Length, CStringUtils.TryFormat("Expected: [{0}]\nActual: [{1}]"), Join(", ", expected), Join(", ", actual));
             for (int i = 0; i < expected.Length; ++i)
             {
                 Assert.AreEqual(expected[i], Cmd_bind.ToString(actual[i]));

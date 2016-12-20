@@ -175,7 +175,7 @@ namespace LunarPlugin
             List<string> argsList = new List<string>();
             while (iter.HasNext())
             {
-                string token = StringUtils.UnArg(iter.Next());
+                string token = CStringUtils.UnArg(iter.Next());
 
                 // first, try to parse options
                 if (!TryParseOption(iter, token))
@@ -184,7 +184,7 @@ namespace LunarPlugin
                     argsList.Add(token);
                     while (iter.HasNext())
                     {
-                        token = StringUtils.UnArg(iter.Next());
+                        token = CStringUtils.UnArg(iter.Next());
                         argsList.Add(token);
                     }
 
@@ -304,7 +304,7 @@ namespace LunarPlugin
                 return true;
             }
 
-            if (token.StartsWith("-") && !StringUtils.IsNumeric(token))
+            if (token.StartsWith("-") && !CStringUtils.IsNumeric(token))
             {
                 string optionName = token.Substring(1);
                 ParseOption(iter, optionName);
@@ -496,8 +496,8 @@ namespace LunarPlugin
                 }
 
                 string optionDesc = opt.ShortName != null ? 
-                    StringUtils.TryFormat("--{0}(-{1})", opt.Name, opt.ShortName) : 
-                    StringUtils.TryFormat("--{0}", opt.Name);
+                    CStringUtils.TryFormat("--{0}(-{1})", opt.Name, opt.ShortName) : 
+                    CStringUtils.TryFormat("--{0}", opt.Name);
 
                 StringBuilder buffer = new StringBuilder();
                 buffer.AppendFormat("Invalid value '{0}' for option {1}\n", value, optionDesc);
@@ -556,7 +556,7 @@ namespace LunarPlugin
             if (!string.IsNullOrEmpty(prefix))
             {
                 return ListOptions(outList, delegate(Option opt) {
-                    return StringUtils.StartsWithIgnoreCase(opt.ShortName, prefix);
+                    return CStringUtils.StartsWithIgnoreCase(opt.ShortName, prefix);
                 });
             }
 
@@ -573,7 +573,7 @@ namespace LunarPlugin
             if (!string.IsNullOrEmpty(prefix))
             {
                 return ListOptions(outList, delegate(Option opt) {
-                    return StringUtils.StartsWithIgnoreCase(opt.Name, prefix);
+                    return CStringUtils.StartsWithIgnoreCase(opt.Name, prefix);
                 });
             }
             return ListOptions(outList, DefaultListOptionsFilter);
@@ -649,12 +649,12 @@ namespace LunarPlugin
                     
                     if (targetOpt == null)
                     {
-                        if (StringUtils.EqualsIgnoreCase(optName, name))
+                        if (CStringUtils.EqualsIgnoreCase(optName, name))
                         {
                             targetOpt = opt;
                         }
                     }
-                    else if (StringUtils.StartsWithIgnoreCase(optName, name))
+                    else if (CStringUtils.StartsWithIgnoreCase(optName, name))
                     {
                         return null;
                     }
@@ -754,7 +754,7 @@ namespace LunarPlugin
         /// </summary>
         protected void Print(string format, params object[] args)
         {
-            m_delegate.LogTerminal(StringUtils.TryFormat(format, args));
+            m_delegate.LogTerminal(CStringUtils.TryFormat(format, args));
         }
 
         /// <summary>
@@ -793,7 +793,7 @@ namespace LunarPlugin
         /// </summary>
         protected void PrintIndent(string format, params object[] args)
         {
-            m_delegate.LogTerminal("  " + StringUtils.TryFormat(format, args));
+            m_delegate.LogTerminal("  " + CStringUtils.TryFormat(format, args));
         }
 
         /// <summary>
@@ -801,7 +801,7 @@ namespace LunarPlugin
         /// </summary>
         protected void PrintError(string format, params object[] args)
         {
-            PrintIndent(C(StringUtils.TryFormat(format, args), ColorCode.Error));
+            PrintIndent(C(CStringUtils.TryFormat(format, args), ColorCode.Error));
         }
 
         /// <summary>
@@ -817,7 +817,7 @@ namespace LunarPlugin
         /// </summary>
         protected void PrintError(Exception e, string format, params object[] args)
         {
-            PrintError(e, StringUtils.TryFormat(format, args));
+            PrintError(e, CStringUtils.TryFormat(format, args));
         }
 
         /// <summary>
@@ -847,7 +847,7 @@ namespace LunarPlugin
             // name
             if (argsUsages != null && argsUsages.Length > 0)
             {
-                string name = StringUtils.C(this.Name, ColorCode.TableCommand);
+                string name = CStringUtils.C(this.Name, ColorCode.TableCommand);
 
                 // first usage line
                 buffer.AppendFormat("  usage: {0}", name);
@@ -870,7 +870,7 @@ namespace LunarPlugin
             }
             else
             {
-                buffer.Append(StringUtils.C("'Execute' method is not resolved", ColorCode.Error)); 
+                buffer.Append(CStringUtils.C("'Execute' method is not resolved", ColorCode.Error)); 
             }
 
             Print(buffer.ToString());
@@ -894,10 +894,10 @@ namespace LunarPlugin
 
                     if (opt.ShortName != null)
                     {
-                        buffer.AppendFormat("-{0}|", StringUtils.C(opt.ShortName, ColorCode.TableVar));
+                        buffer.AppendFormat("-{0}|", CStringUtils.C(opt.ShortName, ColorCode.TableVar));
                     }
 
-                    buffer.AppendFormat("--{0}", StringUtils.C(opt.Name, ColorCode.TableVar));
+                    buffer.AppendFormat("--{0}", CStringUtils.C(opt.Name, ColorCode.TableVar));
 
                     if (opt.Type != typeof(bool))
                     {
@@ -907,7 +907,7 @@ namespace LunarPlugin
                             buffer.Append(" <");
                             for (int valueIndex = 0; valueIndex < values.Length; ++valueIndex)
                             {
-                                buffer.Append(StringUtils.Arg(values[valueIndex]));
+                                buffer.Append(CStringUtils.Arg(values[valueIndex]));
                                 if (valueIndex < values.Length - 1)
                                 {
                                     buffer.Append("|");
@@ -989,7 +989,7 @@ namespace LunarPlugin
         {
             if (m_values != null && m_values.Length > 0)
             {
-                return new String[] { " " + StringUtils.Join(m_values, "|") };
+                return new String[] { " " + CStringUtils.Join(m_values, "|") };
             }
 
             if (executeMethods == null)
@@ -1050,12 +1050,12 @@ namespace LunarPlugin
 
         internal bool StartsWith(string prefix)
         {
-            return StringUtils.StartsWithIgnoreCase(Name, prefix);
+            return CStringUtils.StartsWithIgnoreCase(Name, prefix);
         }
 
-        internal static string Arg(string value) { return StringUtils.Arg(value); }
+        internal static string Arg(string value) { return CStringUtils.Arg(value); }
 
-        internal static string C(string str, ColorCode color) { return StringUtils.C(str, color); }
+        internal static string C(string str, ColorCode color) { return CStringUtils.C(str, color); }
 
         #endregion
 
@@ -1194,7 +1194,7 @@ namespace LunarPlugin
                     }
                     if (value.StartsWith("-")) // can't be short option
                     {
-                        return StringUtils.IsNumeric(value); // but can be a negative number
+                        return CStringUtils.IsNumeric(value); // but can be a negative number
                     }
                     if (value.Equals("&&") || value.Equals("||"))
                     {
@@ -1206,12 +1206,12 @@ namespace LunarPlugin
 
                 if (type == typeof(int))
                 {
-                    return StringUtils.IsInteger(value);
+                    return CStringUtils.IsInteger(value);
                 }
 
                 if (type == typeof(float))
                 {
-                    return StringUtils.IsNumeric(value);
+                    return CStringUtils.IsNumeric(value);
                 }
 
                 return false;
@@ -1269,7 +1269,7 @@ namespace LunarPlugin
                     for (int i = 0; i < Values.Length; ++i)
                     {
                         string str = Values[i];
-                        if (token == null || StringUtils.StartsWithIgnoreCase(str, token))
+                        if (token == null || CStringUtils.StartsWithIgnoreCase(str, token))
                         {
                             list.Add(str);
                         }
@@ -1317,7 +1317,7 @@ namespace LunarPlugin
         }
 
         public CCommandException(string format, params object[] args)
-            : this(StringUtils.TryFormat(format, args))
+            : this(CStringUtils.TryFormat(format, args))
         {
         }
     }
@@ -1330,7 +1330,7 @@ namespace LunarPlugin
         }
 
         public CCommandParseException(string format, params object[] args)
-            : this(StringUtils.TryFormat(format, args))
+            : this(CStringUtils.TryFormat(format, args))
         {
         }
     }

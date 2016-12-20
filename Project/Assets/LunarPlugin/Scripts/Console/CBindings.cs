@@ -249,7 +249,7 @@ namespace LunarPluginInternal
             if (prefix != null)
             {
                 return List(delegate(CBinding binding) {
-                    return StringUtils.StartsWithIgnoreCase(binding.shortCut.ToString(), prefix);
+                    return CStringUtils.StartsWithIgnoreCase(binding.shortCut.ToString(), prefix);
                 });
             }
 

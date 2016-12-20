@@ -375,7 +375,7 @@ namespace LunarPlugin
             {
                 bool changed = m_value.intValue != value;
 
-                m_value.stringValue = StringUtils.ToString(value);
+                m_value.stringValue = CStringUtils.ToString(value);
                 m_value.intValue = value;
                 m_value.floatValue = (float)value;
                 m_value.vectorValue = new Vector4();
@@ -399,7 +399,7 @@ namespace LunarPlugin
             {
                 float oldValue = m_value.floatValue;
 
-                m_value.stringValue = StringUtils.ToString(value);
+                m_value.stringValue = CStringUtils.ToString(value);
                 m_value.intValue = (int)value;
                 m_value.floatValue = value;
                 m_value.vectorValue = new Vector4();
@@ -439,7 +439,7 @@ namespace LunarPlugin
                 Vector4 vector = new Vector4(value.r, value.g, value.b, value.a);
                 bool changed = m_value.vectorValue != vector;
 
-                m_value.stringValue = StringUtils.ToString(ref value);
+                m_value.stringValue = CStringUtils.ToString(ref value);
                 m_value.intValue = 0;
                 m_value.floatValue = 0.0f;
                 m_value.vectorValue = vector;
@@ -470,7 +470,7 @@ namespace LunarPlugin
                 Vector4 vector = new Vector4(value.x, value.y, value.width, value.height);
                 bool changed = m_value.vectorValue != vector;
 
-                m_value.stringValue = StringUtils.ToString(ref value);
+                m_value.stringValue = CStringUtils.ToString(ref value);
                 m_value.intValue = 0;
                 m_value.floatValue = 0.0f;
                 m_value.vectorValue = vector;
@@ -497,7 +497,7 @@ namespace LunarPlugin
                 Vector4 vector = new Vector4(value.x, value.y);
                 bool changed = m_value.vectorValue != vector;
 
-                m_value.stringValue = StringUtils.ToString(ref value);
+                m_value.stringValue = CStringUtils.ToString(ref value);
                 m_value.intValue = 0;
                 m_value.floatValue = 0.0f;
                 m_value.vectorValue = vector;
@@ -525,7 +525,7 @@ namespace LunarPlugin
                 Vector4 vector = new Vector4(value.x, value.y, value.z);
                 bool changed = m_value.vectorValue != vector;
 
-                m_value.stringValue = StringUtils.ToString(ref value);
+                m_value.stringValue = CStringUtils.ToString(ref value);
                 m_value.intValue = 0;
                 m_value.floatValue = 0.0f;
                 m_value.vectorValue = vector;
@@ -548,7 +548,7 @@ namespace LunarPlugin
             set {
                 bool changed = m_value.vectorValue != value;
 
-                m_value.stringValue = StringUtils.ToString(ref value);
+                m_value.stringValue = CStringUtils.ToString(ref value);
                 m_value.intValue = 0;
                 m_value.floatValue = 0.0f;
                 m_value.vectorValue = value;

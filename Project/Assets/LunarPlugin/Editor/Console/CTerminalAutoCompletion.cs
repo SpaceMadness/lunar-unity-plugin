@@ -64,10 +64,10 @@ namespace LunarEditor
 
             if (suggestions.Length == 1)
             {
-                return ReplaceToken(line, token, StringUtils.RemoveRichTextTags(suggestions[0])) + " ";
+                return ReplaceToken(line, token, CStringUtils.RemoveRichTextTags(suggestions[0])) + " ";
             }
 
-            string suggestion = StringUtils.GetSuggestedText(token, suggestions, true);
+            string suggestion = CStringUtils.GetSuggestedText(token, suggestions, true);
             if (suggestion == null || suggestion.Equals(token))
             {
                 return null;

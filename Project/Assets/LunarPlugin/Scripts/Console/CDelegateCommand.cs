@@ -91,7 +91,7 @@ namespace LunarPluginInternal
 
             string argsUsage = GetArgsUsage();
 
-            string name = StringUtils.C(this.Name, ColorCode.TableCommand);
+            string name = CStringUtils.C(this.Name, ColorCode.TableCommand);
             buffer.AppendFormat("  usage: {0}", name);
             buffer.Append(argsUsage);
 

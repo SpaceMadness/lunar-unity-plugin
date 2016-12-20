@@ -48,7 +48,7 @@ namespace LunarEditor
                 foreach (string file in files)
                 {
                     string filename = CFileUtils.GetFileName(file);
-                    if (token == null || StringUtils.StartsWithIgnoreCase(filename, token))
+                    if (token == null || CStringUtils.StartsWithIgnoreCase(filename, token))
                     {
                         result.Add(filename);
                     }

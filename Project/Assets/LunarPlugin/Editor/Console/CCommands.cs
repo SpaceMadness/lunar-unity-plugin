@@ -98,7 +98,7 @@ namespace LunarEditor
                 if (shortList)
                 {
                     string[] names = CCollection.Map(vars, delegate(CVar cvar) {
-                        return StringUtils.C(cvar.Name, ColorCode.TableVar);
+                        return CStringUtils.C(cvar.Name, ColorCode.TableVar);
                     });
                     Print(names);
                 }
@@ -108,12 +108,12 @@ namespace LunarEditor
                     for (int i = 0; i < vars.Count; ++i)
                     {
                         CVar cvar = vars[i];
-                        result.AppendFormat("  {0} {1}", StringUtils.C(cvar.Name, ColorCode.TableVar), StringUtils.Arg(cvar.Value));
+                        result.AppendFormat("  {0} {1}", CStringUtils.C(cvar.Name, ColorCode.TableVar), CStringUtils.Arg(cvar.Value));
                         
                         // TODO: better color highlight
                         if (!cvar.IsDefault)
                         {
-                            result.AppendFormat(" {0} {1}", StringUtils.C("default", ColorCode.TableVar), cvar.DefaultValue);
+                            result.AppendFormat(" {0} {1}", CStringUtils.C("default", ColorCode.TableVar), cvar.DefaultValue);
                         }
                         
                         if (i < vars.Count - 1)
@@ -175,7 +175,7 @@ namespace LunarEditor
             }
 
             return CCollection.Map(vars, delegate(CVar cvar) {
-                return StringUtils.C(cvar.Name, ColorCode.TableVar);
+                return CStringUtils.C(cvar.Name, ColorCode.TableVar);
             });
         }
     }
@@ -216,7 +216,7 @@ namespace LunarEditor
 
             return CCollection.Map(vars, delegate(CVar cvar)
             {
-                return StringUtils.C(cvar.Name, ColorCode.TableVar);
+                return CStringUtils.C(cvar.Name, ColorCode.TableVar);
             });
         }
     }
@@ -304,7 +304,7 @@ namespace LunarEditor
                     }
                 }
                 
-                CBindings.Bind(shortCut, StringUtils.UnArg(command), keyUpCommand != null ? StringUtils.UnArg(keyUpCommand) : null);
+                CBindings.Bind(shortCut, CStringUtils.UnArg(command), keyUpCommand != null ? CStringUtils.UnArg(keyUpCommand) : null);
                 
                 PostNotification(
                     CCommandNotifications.CBindingsChanged,
@@ -332,7 +332,7 @@ namespace LunarEditor
 
         protected override IList<string> AutoCompleteArgs(string commandLine, string token)
         {
-            return StringUtils.Filter(CBindings.BindingsNames, token);
+            return CStringUtils.Filter(CBindings.BindingsNames, token);
         }
 
         private static char OppositeOperation(char op)
@@ -345,7 +345,7 @@ namespace LunarEditor
         
         public static string ToString(CBinding b)
         {
-            return string.Format("bind {0} {1}", b.shortCut.ToString(), StringUtils.Arg(b.cmdKeyDown));
+            return string.Format("bind {0} {1}", b.shortCut.ToString(), CStringUtils.Arg(b.cmdKeyDown));
         }
     }
 
@@ -359,7 +359,7 @@ namespace LunarEditor
             IList<CBinding> bindings = CBindings.List(prefix);
             foreach (CBinding b in bindings)
             {
-                PrintIndent("bind {0} {1}", b.shortCut.ToString(), StringUtils.Arg(b.cmdKeyDown));
+                PrintIndent("bind {0} {1}", b.shortCut.ToString(), CStringUtils.Arg(b.cmdKeyDown));
             }
         }
 
@@ -456,7 +456,7 @@ namespace LunarEditor
     {
         void Execute(string name, string commands)
         {
-            CRegistery.AddAlias(name, StringUtils.UnArg(commands));
+            CRegistery.AddAlias(name, CStringUtils.UnArg(commands));
             
             PostNotification(
                 CCommandNotifications.CAliasesChanged, 
@@ -494,7 +494,7 @@ namespace LunarEditor
         
         private static string ToString(CAliasCommand cmd)
         {
-            return string.Format("alias {0} {1}", cmd.Name, StringUtils.Arg(cmd.Alias));
+            return string.Format("alias {0} {1}", cmd.Name, CStringUtils.Arg(cmd.Alias));
         }
     }
 
@@ -548,7 +548,7 @@ namespace LunarEditor
         
         private static string ToString(CAliasCommand cmd)
         {
-            return string.Format("alias {0} {1}", cmd.Name, StringUtils.Arg(cmd.Alias));
+            return string.Format("alias {0} {1}", cmd.Name, CStringUtils.Arg(cmd.Alias));
         }
     }
 
@@ -699,7 +699,7 @@ namespace LunarEditor
                 configs.Add(LPConstants.ConfigPlayMode);
             }
 
-            return StringUtils.Filter(configs, token);
+            return CStringUtils.Filter(configs, token);
         }
 
         private static void AddEntries(IList<string> outList, IList<string> entries, string groupName)
@@ -731,7 +731,7 @@ namespace LunarEditor
             {
                 if (cvar.Value != null)
                 {
-                    entries.Add(string.Format("{0} {1}", cvar.Name, StringUtils.Arg(cvar.Value)));
+                    entries.Add(string.Format("{0} {1}", cvar.Name, CStringUtils.Arg(cvar.Value)));
                 }
                 else
                 {
@@ -749,7 +749,7 @@ namespace LunarEditor
             IList<string> entries = new List<string>(bindings.Count);
             foreach (CBinding binding in bindings)
             {
-                entries.Add(string.Format("bind {0} {1}", binding.shortCut.ToString(), StringUtils.Arg(binding.cmdKeyDown)));
+                entries.Add(string.Format("bind {0} {1}", binding.shortCut.ToString(), CStringUtils.Arg(binding.cmdKeyDown)));
             }
 
             return entries;
@@ -845,7 +845,7 @@ namespace LunarEditor
 
             return CCollection.Map(commands, delegate(CCommand cmd)
             {
-                return StringUtils.C(cmd.Name, cmd.ColorCode);
+                return CStringUtils.C(cmd.Name, cmd.ColorCode);
             });
         }
     }
@@ -1053,7 +1053,7 @@ namespace LunarEditor
             string[] names = Enum.GetNames(typeof(ColorCode));
             for (int i = 0; i < names.Length; ++i)
             {
-                Print("{0}: {1}", i, StringUtils.C(names[i], (ColorCode)i));
+                Print("{0}: {1}", i, CStringUtils.C(names[i], (ColorCode)i));
             }
         }
         
@@ -1076,7 +1076,7 @@ namespace LunarEditor
                 Color color = CColorUtils.FromRGB(value);
                 EditorSkin.SetColor(values[index], color);
                 
-                Print("{0}: {1}", index, StringUtils.C(values[index].ToString(), values[index]));
+                Print("{0}: {1}", index, CStringUtils.C(values[index].ToString(), values[index]));
             }
             else
             {
@@ -1135,7 +1135,7 @@ namespace LunarEditor
             StringBuilder buffer = new StringBuilder();
             for (int i = startIndex; i < args.Length; ++i)
             {
-                buffer.Append(StringUtils.Arg(args[i]));
+                buffer.Append(CStringUtils.Arg(args[i]));
                 if (i < args.Length - 1)
                 {
                     buffer.Append(' ');

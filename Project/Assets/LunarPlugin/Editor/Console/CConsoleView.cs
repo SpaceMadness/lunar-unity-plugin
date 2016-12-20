@@ -157,7 +157,7 @@ namespace LunarEditor
 
             for (int i = fromLine; i < toLine;)
             {
-                buffer.Append(StringUtils.RemoveRichTextTags(Entries[i++].value));
+                buffer.Append(CStringUtils.RemoveRichTextTags(Entries[i++].value));
                 if (i < toLine)
                 {
                     buffer.Append('\n');
@@ -438,7 +438,7 @@ namespace LunarEditor
 
         public ConsoleViewCellEntry(Exception e, string message, float width = 0, float height = 0)
         {
-            this.value = message != null ? StringUtils.TryFormat("{0} ({1})", message, e.Message) : e.Message;
+            this.value = message != null ? CStringUtils.TryFormat("{0} ({1})", message, e.Message) : e.Message;
             this.width = width;
             this.height = height;
             this.flags = Flags.Plain;
@@ -502,7 +502,7 @@ namespace LunarEditor
             for (int i = 0; i < table.Length; ++i)
             {
                 string str = table[i];
-                int len = StringUtils.Strlen(str);
+                int len = CStringUtils.Strlen(str);
                 if (len > maxLength)
                 {
                     maxLength = len;
@@ -606,7 +606,7 @@ namespace LunarEditor
             float endPosX = style.GetCursorPixelPosition(stackLine.frame, content, sourceEnd).x + 1;
 
             stackLine.sourceFrame = new Rect(startPosX, stackLine.frame.y, endPosX - startPosX, stackLine.frame.height);
-            stackLine.line = StringUtils.C(stackLine.line, color, sourceStart, sourceEnd);
+            stackLine.line = CStringUtils.C(stackLine.line, color, sourceStart, sourceEnd);
         }
         
         private bool HasFlag(Flags flag)

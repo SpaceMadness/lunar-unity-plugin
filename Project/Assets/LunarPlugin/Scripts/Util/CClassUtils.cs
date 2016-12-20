@@ -122,7 +122,7 @@ namespace LunarPluginInternal
 
         public static bool ShouldListMethod(MethodInfo m, string prefix)
         {
-            return StringUtils.StartsWithIgnoreCase(m.Name, prefix);
+            return CStringUtils.StartsWithIgnoreCase(m.Name, prefix);
         }
 
         public static T GetObjectField<T>(object target, string name)

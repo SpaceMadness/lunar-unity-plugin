@@ -2047,7 +2047,7 @@ namespace LunarPlugin
 
         private static void AssertHelper(string format, params object[] args)
         {
-            string message = StringUtils.TryFormat(format, args);
+            string message = CStringUtils.TryFormat(format, args);
             string stackTrace = CStackTrace.ExtractStackTrace(3);
 
             CPlatform.AssertMessage(message, stackTrace);

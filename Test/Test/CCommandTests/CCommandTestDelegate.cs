@@ -68,7 +68,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (string[] args) =>
             {
-                AddResult("action: {0}", StringUtils.Join(args, ", "));
+                AddResult("action: {0}", CStringUtils.Join(args, ", "));
             });
 
             Execute("action arg1 arg2 arg3");
@@ -297,7 +297,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (string[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action");
@@ -309,7 +309,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (string[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action arg");
@@ -321,7 +321,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (string[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action arg1 arg2");
@@ -333,7 +333,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (string[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action arg1 arg2 arg3");
@@ -345,7 +345,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (int[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action");
@@ -357,7 +357,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (int[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action 10");
@@ -369,7 +369,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (int[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action 10 20");
@@ -381,7 +381,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (int[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action 10 20 30");
@@ -393,7 +393,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (float[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action");
@@ -405,7 +405,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (float[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action 3.14");
@@ -417,7 +417,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (float[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action 3.14 3.15");
@@ -429,7 +429,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (float[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action 3.14 3.15 3.16");
@@ -441,7 +441,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (bool[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action");
@@ -453,7 +453,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (bool[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action 1");
@@ -465,7 +465,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (bool[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action 1 0");
@@ -477,7 +477,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommand("action", (bool[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
             });
 
             Execute("action 1 0 1");
@@ -690,7 +690,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (string[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -703,7 +703,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (string[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -716,7 +716,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (string[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -729,7 +729,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (string[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -742,7 +742,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (int[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -755,7 +755,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (int[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -768,7 +768,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (int[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -781,7 +781,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (int[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -794,7 +794,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (float[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -807,7 +807,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (float[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -820,7 +820,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (float[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -833,7 +833,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (float[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -846,7 +846,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (bool[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -859,7 +859,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (bool[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -872,7 +872,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (bool[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 
@@ -885,7 +885,7 @@ namespace CCommandTests
         {
             Lunar.RegisterCommandEx("action", (bool[] args) =>
             {
-                AddResult("action " + StringUtils.Join(args, " "));
+                AddResult("action " + CStringUtils.Join(args, " "));
                 return true;
             });
 

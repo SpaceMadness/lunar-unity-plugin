@@ -45,7 +45,7 @@ namespace LunarEditor
                 throw new ArgumentNullException("href");
             }
 
-            m_content = new GUIContent(StringUtils.NonNullOrEmpty(text));
+            m_content = new GUIContent(CStringUtils.NonNullOrEmpty(text));
             m_href = href;
 
             Vector2 size = this.Style.CalcSize(m_content);

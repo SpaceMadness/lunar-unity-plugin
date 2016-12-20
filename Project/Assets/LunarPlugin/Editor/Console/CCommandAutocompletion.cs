@@ -121,7 +121,7 @@ namespace LunarEditor
                     iter.Position = iterPos;
                     return getSuggestedOptions(iter, cmd, optionName, "--");
                 }
-                else if (token.StartsWith("-") && !StringUtils.IsNumeric(token)) // short option
+                else if (token.StartsWith("-") && !CStringUtils.IsNumeric(token)) // short option
                 {
                     string optionName = token.Substring(1);
                     if (SkipOption(iter, cmd, optionName)) continue;
@@ -294,20 +294,20 @@ namespace LunarEditor
         {
             if (useShort)
             {
-                return StringUtils.C("-" + opt.ShortName, ColorCode.TableVar);
+                return CStringUtils.C("-" + opt.ShortName, ColorCode.TableVar);
             }
 
-            return StringUtils.C("--" + opt.Name, ColorCode.TableVar);
+            return CStringUtils.C("--" + opt.Name, ColorCode.TableVar);
         }
 
         private static bool isOptionNameMatch(Option opt, string token, bool useShort)
         {
             if (useShort)
             {
-                return opt.ShortName != null && StringUtils.EqualsIgnoreCase(opt.ShortName, token);
+                return opt.ShortName != null && CStringUtils.EqualsIgnoreCase(opt.ShortName, token);
             }
 
-            return StringUtils.EqualsIgnoreCase(opt.Name, token);
+            return CStringUtils.EqualsIgnoreCase(opt.Name, token);
         }
 
 
@@ -337,9 +337,9 @@ namespace LunarEditor
             List<string> sortedValues = new List<string>(values.Count);
             for (int i = 0; i < values.Count; ++i)
             {
-                if (token.Length == 0 || StringUtils.StartsWithIgnoreCase(StringUtils.RemoveRichTextTags(values[i]), token))
+                if (token.Length == 0 || CStringUtils.StartsWithIgnoreCase(CStringUtils.RemoveRichTextTags(values[i]), token))
                 {
-                    sortedValues.Add(StringUtils.RemoveRichTextTags(values[i]));
+                    sortedValues.Add(CStringUtils.RemoveRichTextTags(values[i]));
                 }
             }
 
@@ -374,7 +374,7 @@ namespace LunarEditor
         private static string toDisplayName(CCommand cmd)
         {
             ColorCode color = cmd is CVarCommand ? ColorCode.TableVar : cmd.ColorCode;
-            return StringUtils.C(cmd.Name, color);
+            return CStringUtils.C(cmd.Name, color);
         }
 
         private static IList<string> getTokens(string line)

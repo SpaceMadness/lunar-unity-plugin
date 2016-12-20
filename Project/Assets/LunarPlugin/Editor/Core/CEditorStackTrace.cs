@@ -142,7 +142,7 @@ namespace LunarEditor
                 while (lineStart < stackTrace.Length)
                 {
                     // extract next line
-                    lineEnd = StringUtils.EndOfLineIndex(stackTrace, lineStart);
+                    lineEnd = CStringUtils.EndOfLineIndex(stackTrace, lineStart);
                     string line = stackTrace.Substring(lineStart, lineEnd - lineStart);
                     lineStart = lineEnd + 1;
 
@@ -153,7 +153,7 @@ namespace LunarEditor
                         GroupCollection groups = m.Groups;
                         string sourcePath = groups[2].Value;
                         string lineNumberStr = groups[3].Value;
-                        int lineNumber = StringUtils.ParseInt(lineNumberStr, -1);
+                        int lineNumber = CStringUtils.ParseInt(lineNumberStr, -1);
 
                         list.Add(new StackTraceLine(line, string.IsNullOrEmpty(sourcePath) ? null : sourcePath, lineNumber, lineNumberStr.Length));
                     }
@@ -165,15 +165,15 @@ namespace LunarEditor
                         string args = OptimizeArgs(groups[2].Value);
                         string path = OptimizePath(groups[4].Value);
                         string lineNumberStr = groups[5].Value;
-                        int lineNumber = StringUtils.ParseInt(lineNumberStr, -1);
+                        int lineNumber = CStringUtils.ParseInt(lineNumberStr, -1);
 
                         if (!string.IsNullOrEmpty(path) && lineNumber != -1)
                         {
-                            line = StringUtils.TryFormat("{0}({1}) (at {2}:{3})", method, args, path, lineNumberStr);
+                            line = CStringUtils.TryFormat("{0}({1}) (at {2}:{3})", method, args, path, lineNumberStr);
                         }
                         else
                         {
-                            line = StringUtils.TryFormat("{0}({1})", method, args);
+                            line = CStringUtils.TryFormat("{0}({1})", method, args);
                         }
 
                         list.Add(new StackTraceLine(line, path, lineNumber, lineNumberStr.Length));
@@ -198,7 +198,7 @@ namespace LunarEditor
                 if (m.Success)
                 {
                     string path = m.Groups[1].Value;
-                    int lineNumber = StringUtils.ParseInt(m.Groups[2].Value, -1);
+                    int lineNumber = CStringUtils.ParseInt(m.Groups[2].Value, -1);
                     entry = new SourcePathEntry(path, lineNumber);
                     return true;
                 }

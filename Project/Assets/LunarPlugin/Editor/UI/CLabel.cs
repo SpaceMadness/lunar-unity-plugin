@@ -40,7 +40,7 @@ namespace LunarEditor
                 this.Style = style;
             }
 
-            m_content = new GUIContent(StringUtils.NonNullOrEmpty(text));
+            m_content = new GUIContent(CStringUtils.NonNullOrEmpty(text));
             Vector2 size = CalcTextSize();
             this.Frame = new Rect(0, 0, size.x, size.y);
         }
@@ -52,7 +52,7 @@ namespace LunarEditor
                 this.Style = style;
             }
 
-            m_content = new GUIContent(StringUtils.NonNullOrEmpty(text));
+            m_content = new GUIContent(CStringUtils.NonNullOrEmpty(text));
             Vector2 size = WordWrap(m_content, width);
             this.Frame = new Rect(0, 0, width, size.y);
         }

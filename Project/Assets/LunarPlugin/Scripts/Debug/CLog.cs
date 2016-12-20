@@ -276,7 +276,7 @@ namespace LunarPlugin
         {
             if (e != null)
             {
-                string message = StringUtils.TryFormat("{0}: {1}", e.GetType().Name, e.Message);
+                string message = CStringUtils.TryFormat("{0}: {1}", e.GetType().Name, e.Message);
                 LogMessage(null, CLogLevel.Exception, message, e.StackTrace);
             }
         }
@@ -284,11 +284,11 @@ namespace LunarPlugin
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void error(Exception e, string format, params object[] args)
         {
-            string message = StringUtils.TryFormat(format, args);
+            string message = CStringUtils.TryFormat(format, args);
 
             if (e != null)
             {
-                string fullMessage = StringUtils.TryFormat("{0}: {1} ({2})", e.GetType().Name, e.Message, message);
+                string fullMessage = CStringUtils.TryFormat("{0}: {1} ({2})", e.GetType().Name, e.Message, message);
                 LogMessage(null, CLogLevel.Exception, fullMessage, e.StackTrace);
             }
             else
@@ -322,98 +322,98 @@ namespace LunarPlugin
         public static void v<A0>(string format, A0 arg0)
         {
             if (ShouldLogLevel(CLogLevel.Verbose))
-                LogMessage(null, CLogLevel.Verbose, StringUtils.TryFormat(format, arg0));
+                LogMessage(null, CLogLevel.Verbose, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void v<A0, A1>(string format, A0 arg0, A1 arg1)
         {
             if (ShouldLogLevel(CLogLevel.Verbose))
-                LogMessage(null, CLogLevel.Verbose, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(null, CLogLevel.Verbose, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void v<A0, A1, A2>(string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (ShouldLogLevel(CLogLevel.Verbose))
-                LogMessage(null, CLogLevel.Verbose, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(null, CLogLevel.Verbose, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void v(string format, params object[] args)
         {
             if (ShouldLogLevel(CLogLevel.Verbose))
-                LogMessage(null, CLogLevel.Verbose, StringUtils.TryFormat(format, args));
+                LogMessage(null, CLogLevel.Verbose, CStringUtils.TryFormat(format, args));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void v<A0>(CTag tag, string format, A0 arg0)
         {
             if (ShouldLogLevel(CLogLevel.Verbose) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Verbose, StringUtils.TryFormat(format, arg0));
+                LogMessage(tag, CLogLevel.Verbose, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void v<A0, A1>(CTag tag, string format, A0 arg0, A1 arg1)
         {
             if (ShouldLogLevel(CLogLevel.Verbose) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Verbose, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(tag, CLogLevel.Verbose, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void v<A0, A1, A2>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (ShouldLogLevel(CLogLevel.Verbose) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Verbose, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(tag, CLogLevel.Verbose, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void v<A0, A1, A2, A3>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2, A3 arg3)
         {
             if (ShouldLogLevel(CLogLevel.Verbose) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Verbose, StringUtils.TryFormat(format, arg0, arg1, arg2, arg3));
+                LogMessage(tag, CLogLevel.Verbose, CStringUtils.TryFormat(format, arg0, arg1, arg2, arg3));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void v<A0, A1, A2, A3, A4>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2, A3 arg3, A4 arg4)
         {
             if (ShouldLogLevel(CLogLevel.Verbose) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Verbose, StringUtils.TryFormat(format, arg0, arg1, arg2, arg3, arg4));
+                LogMessage(tag, CLogLevel.Verbose, CStringUtils.TryFormat(format, arg0, arg1, arg2, arg3, arg4));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void v(CTag tag, string format, params object[] args)
         {
             if (ShouldLogLevel(CLogLevel.Verbose) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Verbose, StringUtils.TryFormat(format, args));
+                LogMessage(tag, CLogLevel.Verbose, CStringUtils.TryFormat(format, args));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void v<A0>(bool condition, CTag tag, string format, A0 arg0)
         {
             if (condition && ShouldLogLevel(CLogLevel.Verbose) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Verbose, StringUtils.TryFormat(format, arg0));
+                LogMessage(tag, CLogLevel.Verbose, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void v<A0, A1>(bool condition, CTag tag, string format, A0 arg0, A1 arg1)
         {
             if (condition && ShouldLogLevel(CLogLevel.Verbose) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Verbose, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(tag, CLogLevel.Verbose, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void v<A0, A1, A2>(bool condition, CTag tag, string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (condition && ShouldLogLevel(CLogLevel.Verbose) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Verbose, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(tag, CLogLevel.Verbose, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void v(bool condition, CTag tag, string format, params object[] args)
         {
             if (condition && ShouldLogLevel(CLogLevel.Verbose) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Verbose, StringUtils.TryFormat(format, args));
+                LogMessage(tag, CLogLevel.Verbose, CStringUtils.TryFormat(format, args));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
@@ -441,98 +441,98 @@ namespace LunarPlugin
         public static void d<A0>(string format, A0 arg0)
         {
             if (ShouldLogLevel(CLogLevel.Debug))
-                LogMessage(null, CLogLevel.Debug, StringUtils.TryFormat(format, arg0));
+                LogMessage(null, CLogLevel.Debug, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void d<A0, A1>(string format, A0 arg0, A1 arg1)
         {
             if (ShouldLogLevel(CLogLevel.Debug))
-                LogMessage(null, CLogLevel.Debug, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(null, CLogLevel.Debug, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void d<A0, A1, A2>(string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (ShouldLogLevel(CLogLevel.Debug))
-                LogMessage(null, CLogLevel.Debug, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(null, CLogLevel.Debug, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void d(string format, params object[] args)
         {
             if (ShouldLogLevel(CLogLevel.Debug))
-                LogMessage(null, CLogLevel.Debug, StringUtils.TryFormat(format, args));
+                LogMessage(null, CLogLevel.Debug, CStringUtils.TryFormat(format, args));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void d<A0>(CTag tag, string format, A0 arg0)
         {
             if (ShouldLogLevel(CLogLevel.Debug) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Debug, StringUtils.TryFormat(format, arg0));
+                LogMessage(tag, CLogLevel.Debug, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void d<A0, A1>(CTag tag, string format, A0 arg0, A1 arg1)
         {
             if (ShouldLogLevel(CLogLevel.Debug) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Debug, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(tag, CLogLevel.Debug, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void d<A0, A1, A2>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (ShouldLogLevel(CLogLevel.Debug) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Debug, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(tag, CLogLevel.Debug, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void d<A0, A1, A2, A3>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2, A3 arg3)
         {
             if (ShouldLogLevel(CLogLevel.Debug) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Debug, StringUtils.TryFormat(format, arg0, arg1, arg2, arg3));
+                LogMessage(tag, CLogLevel.Debug, CStringUtils.TryFormat(format, arg0, arg1, arg2, arg3));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void d<A0, A1, A2, A3, A4>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2, A3 arg3, A4 arg4)
         {
             if (ShouldLogLevel(CLogLevel.Debug) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Debug, StringUtils.TryFormat(format, arg0, arg1, arg2, arg3, arg4));
+                LogMessage(tag, CLogLevel.Debug, CStringUtils.TryFormat(format, arg0, arg1, arg2, arg3, arg4));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void d(CTag tag, string format, params object[] args)
         {
             if (ShouldLogLevel(CLogLevel.Debug) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Debug, StringUtils.TryFormat(format, args));
+                LogMessage(tag, CLogLevel.Debug, CStringUtils.TryFormat(format, args));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void d<A0>(bool condition, CTag tag, string format, A0 arg0)
         {
             if (condition && ShouldLogLevel(CLogLevel.Debug) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Debug, StringUtils.TryFormat(format, arg0));
+                LogMessage(tag, CLogLevel.Debug, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void d<A0, A1>(bool condition, CTag tag, string format, A0 arg0, A1 arg1)
         {
             if (condition && ShouldLogLevel(CLogLevel.Debug) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Debug, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(tag, CLogLevel.Debug, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void d<A0, A1, A2>(bool condition, CTag tag, string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (condition && ShouldLogLevel(CLogLevel.Debug) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Debug, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(tag, CLogLevel.Debug, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void d(bool condition, CTag tag, string format, params object[] args)
         {
             if (condition && ShouldLogLevel(CLogLevel.Debug) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Debug, StringUtils.TryFormat(format, args));
+                LogMessage(tag, CLogLevel.Debug, CStringUtils.TryFormat(format, args));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
@@ -560,98 +560,98 @@ namespace LunarPlugin
         public static void i<A0>(string format, A0 arg0)
         {
             if (ShouldLogLevel(CLogLevel.Info))
-                LogMessage(null, CLogLevel.Info, StringUtils.TryFormat(format, arg0));
+                LogMessage(null, CLogLevel.Info, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void i<A0, A1>(string format, A0 arg0, A1 arg1)
         {
             if (ShouldLogLevel(CLogLevel.Info))
-                LogMessage(null, CLogLevel.Info, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(null, CLogLevel.Info, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void i<A0, A1, A2>(string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (ShouldLogLevel(CLogLevel.Info))
-                LogMessage(null, CLogLevel.Info, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(null, CLogLevel.Info, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void i(string format, params object[] args)
         {
             if (ShouldLogLevel(CLogLevel.Info))
-                LogMessage(null, CLogLevel.Info, StringUtils.TryFormat(format, args));
+                LogMessage(null, CLogLevel.Info, CStringUtils.TryFormat(format, args));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void i<A0>(CTag tag, string format, A0 arg0)
         {
             if (ShouldLogLevel(CLogLevel.Info) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Info, StringUtils.TryFormat(format, arg0));
+                LogMessage(tag, CLogLevel.Info, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void i<A0, A1>(CTag tag, string format, A0 arg0, A1 arg1)
         {
             if (ShouldLogLevel(CLogLevel.Info) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Info, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(tag, CLogLevel.Info, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void i<A0, A1, A2>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (ShouldLogLevel(CLogLevel.Info) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Info, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(tag, CLogLevel.Info, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void i<A0, A1, A2, A3>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2, A3 arg3)
         {
             if (ShouldLogLevel(CLogLevel.Info) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Info, StringUtils.TryFormat(format, arg0, arg1, arg2, arg3));
+                LogMessage(tag, CLogLevel.Info, CStringUtils.TryFormat(format, arg0, arg1, arg2, arg3));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void i<A0, A1, A2, A3, A4>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2, A3 arg3, A4 arg4)
         {
             if (ShouldLogLevel(CLogLevel.Info) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Info, StringUtils.TryFormat(format, arg0, arg1, arg2, arg3, arg4));
+                LogMessage(tag, CLogLevel.Info, CStringUtils.TryFormat(format, arg0, arg1, arg2, arg3, arg4));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void i(CTag tag, string format, params object[] args)
         {
             if (ShouldLogLevel(CLogLevel.Info) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Info, StringUtils.TryFormat(format, args));
+                LogMessage(tag, CLogLevel.Info, CStringUtils.TryFormat(format, args));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void i<A0>(bool condition, CTag tag, string format, A0 arg0)
         {
             if (condition && ShouldLogLevel(CLogLevel.Info) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Info, StringUtils.TryFormat(format, arg0));
+                LogMessage(tag, CLogLevel.Info, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void i<A0, A1>(bool condition, CTag tag, string format, A0 arg0, A1 arg1)
         {
             if (condition && ShouldLogLevel(CLogLevel.Info) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Info, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(tag, CLogLevel.Info, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void i<A0, A1, A2>(bool condition, CTag tag, string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (condition && ShouldLogLevel(CLogLevel.Info) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Info, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(tag, CLogLevel.Info, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void i(bool condition, CTag tag, string format, params object[] args)
         {
             if (condition && ShouldLogLevel(CLogLevel.Info) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Info, StringUtils.TryFormat(format, args));
+                LogMessage(tag, CLogLevel.Info, CStringUtils.TryFormat(format, args));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
@@ -679,98 +679,98 @@ namespace LunarPlugin
         public static void w<A0>(string format, A0 arg0)
         {
             if (ShouldLogLevel(CLogLevel.Warn))
-                LogMessage(null, CLogLevel.Warn, StringUtils.TryFormat(format, arg0));
+                LogMessage(null, CLogLevel.Warn, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void w<A0, A1>(string format, A0 arg0, A1 arg1)
         {
             if (ShouldLogLevel(CLogLevel.Warn))
-                LogMessage(null, CLogLevel.Warn, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(null, CLogLevel.Warn, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void w<A0, A1, A2>(string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (ShouldLogLevel(CLogLevel.Warn))
-                LogMessage(null, CLogLevel.Warn, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(null, CLogLevel.Warn, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void w(string format, params object[] args)
         {
             if (ShouldLogLevel(CLogLevel.Warn))
-                LogMessage(null, CLogLevel.Warn, StringUtils.TryFormat(format, args));
+                LogMessage(null, CLogLevel.Warn, CStringUtils.TryFormat(format, args));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void w<A0>(CTag tag, string format, A0 arg0)
         {
             if (ShouldLogLevel(CLogLevel.Warn) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Warn, StringUtils.TryFormat(format, arg0));
+                LogMessage(tag, CLogLevel.Warn, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void w<A0, A1>(CTag tag, string format, A0 arg0, A1 arg1)
         {
             if (ShouldLogLevel(CLogLevel.Warn) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Warn, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(tag, CLogLevel.Warn, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void w<A0, A1, A2>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (ShouldLogLevel(CLogLevel.Warn) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Warn, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(tag, CLogLevel.Warn, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void w<A0, A1, A2, A3>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2, A3 arg3)
         {
             if (ShouldLogLevel(CLogLevel.Warn) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Warn, StringUtils.TryFormat(format, arg0, arg1, arg2, arg3));
+                LogMessage(tag, CLogLevel.Warn, CStringUtils.TryFormat(format, arg0, arg1, arg2, arg3));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void w<A0, A1, A2, A3, A4>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2, A3 arg3, A4 arg4)
         {
             if (ShouldLogLevel(CLogLevel.Warn) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Warn, StringUtils.TryFormat(format, arg0, arg1, arg2, arg3, arg4));
+                LogMessage(tag, CLogLevel.Warn, CStringUtils.TryFormat(format, arg0, arg1, arg2, arg3, arg4));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void w(CTag tag, string format, params object[] args)
         {
             if (ShouldLogLevel(CLogLevel.Warn) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Warn, StringUtils.TryFormat(format, args));
+                LogMessage(tag, CLogLevel.Warn, CStringUtils.TryFormat(format, args));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void w<A0>(bool condition, CTag tag, string format, A0 arg0)
         {
             if (condition && ShouldLogLevel(CLogLevel.Warn) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Warn, StringUtils.TryFormat(format, arg0));
+                LogMessage(tag, CLogLevel.Warn, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void w<A0, A1>(bool condition, CTag tag, string format, A0 arg0, A1 arg1)
         {
             if (condition && ShouldLogLevel(CLogLevel.Warn) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Warn, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(tag, CLogLevel.Warn, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void w<A0, A1, A2>(bool condition, CTag tag, string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (condition && ShouldLogLevel(CLogLevel.Warn) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Warn, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(tag, CLogLevel.Warn, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void w(bool condition, CTag tag, string format, params object[] args)
         {
             if (condition && ShouldLogLevel(CLogLevel.Warn) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Warn, StringUtils.TryFormat(format, args));
+                LogMessage(tag, CLogLevel.Warn, CStringUtils.TryFormat(format, args));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
@@ -798,98 +798,98 @@ namespace LunarPlugin
         public static void e<A0>(string format, A0 arg0)
         {
             if (ShouldLogLevel(CLogLevel.Error))
-                LogMessage(null, CLogLevel.Error, StringUtils.TryFormat(format, arg0));
+                LogMessage(null, CLogLevel.Error, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void e<A0, A1>(string format, A0 arg0, A1 arg1)
         {
             if (ShouldLogLevel(CLogLevel.Error))
-                LogMessage(null, CLogLevel.Error, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(null, CLogLevel.Error, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void e<A0, A1, A2>(string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (ShouldLogLevel(CLogLevel.Error))
-                LogMessage(null, CLogLevel.Error, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(null, CLogLevel.Error, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void e(string format, params object[] args)
         {
             if (ShouldLogLevel(CLogLevel.Error))
-                LogMessage(null, CLogLevel.Error, StringUtils.TryFormat(format, args));
+                LogMessage(null, CLogLevel.Error, CStringUtils.TryFormat(format, args));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void e<A0>(CTag tag, string format, A0 arg0)
         {
             if (ShouldLogLevel(CLogLevel.Error) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Error, StringUtils.TryFormat(format, arg0));
+                LogMessage(tag, CLogLevel.Error, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void e<A0, A1>(CTag tag, string format, A0 arg0, A1 arg1)
         {
             if (ShouldLogLevel(CLogLevel.Error) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Error, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(tag, CLogLevel.Error, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void e<A0, A1, A2>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (ShouldLogLevel(CLogLevel.Error) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Error, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(tag, CLogLevel.Error, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void e<A0, A1, A2, A3>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2, A3 arg3)
         {
             if (ShouldLogLevel(CLogLevel.Error) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Error, StringUtils.TryFormat(format, arg0, arg1, arg2, arg3));
+                LogMessage(tag, CLogLevel.Error, CStringUtils.TryFormat(format, arg0, arg1, arg2, arg3));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void e<A0, A1, A2, A3, A4>(CTag tag, string format, A0 arg0, A1 arg1, A2 arg2, A3 arg3, A4 arg4)
         {
             if (ShouldLogLevel(CLogLevel.Error) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Error, StringUtils.TryFormat(format, arg0, arg1, arg2, arg3, arg4));
+                LogMessage(tag, CLogLevel.Error, CStringUtils.TryFormat(format, arg0, arg1, arg2, arg3, arg4));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void e(CTag tag, string format, params object[] args)
         {
             if (ShouldLogLevel(CLogLevel.Error) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Error, StringUtils.TryFormat(format, args));
+                LogMessage(tag, CLogLevel.Error, CStringUtils.TryFormat(format, args));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void e<A0>(bool condition, CTag tag, string format, A0 arg0)
         {
             if (condition && ShouldLogLevel(CLogLevel.Error) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Error, StringUtils.TryFormat(format, arg0));
+                LogMessage(tag, CLogLevel.Error, CStringUtils.TryFormat(format, arg0));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void e<A0, A1>(bool condition, CTag tag, string format, A0 arg0, A1 arg1)
         {
             if (condition && ShouldLogLevel(CLogLevel.Error) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Error, StringUtils.TryFormat(format, arg0, arg1));
+                LogMessage(tag, CLogLevel.Error, CStringUtils.TryFormat(format, arg0, arg1));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void e<A0, A1, A2>(bool condition, CTag tag, string format, A0 arg0, A1 arg1, A2 arg2)
         {
             if (condition && ShouldLogLevel(CLogLevel.Error) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Error, StringUtils.TryFormat(format, arg0, arg1, arg2));
+                LogMessage(tag, CLogLevel.Error, CStringUtils.TryFormat(format, arg0, arg1, arg2));
         }
 
         [System.Diagnostics.Conditional("LUNAR_DEVELOPMENT")]
         public static void e(bool condition, CTag tag, string format, params object[] args)
         {
             if (condition && ShouldLogLevel(CLogLevel.Error) && ShouldLogTag(tag))
-                LogMessage(tag, CLogLevel.Error, StringUtils.TryFormat(format, args));
+                LogMessage(tag, CLogLevel.Error, CStringUtils.TryFormat(format, args));
         }
 
         #endregion

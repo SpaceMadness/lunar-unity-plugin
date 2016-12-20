@@ -29,7 +29,7 @@ using UnityEngine;
 
 namespace LunarPluginInternal
 {
-    public static class StringUtils
+    public static class CStringUtils
     {
         private static readonly char[] kSpaceSplitChars = { ' ' };
 
@@ -504,7 +504,7 @@ namespace LunarPluginInternal
 
                 if (value.IndexOf(' ') != -1)
                 {
-                    value = StringUtils.TryFormat("\"{0}\"", value);
+                    value = CStringUtils.TryFormat("\"{0}\"", value);
                 }
 
                 return value;
@@ -534,12 +534,12 @@ namespace LunarPluginInternal
 
         internal static string C(string str, ColorCode color)
         {
-            return StringUtils.TryFormat("<color=${0}>{1}</color>", ((int)color).ToString(), str);
+            return CStringUtils.TryFormat("<color=${0}>{1}</color>", ((int)color).ToString(), str);
         }
 
         internal static string C(string str, Color color, int startIndex, int endIndex)
         {
-            return StringUtils.TryFormat("{0}<color=#{1}>{2}</color>{3}", str.Substring(0, startIndex), 
+            return CStringUtils.TryFormat("{0}<color=#{1}>{2}</color>{3}", str.Substring(0, startIndex), 
                 ToHexValue(ref color), 
                 str.Substring(startIndex, endIndex - startIndex), 
                 str.Substring(endIndex)
@@ -548,7 +548,7 @@ namespace LunarPluginInternal
 
         public static string C(string str, Color color)
         {
-            return StringUtils.TryFormat("<color=#{0}>{1}</color>", ToHexValue(ref color), str);
+            return CStringUtils.TryFormat("<color=#{0}>{1}</color>", ToHexValue(ref color), str);
         }
 
         private static string ToHexValue(ref Color color)
@@ -563,12 +563,12 @@ namespace LunarPluginInternal
 
         public static string B(string str)
         {
-            return StringUtils.TryFormat("<b>{0}</b>", str);
+            return CStringUtils.TryFormat("<b>{0}</b>", str);
         }
 
         public static string I(string str)
         {
-            return StringUtils.TryFormat("<i>{0}</i>", str);
+            return CStringUtils.TryFormat("<i>{0}</i>", str);
         }
 
         public static string RemoveRichTextTags(string line)

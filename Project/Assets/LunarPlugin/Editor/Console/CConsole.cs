@@ -133,7 +133,7 @@ namespace LunarEditor
             
             if (filename != null)
             {
-                lineBuffer.Append(StringUtils.C("[" + filename + "]: ", EditorSkin.GetColor(ColorCode.Plain)));
+                lineBuffer.Append(CStringUtils.C("[" + filename + "]: ", EditorSkin.GetColor(ColorCode.Plain)));
             }
             
             if (tag != null)

@@ -325,7 +325,7 @@ namespace LunarPluginInternal
         {
             if (iter.HasNext())
             {
-                string arg = StringUtils.UnArg(iter.Next());
+                string arg = CStringUtils.UnArg(iter.Next());
                 if (!IsValidArg(arg)) 
                 {
                     throw new CCommandException("Invalid arg: " + arg);

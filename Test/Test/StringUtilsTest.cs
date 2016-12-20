@@ -21,8 +21,8 @@ namespace LunarPlugin.Test
         {
             string arg = "arg";
             string escaped = arg;
-            Assert.AreEqual(escaped, StringUtils.Arg(arg));
-            Assert.AreEqual(arg, StringUtils.UnArg(escaped));
+            Assert.AreEqual(escaped, CStringUtils.Arg(arg));
+            Assert.AreEqual(arg, CStringUtils.UnArg(escaped));
         }
 
         [Test()]
@@ -30,8 +30,8 @@ namespace LunarPlugin.Test
         {
             string arg = "some arg with spaces";
             string escaped = '"' + arg + '"';
-            Assert.AreEqual(escaped, StringUtils.Arg(arg));
-            Assert.AreEqual(arg, StringUtils.UnArg(escaped));
+            Assert.AreEqual(escaped, CStringUtils.Arg(arg));
+            Assert.AreEqual(arg, CStringUtils.UnArg(escaped));
         }
 
         [Test()]
@@ -39,8 +39,8 @@ namespace LunarPlugin.Test
         {
             string arg = "\"quotes\"";
             string escaped = "\\\"quotes\\\"";
-            Assert.AreEqual(escaped, StringUtils.Arg(arg));
-            Assert.AreEqual(arg, StringUtils.UnArg(escaped));
+            Assert.AreEqual(escaped, CStringUtils.Arg(arg));
+            Assert.AreEqual(arg, CStringUtils.UnArg(escaped));
         }
 
         [Test()]
@@ -48,8 +48,8 @@ namespace LunarPlugin.Test
         {
             string arg = "spaces and \"quotes\"";
             string escaped = "\"spaces and \\\"quotes\\\"\"";
-            Assert.AreEqual(escaped, StringUtils.Arg(arg));
-            Assert.AreEqual(arg, StringUtils.UnArg(escaped));
+            Assert.AreEqual(escaped, CStringUtils.Arg(arg));
+            Assert.AreEqual(arg, CStringUtils.UnArg(escaped));
         }
 
         [Test()]
@@ -57,8 +57,8 @@ namespace LunarPlugin.Test
         {
             string arg = "some 'arg with' spaces";
             string escaped = "\"some \\'arg with\\' spaces\"";
-            Assert.AreEqual(escaped, StringUtils.Arg(arg));
-            Assert.AreEqual(arg, StringUtils.UnArg(escaped));
+            Assert.AreEqual(escaped, CStringUtils.Arg(arg));
+            Assert.AreEqual(arg, CStringUtils.UnArg(escaped));
         }
 
         [Test()]
@@ -66,8 +66,8 @@ namespace LunarPlugin.Test
         {
             string arg = "'quotes'";
             string escaped = "\\'quotes\\'";
-            Assert.AreEqual(escaped, StringUtils.Arg(arg));
-            Assert.AreEqual(arg, StringUtils.UnArg(escaped));
+            Assert.AreEqual(escaped, CStringUtils.Arg(arg));
+            Assert.AreEqual(arg, CStringUtils.UnArg(escaped));
         }
 
         #endregion
@@ -140,7 +140,7 @@ namespace LunarPlugin.Test
             int endIndex = startIndex + word.Length;
             for (int i = startIndex + 1; i <= endIndex; ++i)
             {
-                Assert.AreEqual(startIndex, StringUtils.StartOfTheWord(value, i), "\"" + word + "\":" + i);
+                Assert.AreEqual(startIndex, CStringUtils.StartOfTheWord(value, i), "\"" + word + "\":" + i);
             }
         }
 
@@ -152,7 +152,7 @@ namespace LunarPlugin.Test
             int endIndex = startIndex + word.Length;
             for (int i = startIndex; i < endIndex; ++i)
             {
-                Assert.AreEqual(endIndex, StringUtils.EndOfTheWord(value, i), "\"" + word + "\":" + i);
+                Assert.AreEqual(endIndex, CStringUtils.EndOfTheWord(value, i), "\"" + word + "\":" + i);
             }
         }
 
@@ -164,24 +164,24 @@ namespace LunarPlugin.Test
         public void TestRemoveBoldStyleTag()
         {
             string expected = "text";
-            string formatted = StringUtils.B(expected);
-            Assert.AreEqual(expected, StringUtils.RemoveRichTextTags(formatted));
+            string formatted = CStringUtils.B(expected);
+            Assert.AreEqual(expected, CStringUtils.RemoveRichTextTags(formatted));
         }
 
         [Test]
         public void TestRemoveItalicStyleTag()
         {
             string expected = "text";
-            string formatted = StringUtils.I(expected);
-            Assert.AreEqual(expected, StringUtils.RemoveRichTextTags(formatted));
+            string formatted = CStringUtils.I(expected);
+            Assert.AreEqual(expected, CStringUtils.RemoveRichTextTags(formatted));
         }
 
         [Test]
         public void TestRemoveColorTag()
         {
             string expected = "text";
-            string formatted = StringUtils.C(expected, ColorCode.Clear);
-            Assert.AreEqual(expected, StringUtils.RemoveRichTextTags(formatted));
+            string formatted = CStringUtils.C(expected, ColorCode.Clear);
+            Assert.AreEqual(expected, CStringUtils.RemoveRichTextTags(formatted));
         }
 
         [Test]
@@ -189,35 +189,35 @@ namespace LunarPlugin.Test
         {
             string expected = "red green blue";
             string formatted = string.Format("{0} {1} {2}", 
-                StringUtils.C("red", ColorCode.Clear),
-                StringUtils.C("green", ColorCode.Error),
-                StringUtils.C("blue", ColorCode.LevelDebug)
+                CStringUtils.C("red", ColorCode.Clear),
+                CStringUtils.C("green", ColorCode.Error),
+                CStringUtils.C("blue", ColorCode.LevelDebug)
             );
-            Assert.AreEqual(expected, StringUtils.RemoveRichTextTags(formatted));
+            Assert.AreEqual(expected, CStringUtils.RemoveRichTextTags(formatted));
         }
 
         [Test]
         public void TestRemoveColorMultipleInnerTags()
         {
             string expected = "red green blue";
-            string formatted = StringUtils.C(string.Format("{0} {1} {2}", 
-                StringUtils.C("red", ColorCode.Clear),
-                StringUtils.C("green", ColorCode.Error),
-                StringUtils.C("blue", ColorCode.LevelDebug)
+            string formatted = CStringUtils.C(string.Format("{0} {1} {2}", 
+                CStringUtils.C("red", ColorCode.Clear),
+                CStringUtils.C("green", ColorCode.Error),
+                CStringUtils.C("blue", ColorCode.LevelDebug)
             ), ColorCode.LevelError);
-            Assert.AreEqual(expected, StringUtils.RemoveRichTextTags(formatted));
+            Assert.AreEqual(expected, CStringUtils.RemoveRichTextTags(formatted));
         }
 
         [Test]
         public void TestRemoveColorMultipleInnerStyleTags()
         {
             string expected = "red green blue";
-            string formatted = StringUtils.B(string.Format("{0} {1} {2}", 
-                StringUtils.C("red", ColorCode.Clear),
-                StringUtils.C("green", ColorCode.Error),
-                StringUtils.C("blue", ColorCode.LevelDebug)
+            string formatted = CStringUtils.B(string.Format("{0} {1} {2}", 
+                CStringUtils.C("red", ColorCode.Clear),
+                CStringUtils.C("green", ColorCode.Error),
+                CStringUtils.C("blue", ColorCode.LevelDebug)
             ));
-            Assert.AreEqual(expected, StringUtils.RemoveRichTextTags(formatted));
+            Assert.AreEqual(expected, CStringUtils.RemoveRichTextTags(formatted));
         }
 
         #endregion
@@ -235,18 +235,18 @@ namespace LunarPlugin.Test
             };
 
             string formatted = string.Format("{0} {1} {2}", 
-                StringUtils.C("red", (ColorCode)0),
-                StringUtils.C("green", (ColorCode)1),
-                StringUtils.C("blue", (ColorCode)2)
+                CStringUtils.C("red", (ColorCode)0),
+                CStringUtils.C("green", (ColorCode)1),
+                CStringUtils.C("blue", (ColorCode)2)
             );
 
             string expected = string.Format("{0} {1} {2}", 
-                StringUtils.C("red", lookup[0]),
-                StringUtils.C("green", lookup[1]),
-                StringUtils.C("blue", lookup[2])
+                CStringUtils.C("red", lookup[0]),
+                CStringUtils.C("green", lookup[1]),
+                CStringUtils.C("blue", lookup[2])
             );
 
-            string actual = StringUtils.SetColors(formatted, lookup);
+            string actual = CStringUtils.SetColors(formatted, lookup);
             Assert.AreEqual(expected, actual);
         }
 
@@ -261,20 +261,20 @@ namespace LunarPlugin.Test
             };
 
             string formatted = string.Format("{0} {1} {2}", 
-                StringUtils.C("red", (ColorCode)0),
-                StringUtils.C("green", (ColorCode)1),
-                StringUtils.C("blue", (ColorCode)2),
-                StringUtils.C("yellow", (ColorCode)3)
+                CStringUtils.C("red", (ColorCode)0),
+                CStringUtils.C("green", (ColorCode)1),
+                CStringUtils.C("blue", (ColorCode)2),
+                CStringUtils.C("yellow", (ColorCode)3)
             );
 
             string expected = string.Format("{0} {1} {2}", 
-                StringUtils.C("red", lookup[0]),
-                StringUtils.C("green", lookup[1]),
-                StringUtils.C("blue", lookup[2]),
-                StringUtils.C("yellow", (ColorCode)3)
+                CStringUtils.C("red", lookup[0]),
+                CStringUtils.C("green", lookup[1]),
+                CStringUtils.C("blue", lookup[2]),
+                CStringUtils.C("yellow", (ColorCode)3)
             );
 
-            string actual = StringUtils.SetColors(formatted, lookup);
+            string actual = CStringUtils.SetColors(formatted, lookup);
             Assert.AreEqual(expected, actual);
         }
 
@@ -286,7 +286,7 @@ namespace LunarPlugin.Test
         public void TestCountLineBreaksSingleLine()
         {
             string line = "line";
-            Assert.AreEqual(0, StringUtils.LinesBreaksCount(line));
+            Assert.AreEqual(0, CStringUtils.LinesBreaksCount(line));
         }
 
         [Test]
@@ -295,7 +295,7 @@ namespace LunarPlugin.Test
             string line = "line1\n" +
                           "line2";
 
-            Assert.AreEqual(1, StringUtils.LinesBreaksCount(line));
+            Assert.AreEqual(1, CStringUtils.LinesBreaksCount(line));
         }
 
         [Test]
@@ -305,14 +305,14 @@ namespace LunarPlugin.Test
                           "line2\n" +
                           "line3";
 
-            Assert.AreEqual(2, StringUtils.LinesBreaksCount(line));
+            Assert.AreEqual(2, CStringUtils.LinesBreaksCount(line));
         }
 
         [Test]
         public void TestCountLineBreaksNullLine()
         {
             string line = null;
-            Assert.AreEqual(0, StringUtils.LinesBreaksCount(line));
+            Assert.AreEqual(0, CStringUtils.LinesBreaksCount(line));
         }
 
         [Test]
@@ -325,53 +325,53 @@ namespace LunarPlugin.Test
                            "jklm";
 
             int index = 0;
-            Assert.AreEqual(index, StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(index, CStringUtils.MoveLineUp(value, index));
 
             // second line
             index = value.IndexOf('a');
-            Assert.AreEqual(0, StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(0, CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('a') + 1;
-            Assert.AreEqual(0, StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(0, CStringUtils.MoveLineUp(value, index));
 
             // third line
             index = value.IndexOf('c');
-            Assert.AreEqual(value.IndexOf('a'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('a'), CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('d');
-            Assert.AreEqual(value.IndexOf('a') + 1, StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('a') + 1, CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('d') + 1;
-            Assert.AreEqual(value.IndexOf('a') + 1, StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('a') + 1, CStringUtils.MoveLineUp(value, index));
 
             // fourth line
             index = value.IndexOf('f');
-            Assert.AreEqual(value.IndexOf('c'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('c'), CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('g');
-            Assert.AreEqual(value.IndexOf('d'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('d'), CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('h');
-            Assert.AreEqual(value.IndexOf('d') + 1, StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('d') + 1, CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('h') + 1;
-            Assert.AreEqual(value.IndexOf('d') + 1, StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('d') + 1, CStringUtils.MoveLineUp(value, index));
 
             // fifth line
             index = value.IndexOf('j');
-            Assert.AreEqual(value.IndexOf('f'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('f'), CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('k');
-            Assert.AreEqual(value.IndexOf('g'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('g'), CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('l');
-            Assert.AreEqual(value.IndexOf('h'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('h'), CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('m');
-            Assert.AreEqual(value.IndexOf('h') + 1, StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('h') + 1, CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('m') + 1;
-            Assert.AreEqual(value.IndexOf('h') + 1, StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('h') + 1, CStringUtils.MoveLineUp(value, index));
         }
 
         [Test]
@@ -385,50 +385,50 @@ namespace LunarPlugin.Test
 
             // first line
             int index = 0;
-            Assert.AreEqual(value.IndexOf('a'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('a'), CStringUtils.MoveLineDown(value, index));
 
             // second line
             index = value.IndexOf('a');
-            Assert.AreEqual(value.IndexOf('c'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('c'), CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('a') + 1;
-            Assert.AreEqual(value.IndexOf('d'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('d'), CStringUtils.MoveLineDown(value, index));
 
             // third line
             index = value.IndexOf('c');
-            Assert.AreEqual(value.IndexOf('f'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('f'), CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('d');
-            Assert.AreEqual(value.IndexOf('g'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('g'), CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('d') + 1;
-            Assert.AreEqual(value.IndexOf('h'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('h'), CStringUtils.MoveLineDown(value, index));
 
             // fourth line
             index = value.IndexOf('f');
-            Assert.AreEqual(value.IndexOf('j'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('j'), CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('g');
-            Assert.AreEqual(value.IndexOf('k'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('k'), CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('h');
-            Assert.AreEqual(value.IndexOf('l'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('l'), CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('h') + 1;
-            Assert.AreEqual(value.IndexOf('m'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('m'), CStringUtils.MoveLineDown(value, index));
 
             // fifth line
             index = value.IndexOf('j');
-            Assert.AreEqual(index, StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(index, CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('k');
-            Assert.AreEqual(index, StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(index, CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('l');
-            Assert.AreEqual(index, StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(index, CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('m');
-            Assert.AreEqual(index, StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(index, CStringUtils.MoveLineDown(value, index));
         }
 
         [Test]
@@ -444,56 +444,56 @@ namespace LunarPlugin.Test
             int index = value.IndexOf('a');
 
             // first line
-            Assert.AreEqual(index, StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(index, CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('b');
-            Assert.AreEqual(index, StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(index, CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('c');
-            Assert.AreEqual(index, StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(index, CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('d');
-            Assert.AreEqual(index, StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(index, CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('d') + 1;
-            Assert.AreEqual(index, StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(index, CStringUtils.MoveLineUp(value, index));
 
             // second line
             index = value.IndexOf('f');
-            Assert.AreEqual(value.IndexOf('a'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('a'), CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('g');
-            Assert.AreEqual(value.IndexOf('b'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('b'), CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('h');
-            Assert.AreEqual(value.IndexOf('c'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('c'), CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('h') + 1;
-            Assert.AreEqual(value.IndexOf('d'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('d'), CStringUtils.MoveLineUp(value, index));
 
             // third line
             index = value.IndexOf('j');
-            Assert.AreEqual(value.IndexOf('f'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('f'), CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('k');
-            Assert.AreEqual(value.IndexOf('g'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('g'), CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('k') + 1;
-            Assert.AreEqual(value.IndexOf('h'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('h'), CStringUtils.MoveLineUp(value, index));
 
             // fourth line
             index = value.IndexOf('m');
-            Assert.AreEqual(value.IndexOf('j'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('j'), CStringUtils.MoveLineUp(value, index));
 
             index = value.IndexOf('m') + 1;
-            Assert.AreEqual(value.IndexOf('k'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('k'), CStringUtils.MoveLineUp(value, index));
 
             // fifth line
             index = value.LastIndexOf('\n');
-            Assert.AreEqual(value.IndexOf('m'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.IndexOf('m'), CStringUtils.MoveLineUp(value, index));
 
             index = value.LastIndexOf('\n') + 1;
-            Assert.AreEqual(value.LastIndexOf('\n'), StringUtils.MoveLineUp(value, index));
+            Assert.AreEqual(value.LastIndexOf('\n'), CStringUtils.MoveLineUp(value, index));
         }
 
         [Test]
@@ -508,56 +508,56 @@ namespace LunarPlugin.Test
 
             // first line
             int index = value.IndexOf('a');
-            Assert.AreEqual(value.IndexOf('f'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('f'), CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('b');
-            Assert.AreEqual(value.IndexOf('g'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('g'), CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('c');
-            Assert.AreEqual(value.IndexOf('h'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('h'), CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('d');
-            Assert.AreEqual(value.IndexOf('h') + 1, StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('h') + 1, CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('d') + 1;
-            Assert.AreEqual(value.IndexOf('h') + 1, StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('h') + 1, CStringUtils.MoveLineDown(value, index));
 
             // second line
             index = value.IndexOf('f');
-            Assert.AreEqual(value.IndexOf('j'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('j'), CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('g');
-            Assert.AreEqual(value.IndexOf('k'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('k'), CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('h');
-            Assert.AreEqual(value.IndexOf('k') + 1, StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('k') + 1, CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('h') + 1;
-            Assert.AreEqual(value.IndexOf('k') + 1, StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('k') + 1, CStringUtils.MoveLineDown(value, index));
 
             // third line
             index = value.IndexOf('j');
-            Assert.AreEqual(value.IndexOf('m'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('m'), CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('k');
-            Assert.AreEqual(value.IndexOf('m') + 1, StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('m') + 1, CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('k') + 1;
-            Assert.AreEqual(value.IndexOf('m') + 1, StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.IndexOf('m') + 1, CStringUtils.MoveLineDown(value, index));
 
             // fourth line
             index = value.IndexOf('m');
-            Assert.AreEqual(value.LastIndexOf('\n'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.LastIndexOf('\n'), CStringUtils.MoveLineDown(value, index));
 
             index = value.IndexOf('m') + 1;
-            Assert.AreEqual(value.LastIndexOf('\n'), StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.LastIndexOf('\n'), CStringUtils.MoveLineDown(value, index));
 
             // fifth line
             index = value.LastIndexOf('\n');
-            Assert.AreEqual(value.LastIndexOf('\n') + 1, StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.LastIndexOf('\n') + 1, CStringUtils.MoveLineDown(value, index));
 
             index = value.LastIndexOf('\n') + 1;
-            Assert.AreEqual(value.LastIndexOf('\n') + 1, StringUtils.MoveLineDown(value, index));
+            Assert.AreEqual(value.LastIndexOf('\n') + 1, CStringUtils.MoveLineDown(value, index));
         }
 
         [Test]
@@ -568,13 +568,13 @@ namespace LunarPlugin.Test
                            "";
 
             // first line
-            Assert.AreEqual(0, StringUtils.MoveLineUp(value, 0));
+            Assert.AreEqual(0, CStringUtils.MoveLineUp(value, 0));
 
             // second line
-            Assert.AreEqual(0, StringUtils.MoveLineUp(value, 1));
+            Assert.AreEqual(0, CStringUtils.MoveLineUp(value, 1));
 
             // third line
-            Assert.AreEqual(1, StringUtils.MoveLineUp(value, 2));
+            Assert.AreEqual(1, CStringUtils.MoveLineUp(value, 2));
         }
 
         [Test]
@@ -585,13 +585,13 @@ namespace LunarPlugin.Test
                            "";
 
             // first line
-            Assert.AreEqual(1, StringUtils.MoveLineDown(value, 0));
+            Assert.AreEqual(1, CStringUtils.MoveLineDown(value, 0));
 
             // second line
-            Assert.AreEqual(2, StringUtils.MoveLineDown(value, 1));
+            Assert.AreEqual(2, CStringUtils.MoveLineDown(value, 1));
 
             // third line
-            Assert.AreEqual(2, StringUtils.MoveLineDown(value, 2));
+            Assert.AreEqual(2, CStringUtils.MoveLineDown(value, 2));
         }
 
         #endregion
@@ -606,7 +606,7 @@ namespace LunarPlugin.Test
                 "aa1", "aa11", "aa12", "aa13", "aa111", "aa112", "aa113", "b"
             };
 
-            Assert.IsNull(StringUtils.GetSuggestedText(null, values));
+            Assert.IsNull(CStringUtils.GetSuggestedText(null, values));
         }
 
         [Test()]
@@ -617,7 +617,7 @@ namespace LunarPlugin.Test
                 "aa1", "aa11", "aa12", "aa13", "aa111", "aa112", "aa113", "b"
             };
             
-            Assert.IsNull(StringUtils.GetSuggestedText("", values));
+            Assert.IsNull(CStringUtils.GetSuggestedText("", values));
         }
 
         [Test()]
@@ -628,7 +628,7 @@ namespace LunarPlugin.Test
                 "aa1", "aa11", "aa12", "aa13", "aa111", "aa112", "aa113", "b"
             };
             
-            Assert.AreEqual("b", StringUtils.GetSuggestedText("b", values));
+            Assert.AreEqual("b", CStringUtils.GetSuggestedText("b", values));
         }
 
         [Test()]
@@ -639,7 +639,7 @@ namespace LunarPlugin.Test
                 "aa1", "aa11", "aa12", "aa13", "aa111", "aa112", "aa113", "aa2", "b"
             };
             
-            Assert.AreEqual("aa", StringUtils.GetSuggestedText("a", values));
+            Assert.AreEqual("aa", CStringUtils.GetSuggestedText("a", values));
         }
 
         [Test()]
@@ -650,7 +650,7 @@ namespace LunarPlugin.Test
                 "aa1", "aa11", "aa12", "aa13", "aa111", "aa112", "aa113", "aa2", "b"
             };
 
-            Assert.AreEqual("aa", StringUtils.GetSuggestedText("aa", values));
+            Assert.AreEqual("aa", CStringUtils.GetSuggestedText("aa", values));
         }
 
         [Test()]
@@ -661,7 +661,7 @@ namespace LunarPlugin.Test
                 "aa1", "aa11", "aa12", "aa13", "aa111", "aa112", "aa113", "aa2", "b"
             };
 
-            Assert.AreEqual("aa1", StringUtils.GetSuggestedText("aa1", values));
+            Assert.AreEqual("aa1", CStringUtils.GetSuggestedText("aa1", values));
         }
 
         [Test()]
@@ -672,7 +672,7 @@ namespace LunarPlugin.Test
                 "aa1", "aa11", "aa12", "aa13", "aa111", "aa112", "aa113", "aa2", "b"
             };
 
-            Assert.AreEqual("aa11", StringUtils.GetSuggestedText("aa11", values));
+            Assert.AreEqual("aa11", CStringUtils.GetSuggestedText("aa11", values));
         }
 
         [Test()]
@@ -683,7 +683,7 @@ namespace LunarPlugin.Test
                 "aa1", "aa11", "aa12", "aa13", "aa111", "aa112", "aa113", "aa2", "b"
             };
 
-            Assert.AreEqual("aa111", StringUtils.GetSuggestedText("aa111", values));
+            Assert.AreEqual("aa111", CStringUtils.GetSuggestedText("aa111", values));
         }
 
         [Test()]
@@ -694,7 +694,7 @@ namespace LunarPlugin.Test
                 "aa1", "aa11", "aa12", "aa13", "aa111", "aa112", "aa113", "aa2", "b"
             };
 
-            Assert.IsNull(StringUtils.GetSuggestedText("aa1111", values));
+            Assert.IsNull(CStringUtils.GetSuggestedText("aa1111", values));
         }
 
         #endregion
@@ -719,7 +719,7 @@ namespace LunarPlugin.Test
                 "LINE12"
             };
 
-            Assert.AreEqual(expected, StringUtils.Filter(strings, "LINE1"));
+            Assert.AreEqual(expected, CStringUtils.Filter(strings, "LINE1"));
         }
 
         [Test]
@@ -743,7 +743,7 @@ namespace LunarPlugin.Test
                 "foo"
             };
 
-            Assert.AreEqual(expected, StringUtils.Filter(strings, ""));
+            Assert.AreEqual(expected, CStringUtils.Filter(strings, ""));
         }
 
         [Test]
@@ -767,7 +767,7 @@ namespace LunarPlugin.Test
                 "foo"
             };
 
-            Assert.AreEqual(expected, StringUtils.Filter(strings, null));
+            Assert.AreEqual(expected, CStringUtils.Filter(strings, null));
         }
 
         #endregion

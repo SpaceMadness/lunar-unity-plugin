@@ -62,7 +62,7 @@ namespace LunarEditor
 
         public static string SetColors(string line)
         {
-            return line != null ? StringUtils.SetColors(line, colors.m_lookup) : null;
+            return line != null ? CStringUtils.SetColors(line, colors.m_lookup) : null;
         }
 
         private static bool isProSkin

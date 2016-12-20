@@ -356,7 +356,7 @@ namespace LunarPluginInternal
             IDictionary<string, object> data = new Dictionary<string, object>();
             foreach (KeyValuePair<string, object> e in m_data)
             {
-                if (StringUtils.StartsWithIgnoreCase(e.Key, token))
+                if (CStringUtils.StartsWithIgnoreCase(e.Key, token))
                 {
                     data[e.Key] = e.Value;
                 }

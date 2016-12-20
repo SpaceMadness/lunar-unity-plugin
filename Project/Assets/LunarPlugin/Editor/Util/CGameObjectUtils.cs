@@ -73,6 +73,6 @@ public static class GameObjectUtils
 
     public static bool ShouldListObject(GameObject obj, string prefix)
     {
-        return prefix == null || StringUtils.StartsWithIgnoreCase(obj.name, prefix);
+        return prefix == null || CStringUtils.StartsWithIgnoreCase(obj.name, prefix);
     }
 }

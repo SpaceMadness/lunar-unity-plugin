@@ -36,7 +36,7 @@ namespace LunarPlugin.Test
         protected void AssertList<T>(IList<T> actual, params T[] expected) 
             where T : IEquatable<T>
         {
-            Assert.AreEqual(expected.Length, actual.Count, StringUtils.TryFormat("Expected: [{0}]\nActual: [{1}]"), Join(", ", expected), Join(", ", actual));
+            Assert.AreEqual(expected.Length, actual.Count, CStringUtils.TryFormat("Expected: [{0}]\nActual: [{1}]"), Join(", ", expected), Join(", ", actual));
             for (int i = 0; i < expected.Length; ++i)
             {
                 Assert.AreEqual(expected[i], actual[i]);
@@ -49,7 +49,7 @@ namespace LunarPlugin.Test
             Assert.IsNotNull(actual);
             Assert.IsNotNull(expected);
 
-            Assert.AreEqual(actual.Length, expected.Length, StringUtils.TryFormat("Expected: [{0}]\nActual: [{1}]"), Join(", ", expected), Join(", ", actual));
+            Assert.AreEqual(actual.Length, expected.Length, CStringUtils.TryFormat("Expected: [{0}]\nActual: [{1}]"), Join(", ", expected), Join(", ", actual));
             for (int i = 0; i < expected.Length; ++i)
             {
                 Assert.AreEqual(expected[i], actual[i]);
@@ -58,7 +58,7 @@ namespace LunarPlugin.Test
 
         protected void AssertTypes<T>(IList<T> actual, params Type[] expected)
         {
-            Assert.AreEqual(actual.Count, expected.Length, StringUtils.TryFormat("Expected: [{0}]\nActual: [{1}]"), Join(", ", expected), JoinTypes(", ", actual));
+            Assert.AreEqual(actual.Count, expected.Length, CStringUtils.TryFormat("Expected: [{0}]\nActual: [{1}]"), Join(", ", expected), JoinTypes(", ", actual));
             for (int i = 0; i < expected.Length; ++i)
             {
                 Assert.AreEqual(actual[i].GetType(), expected[i]);
@@ -67,7 +67,7 @@ namespace LunarPlugin.Test
 
         protected string Join<T>(string separator, IList<T> list)
         {
-            return StringUtils.Join(list, separator);
+            return CStringUtils.Join(list, separator);
         }
 
         private string JoinTypes<T>(string separator, IList<T> list)

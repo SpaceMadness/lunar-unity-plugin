@@ -49,7 +49,7 @@ namespace LunarPluginInternal
         {
             if (args.Length == 0)
             {
-                PrintIndent("{0} is:\"{1}\" default:\"{2}\"", StringUtils.C(cvar.Name, ColorCode.TableVar), cvar.Value, cvar.DefaultValue);
+                PrintIndent("{0} is:\"{1}\" default:\"{2}\"", CStringUtils.C(cvar.Name, ColorCode.TableVar), cvar.Value, cvar.DefaultValue);
                 return false;
             }
 
@@ -128,7 +128,7 @@ namespace LunarPluginInternal
                 {
                     if (args.Length == 3 || args.Length == 4)
                     {
-                        float[] values = StringUtils.ParseFloats(args);
+                        float[] values = CStringUtils.ParseFloats(args);
                         if (values == null)
                         {
                             PrintError("Invalid values");
@@ -195,7 +195,7 @@ namespace LunarPluginInternal
                         return false;
                     }
 
-                    float[] values = StringUtils.ParseFloats(args);
+                    float[] values = CStringUtils.ParseFloats(args);
                     if (values == null)
                     {
                         PrintError("Invalid values");
@@ -216,7 +216,7 @@ namespace LunarPluginInternal
                         return false;
                     }
 
-                    float[] values = StringUtils.ParseFloats(args);
+                    float[] values = CStringUtils.ParseFloats(args);
                     if (values == null)
                     {
                         PrintError("Invalid values");
@@ -237,7 +237,7 @@ namespace LunarPluginInternal
                         return false;
                     }
 
-                    float[] values = StringUtils.ParseFloats(args);
+                    float[] values = CStringUtils.ParseFloats(args);
                     if (values == null)
                     {
                         PrintError("Invalid values");
@@ -266,7 +266,7 @@ namespace LunarPluginInternal
                         return false;
                     }
 
-                    float[] values = StringUtils.ParseFloats(args);
+                    float[] values = CStringUtils.ParseFloats(args);
                     if (values == null)
                     {
                         PrintError("Invalid values");

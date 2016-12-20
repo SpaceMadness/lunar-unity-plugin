@@ -64,7 +64,7 @@ namespace LunarPlugin.Test
                 string[] table = entry.Table;
                 foreach (string item in table)
                 {
-                    terminalTableOutput.Add(StringUtils.RemoveRichTextTags(item));
+                    terminalTableOutput.Add(CStringUtils.RemoveRichTextTags(item));
                 }
             }
         }
