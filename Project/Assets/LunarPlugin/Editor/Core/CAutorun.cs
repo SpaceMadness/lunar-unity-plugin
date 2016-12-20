@@ -37,11 +37,11 @@ using LunarPluginInternal;
 namespace LunarEditor
 {
     [InitializeOnLoad]
-    partial class Autorun
+    partial class CAutorun
     {
         private static bool isPlaying;
 
-        static Autorun()
+        static CAutorun()
         {
             isPlaying = EditorApplication.isPlaying;
 
