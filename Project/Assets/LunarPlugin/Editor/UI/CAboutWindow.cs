@@ -56,19 +56,19 @@ namespace LunarEditor
 
             View buttonsView = new View();
 
-            Button twitterButton = new Button("Follow @LunarPlugin", delegate(Button button) {
+            CButton twitterButton = new CButton("Follow @LunarPlugin", delegate(CButton button) {
                 Application.OpenURL("https://twitter.com/intent/follow?screen_name=LunarPlugin&user_id=2939274198");
             });
             twitterButton.Width = contentView.Width;
             buttonsView.AddSubview(twitterButton);
 
-            Button facebookButton = new Button("Facebook Page", delegate(Button button) {
+            CButton facebookButton = new CButton("Facebook Page", delegate(CButton button) {
                 Application.OpenURL("https://www.facebook.com/LunarPlugin");
             });
             facebookButton.Width = contentView.Width;
             buttonsView.AddSubview(facebookButton);
 
-            Button emailButton = new Button("Send Email", delegate(Button button) {
+            CButton emailButton = new CButton("Send Email", delegate(CButton button) {
                 Application.OpenURL("mailto:lunar.plugin@gmail.com?subject=Lunar%20plugin%20feedback&body=Hey%20Alex%2C%0A%0AI%27ve%20just%20checked%20the%20Lunar%20plugin.%20Nice%20job%2C%20man%21%20Still%2C%20there%27s%20some%20stuff%20I%20don%27t%20really%20like.%20For%20example%2C%20...%0A%0AFix%20it%2C%20you%20son%20of%20a%20bitch%2C%20or%20go%20to%20Hell%21%0A%0ASincerely%2C%0A%0AYour%20Lunar%20Plugin%20User");
             });
             emailButton.Width = contentView.Width;

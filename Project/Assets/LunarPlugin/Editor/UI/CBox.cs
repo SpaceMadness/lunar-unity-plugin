@@ -24,14 +24,14 @@ using UnityEngine;
 
 namespace LunarEditor
 {
-    class Box : View
+    class CBox : View
     {
-        public Box(float width, float height)
+        public CBox(float width, float height)
             : this(width, height, GUI.skin.box)
         {
         }
 
-        public Box(float width, float height, GUIStyle style)
+        public CBox(float width, float height, GUIStyle style)
             : base(width, height)
         {
             this.Style = style;

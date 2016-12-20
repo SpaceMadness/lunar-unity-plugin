@@ -44,7 +44,7 @@ namespace LunarEditor
             GUILayout.EndHorizontal();
         }
 
-        public ToolBarButton AddButton(string title, ButtonDelegate buttonDelegate)
+        public ToolBarButton AddButton(string title, CButtonDelegate buttonDelegate)
         {
             ToolBarButton button = new ToolBarButton(title, buttonDelegate);
             AddSubview(button);
@@ -95,9 +95,9 @@ namespace LunarEditor
         }
     }
 
-    class ToolBarButton : Button
+    class ToolBarButton : CButton
     {
-        public ToolBarButton(string title, ButtonDelegate buttonDelegate)
+        public ToolBarButton(string title, CButtonDelegate buttonDelegate)
             : base(title, buttonDelegate)
         {
             Width = SharedStyles.MeasureWidth(SharedStyles.toolbarButton, title);

@@ -24,11 +24,11 @@ using System.Collections;
 
 namespace LunarEditor
 {
-    delegate void ButtonDelegate(Button button);
+    delegate void CButtonDelegate(CButton button);
 
-    class Button : CAbstractButton
+    class CButton : CAbstractButton
     {
-        public Button(string title, ButtonDelegate buttonDelegate)
+        public CButton(string title, CButtonDelegate buttonDelegate)
             : base(title)
         {
             ButtonDelegate = buttonDelegate;
@@ -47,7 +47,7 @@ namespace LunarEditor
 
         #region Properties
 
-        public ButtonDelegate ButtonDelegate { get; private set; }
+        public CButtonDelegate ButtonDelegate { get; private set; }
 
         #endregion
     }

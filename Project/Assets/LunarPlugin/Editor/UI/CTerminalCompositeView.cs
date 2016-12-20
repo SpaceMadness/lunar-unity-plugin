@@ -67,20 +67,20 @@ namespace LunarEditor
             ToolBar toolbar = new ToolBar(this.Width);
             toolbar.Width = this.Width;
 
-            toolbar.AddButton("Clear", delegate(Button button)
+            toolbar.AddButton("Clear", delegate(CButton button)
             {
                 Terminal.Clear();
             });
 
             // copy to clipboard
-            toolbar.AddButton("Copy", delegate(Button button)
+            toolbar.AddButton("Copy", delegate(CButton button)
                 {
                     string text = GetText();
                     CEditor.CopyToClipboard(text);
                 });
 
             // save to file
-            toolbar.AddButton("Save", delegate(Button button)
+            toolbar.AddButton("Save", delegate(CButton button)
                 {
                     string title = "Console log";
                     string directory = CFileUtils.DataPath;
