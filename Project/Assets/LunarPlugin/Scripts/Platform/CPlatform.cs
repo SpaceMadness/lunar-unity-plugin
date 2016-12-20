@@ -30,7 +30,7 @@ namespace LunarPluginInternal
 {
     internal static class CPlatform
     {
-        private static readonly string EditorPlatformType = "LunarEditor.EditorPlatform";
+        private static readonly string EditorPlatformType = "LunarEditor.CEditorPlatform";
         private static CPlatformImpl s_impl;
 
         static CPlatform()
@@ -60,7 +60,7 @@ namespace LunarPluginInternal
             catch (MissingMethodException) // FIXME: I don't like this
             {
                 // unit test running
-                Type type = CClassUtils.TypeForName("LunarPluginInternal.TestingPlatform");
+                Type type = CClassUtils.TypeForName("LunarPluginInternal.CTestingPlatform");
                 return CClassUtils.CreateInstance<CPlatformImpl>(type);
             }
         }
