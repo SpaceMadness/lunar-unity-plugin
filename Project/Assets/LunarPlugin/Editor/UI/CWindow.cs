@@ -59,7 +59,7 @@ namespace LunarEditor
             #pragma warning disable 0618
             this.title = title;
             #pragma warning restore 0618
-            TimerManager.ScheduleTimer(Repaint, 1.0f); // hack: after script reloading windows are not repainted
+            CTimerManager.ScheduleTimer(Repaint, 1.0f); // hack: after script reloading windows are not repainted
         }
 
         private void RunStart()

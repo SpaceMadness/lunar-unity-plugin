@@ -23,7 +23,7 @@ namespace LunarPlugin.Test.Timers
         [Test]
         public void TestSingleTimerReuse()
         {
-            Timer instance = NextTimer();
+            CTimer instance = NextTimer();
             Assert.AreEqual(0, TestTimer.PoolSize);
 
             Recycle(instance);
@@ -36,10 +36,10 @@ namespace LunarPlugin.Test.Timers
         [Test]
         public void TestMultipleTimerReuse()
         {
-            Timer instance1 = NextTimer();
+            CTimer instance1 = NextTimer();
             Assert.AreEqual(0, TestTimer.PoolSize);
 
-            Timer instance2 = NextTimer();
+            CTimer instance2 = NextTimer();
             Assert.AreEqual(0, TestTimer.PoolSize);
 
             Recycle(instance1);
@@ -58,16 +58,16 @@ namespace LunarPlugin.Test.Timers
         [Test]
         public void TestMultipleTimerMultipleReuse()
         {
-            Timer instance1 = NextTimer();
+            CTimer instance1 = NextTimer();
             Assert.AreEqual(0, TestTimer.PoolSize);
 
-            Timer instance2 = NextTimer();
+            CTimer instance2 = NextTimer();
             Assert.AreEqual(0, TestTimer.PoolSize);
 
             Recycle(instance1);
             Assert.AreEqual(1, TestTimer.PoolSize);
 
-            Timer instance3 = NextTimer();
+            CTimer instance3 = NextTimer();
             Assert.AreEqual(0, TestTimer.PoolSize);
 
             Recycle(instance2);
@@ -83,12 +83,12 @@ namespace LunarPlugin.Test.Timers
             Assert.AreEqual(0, TestTimer.PoolSize);
         }
 
-        private static Timer NextTimer()
+        private static CTimer NextTimer()
         {
             return TestTimer.NextFreeTimer();
         }
 
-        private static void Recycle(Timer instance)
+        private static void Recycle(CTimer instance)
         {
             TestTimer.AddFreeTimer(instance);
         }

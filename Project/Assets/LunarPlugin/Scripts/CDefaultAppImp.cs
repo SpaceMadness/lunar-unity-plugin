@@ -30,7 +30,7 @@ namespace LunarPluginInternal
     class DefaultAppImp : AppImp, ICUpdatable, IDestroyable, ICCommandDelegate
     {
         private readonly CCommandProcessor m_processor;
-        private readonly TimerManager m_timerManager;
+        private readonly CTimerManager m_timerManager;
         private readonly CNotificationCenter m_notificationCenter;
         private readonly UpdatableList m_updatables;
 
@@ -52,7 +52,7 @@ namespace LunarPluginInternal
         {
             ResolveCommands();
 
-            TimerManager.ScheduleTimerOnce(delegate()
+            CTimerManager.ScheduleTimerOnce(delegate()
             {
                 ExecStartupConfigs();
                 RegisterCommandNotifications();
@@ -209,9 +209,9 @@ namespace LunarPluginInternal
 
         #region Factory methods
 
-        protected virtual TimerManager CreateTimerManager()
+        protected virtual CTimerManager CreateTimerManager()
         {
-            return TimerManager.SharedInstance;
+            return CTimerManager.SharedInstance;
         }
 
         protected virtual CNotificationCenter CreateNotificationCenter()

@@ -25,21 +25,21 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    class TimerManager : ITimerManager
+    class CTimerManager : ITimerManager
     {
-        public static readonly ITimerManager Null = new NullTimerManager();
+        public static readonly ITimerManager Null = new CNullTimerManager();
 
-        private static TimerManager s_sharedInstance;
+        private static CTimerManager s_sharedInstance;
 
         internal double currentTime;
 
-        private Timer rootTimer;
+        private CTimer rootTimer;
 
-        private Timer delayedAddHeadTimer; // timers which were scheduled while iterating the list
-        private Timer delayedAddTailTimer; // track tail to append at the end of the list so timers are
+        private CTimer delayedAddHeadTimer; // timers which were scheduled while iterating the list
+        private CTimer delayedAddTailTimer; // track tail to append at the end of the list so timers are
                                            // fired in the same order as they scheduled
 
-        private Timer delayedFreeRootTimer; // timers which were cancelled while iterating the list
+        private CTimer delayedFreeRootTimer; // timers which were cancelled while iterating the list
 
         private int timersCount;
         private bool updating;
@@ -48,27 +48,27 @@ namespace LunarPluginInternal
 
         #region Shared instance
 
-        static TimerManager()
+        static CTimerManager()
         {
-            s_sharedInstance = new TimerManager();
+            s_sharedInstance = new CTimerManager();
         }
 
-        public static Timer ScheduleTimer(Action callback, float delay = 0.0f, bool repeated = false, string name = null)
-        {
-            return s_sharedInstance.Schedule(callback, delay, repeated, name);
-        }
-
-        public static Timer ScheduleTimer(Action<Timer> callback, float delay = 0.0f, bool repeated = false, string name = null)
+        public static CTimer ScheduleTimer(Action callback, float delay = 0.0f, bool repeated = false, string name = null)
         {
             return s_sharedInstance.Schedule(callback, delay, repeated, name);
         }
 
-        public static Timer ScheduleTimerOnce(Action callback, float delay = 0.0f, bool repeated = false, string name = null)
+        public static CTimer ScheduleTimer(Action<CTimer> callback, float delay = 0.0f, bool repeated = false, string name = null)
+        {
+            return s_sharedInstance.Schedule(callback, delay, repeated, name);
+        }
+
+        public static CTimer ScheduleTimerOnce(Action callback, float delay = 0.0f, bool repeated = false, string name = null)
         {
             return s_sharedInstance.ScheduleOnce(callback, delay, repeated, name);
         }
 
-        public static Timer ScheduleTimerOnce(Action<Timer> callback, float delay = 0.0f, bool repeated = false, string name = null)
+        public static CTimer ScheduleTimerOnce(Action<CTimer> callback, float delay = 0.0f, bool repeated = false, string name = null)
         {
             return s_sharedInstance.ScheduleOnce(callback, delay, repeated, name);
         }
@@ -78,7 +78,7 @@ namespace LunarPluginInternal
             s_sharedInstance.Cancel(callback);
         }
 
-        public static void CancelTimer(Action<Timer> callback)
+        public static void CancelTimer(Action<CTimer> callback)
         {
             s_sharedInstance.Cancel(callback);
         }
@@ -88,7 +88,7 @@ namespace LunarPluginInternal
             s_sharedInstance.CancelAll(target);
         }
 
-        internal static TimerManager SharedInstance
+        internal static CTimerManager SharedInstance
         {
             get { return s_sharedInstance; }
         }
@@ -108,14 +108,14 @@ namespace LunarPluginInternal
                 if (timersCount > 0)
                 {
                     updating = true;
-                    for (Timer t = rootTimer; t != null;)
+                    for (CTimer t = rootTimer; t != null;)
                     {
                         if (t.fireTime > currentTime)
                         {
                             break;
                         }
 
-                        Timer timer = t;
+                        CTimer timer = t;
                         t = t.next;
 
                         if (!timer.cancelled)
@@ -128,9 +128,9 @@ namespace LunarPluginInternal
                     // Put timers which were cancelled during this update back into the pool
                     if (delayedFreeRootTimer != null)
                     {
-                        for (Timer t = delayedFreeRootTimer; t != null;)
+                        for (CTimer t = delayedFreeRootTimer; t != null;)
                         {
-                            Timer timer = t;
+                            CTimer timer = t;
                             t = t.helpListNext;
 
                             CancelTimerInLoop(timer);
@@ -141,9 +141,9 @@ namespace LunarPluginInternal
                     // Add timers which were scheduled during this update
                     if (delayedAddHeadTimer != null)
                     {
-                        for (Timer t = delayedAddHeadTimer; t != null;)
+                        for (CTimer t = delayedAddHeadTimer; t != null;)
                         {
-                            Timer timer = t;
+                            CTimer timer = t;
                             t = t.helpListNext;
 
                             AddTimer(timer);
@@ -161,21 +161,21 @@ namespace LunarPluginInternal
 
         #region Schedule
 
-        public override Timer Schedule(Action callback, float delay, int numRepeats, string name = null)
+        public override CTimer Schedule(Action callback, float delay, int numRepeats, string name = null)
         {
-            return Schedule(callback, Timer.DefaultTimerCallback, delay, numRepeats, name);
+            return Schedule(callback, CTimer.DefaultTimerCallback, delay, numRepeats, name);
         }
 
-        public override Timer Schedule(Action<Timer> callback, float delay, int numRepeats, string name = null)
+        public override CTimer Schedule(Action<CTimer> callback, float delay, int numRepeats, string name = null)
         {
             return Schedule(null, callback, delay, numRepeats, name);
         }
 
-        private Timer Schedule(Action callback1, Action<Timer> callback2, float delay, int numRepeats, string name)
+        private CTimer Schedule(Action callback1, Action<CTimer> callback2, float delay, int numRepeats, string name)
         {
             float timeout = delay < 0 ? 0 : delay;
 
-            Timer timer = NextFreeTimer();
+            CTimer timer = NextFreeTimer();
             timer.callback1 = callback1;
             timer.callback2 = callback2;
             timer.timeout = timeout;
@@ -199,9 +199,9 @@ namespace LunarPluginInternal
             return timer;
         }
 
-        protected override Timer FindTimer(Action callback)
+        protected override CTimer FindTimer(Action callback)
         {
-            for (Timer timer = rootTimer; timer != null; timer = timer.next)
+            for (CTimer timer = rootTimer; timer != null; timer = timer.next)
             {
                 if (timer.callback1 == callback)
                 {
@@ -212,9 +212,9 @@ namespace LunarPluginInternal
             return null;
         }
 
-        protected override Timer FindTimer(Action<Timer> callback)
+        protected override CTimer FindTimer(Action<CTimer> callback)
         {
-            for (Timer timer = rootTimer; timer != null; timer = timer.next)
+            for (CTimer timer = rootTimer; timer != null; timer = timer.next)
             {
                 if (timer.callback2 == callback)
                 {
@@ -229,9 +229,9 @@ namespace LunarPluginInternal
         {
             lock (this)
             {
-                for (Timer timer = rootTimer; timer != null;)
+                for (CTimer timer = rootTimer; timer != null;)
                 {
-                    Timer t = timer;
+                    CTimer t = timer;
                     timer = timer.next;
 
                     if (t.callback1 == callback)
@@ -242,13 +242,13 @@ namespace LunarPluginInternal
             }
         }
 
-        public override void Cancel(Action<Timer> callback)
+        public override void Cancel(Action<CTimer> callback)
         {
             lock (this)
             {
-                for (Timer timer = rootTimer; timer != null;)
+                for (CTimer timer = rootTimer; timer != null;)
                 {
-                    Timer t = timer;
+                    CTimer t = timer;
                     timer = timer.next;
 
                     if (t.callback2 == callback)
@@ -263,9 +263,9 @@ namespace LunarPluginInternal
         {
             lock (this)
             {
-                for (Timer timer = rootTimer; timer != null;)
+                for (CTimer timer = rootTimer; timer != null;)
                 {
-                    Timer t = timer;
+                    CTimer t = timer;
                     timer = timer.next;
 
                     if (t.name == name)
@@ -280,9 +280,9 @@ namespace LunarPluginInternal
         {
             lock (this)
             {
-                for (Timer timer = rootTimer; timer != null;)
+                for (CTimer timer = rootTimer; timer != null;)
                 {
-                    Timer t = timer;
+                    CTimer t = timer;
                     timer = timer.next;
 
                     if (t.callback1 != null && t.callback1.Target == target || t.callback2.Target == target)
@@ -297,9 +297,9 @@ namespace LunarPluginInternal
         {
             lock (this)
             {
-                for (Timer timer = rootTimer; timer != null;)
+                for (CTimer timer = rootTimer; timer != null;)
                 {
-                    Timer t = timer;
+                    CTimer t = timer;
                     timer = timer.next;
 
                     t.Cancel();
@@ -324,14 +324,14 @@ namespace LunarPluginInternal
 
         #region Timer List
 
-        private Timer NextFreeTimer()
+        private CTimer NextFreeTimer()
         {
-            Timer timer = Timer.NextFreeTimer();
+            CTimer timer = CTimer.NextFreeTimer();
             timer.manager = this;
             return timer;
         }
 
-        private void AddTimerDelayed(Timer timer)
+        private void AddTimerDelayed(CTimer timer)
         {
             if (delayedAddHeadTimer == null)
             {
@@ -345,18 +345,18 @@ namespace LunarPluginInternal
             delayedAddTailTimer = timer;
         }
 
-        private void AddFreeTimerDelayed(Timer timer)
+        private void AddFreeTimerDelayed(CTimer timer)
         {
             timer.helpListNext = delayedFreeRootTimer;
             delayedFreeRootTimer = timer;
         }
 
-        private void AddFreeTimer(Timer timer)
+        private void AddFreeTimer(CTimer timer)
         {
-            Timer.AddFreeTimer(timer);
+            CTimer.AddFreeTimer(timer);
         }
 
-        private void AddTimer(Timer timer)
+        private void AddTimer(CTimer timer)
         {
             Assert.AreSame(this, timer.manager);
             ++timersCount;
@@ -374,13 +374,13 @@ namespace LunarPluginInternal
                 }
 
                 // try to insert in a sorted order
-                Timer tail = rootTimer;
-                for (Timer t = rootTimer.next; t != null; tail = t, t = t.next)
+                CTimer tail = rootTimer;
+                for (CTimer t = rootTimer.next; t != null; tail = t, t = t.next)
                 {
                     if (timer.fireTime < t.fireTime)
                     {
-                        Timer prev = t.prev;
-                        Timer next = t;
+                        CTimer prev = t.prev;
+                        CTimer next = t;
 
                         timer.prev = prev;
                         timer.next = next;
@@ -402,14 +402,14 @@ namespace LunarPluginInternal
             }
         }
 
-        private void RemoveTimer(Timer timer)
+        private void RemoveTimer(CTimer timer)
         {
             Assert.AreSame(this, timer.manager);
             Assert.Greater(timersCount, 0);
             --timersCount;
 
-            Timer prev = timer.prev;
-            Timer next = timer.next;
+            CTimer prev = timer.prev;
+            CTimer next = timer.next;
 
             if (prev != null)
                 prev.next = next;
@@ -420,7 +420,7 @@ namespace LunarPluginInternal
                 next.prev = prev;
         }
 
-        internal void CancelTimer(Timer timer)
+        internal void CancelTimer(CTimer timer)
         {   
             lock (this)
             {
@@ -435,7 +435,7 @@ namespace LunarPluginInternal
             }
         }
 
-        private void CancelTimerInLoop(Timer timer)
+        private void CancelTimerInLoop(CTimer timer)
         {
             RemoveTimer(timer);
             AddFreeTimer(timer);
@@ -455,12 +455,12 @@ namespace LunarPluginInternal
 
         #region Properties
 
-        protected Timer RootTimer
+        protected CTimer RootTimer
         {
             get { return rootTimer; }
         }
 
-        protected Timer DelayedFreeHeadTimer
+        protected CTimer DelayedFreeHeadTimer
         {
             get { return delayedFreeRootTimer; }
         }
@@ -484,14 +484,14 @@ namespace LunarPluginInternal
         #endif
     }
 
-    internal class NullTimerManager : ITimerManager
+    internal class CNullTimerManager : ITimerManager
     {
-        public override Timer Schedule(Action callback, float delay, int numRepeats, string name = null)
+        public override CTimer Schedule(Action callback, float delay, int numRepeats, string name = null)
         {
             throw new InvalidOperationException("Can't schedule timer on a 'null' timer manager");
         }
 
-        public override Timer Schedule(Action<Timer> callback, float delay, int numRepeats, string name = null)
+        public override CTimer Schedule(Action<CTimer> callback, float delay, int numRepeats, string name = null)
         {
             throw new InvalidOperationException("Can't schedule timer on a 'null' timer manager");
         }
@@ -500,7 +500,7 @@ namespace LunarPluginInternal
         {   
         }
 
-        public override void Cancel(Action<Timer> callback)
+        public override void Cancel(Action<CTimer> callback)
         {
         }
 
@@ -516,12 +516,12 @@ namespace LunarPluginInternal
         {
         }
 
-        protected override Timer FindTimer(Action callback)
+        protected override CTimer FindTimer(Action callback)
         {
             return null;
         }
 
-        protected override Timer FindTimer(Action<Timer> callback)
+        protected override CTimer FindTimer(Action<CTimer> callback)
         {
             return null;
         }

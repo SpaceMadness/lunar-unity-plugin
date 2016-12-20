@@ -53,7 +53,7 @@ namespace LunarEditor
         {
             m_lastUpdateTime = EditorApplication.timeSinceStartup;
 
-            TimerManager.ScheduleTimer(() =>
+            CTimerManager.ScheduleTimer(() =>
             {
                 CThreadUtils.InitOnMainThread(); // we need to make sure this call is done on the main thread
                 Log.Initialize(); // it's safe to initialize logging

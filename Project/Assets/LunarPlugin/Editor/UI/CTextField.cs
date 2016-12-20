@@ -221,7 +221,7 @@ namespace LunarEditor
                 #if UNITY_5_1 || UNITY_5_0 || UNITY_4_6
                 CaretPos = value != null ? value.Length + 1 : 0;
                 #else
-                TimerManager.ScheduleTimer(delegate() {
+                CTimerManager.ScheduleTimer(delegate() {
                     CaretPos = value != null ? value.Length + 1 : 0;
                 });
                 #endif

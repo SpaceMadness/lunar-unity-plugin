@@ -25,23 +25,23 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    public class Timer
+    public class CTimer
     {
         internal static readonly object mutex = new object();
 
-        internal static Timer freeRoot;
+        internal static CTimer freeRoot;
 
         internal bool cancelled;
 
         internal Action callback1;
-        internal Action<Timer> callback2;
+        internal Action<CTimer> callback2;
 
-        internal Timer next;
-        internal Timer prev;
+        internal CTimer next;
+        internal CTimer prev;
 
-        internal Timer helpListNext;
+        internal CTimer helpListNext;
 
-        internal TimerManager manager;
+        internal CTimerManager manager;
 
         internal int numRepeats;
         internal int numRepeated;
@@ -94,7 +94,7 @@ namespace LunarPluginInternal
             }
         }
 
-        internal static void DefaultTimerCallback(Timer timer)
+        internal static void DefaultTimerCallback(CTimer timer)
         {
             timer.callback1();
         }
@@ -119,7 +119,7 @@ namespace LunarPluginInternal
             get { return (float) (manager.currentTime - scheduleTime); }
         }
 
-        protected static Timer FreeRoot
+        protected static CTimer FreeRoot
         {
             get { return freeRoot; }
             set { freeRoot = value; }
@@ -140,11 +140,11 @@ namespace LunarPluginInternal
 
         #region Objects pool
 
-        internal protected static Timer NextFreeTimer()
+        internal protected static CTimer NextFreeTimer()
         {
             lock (mutex)
             {
-                Timer timer;
+                CTimer timer;
                 if (freeRoot != null)
                 {
                     timer = freeRoot;
@@ -153,14 +153,14 @@ namespace LunarPluginInternal
                 }
                 else
                 {
-                    timer = new Timer();
+                    timer = new CTimer();
                 }
             
                 return timer;
             }
         }
 
-        internal protected static void AddFreeTimer(Timer timer)
+        internal protected static void AddFreeTimer(CTimer timer)
         {
             lock (mutex)
             {
@@ -177,17 +177,17 @@ namespace LunarPluginInternal
 
         #if LUNAR_DEVELOPMENT
 
-        public static Timer NextTimer(Timer timer)
+        public static CTimer NextTimer(CTimer timer)
         {
             return timer.next;
         }
 
-        public static Timer PrevTimer(Timer timer)
+        public static CTimer PrevTimer(CTimer timer)
         {
             return timer.prev;
         }
 
-        public static Timer NextHelperListTimer(Timer timer)
+        public static CTimer NextHelperListTimer(CTimer timer)
         {
             return timer.helpListNext;
         }

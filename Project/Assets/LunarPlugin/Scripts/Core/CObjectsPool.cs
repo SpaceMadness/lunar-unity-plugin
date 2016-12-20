@@ -119,7 +119,7 @@ namespace LunarPluginInternal
 
         public CObjectsPoolEntry AutoRecycle()
         {
-            TimerManager.ScheduleTimer(Recycle);
+            CTimerManager.ScheduleTimer(Recycle);
             return this;
         }
 

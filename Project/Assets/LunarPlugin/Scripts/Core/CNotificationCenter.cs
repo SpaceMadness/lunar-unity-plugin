@@ -44,16 +44,16 @@ namespace LunarPluginInternal
     {
         private static CNotificationCenter s_sharedInstance;
 
-        private TimerManager m_timerManager;
+        private CTimerManager m_timerManager;
         private IDictionary<string, CNotificationDelegateList> m_registerMap;
         private CObjectsPool<CNotification> m_notificatoinsPool;
 
         static CNotificationCenter()
         {
-            s_sharedInstance = new CNotificationCenter(TimerManager.SharedInstance);
+            s_sharedInstance = new CNotificationCenter(CTimerManager.SharedInstance);
         }
 
-        public CNotificationCenter(TimerManager timerManager)
+        public CNotificationCenter(CTimerManager timerManager)
         {
             m_timerManager = timerManager;
             m_registerMap = new Dictionary<string, CNotificationDelegateList>();
@@ -234,7 +234,7 @@ namespace LunarPluginInternal
         
         private void SchedulePost(CNotification notification)
         {
-            Timer timer = m_timerManager.Schedule(PostCallback);
+            CTimer timer = m_timerManager.Schedule(PostCallback);
             timer.userData = notification;
         }
         
@@ -243,7 +243,7 @@ namespace LunarPluginInternal
             m_timerManager.Cancel(PostCallback);
         }
         
-        private void PostCallback(Timer timer)
+        private void PostCallback(CTimer timer)
         {
             CNotification notification = timer.userData as CNotification;
             Assert.IsNotNull(notification);

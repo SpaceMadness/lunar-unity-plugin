@@ -122,12 +122,12 @@ namespace LunarPluginInternal
 
             if (immediately)
             {
-                TimerManager.CancelTimer(SaveDelayed);
+                CTimerManager.CancelTimer(SaveDelayed);
                 Save();
             }
             else
             {
-                TimerManager.ScheduleTimerOnce(SaveDelayed);
+                CTimerManager.ScheduleTimerOnce(SaveDelayed);
             }
         }
 

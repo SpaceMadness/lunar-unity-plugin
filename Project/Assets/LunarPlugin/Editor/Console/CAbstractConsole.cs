@@ -54,7 +54,7 @@ namespace LunarEditor
             }
             else
             {
-                TimerManager.ScheduleTimer(() =>
+                CTimerManager.ScheduleTimer(() =>
                 {
                     Add(entry);
                 });

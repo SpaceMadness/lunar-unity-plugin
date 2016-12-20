@@ -23,7 +23,7 @@ namespace PreferencesTests
         public void SetUp()
         {
             File.Delete(kPreferencesPath);
-            TimerManager.CancelTimers();
+            CTimerManager.CancelTimers();
         }
 
         [Test]
@@ -167,7 +167,7 @@ namespace PreferencesTests
             CPreferences otherPrefs = new CPreferences(kPreferencesPath);
             Assert.IsNull(otherPrefs.GetString("key"));
 
-            TimerManager.RunUpdate(0.5f);
+            CTimerManager.RunUpdate(0.5f);
 
             otherPrefs = new CPreferences(kPreferencesPath);
             Assert.AreEqual("value", otherPrefs.GetString("key"));
