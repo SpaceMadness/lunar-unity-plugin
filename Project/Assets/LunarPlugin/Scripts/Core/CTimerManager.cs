@@ -25,9 +25,9 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    class CTimerManager : ITimerManager
+    class CTimerManager : ICTimerManager
     {
-        public static readonly ITimerManager Null = new CNullTimerManager();
+        public static readonly ICTimerManager Null = new CNullTimerManager();
 
         private static CTimerManager s_sharedInstance;
 
@@ -484,7 +484,7 @@ namespace LunarPluginInternal
         #endif
     }
 
-    internal class CNullTimerManager : ITimerManager
+    internal class CNullTimerManager : ICTimerManager
     {
         public override CTimer Schedule(Action callback, float delay, int numRepeats, string name = null)
         {
