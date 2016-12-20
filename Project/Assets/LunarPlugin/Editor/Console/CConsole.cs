@@ -30,7 +30,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class Console : AbstractConsole
+    class Console : CAbstractConsole
     {
         public Console(int capacity)
             : base(capacity)

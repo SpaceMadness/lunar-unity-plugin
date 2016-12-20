@@ -13,7 +13,7 @@ using CCommandTests;
 
 namespace LunarPlugin.Test
 {
-    public class AutoCompleteTestFixture : CCommandTestFixture, IConsoleDelegate
+    public class AutoCompleteTestFixture : CCommandTestFixture, ICConsoleDelegate
     {
         private CTerminal terminal;
         private List<string> terminalTableOutput;
@@ -57,7 +57,7 @@ namespace LunarPlugin.Test
 
         #region IConsoleDelegate implementation
 
-        public void OnConsoleEntryAdded(AbstractConsole console, ref ConsoleViewCellEntry entry)
+        public void OnConsoleEntryAdded(CAbstractConsole console, ref ConsoleViewCellEntry entry)
         {
             if (entry.IsTable)
             {
@@ -69,7 +69,7 @@ namespace LunarPlugin.Test
             }
         }
 
-        public void OnConsoleCleared(AbstractConsole console)
+        public void OnConsoleCleared(CAbstractConsole console)
         {
         }
 

@@ -33,16 +33,16 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class ConsoleView : TableView, ITableViewDataSource, ITableViewDelegate, IConsoleDelegate
+    class ConsoleView : TableView, ITableViewDataSource, ITableViewDelegate, ICConsoleDelegate
     {
-        private readonly AbstractConsole m_console;
+        private readonly CAbstractConsole m_console;
 
         private ConsoleFilteredDelegate m_filteredDelegate;
 
-        private ITextMeasure m_textMeasure;
+        private ICTextMeasure m_textMeasure;
         private float m_overridenContentWidth;
 
-        public ConsoleView(AbstractConsole console, float width, float height)
+        public ConsoleView(CAbstractConsole console, float width, float height)
             : base(console.Capacity, width, height)
         {
             m_console = console;
@@ -58,7 +58,7 @@ namespace LunarEditor
             ReloadData();
         }
 
-        protected virtual ITextMeasure CreateTextMeasure()
+        protected virtual ICTextMeasure CreateTextMeasure()
         {
             return new GUIStyleTextMeasure(SharedStyles.consoleTextStyle);
         }
@@ -67,13 +67,13 @@ namespace LunarEditor
 
         #region IConsoleDelegate implementation
 
-        public void OnConsoleEntryAdded(AbstractConsole console, ref ConsoleViewCellEntry entry)
+        public void OnConsoleEntryAdded(CAbstractConsole console, ref ConsoleViewCellEntry entry)
         {
             ReloadNewData();
             Repaint();
         }
 
-        public void OnConsoleCleared(AbstractConsole console)
+        public void OnConsoleCleared(CAbstractConsole console)
         {
             ReloadData();
             Repaint();
@@ -358,7 +358,7 @@ namespace LunarEditor
 
         #region Properties
 
-        internal IConsoleDelegate ConsoleDelegate
+        internal ICConsoleDelegate ConsoleDelegate
         {
             get { return m_console.Delegate;  }
             set { m_console.Delegate = value; }
@@ -449,12 +449,12 @@ namespace LunarEditor
             this.stackTrace = e.StackTrace;
         }
 
-        internal void Layout(ITextMeasure measure, float maxWidth)
+        internal void Layout(ICTextMeasure measure, float maxWidth)
         {
             Layout(measure, maxWidth, maxWidth);
         }
 
-        internal void Layout(ITextMeasure measure, float contentWidth, float maxWidth)
+        internal void Layout(ICTextMeasure measure, float contentWidth, float maxWidth)
         {
             if (this.IsPlain)
             {
@@ -488,13 +488,13 @@ namespace LunarEditor
 
         }
 
-        private void LayoutPlain(ITextMeasure measure, float maxWidth)
+        private void LayoutPlain(ICTextMeasure measure, float maxWidth)
         {
             this.width = maxWidth;
             this.height = measure.CalcHeight(value, maxWidth);
         }
 
-        private void LayoutTable(ITextMeasure measure, string[] table, float contentWidth, float maxWidth)
+        private void LayoutTable(ICTextMeasure measure, string[] table, float contentWidth, float maxWidth)
         {
             int maxLength = 0;
             string longestString = null;
@@ -563,7 +563,7 @@ namespace LunarEditor
             this.height = size.y;
         }
 
-        private void LayoutException(ITextMeasure measure, StackTraceLine[] stackLines, float maxWidth)
+        private void LayoutException(ICTextMeasure measure, StackTraceLine[] stackLines, float maxWidth)
         {
             float nextX = 0.0f;
             float totalHeight = measure.CalcHeight(value, maxWidth);

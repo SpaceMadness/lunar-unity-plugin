@@ -27,19 +27,19 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    interface IConsoleDelegate
+    interface ICConsoleDelegate
     {
-        void OnConsoleEntryAdded(AbstractConsole console, ref ConsoleViewCellEntry entry);
-        void OnConsoleCleared(AbstractConsole console);
+        void OnConsoleEntryAdded(CAbstractConsole console, ref ConsoleViewCellEntry entry);
+        void OnConsoleCleared(CAbstractConsole console);
     }
 
 #if LUNAR_DEVELOPMENT
     public // looks ugly but works for Unit testing
 #endif
 
-    class AbstractConsole : ICDestroyable, IConsoleDelegate
+    class CAbstractConsole : ICDestroyable, ICConsoleDelegate
     {
-        public AbstractConsole(int historySize)
+        public CAbstractConsole(int historySize)
         {
             Entries = new CCycleArray<ConsoleViewCellEntry>(historySize);
             Delegate = this; // use null-object to avoid constant null reference checks
@@ -81,11 +81,11 @@ namespace LunarEditor
 
         #region IConsoleDelegate null implementation
 
-        public void OnConsoleEntryAdded(AbstractConsole console, ref ConsoleViewCellEntry entry)
+        public void OnConsoleEntryAdded(CAbstractConsole console, ref ConsoleViewCellEntry entry)
         {
         }
 
-        public void OnConsoleCleared(AbstractConsole console)
+        public void OnConsoleCleared(CAbstractConsole console)
         {
         }
 
@@ -96,7 +96,7 @@ namespace LunarEditor
         #region Properties
         
         internal CCycleArray<ConsoleViewCellEntry> Entries { get; private set; }
-        internal IConsoleDelegate Delegate { get; set; }
+        internal ICConsoleDelegate Delegate { get; set; }
 
         public int Capacity
         {
@@ -107,16 +107,16 @@ namespace LunarEditor
         #endregion
     }
 
-    struct AttributedString
+    struct CAttributedString
     {
-        public static readonly AttributedString Null = default(AttributedString);
+        public static readonly CAttributedString Null = default(CAttributedString);
 
         public string value;
         public Rect position;
         public int foregroundColor, backgroundColor;
         public int flags;
 
-        public AttributedString(string value, float x = 0, float y = 0, float w = 0, float h = 0, int foregroundColor = 0, int backgroundColor = 0)
+        public CAttributedString(string value, float x = 0, float y = 0, float w = 0, float h = 0, int foregroundColor = 0, int backgroundColor = 0)
         {
             this.value = value != null ? value : "";
             this.position = new Rect(x, y, w, h);
@@ -159,7 +159,7 @@ namespace LunarEditor
         #endregion
     }
 
-    interface ITextMeasure
+    interface ICTextMeasure
     {
         Vector2 CalcSize(string text);
         float CalcHeight(string text, float width);

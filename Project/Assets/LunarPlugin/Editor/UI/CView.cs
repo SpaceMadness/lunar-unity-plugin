@@ -988,7 +988,7 @@ namespace LunarEditor
         }
     }
 
-    class GUIStyleTextMeasure : ITextMeasure
+    class GUIStyleTextMeasure : ICTextMeasure
     {
         private GUIStyle m_style;
 

@@ -83,14 +83,14 @@ namespace ConsoleViewTests
         #endregion
     }
 
-    class MockConsoleView : ConsoleView, ITextMeasure
+    class MockConsoleView : ConsoleView, ICTextMeasure
     {
-        public MockConsoleView(AbstractConsole console, float width, float height)
+        public MockConsoleView(CAbstractConsole console, float width, float height)
             : base(console, width, height)
         {
         }
 
-        protected override ITextMeasure CreateTextMeasure()
+        protected override ICTextMeasure CreateTextMeasure()
         {
             return this;
         }
@@ -120,7 +120,7 @@ namespace ConsoleViewTests
         }
     }
 
-    class MockConsole : AbstractConsole
+    class MockConsole : CAbstractConsole
     {
         public MockConsole(int historySize = 100)
             : base(historySize)

@@ -28,7 +28,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class ConsoleFilteredDelegate : ConsoleViewCompositeFilter, ITableViewDataSource, ITableViewDelegate, IConsoleDelegate
+    class ConsoleFilteredDelegate : ConsoleViewCompositeFilter, ITableViewDataSource, ITableViewDelegate, ICConsoleDelegate
     {
         private ConsoleView m_consoleView;
 
@@ -294,7 +294,7 @@ namespace LunarEditor
 
         #region IConsoleDelegate implementation
 
-        public void OnConsoleEntryAdded(AbstractConsole console, ref ConsoleViewCellEntry entry)
+        public void OnConsoleEntryAdded(CAbstractConsole console, ref ConsoleViewCellEntry entry)
         {
             CCycleArray<ConsoleViewCellEntry> Entries = this.Entries;
 
@@ -322,7 +322,7 @@ namespace LunarEditor
             }
         }
 
-        public void OnConsoleCleared(AbstractConsole console)
+        public void OnConsoleCleared(CAbstractConsole console)
         {
             ClearIndices();
             m_consoleView.OnConsoleCleared(console);

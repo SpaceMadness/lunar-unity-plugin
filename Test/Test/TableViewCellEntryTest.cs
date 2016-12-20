@@ -15,7 +15,7 @@ namespace TableViewTest
     using Assert = NUnit.Framework.Assert;
 
     [TestFixture()]
-    public class TableViewCellEntryTest : ITextMeasure
+    public class TableViewCellEntryTest : ICTextMeasure
     {
         private static readonly string kSpace = "  ";
 

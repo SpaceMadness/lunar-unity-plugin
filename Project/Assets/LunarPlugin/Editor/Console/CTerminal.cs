@@ -31,7 +31,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class CTerminal : AbstractConsole
+    class CTerminal : CAbstractConsole
     {
         public CTerminal(int capacity)
             : base(capacity)
