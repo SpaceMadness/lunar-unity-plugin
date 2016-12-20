@@ -15,7 +15,7 @@ namespace LunarPlugin.Test
 {
     public class AutoCompleteTestFixture : CCommandTestFixture, IConsoleDelegate
     {
-        private Terminal terminal;
+        private CTerminal terminal;
         private List<string> terminalTableOutput;
 
         //////////////////////////////////////////////////////////////////////////////
@@ -27,7 +27,7 @@ namespace LunarPlugin.Test
         {
             base.RunSetUp();
 
-            terminal = new Terminal(1024);
+            terminal = new CTerminal(1024);
             terminal.Delegate = this;
             terminalTableOutput = new List<string>();
         }

@@ -213,7 +213,7 @@ namespace LunarEditor
             get { return s_editorInstance; }
         }
 
-        internal static Terminal Terminal
+        internal static CTerminal Terminal
         {
             get { return Imp.Terminal; }
         }

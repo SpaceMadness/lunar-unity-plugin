@@ -28,7 +28,7 @@ namespace LunarEditor
 {
     class EditorAppImp : DefaultAppImp
     {
-        private readonly Terminal m_terminal;
+        private readonly CTerminal m_terminal;
 
         public EditorAppImp()
         {
@@ -64,7 +64,7 @@ namespace LunarEditor
             get { return true; }
         }
 
-        protected virtual Terminal CreateTerminal(int capacity)
+        protected virtual CTerminal CreateTerminal(int capacity)
         {
             return new FormattedTerminal(capacity);
         }
@@ -75,7 +75,7 @@ namespace LunarEditor
 
         #region Properties
 
-        public Terminal Terminal
+        public CTerminal Terminal
         {
             get { return m_terminal; }
         }

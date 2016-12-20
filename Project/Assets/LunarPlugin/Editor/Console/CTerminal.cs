@@ -31,9 +31,9 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class Terminal : AbstractConsole
+    class CTerminal : AbstractConsole
     {
-        public Terminal(int capacity)
+        public CTerminal(int capacity)
             : base(capacity)
         {
             History = new TerminalHistory(100);
@@ -97,7 +97,7 @@ namespace LunarEditor
         #endregion
     }
 
-    class FormattedTerminal : Terminal
+    class FormattedTerminal : CTerminal
     {
         public FormattedTerminal(int capacity)
             : base(capacity)

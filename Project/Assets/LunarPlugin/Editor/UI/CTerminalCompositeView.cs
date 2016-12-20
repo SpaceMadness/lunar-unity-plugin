@@ -33,7 +33,7 @@ namespace LunarEditor
     interface ITerminalCompositeViewDelegate
     {
         void ExecCommand(string commandLine);
-        Terminal Terminal { get; }
+        CTerminal Terminal { get; }
     }
 
     class TerminalCompositeView : View
@@ -284,7 +284,7 @@ namespace LunarEditor
 
         #region Properties
 
-        private Terminal Terminal
+        private CTerminal Terminal
         {
             get { return m_delegate.Terminal; }
         }

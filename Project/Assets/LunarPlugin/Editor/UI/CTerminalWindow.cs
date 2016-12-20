@@ -55,7 +55,7 @@ namespace LunarEditor
             EditorApp.ExecCommand(commandLine, true);
         }
 
-        public Terminal Terminal
+        public CTerminal Terminal
         {
             get { return EditorApp.Terminal; }
         }
