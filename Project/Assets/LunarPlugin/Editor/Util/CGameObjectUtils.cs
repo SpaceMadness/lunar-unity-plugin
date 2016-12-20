@@ -26,12 +26,12 @@ using System.Collections.Generic;
 using LunarPlugin;
 using LunarPluginInternal;
 
-public delegate bool GameObjectFilter(GameObject o);
-public delegate bool ComponentFilter(Component c);
+public delegate bool CGameObjectFilter(GameObject o);
+public delegate bool CComponentFilter(Component c);
 
-public static class GameObjectUtils
+public static class CGameObjectUtils
 {
-    public static IList<GameObject> ListGameObjects(GameObjectFilter filter)
+    public static IList<GameObject> ListGameObjects(CGameObjectFilter filter)
     {
         IList<GameObject> list = new List<GameObject>();
 
@@ -48,13 +48,13 @@ public static class GameObjectUtils
     }
 
     #if !(UNITY_4_7 || UNITY_4_6 || UNITY_4_5 || UNITY_4_4 || UNITY_4_3 || UNITY_4_2 || UNITY_4_1 || UNITY_4)
-    public static IList<GameObject> ListChildren(string name, GameObjectFilter filter)
+    public static IList<GameObject> ListChildren(string name, CGameObjectFilter filter)
     {
         GameObject obj = GameObject.Find(name);
         return obj != null ? ListChildren(obj, filter) : null;
     }
 
-    public static IList<GameObject> ListChildren(GameObject obj, GameObjectFilter filter)
+    public static IList<GameObject> ListChildren(GameObject obj, CGameObjectFilter filter)
     {
         IList<GameObject> list = new List<GameObject>();
 
