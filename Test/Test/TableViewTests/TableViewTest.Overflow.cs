@@ -29,7 +29,7 @@ namespace TableViewTests
             table.Delegate = adapter;
             table.ReloadData();
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 0
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 0
             table.ReloadNewData();
 
             AssertVisibleRows(table, 0);
@@ -37,7 +37,7 @@ namespace TableViewTests
             Assert.AreEqual(0, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 1
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 1
             table.ReloadNewData();
 
             AssertVisibleRows(table, 0, 1);
@@ -45,7 +45,7 @@ namespace TableViewTests
             Assert.AreEqual(0, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 2
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 2
             table.ReloadNewData();
 
             AssertVisibleRows(table, 0, 1, 2);
@@ -53,7 +53,7 @@ namespace TableViewTests
             Assert.AreEqual(0, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 3
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 3
             table.ReloadNewData();
 
             AssertVisibleRows(table, 0, 1, 2, 3);
@@ -61,7 +61,7 @@ namespace TableViewTests
             Assert.AreEqual(0, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 4
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 4
             table.ReloadNewData();
 
             AssertVisibleRows(table, 0, 1, 2, 3, 4);
@@ -69,7 +69,7 @@ namespace TableViewTests
             Assert.AreEqual(0, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 5
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 5
             table.ReloadNewData();
 
             AssertVisibleRows(table, 0, 1, 2, 3, 4, 5);
@@ -77,7 +77,7 @@ namespace TableViewTests
             Assert.AreEqual(0, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 6
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 6
             table.ReloadNewData();
 
             AssertVisibleRows(table, 0, 1, 2, 3, 4, 5);
@@ -85,7 +85,7 @@ namespace TableViewTests
             Assert.AreEqual(0, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 7
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 7
             table.ReloadNewData();
 
             AssertVisibleRows(table, 1, 2, 3, 4, 5, 6);
@@ -93,7 +93,7 @@ namespace TableViewTests
             Assert.AreEqual(cellHeight, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 8
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 8
             table.ReloadNewData();
 
             AssertVisibleRows(table, 2, 3, 4, 5, 6, 7);
@@ -101,7 +101,7 @@ namespace TableViewTests
             Assert.AreEqual(2 * cellHeight, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 9
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 9
             table.ReloadNewData();
 
             AssertVisibleRows(table, 3, 4, 5, 6, 7, 8);
@@ -109,7 +109,7 @@ namespace TableViewTests
             Assert.AreEqual(3 * cellHeight, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 10
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 10
             table.ReloadNewData();
 
             AssertVisibleRows(table, 4, 5, 6, 7, 8, 9);
@@ -117,7 +117,7 @@ namespace TableViewTests
             Assert.AreEqual(4 * cellHeight, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 11
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 11
             table.ReloadNewData();
 
             AssertVisibleRows(table, 5, 6, 7, 8, 9, 10);
@@ -125,7 +125,7 @@ namespace TableViewTests
             Assert.AreEqual(5 * cellHeight, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 12
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 12
             table.ReloadNewData();
 
             AssertVisibleRows(table, 6, 7, 8, 9, 10, 11);
@@ -133,7 +133,7 @@ namespace TableViewTests
             Assert.AreEqual(6 * cellHeight, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 13
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 13
             table.ReloadNewData();
 
             AssertVisibleRows(table, 7, 8, 9, 10, 11, 12);
@@ -141,7 +141,7 @@ namespace TableViewTests
             Assert.AreEqual(7 * cellHeight, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 14
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 14
             table.ReloadNewData();
 
             AssertVisibleRows(table, 8, 9, 10, 11, 12, 13);
@@ -149,7 +149,7 @@ namespace TableViewTests
             Assert.AreEqual(8 * cellHeight, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 15
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 15
             table.ReloadNewData();
 
             AssertVisibleRows(table, 9, 10, 11, 12, 13, 14);
@@ -173,7 +173,7 @@ namespace TableViewTests
             table.Delegate = adapter;
             table.ReloadData();
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 0
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 0
             table.ReloadNewData();
 
             AssertVisibleRows(table, 0);
@@ -181,7 +181,7 @@ namespace TableViewTests
             Assert.AreEqual(0, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 1
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 1
             table.ReloadNewData();
 
             AssertVisibleRows(table, 0, 1);
@@ -189,7 +189,7 @@ namespace TableViewTests
             Assert.AreEqual(0, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 2
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 2
             table.ReloadNewData();
 
             AssertVisibleRows(table, 0, 1, 2);
@@ -197,7 +197,7 @@ namespace TableViewTests
             Assert.AreEqual(0, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 3
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 3
             table.ReloadNewData();
 
             AssertVisibleRows(table, 0, 1, 2, 3);
@@ -205,7 +205,7 @@ namespace TableViewTests
             Assert.AreEqual(0, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 4
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 4
             table.ReloadNewData();
 
             AssertVisibleRows(table, 0, 1, 2, 3, 4);
@@ -213,7 +213,7 @@ namespace TableViewTests
             Assert.AreEqual(0, table.ScrollPosTop);
             Assert.AreEqual(0, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 5
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 5
             table.ReloadNewData();
 
             AssertVisibleRows(table, 0, 1, 2, 3, 4, 5);
@@ -221,7 +221,7 @@ namespace TableViewTests
             Assert.AreEqual(10.5, table.ScrollPosTop);
             Assert.AreEqual(10.5, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 6
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 6
             table.ReloadNewData();
 
             AssertVisibleRows(table, 1, 2, 3, 4, 5, 6);
@@ -229,7 +229,7 @@ namespace TableViewTests
             Assert.AreEqual(26.5, table.ScrollPosTop);
             Assert.AreEqual(26.5, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 7
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 7
             table.ReloadNewData();
 
             AssertVisibleRows(table, 2, 3, 4, 5, 6, 7);
@@ -237,7 +237,7 @@ namespace TableViewTests
             Assert.AreEqual(42.5, table.ScrollPosTop);
             Assert.AreEqual(26.5, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 8
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 8
             table.ReloadNewData();
 
             AssertVisibleRows(table, 3, 4, 5, 6, 7, 8);
@@ -245,7 +245,7 @@ namespace TableViewTests
             Assert.AreEqual(58.5, table.ScrollPosTop);
             Assert.AreEqual(26.5, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 9
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 9
             table.ReloadNewData();
 
             AssertVisibleRows(table, 4, 5, 6, 7, 8, 9);
@@ -253,7 +253,7 @@ namespace TableViewTests
             Assert.AreEqual(74.5, table.ScrollPosTop);
             Assert.AreEqual(26.5, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 10
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 10
             table.ReloadNewData();
 
             AssertVisibleRows(table, 5, 6, 7, 8, 9, 10);
@@ -261,7 +261,7 @@ namespace TableViewTests
             Assert.AreEqual(90.5, table.ScrollPosTop);
             Assert.AreEqual(26.5, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 11
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 11
             table.ReloadNewData();
 
             AssertVisibleRows(table, 6, 7, 8, 9, 10, 11);
@@ -269,7 +269,7 @@ namespace TableViewTests
             Assert.AreEqual(106.5, table.ScrollPosTop);
             Assert.AreEqual(26.5, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 12
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 12
             table.ReloadNewData();
 
             AssertVisibleRows(table, 7, 8, 9, 10, 11, 12);
@@ -277,7 +277,7 @@ namespace TableViewTests
             Assert.AreEqual(122.5, table.ScrollPosTop);
             Assert.AreEqual(26.5, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 13
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 13
             table.ReloadNewData();
 
             AssertVisibleRows(table, 8, 9, 10, 11, 12, 13);
@@ -285,7 +285,7 @@ namespace TableViewTests
             Assert.AreEqual(138.5, table.ScrollPosTop);
             Assert.AreEqual(26.5, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 14
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 14
             table.ReloadNewData();
 
             AssertVisibleRows(table, 9, 10, 11, 12, 13, 14);
@@ -293,7 +293,7 @@ namespace TableViewTests
             Assert.AreEqual(154.5, table.ScrollPosTop);
             Assert.AreEqual(26.5, table.ScrollGUIPosTop);
 
-            adapter.Add(new TableViewCell(320, cellHeight)); // 15
+            adapter.Add(new CTableViewCell(320, cellHeight)); // 15
             table.ReloadNewData();
 
             AssertVisibleRows(table, 10, 11, 12, 13, 14, 15);

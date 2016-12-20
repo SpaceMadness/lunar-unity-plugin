@@ -124,13 +124,13 @@ namespace TableViewTests
             HandleEvent(evt);
         }
 
-        protected override bool OnMouseDown(CEvent evt, TableViewCell cell)
+        protected override bool OnMouseDown(CEvent evt, CTableViewCell cell)
         {
             ClickedCell = cell;
             return true;
         }
 
-        public TableViewCell ClickedCell { get; private set; }
+        public CTableViewCell ClickedCell { get; private set; }
         public int ClickedCellIndex
         {
             get { return ClickedCell != null ? ClickedCell.CellIndex : -1; }

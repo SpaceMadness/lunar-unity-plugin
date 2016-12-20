@@ -18,10 +18,10 @@ namespace TableViewTests
         public void TestAddTwoRows()
         {
             TableViewMock table = new TableViewMock(320, 15);
-            TableViewCell a1 = new TableViewCellMock1(table.Width, 10);
-            TableViewCell a2 = new TableViewCellMock2(table.Width, 15);
+            CTableViewCell a1 = new TableViewCellMock1(table.Width, 10);
+            CTableViewCell a2 = new TableViewCellMock2(table.Width, 15);
 
-            TestCellPredefinedAdapter adapter = new TestCellPredefinedAdapter(new TableViewCell[] { a1 });
+            TestCellPredefinedAdapter adapter = new TestCellPredefinedAdapter(new CTableViewCell[] { a1 });
 
             table.DataSource = adapter;
             table.Delegate = adapter;
@@ -30,8 +30,8 @@ namespace TableViewTests
             adapter.Add(a2);
             table.ReloadNewData();
 
-            TableViewCell b1 = table.FirstVisibleCell;
-            TableViewCell b2 = b1.NextCell;
+            CTableViewCell b1 = table.FirstVisibleCell;
+            CTableViewCell b2 = b1.NextCell;
 
             Assert.AreSame(a1, b1);
             Assert.AreSame(a2, b2);
@@ -42,11 +42,11 @@ namespace TableViewTests
         public void TestAddMultipleRows()
         {
             TableViewMock table = new TableViewMock(320, 15);
-            TableViewCell a1 = new TableViewCellMock1(table.Width, 10);
-            TableViewCell a2 = new TableViewCellMock2(table.Width, 15);
-            TableViewCell a3 = new TableViewCellMock3(table.Width, 10);
+            CTableViewCell a1 = new TableViewCellMock1(table.Width, 10);
+            CTableViewCell a2 = new TableViewCellMock2(table.Width, 15);
+            CTableViewCell a3 = new TableViewCellMock3(table.Width, 10);
 
-            TestCellPredefinedAdapter adapter = new TestCellPredefinedAdapter(new TableViewCell[] { a1 });
+            TestCellPredefinedAdapter adapter = new TestCellPredefinedAdapter(new CTableViewCell[] { a1 });
 
             table.DataSource = adapter;
             table.Delegate = adapter;
@@ -63,14 +63,14 @@ namespace TableViewTests
         public void TestAddMultipleRowsAndScroll()
         {
             TableViewMock table = new TableViewMock(320, 15);
-            TableViewCell c1 = new TableViewCellMock1(table.Width, 10);
-            TableViewCell c2 = new TableViewCellMock2(table.Width, 15);
-            TableViewCell c3 = new TableViewCellMock1(table.Width, 10);
-            TableViewCell c4 = new TableViewCellMock2(table.Width, 15);
-            TableViewCell c5 = new TableViewCellMock1(table.Width, 10);
-            TableViewCell c6 = new TableViewCellMock2(table.Width, 15);
+            CTableViewCell c1 = new TableViewCellMock1(table.Width, 10);
+            CTableViewCell c2 = new TableViewCellMock2(table.Width, 15);
+            CTableViewCell c3 = new TableViewCellMock1(table.Width, 10);
+            CTableViewCell c4 = new TableViewCellMock2(table.Width, 15);
+            CTableViewCell c5 = new TableViewCellMock1(table.Width, 10);
+            CTableViewCell c6 = new TableViewCellMock2(table.Width, 15);
 
-            TestCellPredefinedAdapter adapter = new TestCellPredefinedAdapter(new TableViewCell[0]);
+            TestCellPredefinedAdapter adapter = new TestCellPredefinedAdapter(new CTableViewCell[0]);
             table.DataSource = adapter;
             table.Delegate = adapter;
 

@@ -29,12 +29,12 @@ namespace TableViewTests
 
         #region Helpers
 
-        private void AssertVisibleRows(TableView table, params int[] indices)
+        private void AssertVisibleRows(CTableView table, params int[] indices)
         {
             Assert.AreEqual(indices.Length, table.VisibleCellsCount);
             int index = 0;
-            TableViewCell cell = table.FirstVisibleCell;
-            TableViewCell lastCell = null;
+            CTableViewCell cell = table.FirstVisibleCell;
+            CTableViewCell lastCell = null;
             while (cell != null)
             {
                 Assert.AreEqual(indices[index++], cell.CellIndex);
@@ -45,12 +45,12 @@ namespace TableViewTests
             Assert.AreSame(lastCell, table.LastVisibleCell);
         }
 
-        private void AssertVisibleRows(TableView table, params TableViewCell[] cells)
+        private void AssertVisibleRows(CTableView table, params CTableViewCell[] cells)
         {
             Assert.AreEqual(cells.Length, table.VisibleCellsCount);
             int index = 0;
-            TableViewCell cell = table.FirstVisibleCell;
-            TableViewCell lastCell = null;
+            CTableViewCell cell = table.FirstVisibleCell;
+            CTableViewCell lastCell = null;
             while (cell != null)
             {
                 Assert.AreSame(cells[index++], cell);
@@ -74,19 +74,19 @@ namespace TableViewTests
                 m_cellsEntries = new List<MockCellEntry>(cellsHeights);
             }
 
-            public override int NumberOfRows(TableView table)
+            public override int NumberOfRows(CTableView table)
             {
                 return Count;
             }
 
-            public override TableViewCell TableCellForRow(TableView table, int rowIndex)
+            public override CTableViewCell TableCellForRow(CTableView table, int rowIndex)
             {
-                TableViewCell cell = table.DequeueReusableCell(m_cellsEntries[rowIndex].type);
+                CTableViewCell cell = table.DequeueReusableCell(m_cellsEntries[rowIndex].type);
                 if (cell == null)
                 {
                     float width = table.Width;
                     float height = m_cellsEntries[rowIndex].height;
-                    return (TableViewCell) Activator.CreateInstance(m_cellsEntries[rowIndex].type, width, height);
+                    return (CTableViewCell) Activator.CreateInstance(m_cellsEntries[rowIndex].type, width, height);
                 }
 
                 return cell;
@@ -110,21 +110,21 @@ namespace TableViewTests
 
         class TestCellPredefinedAdapter : TableViewAdapter
         {
-            private List<TableViewCell> m_cells;
+            private List<CTableViewCell> m_cells;
 
-            public TestCellPredefinedAdapter(TableViewCell[] cells)
+            public TestCellPredefinedAdapter(CTableViewCell[] cells)
             {
-                m_cells = new List<TableViewCell>(cells);
+                m_cells = new List<CTableViewCell>(cells);
             }
 
-            public override int NumberOfRows(TableView table)
+            public override int NumberOfRows(CTableView table)
             {
                 return Count;
             }
 
-            public override TableViewCell TableCellForRow(TableView table, int rowIndex)
+            public override CTableViewCell TableCellForRow(CTableView table, int rowIndex)
             {
-                TableViewCell cell = m_cells[rowIndex];
+                CTableViewCell cell = m_cells[rowIndex];
                 if (cell is TableViewCellMock)
                 {
                     TableViewCellMock mockCell = cell as TableViewCellMock;
@@ -139,7 +139,7 @@ namespace TableViewTests
                 return m_cells[rowIndex].Height;
             }
 
-            public void Add(params TableViewCell[] cells)
+            public void Add(params CTableViewCell[] cells)
             {
                 m_cells.AddRange(cells);
             }
@@ -152,20 +152,20 @@ namespace TableViewTests
 
         class TestCellCapacityAdapter : TableViewAdapter
         {
-            private CCycleArray<TableViewCell> m_cells;
+            private CCycleArray<CTableViewCell> m_cells;
 
-            public TestCellCapacityAdapter(int capacity, params TableViewCell[] cells)
+            public TestCellCapacityAdapter(int capacity, params CTableViewCell[] cells)
             {
-                m_cells = new CCycleArray<TableViewCell>(capacity);
+                m_cells = new CCycleArray<CTableViewCell>(capacity);
                 Add(cells);
             }
 
-            public override int NumberOfRows(TableView table)
+            public override int NumberOfRows(CTableView table)
             {
                 return Count;
             }
 
-            public override TableViewCell TableCellForRow(TableView table, int rowIndex)
+            public override CTableViewCell TableCellForRow(CTableView table, int rowIndex)
             {
                 return m_cells[rowIndex];
             }
@@ -175,14 +175,14 @@ namespace TableViewTests
                 return m_cells[rowIndex].Height;
             }
 
-            public void Add(TableViewCell cell)
+            public void Add(CTableViewCell cell)
             {
                 m_cells.Add(cell);
             }
 
-            public void Add(params TableViewCell[] cells)
+            public void Add(params CTableViewCell[] cells)
             {
-                foreach (TableViewCell cell in cells)
+                foreach (CTableViewCell cell in cells)
                 {
                     Add(cell);
                 }
@@ -211,7 +211,7 @@ namespace TableViewTests
 
     #region Mocks
 
-    class TableViewMock : TableView
+    class TableViewMock : CTableView
     {
         public TableViewMock(float width, float height)
             : this(100, width, height)
@@ -250,7 +250,7 @@ namespace TableViewTests
         }
     }
 
-    class TableViewCellMock : TableViewCell
+    class TableViewCellMock : CTableViewCell
     {
         private int instanceNumber;
 
@@ -311,15 +311,15 @@ namespace TableViewTests
 
     #endregion
 
-    class TableViewAdapter : ITableViewDataSource, ITableViewDelegate
+    class TableViewAdapter : ICTableViewDataSource, ICTableViewDelegate
     {
         #region ITableViewDataSource implementation
 
-        public virtual TableViewCell TableCellForRow(TableView table, int rowIndex)
+        public virtual CTableViewCell TableCellForRow(CTableView table, int rowIndex)
         {
             return null;
         }
-        public virtual int NumberOfRows(TableView table)
+        public virtual int NumberOfRows(CTableView table)
         {
             return 0;
         }
@@ -333,11 +333,11 @@ namespace TableViewTests
             return 0;
         }
 
-        public virtual void OnTableCellSelected(TableView table, int rowIndex)
+        public virtual void OnTableCellSelected(CTableView table, int rowIndex)
         {
         }
 
-        public virtual void OnTableCellDeselected(TableView table, int rowIndex)
+        public virtual void OnTableCellDeselected(CTableView table, int rowIndex)
         {
         }
 

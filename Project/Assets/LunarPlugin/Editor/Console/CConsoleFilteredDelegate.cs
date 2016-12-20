@@ -28,7 +28,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class CConsoleFilteredDelegate : CConsoleViewCompositeFilter, ITableViewDataSource, ITableViewDelegate, ICConsoleDelegate
+    class CConsoleFilteredDelegate : CConsoleViewCompositeFilter, ICTableViewDataSource, ICTableViewDelegate, ICConsoleDelegate
     {
         private CConsoleView m_consoleView;
 
@@ -257,13 +257,13 @@ namespace LunarEditor
 
         #region ITableViewDataSource implementation
 
-        public TableViewCell TableCellForRow(TableView table, int rowIndex)
+        public CTableViewCell TableCellForRow(CTableView table, int rowIndex)
         {
             int index = ToTableRowIndex(rowIndex);
             return m_consoleView.TableCellForRow(table, index);
         }
 
-        public int NumberOfRows(TableView table)
+        public int NumberOfRows(CTableView table)
         {
             return m_filteredIndices.Length;
         }
@@ -278,13 +278,13 @@ namespace LunarEditor
             return m_consoleView.HeightForTableCell(index);
         }
 
-        public void OnTableCellSelected(TableView table, int rowIndex)
+        public void OnTableCellSelected(CTableView table, int rowIndex)
         {
             int index = ToTableRowIndex(rowIndex);
             m_consoleView.OnTableCellSelected(table, index);
         }
 
-        public void OnTableCellDeselected(TableView table, int rowIndex)
+        public void OnTableCellDeselected(CTableView table, int rowIndex)
         {
             int index = ToTableRowIndex(rowIndex);
             m_consoleView.OnTableCellDeselected(table, index);

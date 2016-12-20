@@ -21,15 +21,15 @@ namespace ConsoleViewTests
 
         #region Helpers
 
-        internal void AssertVisibleRows(TableView table, params string[] values)
+        internal void AssertVisibleRows(CTableView table, params string[] values)
         {
             Assert.AreEqual(values.Length, table.VisibleCellsCount,
                 "expected: " + StringArrayToString(values) + "\n" +
                 "actual: " + VisibleCellsToString(table));
 
             int index = 0;
-            TableViewCell cell = table.FirstVisibleCell;
-            TableViewCell lastCell = null;
+            CTableViewCell cell = table.FirstVisibleCell;
+            CTableViewCell lastCell = null;
             while (cell != null)
             {
                 CConsoleTextEntryView textCell = cell as CConsoleTextEntryView;
@@ -43,11 +43,11 @@ namespace ConsoleViewTests
             Assert.AreSame(lastCell, table.LastVisibleCell);
         }
 
-        private string VisibleCellsToString(TableView table)
+        private string VisibleCellsToString(CTableView table)
         {
             StringBuilder buffer = new StringBuilder("[");
             int index = 0;
-            for (TableViewCell cell = table.FirstVisibleCell; cell != null; cell = cell.NextCell)
+            for (CTableViewCell cell = table.FirstVisibleCell; cell != null; cell = cell.NextCell)
             {
                 CConsoleTextEntryView textCell = cell as CConsoleTextEntryView;
                 Assert.IsNotNull(textCell);

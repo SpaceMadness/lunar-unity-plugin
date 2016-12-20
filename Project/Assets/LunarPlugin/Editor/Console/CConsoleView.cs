@@ -33,7 +33,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class CConsoleView : TableView, ITableViewDataSource, ITableViewDelegate, ICConsoleDelegate
+    class CConsoleView : CTableView, ICTableViewDataSource, ICTableViewDelegate, ICConsoleDelegate
     {
         private readonly CAbstractConsole m_console;
 
@@ -83,13 +83,13 @@ namespace LunarEditor
 
         #region ITableViewDataSource implementation
 
-        public TableViewCell TableCellForRow(TableView table, int rowIndex)
+        public CTableViewCell TableCellForRow(CTableView table, int rowIndex)
         {
             int index = Entries.ToArrayIndex(rowIndex);
             return CreateTableCell(table, ref Entries.InternalArray[index]);
         }
 
-        public int NumberOfRows(TableView table)
+        public int NumberOfRows(CTableView table)
         {
             return Entries.Length;
         }
@@ -104,12 +104,12 @@ namespace LunarEditor
             return HeightForTableCell(ref Entries.InternalArray[index]);
         }
 
-        public void OnTableCellSelected(TableView table, int rowIndex)
+        public void OnTableCellSelected(CTableView table, int rowIndex)
         {
             Repaint();
         }
 
-        public void OnTableCellDeselected(TableView table, int rowIndex)
+        public void OnTableCellDeselected(CTableView table, int rowIndex)
         {
             Repaint();
         }
@@ -171,7 +171,7 @@ namespace LunarEditor
 
         #region Cell clicks
 
-        protected override bool OnMouseDown(CEvent evt, TableViewCell cell)
+        protected override bool OnMouseDown(CEvent evt, CTableViewCell cell)
         {
             CConsoleViewCell consoleCell = cell as CConsoleViewCell;
             if (consoleCell != null && consoleCell.OnMouseDown(evt))
@@ -182,7 +182,7 @@ namespace LunarEditor
             return base.OnMouseDown(evt, cell);
         }
 
-        protected override bool OnMouseDoubleClick(CEvent evt, TableViewCell cell)
+        protected override bool OnMouseDoubleClick(CEvent evt, CTableViewCell cell)
         {
             CConsoleViewCell consoleCell = cell as CConsoleViewCell;
             if (consoleCell != null && consoleCell.OnMouseDoubleClick(evt))
@@ -197,7 +197,7 @@ namespace LunarEditor
 
         //////////////////////////////////////////////////////////////////////////////
 
-        private TableViewCell CreateTableCell(TableView table, ref CConsoleViewCellEntry entry)
+        private CTableViewCell CreateTableCell(CTableView table, ref CConsoleViewCellEntry entry)
         {
             if (entry.IsPlain || entry.IsTable)
             {
@@ -261,7 +261,7 @@ namespace LunarEditor
                 base.OnResize(dx, dy);
                 if (oldTotalHeight == this.TotalHeight) // no re-layout: adjust cells size
                 {
-                    for (TableViewCell cell = this.FirstVisibleCell; cell != null; cell = cell.NextCell)
+                    for (CTableViewCell cell = this.FirstVisibleCell; cell != null; cell = cell.NextCell)
                     {
                         cell.OnTableResized(dx, dy);
                     }
@@ -630,7 +630,7 @@ namespace LunarEditor
         }
     }
 
-    class CConsoleViewCell : TableViewCell
+    class CConsoleViewCell : CTableViewCell
     {
         public virtual bool OnMouseDown(CEvent evt)
         {

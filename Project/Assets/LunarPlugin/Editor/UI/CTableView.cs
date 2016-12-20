@@ -29,38 +29,38 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    using TableViewCellList = CFastList<TableViewCell>;
+    using TableViewCellList = CFastList<CTableViewCell>;
 
-    interface ITableViewDataSource
+    interface ICTableViewDataSource
     {
-        TableViewCell TableCellForRow(TableView table, int rowIndex);
-        int NumberOfRows(TableView table);
+        CTableViewCell TableCellForRow(CTableView table, int rowIndex);
+        int NumberOfRows(CTableView table);
     }
 
-    interface ITableViewDelegate
+    interface ICTableViewDelegate
     {
         float HeightForTableCell(int rowIndex);
-        void OnTableCellSelected(TableView table, int rowIndex);
-        void OnTableCellDeselected(TableView table, int rowIndex);
+        void OnTableCellSelected(CTableView table, int rowIndex);
+        void OnTableCellDeselected(CTableView table, int rowIndex);
     }
 
-    interface ITableViewScrollDelegate
+    interface ICTableViewScrollDelegate
     {
-        void OnTableScroll(TableView table, float oldPos);
+        void OnTableScroll(CTableView table, float oldPos);
     }
 
-    enum TableViewSelectionMode
+    enum CTableViewSelectionMode
     {
         None,
         Single,
         Multiple
     }
 
-    class TableView : View
+    class CTableView : View
     {
         private IDictionary<Type, TableViewCellList> m_reusableCellsLists;
         private CCycleArray<TableViewCellEntry> m_cellsEntries;
-        private CFastList<TableViewCell> m_visibleCells;
+        private CFastList<CTableViewCell> m_visibleCells;
 
         private float m_totalHeight;
         private float m_contentOffset;
@@ -71,7 +71,7 @@ namespace LunarEditor
 
         private int m_lastSelectedIndex;
 
-        public TableView(int capacity, float width, float height)
+        public CTableView(int capacity, float width, float height)
             : base(width, height)
         {
             if (capacity < 0)
@@ -81,10 +81,10 @@ namespace LunarEditor
 
             m_reusableCellsLists = new Dictionary<Type, TableViewCellList>();
             m_cellsEntries = new CCycleArray<TableViewCellEntry>(capacity);
-            m_visibleCells = new CFastList<TableViewCell>();
+            m_visibleCells = new CFastList<CTableViewCell>();
 
-            this.DataSource = TableViewNullDataSource.Instance; // don't do null reference checks
-            this.SelectionMode = TableViewSelectionMode.None;
+            this.DataSource = CTableViewNullDataSource.Instance; // don't do null reference checks
+            this.SelectionMode = CTableViewSelectionMode.None;
 
             this.IsMouseEventsEnabled = true;
             this.MouseDown = MouseDownEventHandler;
@@ -129,7 +129,7 @@ namespace LunarEditor
             }
             #endif // LUNAR_DEVELOPMENT
 
-            for (TableViewCell cell = FirstVisibleCell; cell != null; cell = cell.NextCell)
+            for (CTableViewCell cell = FirstVisibleCell; cell != null; cell = cell.NextCell)
             {
                 if (IsCellSelected(cell.CellIndex))
                 {
@@ -173,14 +173,14 @@ namespace LunarEditor
 
         #endregion
 
-        public T DequeueReusableCell<T>() where T : TableViewCell
+        public T DequeueReusableCell<T>() where T : CTableViewCell
         {
             return (T) DequeueReusableCell(typeof(T));
         }
 
-        public TableViewCell DequeueReusableCell(Type cellType)
+        public CTableViewCell DequeueReusableCell(Type cellType)
         {
-            TableViewCell cell = TryGetUsedCellForType(cellType);
+            CTableViewCell cell = TryGetUsedCellForType(cellType);
             if (cell != null)
             {
                 cell.PrepareForReuse();
@@ -190,7 +190,7 @@ namespace LunarEditor
             return null;
         }
 
-        private TableViewCell TryGetUsedCellForType(Type type)
+        private CTableViewCell TryGetUsedCellForType(Type type)
         {
             TableViewCellList cellList;
             if (m_reusableCellsLists.TryGetValue(type, out cellList))
@@ -201,7 +201,7 @@ namespace LunarEditor
             return null;
         }
 
-        private void RecycleCell(TableViewCell cell)
+        private void RecycleCell(CTableViewCell cell)
         {
             Type cellType = cell.GetType();
 
@@ -265,7 +265,7 @@ namespace LunarEditor
 
             if (IsCellVisible(cellIndex, m_scrollPos))
             {
-                TableViewCell cell = TableCellForRow(cellIndex);
+                CTableViewCell cell = TableCellForRow(cellIndex);
                 m_visibleCells.AddLastItem(cell);
             }
 
@@ -288,7 +288,7 @@ namespace LunarEditor
         {
             // we should scroll first and then shift cells
             Scroll(offset); // this will remove a cell if it's not visible
-            for (TableViewCell cell = FirstVisibleCell; cell != null; cell = cell.NextCell)
+            for (CTableViewCell cell = FirstVisibleCell; cell != null; cell = cell.NextCell)
             {
                 cell.Y -= offset;
             }
@@ -296,7 +296,7 @@ namespace LunarEditor
             m_contentOffset += offset;
         }
 
-        private void RemoveVisibleCell(TableViewCell cell)
+        private void RemoveVisibleCell(CTableViewCell cell)
         {
             m_visibleCells.RemoveItem(cell);
             RecycleCell(cell);
@@ -304,7 +304,7 @@ namespace LunarEditor
 
         private void RemoveVisibleCells()
         {
-            TableViewCell cell;
+            CTableViewCell cell;
             while ((cell = m_visibleCells.RemoveFirstItem()) != null)
             {
                 RecycleCell(cell);
@@ -368,7 +368,7 @@ namespace LunarEditor
                 {
                     for (int cellIndex = lastVisibleCellIndex + 1; cellIndex < rowsCount && IsCellVisible(cellIndex, newPos); ++cellIndex)
                     {
-                        TableViewCell cell = TableCellForRow(cellIndex);
+                        CTableViewCell cell = TableCellForRow(cellIndex);
                         m_visibleCells.AddLastItem(cell);
                     }
                 }
@@ -377,7 +377,7 @@ namespace LunarEditor
                     int rowIndex = FindFirstVisibleRow(newPos, lastVisibleCellIndex + 1, rowsCount - 1);
                     while (rowIndex < rowsCount && IsCellVisible(rowIndex, newPos))
                     {
-                        TableViewCell cell = TableCellForRow(rowIndex);
+                        CTableViewCell cell = TableCellForRow(rowIndex);
                         m_visibleCells.AddLastItem(cell);
                         ++rowIndex;
                     }
@@ -395,7 +395,7 @@ namespace LunarEditor
                 {
                     for (int cellIndex = firstVisibleCellIndex - 1; cellIndex >= m_cellsEntries.HeadIndex && IsCellVisible(cellIndex, newPos); --cellIndex)
                     {
-                        TableViewCell cell = TableCellForRow(cellIndex);
+                        CTableViewCell cell = TableCellForRow(cellIndex);
                         m_visibleCells.AddFirstItem(cell);
                     }
                 }
@@ -404,7 +404,7 @@ namespace LunarEditor
                     int rowIndex = FindLastVisibleRow(newPos, m_cellsEntries.HeadIndex, firstVisibleCellIndex - 1);
                     while (rowIndex >= m_cellsEntries.HeadIndex && IsCellVisible(rowIndex, newPos))
                     {
-                        TableViewCell cell = TableCellForRow(rowIndex);
+                        CTableViewCell cell = TableCellForRow(rowIndex);
                         m_visibleCells.AddFirstItem(cell);
                         --rowIndex;
                     }
@@ -458,11 +458,11 @@ namespace LunarEditor
             return m_cellsEntries[lo].Top <= scrollPosBottom && m_cellsEntries[lo].Bottom > scrollPosBottom ? lo : hi;
         }
 
-        public TableViewCell GetVisibleCell(int index)
+        public CTableViewCell GetVisibleCell(int index)
         {
             if (index >= FirstVisibleCellIndex && index <= LastVisibleCellIndex)
             {
-                for (TableViewCell cell = FirstVisibleCell; cell != null; cell = cell.NextCell)
+                for (CTableViewCell cell = FirstVisibleCell; cell != null; cell = cell.NextCell)
                 {
                     if (cell.CellIndex == index)
                     {
@@ -494,9 +494,9 @@ namespace LunarEditor
             return m_cellsEntries[rowIndex].Top >= scrollPos && m_cellsEntries[rowIndex].Bottom <= scrollPos + ContentHeight;
         }
 
-        private TableViewCell TableCellForRow(int index)
+        private CTableViewCell TableCellForRow(int index)
         {
-            TableViewCell cell = DataSource.TableCellForRow(this, index);
+            CTableViewCell cell = DataSource.TableCellForRow(this, index);
             if (cell == null)
             {
                 throw new NullReferenceException("Table view cell is null");
@@ -548,7 +548,7 @@ namespace LunarEditor
             {
                 m_totalHeight = totalHeight;
 
-                TableViewCell lastVisibleCell = this.LastVisibleCell;
+                CTableViewCell lastVisibleCell = this.LastVisibleCell;
                 if (lastVisibleCell != null)
                 {
                     float screenDiff = (lastVisibleCell.Bottom + m_contentOffset) - this.ScrollPosTop;
@@ -564,7 +564,7 @@ namespace LunarEditor
                     int rowIndex = FindFirstVisibleRow(m_scrollPos, m_cellsEntries.HeadIndex, m_cellsEntries.Length - 1);
                     while (rowIndex < m_cellsEntries.Length && IsCellVisible(rowIndex, m_scrollPos))
                     {
-                        TableViewCell cell = TableCellForRow(rowIndex);
+                        CTableViewCell cell = TableCellForRow(rowIndex);
                         m_visibleCells.AddLastItem(cell);
                         ++rowIndex;
                     }
@@ -589,7 +589,7 @@ namespace LunarEditor
                 // append more visible cells at the end
                 for (int cellIndex = this.LastVisibleCellIndex + 1; cellIndex < rowsCount && IsCellVisible(cellIndex); ++cellIndex)
                 {
-                    TableViewCell cell = TableCellForRow(cellIndex);
+                    CTableViewCell cell = TableCellForRow(cellIndex);
                     m_visibleCells.AddLastItem(cell);
                 }
 
@@ -640,7 +640,7 @@ namespace LunarEditor
         {
             float clickX = evt.mousePosition.x;
             float clickY = evt.mousePosition.y + m_scrollPos - m_contentOffset;
-            TableViewCell cell = FindMouseCell(clickX, clickY);
+            CTableViewCell cell = FindMouseCell(clickX, clickY);
             if (cell != null)
             {
                 Vector2 oldPos = evt.mousePosition;
@@ -658,7 +658,7 @@ namespace LunarEditor
         {
             float clickX = evt.mousePosition.x;
             float clickY = evt.mousePosition.y + m_scrollPos - m_contentOffset;
-            TableViewCell cell = FindMouseCell(clickX, clickY);
+            CTableViewCell cell = FindMouseCell(clickX, clickY);
             if (cell != null)
             {
                 Vector2 oldPos = evt.mousePosition;
@@ -672,12 +672,12 @@ namespace LunarEditor
             return false;
         }
 
-        protected virtual bool OnMouseDown(CEvent evt, TableViewCell cell)
+        protected virtual bool OnMouseDown(CEvent evt, CTableViewCell cell)
         {
-            return this.SelectionMode != TableViewSelectionMode.None && OnCellSelected(cell);
+            return this.SelectionMode != CTableViewSelectionMode.None && OnCellSelected(cell);
         }
 
-        protected virtual bool OnMouseDoubleClick(CEvent evt, TableViewCell cell)
+        protected virtual bool OnMouseDoubleClick(CEvent evt, CTableViewCell cell)
         {
             return false;
         }
@@ -748,11 +748,11 @@ namespace LunarEditor
             return false;
         }
 
-        private bool OnCellSelected(TableViewCell cell)
+        private bool OnCellSelected(CTableViewCell cell)
         {
             int cellIndex = cell.CellIndex;
 
-            if (this.SelectionMode == TableViewSelectionMode.Multiple)
+            if (this.SelectionMode == CTableViewSelectionMode.Multiple)
             {
                 SetCellSelected(cellIndex, !IsCellSelected(cellIndex));
                 return true;
@@ -778,7 +778,7 @@ namespace LunarEditor
             m_lastSelectedIndex = cellIndex;
         }
 
-        private void SetCellSelected(TableViewCell cell, bool flag)
+        private void SetCellSelected(CTableViewCell cell, bool flag)
         {
             SetCellSelected(cell.CellIndex, flag);
         }
@@ -802,7 +802,7 @@ namespace LunarEditor
             }
         }
 
-        private bool IsCellSelected(TableViewCell cell)
+        private bool IsCellSelected(CTableViewCell cell)
         {
             return IsCellSelected(cell.CellIndex);
         }
@@ -812,9 +812,9 @@ namespace LunarEditor
             return m_cellsEntries[index].IsSelected;
         }
 
-        private TableViewCell FindMouseCell(float clickX, float clickY)
+        private CTableViewCell FindMouseCell(float clickX, float clickY)
         {
-            for (TableViewCell cell = FirstVisibleCell; cell != null; cell = cell.NextCell)
+            for (CTableViewCell cell = FirstVisibleCell; cell != null; cell = cell.NextCell)
             {
                 if (cell.ContainsPoint(clickX, clickY))
                 {
@@ -842,24 +842,24 @@ namespace LunarEditor
 
         #region Properties
 
-        public ITableViewDataSource DataSource { get; set; }
-        public ITableViewDelegate Delegate { get; set; }
-        public ITableViewScrollDelegate ScrollDelegate { get; set; }
+        public ICTableViewDataSource DataSource { get; set; }
+        public ICTableViewDelegate Delegate { get; set; }
+        public ICTableViewScrollDelegate ScrollDelegate { get; set; }
 
         public int RowsCount
         {
             get { return DataSource.NumberOfRows(this); }
         }
 
-        public TableViewCell FirstVisibleCell { get { return m_visibleCells.ListFirst; } }
-        public TableViewCell LastVisibleCell { get { return m_visibleCells.ListLast; } }
+        public CTableViewCell FirstVisibleCell { get { return m_visibleCells.ListFirst; } }
+        public CTableViewCell LastVisibleCell { get { return m_visibleCells.ListLast; } }
 
         public int FirstVisibleCellIndex { get { return FirstVisibleCell != null ? FirstVisibleCell.CellIndex : -1; } }
         public int LastVisibleCellIndex { get { return LastVisibleCell != null ? LastVisibleCell.CellIndex : -1; } }
 
         public int VisibleCellsCount { get { return m_visibleCells.Count; } }
 
-        public TableViewSelectionMode SelectionMode { get; set; }
+        public CTableViewSelectionMode SelectionMode { get; set; }
 
         public float ScrollPosTop { get { return m_scrollPos; } }
         public float ScrollPosBottom { get { return m_scrollPos + ContentHeight; } }
@@ -926,14 +926,14 @@ namespace LunarEditor
         }
     }
 
-    class TableViewCell : View
+    class CTableViewCell : View
     {
-        public TableViewCell()
+        public CTableViewCell()
             : this(0, 0)
         {
         }
 
-        public TableViewCell(float width, float height)
+        public CTableViewCell(float width, float height)
             : base(width, height)
         {
             CellIndex = -1;
@@ -955,14 +955,14 @@ namespace LunarEditor
 
         #region FastListNode
 
-        public TableViewCell NextCell
+        public CTableViewCell NextCell
         {
-            get { return (TableViewCell)ListNodeNext; }
+            get { return (CTableViewCell)ListNodeNext; }
         }
 
-        public TableViewCell PrevCell
+        public CTableViewCell PrevCell
         {
-            get { return (TableViewCell)ListNodePrev; }
+            get { return (CTableViewCell)ListNodePrev; }
         }
 
         #endregion
@@ -972,23 +972,23 @@ namespace LunarEditor
         #region Properties
 
         public int CellIndex { get; internal set; }
-        public TableView Table { get; internal set; }
+        public CTableView Table { get; internal set; }
 
         #endregion
     }
 
-    internal class TableViewNullDataSource : ITableViewDataSource
+    internal class CTableViewNullDataSource : ICTableViewDataSource
     {
-        private static TableViewNullDataSource m_instance;
+        private static CTableViewNullDataSource m_instance;
 
         #region ITableViewDataSource implementation
 
-        public TableViewCell TableCellForRow(TableView table, int rowIndex)
+        public CTableViewCell TableCellForRow(CTableView table, int rowIndex)
         {
             throw new InvalidOperationException("Null data source");
         }
 
-        public int NumberOfRows(TableView table)
+        public int NumberOfRows(CTableView table)
         {
             return 0;
         }
@@ -997,13 +997,13 @@ namespace LunarEditor
 
         #region Properties
 
-        public static TableViewNullDataSource Instance
+        public static CTableViewNullDataSource Instance
         {
             get 
             {
                 if (m_instance == null)
                 {
-                    m_instance = new TableViewNullDataSource();
+                    m_instance = new CTableViewNullDataSource();
                 }
 
                 return m_instance;
