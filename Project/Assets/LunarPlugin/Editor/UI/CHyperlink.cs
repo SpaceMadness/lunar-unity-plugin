@@ -28,12 +28,12 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class Link : View
+    class CHyperlink : View
     {
         private GUIContent m_content;
         private string m_href;
 
-        public Link(string text, string href)
+        public CHyperlink(string text, string href)
         {
             if (text == null)
             {
