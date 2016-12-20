@@ -32,7 +32,7 @@ namespace LunarPluginInternal
         private readonly CCommandProcessor m_processor;
         private readonly CTimerManager m_timerManager;
         private readonly CNotificationCenter m_notificationCenter;
-        private readonly UpdatableList m_updatables;
+        private readonly CUpdatableList m_updatables;
 
         public DefaultAppImp()
         {
@@ -40,7 +40,7 @@ namespace LunarPluginInternal
             m_notificationCenter = CreateNotificationCenter();
             m_processor = CreateCommandProcessor();
 
-            m_updatables = new UpdatableList(2);
+            m_updatables = new CUpdatableList(2);
             m_updatables.Add(m_timerManager);
         }
 
@@ -130,7 +130,7 @@ namespace LunarPluginInternal
             m_updatables.Add(updatable);
         }
 
-        protected void AddUpdatable(UpdatableDelegate updatable)
+        protected void AddUpdatable(CUpdatableDelegate updatable)
         {
             m_updatables.Add(updatable);
         }
@@ -140,7 +140,7 @@ namespace LunarPluginInternal
             m_updatables.Remove(updatable);
         }
 
-        protected void RemoveUpdatable(UpdatableDelegate updatable)
+        protected void RemoveUpdatable(CUpdatableDelegate updatable)
         {
             m_updatables.Remove(updatable);
         }

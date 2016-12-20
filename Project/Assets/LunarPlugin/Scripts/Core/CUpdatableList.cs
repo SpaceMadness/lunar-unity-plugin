@@ -24,33 +24,33 @@ using System.Collections.Generic;
 
 namespace LunarPluginInternal
 {
-    delegate void UpdatableDelegate(float delta);
+    delegate void CUpdatableDelegate(float delta);
 
-    class UpdatableList : CBaseUpdatableList<ICUpdatable>, IDestroyable
+    class CUpdatableList : CBaseUpdatableList<ICUpdatable>, IDestroyable
     {
-        public static readonly UpdatableList Null = new NullUpdatableList();
-        private static readonly ICUpdatable nullUpdatable = new NullUpdatable();
+        public static readonly CUpdatableList Null = new CNullUpdatableList();
+        private static readonly ICUpdatable nullUpdatable = new CNullUpdatable();
 
-        public UpdatableList()
+        public CUpdatableList()
             : base(nullUpdatable) 
         {
         }
 
-        public UpdatableList(int capacity)
+        public CUpdatableList(int capacity)
             : base(nullUpdatable, capacity)
         {
         }
 
-        public void Add(UpdatableDelegate del)
+        public void Add(CUpdatableDelegate del)
         {
-            Add(new UpdatableDelegateClass(del));
+            Add(new CUpdatableDelegateClass(del));
         }
 
-        public void Remove(UpdatableDelegate del)
+        public void Remove(CUpdatableDelegate del)
         {
             for (int i = list.Count - 1; i >= 0; --i)
             {
-                UpdatableDelegateClass delegateClass = list[i] as UpdatableDelegateClass;
+                CUpdatableDelegateClass delegateClass = list[i] as CUpdatableDelegateClass;
                 if (delegateClass != null && delegateClass.Delegate == del)
                 {
                     RemoveAt(i);
@@ -58,7 +58,7 @@ namespace LunarPluginInternal
             }
         }
 
-        protected UpdatableList(List<ICUpdatable> list, ICUpdatable nullUpdatable)
+        protected CUpdatableList(List<ICUpdatable> list, ICUpdatable nullUpdatable)
             : base(list, nullUpdatable)
         {
         }
@@ -72,11 +72,11 @@ namespace LunarPluginInternal
         }
     }
 
-    internal sealed class UpdatableDelegateClass : ICUpdatable
+    internal sealed class CUpdatableDelegateClass : ICUpdatable
     {
-        private UpdatableDelegate m_delegate;
+        private CUpdatableDelegate m_delegate;
 
-        public UpdatableDelegateClass(UpdatableDelegate del)
+        public CUpdatableDelegateClass(CUpdatableDelegate del)
         {
             if (del == null)
             {
@@ -97,7 +97,7 @@ namespace LunarPluginInternal
 
         #region Properties
 
-        public UpdatableDelegate Delegate
+        public CUpdatableDelegate Delegate
         {
             get { return m_delegate; }
         }
@@ -105,9 +105,9 @@ namespace LunarPluginInternal
         #endregion
     }
 
-    internal sealed class NullUpdatableList : UpdatableList
+    internal sealed class CNullUpdatableList : CUpdatableList
     {
-        public NullUpdatableList()
+        public CNullUpdatableList()
             : base(null, null)
         {
         }
@@ -147,7 +147,7 @@ namespace LunarPluginInternal
         }
     }
 
-    internal sealed class NullUpdatable : ICUpdatable
+    internal sealed class CNullUpdatable : ICUpdatable
     {
         public void Update(float delta)
         {
