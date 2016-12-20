@@ -29,7 +29,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    using TableViewCellList = FastList<TableViewCell>;
+    using TableViewCellList = CFastList<TableViewCell>;
 
     interface ITableViewDataSource
     {
@@ -60,7 +60,7 @@ namespace LunarEditor
     {
         private IDictionary<Type, TableViewCellList> m_reusableCellsLists;
         private CCycleArray<TableViewCellEntry> m_cellsEntries;
-        private FastList<TableViewCell> m_visibleCells;
+        private CFastList<TableViewCell> m_visibleCells;
 
         private float m_totalHeight;
         private float m_contentOffset;
@@ -81,7 +81,7 @@ namespace LunarEditor
 
             m_reusableCellsLists = new Dictionary<Type, TableViewCellList>();
             m_cellsEntries = new CCycleArray<TableViewCellEntry>(capacity);
-            m_visibleCells = new FastList<TableViewCell>();
+            m_visibleCells = new CFastList<TableViewCell>();
 
             this.DataSource = TableViewNullDataSource.Instance; // don't do null reference checks
             this.SelectionMode = TableViewSelectionMode.None;

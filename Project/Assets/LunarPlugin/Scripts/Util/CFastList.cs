@@ -23,14 +23,14 @@
 
 namespace LunarPluginInternal
 {
-    internal interface IFastList
+    internal interface ICFastList
     {
     }
 
-    class FastList<T> : IFastList where T : FastListNode
+    class CFastList<T> : ICFastList where T : CFastListNode
     {
-        internal FastListNode m_listFirst;
-        internal FastListNode m_listLast;
+        internal CFastListNode m_listFirst;
+        internal CFastListNode m_listLast;
 
         private int m_size;
 
@@ -59,8 +59,8 @@ namespace LunarPluginInternal
             CAssert.Greater(m_size, 0);
             CAssert.AreSame(this, item.m_list);
 
-            FastListNode prev = item.m_listPrev;
-            FastListNode next = item.m_listNext;
+            CFastListNode prev = item.m_listPrev;
+            CFastListNode next = item.m_listNext;
 
             if (prev != null)
             {
@@ -107,14 +107,14 @@ namespace LunarPluginInternal
             return node;
         }
 
-        public virtual bool ContainsItem(FastListNode item)
+        public virtual bool ContainsItem(CFastListNode item)
         {
             if (item.m_list != this)
             {
                 return false;
             }
 
-            for (FastListNode t = m_listFirst; t != null; t = t.m_listNext)
+            for (CFastListNode t = m_listFirst; t != null; t = t.m_listNext)
             {
                 if (t == item)
                 {
@@ -125,7 +125,7 @@ namespace LunarPluginInternal
             return false;
         }
 
-        protected virtual void InsertItem(FastListNode item, FastListNode prev, FastListNode next)
+        protected virtual void InsertItem(CFastListNode item, CFastListNode prev, CFastListNode next)
         {
             CAssert.IsNull(item.m_list);
 
@@ -155,9 +155,9 @@ namespace LunarPluginInternal
 
         public virtual void Clear()
         {
-            for (FastListNode t = m_listFirst; t != null; )
+            for (CFastListNode t = m_listFirst; t != null; )
             {
-                FastListNode next = t.m_listNext;
+                CFastListNode next = t.m_listNext;
                 t.m_listPrev = t.m_listNext = null;
                 t.m_list = null;
                 t = next;
@@ -185,69 +185,18 @@ namespace LunarPluginInternal
         }
     }
 
-    class FastConcurrentList<T> : FastList<T> where T : FastListNode
+    class CFastListNode
     {
-        public override void RemoveItem(T item)
-        {
-            lock (this)
-            {
-                base.RemoveItem(item);
-            }
-        }
+        internal CFastListNode m_listPrev;
+        internal CFastListNode m_listNext;
+        internal ICFastList m_list;
 
-        public override T RemoveFirstItem()
-        {
-            lock (this)
-            {
-                return base.RemoveFirstItem();
-            }
-        }
-
-        public override T RemoveLastItem()
-        {
-            lock (this)
-            {
-                return base.RemoveLastItem();
-            }
-        }
-
-        public override bool ContainsItem(FastListNode item)
-        {
-            lock (this)
-            {
-                return base.ContainsItem(item);
-            }
-        }
-
-        protected override void InsertItem(FastListNode item, FastListNode prev, FastListNode next)
-        {
-            lock (this)
-            {
-                base.InsertItem(item, prev, next);
-            }
-        }
-
-        public override void Clear()
-        {
-            lock (this)
-            {
-                base.Clear();
-            }
-        }
-    }
-
-    class FastListNode
-    {
-        internal FastListNode m_listPrev;
-        internal FastListNode m_listNext;
-        internal IFastList m_list;
-
-        protected FastListNode ListNodePrev
+        protected CFastListNode ListNodePrev
         {
             get { return m_listPrev; }
         }
 
-        protected FastListNode ListNodeNext
+        protected CFastListNode ListNodeNext
         {
             get { return m_listNext; }
         }
@@ -264,7 +213,7 @@ namespace LunarPluginInternal
         #endif // LUNAR_DEVELOPMENT
     }
 
-    class FastListNode<T> : FastListNode where T : FastListNode
+    class CFastListNode<T> : CFastListNode where T : CFastListNode
     {
         public new T ListNodePrev
         {

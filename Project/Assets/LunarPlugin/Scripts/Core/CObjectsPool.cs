@@ -33,7 +33,7 @@ namespace LunarPluginInternal
         void Recycle(CObjectsPoolEntry entry);
     }
 
-    class CObjectsPool<T> : FastList<CObjectsPoolEntry>, ICObjectsPool, ICDestroyable
+    class CObjectsPool<T> : CFastList<CObjectsPoolEntry>, ICObjectsPool, ICDestroyable
         where T : CObjectsPoolEntry, new()
     {
         public CObjectsPool()
@@ -112,7 +112,7 @@ namespace LunarPluginInternal
         }
     }
 
-    class CObjectsPoolEntry : FastListNode
+    class CObjectsPoolEntry : CFastListNode
     {
         internal ICObjectsPool pool;
         internal bool recycled;
