@@ -31,17 +31,17 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    delegate bool URLHandler(string urlString);
+    delegate bool CURLHandler(string urlString);
 
-    class EditorApp : CApp
+    class CEditorApp : CApp
     {
         private static double m_lastUpdateTime;
-        private static EditorApp s_editorInstance; // keep another reference to avoid casts
-        private static readonly IDictionary<string, URLHandler> s_urlHandlers;
+        private static CEditorApp s_editorInstance; // keep another reference to avoid casts
+        private static readonly IDictionary<string, CURLHandler> s_urlHandlers;
 
-        static EditorApp()
+        static CEditorApp()
         {
-            EditorApp editorApp = new EditorApp();
+            CEditorApp editorApp = new CEditorApp();
             s_sharedInstance = editorApp;
             s_editorInstance = editorApp;
             editorApp.Start();
@@ -49,7 +49,7 @@ namespace LunarEditor
             s_urlHandlers = CreateURLHandlersLookup();
         }
 
-        private EditorApp()
+        private CEditorApp()
         {
             m_lastUpdateTime = EditorApplication.timeSinceStartup;
 
@@ -58,8 +58,8 @@ namespace LunarEditor
                 CThreadUtils.InitOnMainThread(); // we need to make sure this call is done on the main thread
                 CLog.Initialize(); // it's safe to initialize logging
 
-                EditorSceneKeyHandler.keyDownHandler += SceneKeyDownHandler;
-                EditorSceneKeyHandler.keyUpHandler += SceneUpDownHandler;
+                CEditorSceneKeyHandler.keyDownHandler += SceneKeyDownHandler;
+                CEditorSceneKeyHandler.keyUpHandler += SceneUpDownHandler;
             });
         }
 
@@ -76,7 +76,7 @@ namespace LunarEditor
 
         protected override CAppImp CreateAppImp()
         {
-            return new EditorAppImp();
+            return new CEditorAppImp();
         }
 
         #endregion
@@ -124,7 +124,7 @@ namespace LunarEditor
                 Uri uri = new Uri(urlString);
                 string scheme = uri.Scheme;
 
-                URLHandler handler = FindURLHandler(scheme);
+                CURLHandler handler = FindURLHandler(scheme);
                 if (handler == null)
                 {
                     CLog.e("Can't find URL handler for scheme: '{0}'", scheme);
@@ -141,7 +141,7 @@ namespace LunarEditor
             return false;
         }
 
-        internal static URLHandler RegisterURLHanlder(string scheme, URLHandler handler)
+        internal static CURLHandler RegisterURLHanlder(string scheme, CURLHandler handler)
         {
             if (scheme == null)
             {
@@ -153,14 +153,14 @@ namespace LunarEditor
                 throw new ArgumentNullException("handler");
             }
 
-            URLHandler oldHandler = FindURLHandler(scheme);
+            CURLHandler oldHandler = FindURLHandler(scheme);
             s_urlHandlers[scheme] = handler;
             return oldHandler;
         }
 
-        private static URLHandler FindURLHandler(string scheme)
+        private static CURLHandler FindURLHandler(string scheme)
         {
-            URLHandler handler;
+            CURLHandler handler;
             if (!string.IsNullOrEmpty(scheme) && s_urlHandlers.TryGetValue(scheme, out handler))
             {
                 return handler;
@@ -169,11 +169,11 @@ namespace LunarEditor
             return null;
         }
 
-        private static IDictionary<string, URLHandler> CreateURLHandlersLookup()
+        private static IDictionary<string, CURLHandler> CreateURLHandlersLookup()
         {
-            IDictionary<string, URLHandler> handlers = new Dictionary<string, URLHandler>();
+            IDictionary<string, CURLHandler> handlers = new Dictionary<string, CURLHandler>();
 
-            URLHandler webPageURLHandler = delegate(string urlString)
+            CURLHandler webPageURLHandler = delegate(string urlString)
             {
                 Application.OpenURL(urlString);
                 return true;
@@ -192,7 +192,7 @@ namespace LunarEditor
 
         internal static void OnPlayModeChanged(bool isPlaying)
         {
-            Editor.OnPlayModeChanged(isPlaying);
+            CEditor.OnPlayModeChanged(isPlaying);
 
             if (isPlaying)
             {
@@ -208,7 +208,7 @@ namespace LunarEditor
 
         #region Properties
 
-        internal static EditorApp EditorInstance
+        internal static CEditorApp EditorInstance
         {
             get { return s_editorInstance; }
         }
@@ -218,9 +218,9 @@ namespace LunarEditor
             get { return Imp.Terminal; }
         }
 
-        protected new static EditorAppImp Imp
+        protected new static CEditorAppImp Imp
         {
-            get { return (EditorAppImp)CApp.Imp; }
+            get { return (CEditorAppImp)CApp.Imp; }
         }
 
         #endregion

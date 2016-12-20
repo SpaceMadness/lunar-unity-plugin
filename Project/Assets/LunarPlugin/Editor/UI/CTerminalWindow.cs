@@ -52,12 +52,12 @@ namespace LunarEditor
 
         public void ExecCommand(string commandLine)
         {
-            EditorApp.ExecCommand(commandLine, true);
+            CEditorApp.ExecCommand(commandLine, true);
         }
 
         public CTerminal Terminal
         {
-            get { return EditorApp.Terminal; }
+            get { return CEditorApp.Terminal; }
         }
 
         #endregion

@@ -680,7 +680,7 @@ namespace LunarEditor
         {
             if (!string.IsNullOrEmpty(StackTrace))
             {
-                if (Editor.OpenFileExternal(StackTrace))
+                if (CEditor.OpenFileExternal(StackTrace))
                 {
                     return true;
                 }
@@ -690,7 +690,7 @@ namespace LunarEditor
                 SourcePathEntry element;
                 if (EditorStackTrace.TryParseCompilerMessage(m_value, out element))
                 {
-                    if (Editor.OpenFileAtLineExternal(element.sourcePath, element.lineNumber))
+                    if (CEditor.OpenFileAtLineExternal(element.sourcePath, element.lineNumber))
                     {
                         return true;
                     }
@@ -758,7 +758,7 @@ namespace LunarEditor
 
                 if (stackLine.sourcePathExists && GUI.Button(stackLine.sourceFrame, GUIContent.none, GUIStyle.none))
                 {
-                    Editor.OpenFileAtLineExternal(stackLine.sourcePath, stackLine.lineNumber);
+                    CEditor.OpenFileAtLineExternal(stackLine.sourcePath, stackLine.lineNumber);
                 }
             }
             GUI.Label(stackLine.frame, stackLine.line, style);

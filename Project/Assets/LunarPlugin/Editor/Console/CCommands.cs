@@ -1093,7 +1093,7 @@ namespace LunarEditor
     {
         void Execute()
         {
-            Editor.Break();
+            CEditor.Break();
         }
     }
 

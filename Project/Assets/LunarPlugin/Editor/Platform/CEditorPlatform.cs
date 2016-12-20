@@ -33,13 +33,13 @@ namespace LunarEditor
     {
         public override void AssertMessage(string message, string stackTrace)
         {
-            Editor.ShowDialog("Assertion", message + "\n" + stackTrace,
-                new Editor.DialogButton("Ignore"),
-                new Editor.DialogButton("Show", delegate()
+            CEditor.ShowDialog("Assertion", message + "\n" + stackTrace,
+                new CEditor.DialogButton("Ignore"),
+                new CEditor.DialogButton("Show", delegate()
                     {
-                        Editor.OpenFileExternal(stackTrace);
+                        CEditor.OpenFileExternal(stackTrace);
                     }),
-                new Editor.DialogButton("Stop", delegate()
+                new CEditor.DialogButton("Stop", delegate()
                     {
                         if (Application.isPlaying)
                         {

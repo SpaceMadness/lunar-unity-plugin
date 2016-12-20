@@ -45,7 +45,7 @@ namespace LunarEditor
         {
             isPlaying = EditorApplication.isPlaying;
 
-            EditorApplication.update += EditorApp.Update;
+            EditorApplication.update += CEditorApp.Update;
             EditorApplication.playmodeStateChanged += OnPlaymodeStateChanged;
         }
 
@@ -54,7 +54,7 @@ namespace LunarEditor
             if (isPlaying ^ EditorApplication.isPlaying)
             {
                 isPlaying = EditorApplication.isPlaying;
-                EditorApp.OnPlayModeChanged(isPlaying);
+                CEditorApp.OnPlayModeChanged(isPlaying);
             }
         }
     }

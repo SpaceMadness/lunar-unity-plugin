@@ -29,11 +29,11 @@ using UnityEditorInternal;
 
 namespace LunarEditor
 {
-    static partial class Editor
+    static partial class CEditor
     {
         public static readonly string ProjectPath;
 
-        static Editor()
+        static CEditor()
         {
             try
             {
@@ -50,7 +50,7 @@ namespace LunarEditor
             SourcePathEntry element;
             if (UnityStackTraceParser.TryParse(stackTrace, out element))
             {
-                return Editor.OpenFileAtLineExternal(element.sourcePath, element.lineNumber);
+                return CEditor.OpenFileAtLineExternal(element.sourcePath, element.lineNumber);
             }
 
             return false;

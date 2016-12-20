@@ -40,7 +40,7 @@ namespace LunarPluginInternal
 
         public static bool AssetPathExists(string path)
         {
-            string fullPath = Path.Combine(LunarEditor.Editor.ProjectPath, path);
+            string fullPath = Path.Combine(LunarEditor.CEditor.ProjectPath, path);
             return CFileUtils.FileExists(fullPath);
         }
     }

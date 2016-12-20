@@ -29,7 +29,7 @@ using UnityEditor;
 
 namespace LunarEditor
 {
-    public class EditorMenu
+    static class CEditorMenu
     {
         [MenuItem("Window/Lunar/Terminal %#t")]
         public static void ShowTerminal()

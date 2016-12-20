@@ -26,11 +26,11 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class EditorAppImp : CDefaultAppImp
+    class CEditorAppImp : CDefaultAppImp
     {
         private readonly CTerminal m_terminal;
 
-        public EditorAppImp()
+        public CEditorAppImp()
         {
             m_terminal = CreateTerminal(CSystemVars.c_historySize.IntValue);
         }

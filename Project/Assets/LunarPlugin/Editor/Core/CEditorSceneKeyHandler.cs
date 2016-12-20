@@ -27,7 +27,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    static class EditorSceneKeyHandler
+    static class CEditorSceneKeyHandler
     {
         public delegate bool KeyHandler(KeyCode key, CModifiers modifiers);
 
@@ -38,7 +38,7 @@ namespace LunarEditor
 
         private static bool[] s_pressedKeyCodeFlags;
 
-        static EditorSceneKeyHandler()
+        static CEditorSceneKeyHandler()
         {
             KeyCode lastKeyCode;
             #if UNITY_4_7 || UNITY_4_6 || UNITY_4_5 || UNITY_4_4 || UNITY_4_3 || UNITY_4_2 || UNITY_4_1 || UNITY_4

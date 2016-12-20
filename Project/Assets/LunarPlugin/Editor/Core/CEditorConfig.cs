@@ -26,12 +26,12 @@ using UnityEditorInternal;
 
 namespace LunarEditor
 {
-    internal static class EditorConfig
+    internal static class CEditorConfig
     {
         public static readonly bool isBatchingMode;
         public static readonly bool isProSkin;
 
-        static EditorConfig()
+        static CEditorConfig()
         {
             try
             {

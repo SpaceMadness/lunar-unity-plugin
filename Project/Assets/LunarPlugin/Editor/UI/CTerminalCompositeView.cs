@@ -76,7 +76,7 @@ namespace LunarEditor
             toolbar.AddButton("Copy", delegate(Button button)
                 {
                     string text = GetText();
-                    Editor.CopyToClipboard(text);
+                    CEditor.CopyToClipboard(text);
                 });
 
             // save to file
@@ -85,7 +85,7 @@ namespace LunarEditor
                     string title = "Console log";
                     string directory = CFileUtils.DataPath;
                     string defaultName = string.Format("console");
-                    string filename = Editor.SaveFilePanel(title, directory, defaultName, "log");
+                    string filename = CEditor.SaveFilePanel(title, directory, defaultName, "log");
                     if (!string.IsNullOrEmpty(filename))
                     {
                         string text = GetText();

@@ -32,7 +32,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    static partial class Editor
+    static partial class CEditor
     {
         internal struct DialogButton
         {

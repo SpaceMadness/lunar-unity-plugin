@@ -63,7 +63,7 @@ namespace LunarEditor
             {
                 if (GUI.Button(this.Bounds, m_content, this.Style))
                 {
-                    EditorApp.HandleURL(m_href);
+                    CEditorApp.HandleURL(m_href);
                 }
             }
             EndGroup();
