@@ -122,14 +122,14 @@ namespace LunarEditor
         
         private string FormatLine(string line)
         {
-            return EditorSkin.SetColors(line);
+            return CEditorSkin.SetColors(line);
         }
         
         private string[] FormatLines(string[] lines)
         {
             for (int i = 0; i < lines.Length; ++i)
             {
-                lines[i] = EditorSkin.SetColors(lines[i]);
+                lines[i] = CEditorSkin.SetColors(lines[i]);
             }
             return lines;
         }

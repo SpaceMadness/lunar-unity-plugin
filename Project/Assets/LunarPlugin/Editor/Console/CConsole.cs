@@ -121,7 +121,7 @@ namespace LunarEditor
         {
             StringBuilder lineBuffer = new StringBuilder();
 
-            string coloredLine = EditorSkin.SetColors(line);
+            string coloredLine = CEditorSkin.SetColors(line);
             
             string filename = CEditorStackTrace.ExtractFileName(stackTrace);
             if (level != null)
@@ -133,7 +133,7 @@ namespace LunarEditor
             
             if (filename != null)
             {
-                lineBuffer.Append(CStringUtils.C("[" + filename + "]: ", EditorSkin.GetColor(CColorCode.Plain)));
+                lineBuffer.Append(CStringUtils.C("[" + filename + "]: ", CEditorSkin.GetColor(CColorCode.Plain)));
             }
             
             if (tag != null)
@@ -150,14 +150,14 @@ namespace LunarEditor
         
         private string FormatLine(string line)
         {
-            return EditorSkin.SetColors(line);
+            return CEditorSkin.SetColors(line);
         }
         
         private string[] FormatTable(string[] table, CLogLevel level, CTag tag, string stackTrace)
         {
             for (int i = 0; i < table.Length; ++i)
             {
-                table[i] = EditorSkin.SetColors(table[i]);
+                table[i] = CEditorSkin.SetColors(table[i]);
             }
             return table;
         }

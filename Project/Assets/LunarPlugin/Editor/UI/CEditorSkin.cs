@@ -29,11 +29,11 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    static class EditorSkin
+    static class CEditorSkin
     {
         private static Colors colors;
 
-        static EditorSkin()
+        static CEditorSkin()
         {
             ResolveColors();
         }

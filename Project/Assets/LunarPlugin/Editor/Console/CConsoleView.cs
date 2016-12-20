@@ -225,7 +225,7 @@ namespace LunarEditor
 
                 // set the size first to calculate individual lines height
                 CColorCode colorCode = entry.level != null ? entry.level.Color : CColorCode.Plain;
-                cell.TextColor = EditorSkin.GetColor(colorCode);
+                cell.TextColor = CEditorSkin.GetColor(colorCode);
                 cell.Width = entry.width;
                 cell.Height = entry.height;
 
@@ -594,7 +594,7 @@ namespace LunarEditor
 
         private static void ResolveSourceLink(GUIStyleTextMeasure measure, ref CStackTraceLine stackLine)
         {
-            Color color = EditorSkin.GetColor(stackLine.sourcePathExists ? CColorCode.Link : CColorCode.LinkInnactive);
+            Color color = CEditorSkin.GetColor(stackLine.sourcePathExists ? CColorCode.Link : CColorCode.LinkInnactive);
 
             int sourceStart = stackLine.sourcePathStart;
             int sourceEnd = stackLine.sourcePathEnd;

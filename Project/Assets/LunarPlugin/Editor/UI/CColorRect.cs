@@ -24,12 +24,12 @@ using System.Collections;
 
 namespace LunarEditor
 {
-    class ColorRect : View
+    class CColorRect : View
     {
         private Color m_color;
         private GUIStyle m_style;
 
-        public ColorRect(Rect frame, Color color)
+        public CColorRect(Rect frame, Color color)
             : base(frame)
         {
             m_style = new GUIStyle();
