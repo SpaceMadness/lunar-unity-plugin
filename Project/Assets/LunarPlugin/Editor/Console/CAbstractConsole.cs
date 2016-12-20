@@ -41,7 +41,7 @@ namespace LunarEditor
     {
         public AbstractConsole(int historySize)
         {
-            Entries = new CycleArray<ConsoleViewCellEntry>(historySize);
+            Entries = new CCycleArray<ConsoleViewCellEntry>(historySize);
             Delegate = this; // use null-object to avoid constant null reference checks
         }
 
@@ -95,7 +95,7 @@ namespace LunarEditor
         
         #region Properties
         
-        internal CycleArray<ConsoleViewCellEntry> Entries { get; private set; }
+        internal CCycleArray<ConsoleViewCellEntry> Entries { get; private set; }
         internal IConsoleDelegate Delegate { get; set; }
 
         public int Capacity

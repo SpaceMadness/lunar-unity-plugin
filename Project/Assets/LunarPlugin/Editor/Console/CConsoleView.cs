@@ -374,7 +374,7 @@ namespace LunarEditor
             get { return m_filteredDelegate != null && m_filteredDelegate.HasFilters; }
         }
 
-        internal CycleArray<ConsoleViewCellEntry> Entries { get { return m_console.Entries; } }
+        internal CCycleArray<ConsoleViewCellEntry> Entries { get { return m_console.Entries; } }
 
         #endregion
     }

@@ -152,11 +152,11 @@ namespace TableViewTests
 
         class TestCellCapacityAdapter : TableViewAdapter
         {
-            private CycleArray<TableViewCell> m_cells;
+            private CCycleArray<TableViewCell> m_cells;
 
             public TestCellCapacityAdapter(int capacity, params TableViewCell[] cells)
             {
-                m_cells = new CycleArray<TableViewCell>(capacity);
+                m_cells = new CCycleArray<TableViewCell>(capacity);
                 Add(cells);
             }
 

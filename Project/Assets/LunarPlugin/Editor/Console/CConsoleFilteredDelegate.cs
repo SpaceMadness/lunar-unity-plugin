@@ -32,7 +32,7 @@ namespace LunarEditor
     {
         private ConsoleView m_consoleView;
 
-        private CycleArray<int> m_filteredIndices;
+        private CCycleArray<int> m_filteredIndices;
 
         private ConsoleViewLogLevelFilter m_levelFilter;
         private ConsoleViewTagFilter m_tagFilter;
@@ -45,7 +45,7 @@ namespace LunarEditor
             m_consoleView = consoleView;
             m_oldConsoleEntriesHeadIndex = Entries.HeadIndex;
 
-            m_filteredIndices = new CycleArray<int>(consoleView.Entries.Capacity);
+            m_filteredIndices = new CCycleArray<int>(consoleView.Entries.Capacity);
         }
 
         public bool SetFilterLogLevel(CLogLevel level)
@@ -296,7 +296,7 @@ namespace LunarEditor
 
         public void OnConsoleEntryAdded(AbstractConsole console, ref ConsoleViewCellEntry entry)
         {
-            CycleArray<ConsoleViewCellEntry> Entries = this.Entries;
+            CCycleArray<ConsoleViewCellEntry> Entries = this.Entries;
 
             // if unfiltered console entries overflow - we need to adjust indices and visible lines
             if (m_oldConsoleEntriesHeadIndex < Entries.HeadIndex)
@@ -341,7 +341,7 @@ namespace LunarEditor
 
         #region Properties
 
-        private CycleArray<ConsoleViewCellEntry> Entries
+        private CCycleArray<ConsoleViewCellEntry> Entries
         {
             get { return m_consoleView.Entries; }
         }

@@ -139,12 +139,12 @@ namespace LunarEditor
 
     class TerminalHistory
     {
-        private CycleArray<string> m_entries;
+        private CCycleArray<string> m_entries;
         private int m_currentIndex;
 
         public TerminalHistory(int capacity)
         {
-            m_entries = new CycleArray<string>(capacity);
+            m_entries = new CCycleArray<string>(capacity);
             m_currentIndex = -1;
         }
 

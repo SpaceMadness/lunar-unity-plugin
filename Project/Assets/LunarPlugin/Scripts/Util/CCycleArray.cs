@@ -26,11 +26,11 @@ using System.Collections;
 
 namespace LunarPluginInternal
 {
-    class CycleArray<E>
+    class CCycleArray<E>
     {
         private E[] m_internalArray;
 
-        public CycleArray(int capacity)
+        public CCycleArray(int capacity)
         {
             m_internalArray = new E[capacity];
         }

@@ -59,7 +59,7 @@ namespace LunarEditor
     class TableView : View
     {
         private IDictionary<Type, TableViewCellList> m_reusableCellsLists;
-        private CycleArray<TableViewCellEntry> m_cellsEntries;
+        private CCycleArray<TableViewCellEntry> m_cellsEntries;
         private FastList<TableViewCell> m_visibleCells;
 
         private float m_totalHeight;
@@ -80,7 +80,7 @@ namespace LunarEditor
             }
 
             m_reusableCellsLists = new Dictionary<Type, TableViewCellList>();
-            m_cellsEntries = new CycleArray<TableViewCellEntry>(capacity);
+            m_cellsEntries = new CCycleArray<TableViewCellEntry>(capacity);
             m_visibleCells = new FastList<TableViewCell>();
 
             this.DataSource = TableViewNullDataSource.Instance; // don't do null reference checks
