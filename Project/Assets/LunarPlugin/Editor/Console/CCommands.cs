@@ -1132,7 +1132,7 @@ namespace LunarEditor
     {
         public static string CreateCommandLine(string[] args, int startIndex = 0)
         {
-            StringBuilder buffer = StringBuilderPool.NextAutoRecycleBuilder();
+            StringBuilder buffer = new StringBuilder();
             for (int i = startIndex; i < args.Length; ++i)
             {
                 buffer.Append(StringUtils.Arg(args[i]));

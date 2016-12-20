@@ -43,7 +43,7 @@ namespace LunarPluginInternal
 
         public static void Tokenize(string str, IList<string> tokens, int options = 0)
         {
-            StringBuilder tokenBuffer = StringBuilderPool.NextAutoRecycleBuilder();
+            StringBuilder tokenBuffer = new StringBuilder();
 
             bool insideSingleQuotes = false;
             bool insideDoubleQuotes = false;

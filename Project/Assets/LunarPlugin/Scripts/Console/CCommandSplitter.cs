@@ -44,7 +44,7 @@ namespace LunarPluginInternal
 
         public static void Split(string str, IList<string> list, int options = 0)
         {
-            StringBuilder commandBuffer = StringBuilderPool.NextAutoRecycleBuilder();
+            StringBuilder commandBuffer = new StringBuilder();
 
             bool insideDoubleQuotes = false;
             bool insideSingleQuotes = false;

@@ -119,7 +119,7 @@ namespace LunarEditor
         
         private string FormatLine(string line, LogLevel level, Tag tag, string stackTrace)
         {
-            RecyclableStringBuilder lineBuffer = StringBuilderPool.NextBuilder();
+            StringBuilder lineBuffer = new StringBuilder();
 
             string coloredLine = EditorSkin.SetColors(line);
             
@@ -145,10 +145,7 @@ namespace LunarEditor
             
             lineBuffer.Append(coloredLine);
             
-            string result = lineBuffer.ToString();
-            lineBuffer.Recycle(); // don't trash timer manager with this call
-
-            return result;
+            return lineBuffer.ToString();
         }
         
         private string FormatLine(string line)
