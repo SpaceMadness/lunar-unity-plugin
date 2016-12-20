@@ -29,7 +29,7 @@ namespace LunarPluginInternal
 {
     class DefaultAppImp : AppImp, IUpdatable, IDestroyable, ICCommandDelegate
     {
-        private readonly CommandProcessor m_processor;
+        private readonly CCommandProcessor m_processor;
         private readonly TimerManager m_timerManager;
         private readonly NotificationCenter m_notificationCenter;
         private readonly UpdatableList m_updatables;
@@ -219,9 +219,9 @@ namespace LunarPluginInternal
             return NotificationCenter.SharedInstance;
         }
 
-        protected virtual CommandProcessor CreateCommandProcessor()
+        protected virtual CCommandProcessor CreateCommandProcessor()
         {
-            CommandProcessor processor = new CommandProcessor();
+            CCommandProcessor processor = new CCommandProcessor();
             processor.CommandDelegate = this;
             return processor;
         }

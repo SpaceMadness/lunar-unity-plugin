@@ -707,7 +707,7 @@ namespace LunarPlugin
             }
             catch (Exception e)
             {
-                throw new CommandAutoCompleteException(e);
+                throw new CCommandAutoCompleteException(e);
             }
         }
 

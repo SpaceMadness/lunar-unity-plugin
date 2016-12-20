@@ -30,9 +30,9 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    class CommandAutoCompleteException : Exception
+    class CCommandAutoCompleteException : Exception
     {
-        public CommandAutoCompleteException(Exception e)
+        public CCommandAutoCompleteException(Exception e)
             : base("Custom command autocomplete exception", e)
         {
         }

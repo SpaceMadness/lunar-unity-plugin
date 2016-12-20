@@ -42,17 +42,17 @@ namespace LunarPluginInternal
         public static readonly string KeyName = "name"; // string
     }
 
-    interface ICommandProcessorDelegate
+    interface ICCommandProcessorDelegate
     {
-        void OnCommandExecuted(CommandProcessor processor, CCommand cmd);
-        void OnCommandUnknown(CommandProcessor processor, string cmdName);
+        void OnCommandExecuted(CCommandProcessor processor, CCommand cmd);
+        void OnCommandUnknown(CCommandProcessor processor, string cmdName);
     }
 
-    class CommandProcessor
+    class CCommandProcessor
     {
         private ICCommandDelegate m_delegate;
 
-        public CommandProcessor()
+        public CCommandProcessor()
         {
             CommandDelegate = null;
         }
@@ -161,7 +161,7 @@ namespace LunarPluginInternal
 
         #region Properties
 
-        public ICommandProcessorDelegate Delegate { get; set; }
+        public ICCommandProcessorDelegate Delegate { get; set; }
         public ICCommandDelegate CommandDelegate
         {
             get { return m_delegate; }
@@ -171,9 +171,9 @@ namespace LunarPluginInternal
         #endregion
     }
 
-    class TokenizeException : Exception
+    class CCommandTokenizeException : Exception
     {
-        public TokenizeException(string message)
+        public CCommandTokenizeException(string message)
             : base(message)
         {
         }

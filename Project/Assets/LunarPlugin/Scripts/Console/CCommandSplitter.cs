@@ -101,12 +101,12 @@ namespace LunarPluginInternal
 
             if (insideDoubleQuotes && !HasOption(options, OPTION_IGNORE_MISSING_QUOTES))
             {
-                throw new TokenizeException("Missing closing double quote");
+                throw new CCommandTokenizeException("Missing closing double quote");
             }
 
             if (insideSingleQuotes && !HasOption(options, OPTION_IGNORE_MISSING_QUOTES))
             {
-                throw new TokenizeException("Missing closing single quote");
+                throw new CCommandTokenizeException("Missing closing single quote");
             }
 
             if (commandBuffer.Length > 0)
@@ -120,7 +120,7 @@ namespace LunarPluginInternal
             string command = buffer.ToString().Trim();
             if (command.Length == 0)
             {
-                throw new TokenizeException("Can't add empty command");
+                throw new CCommandTokenizeException("Can't add empty command");
             }
 
             list.Add(command);

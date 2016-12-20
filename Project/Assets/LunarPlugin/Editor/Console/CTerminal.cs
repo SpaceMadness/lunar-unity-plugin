@@ -72,7 +72,7 @@ namespace LunarEditor
 
                 return result.line;
             }
-            catch (CommandAutoCompleteException e)
+            catch (CCommandAutoCompleteException e)
             {
                 Add(CCommand.Prompt(line));
                 Add(e.InnerException, "Exception while auto completing args");

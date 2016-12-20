@@ -156,12 +156,12 @@ namespace LunarPluginInternal
             
             if (insideDoubleQuotes && !HasOption(options, OPTION_IGNORE_MISSING_QUOTES))
             {
-                throw new TokenizeException("Missing closing double quote: " + str);
+                throw new CCommandTokenizeException("Missing closing double quote: " + str);
             }
             
             if (insideSingleQuotes && !HasOption(options, OPTION_IGNORE_MISSING_QUOTES))
             {
-                throw new TokenizeException("Missing closing single quote: " + str);
+                throw new CCommandTokenizeException("Missing closing single quote: " + str);
             }
             
             AddToken(tokenBuffer, tokens);
