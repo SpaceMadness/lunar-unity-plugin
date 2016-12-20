@@ -28,15 +28,15 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    internal interface IObjectsPool
+    internal interface ICObjectsPool
     {
-        void Recycle(ObjectsPoolEntry entry);
+        void Recycle(CObjectsPoolEntry entry);
     }
 
-    class ObjectsPool<T> : FastList<ObjectsPoolEntry>, IObjectsPool, IDestroyable
-        where T : ObjectsPoolEntry, new()
+    class CObjectsPool<T> : FastList<CObjectsPoolEntry>, ICObjectsPool, IDestroyable
+        where T : CObjectsPoolEntry, new()
     {
-        public ObjectsPool()
+        public CObjectsPool()
         {
         }
 
@@ -47,7 +47,7 @@ namespace LunarPluginInternal
 
         public virtual T NextObject()
         {
-            ObjectsPoolEntry first = RemoveFirstItem();
+            CObjectsPoolEntry first = RemoveFirstItem();
             if (first == null)
             {
                 first = CreateObject();
@@ -59,7 +59,7 @@ namespace LunarPluginInternal
             return (T)first;
         }
 
-        public virtual void Recycle(ObjectsPoolEntry e)
+        public virtual void Recycle(CObjectsPoolEntry e)
         {
             Assert.IsInstanceOfType<T>(e);
             Assert.AreSame(this, e.pool);
@@ -84,8 +84,8 @@ namespace LunarPluginInternal
         #endregion
     }
     
-    class ObjectsPoolConcurrent<T> : ObjectsPool<T>
-        where T : ObjectsPoolEntry, new()
+    class CObjectsPoolConcurrent<T> : CObjectsPool<T>
+        where T : CObjectsPoolEntry, new()
     {
         public override T NextObject()
         {
@@ -95,7 +95,7 @@ namespace LunarPluginInternal
             }
         }
 
-        public override void Recycle(ObjectsPoolEntry e)
+        public override void Recycle(CObjectsPoolEntry e)
         {
             lock (this)
             {
@@ -112,12 +112,12 @@ namespace LunarPluginInternal
         }
     }
 
-    class ObjectsPoolEntry : FastListNode
+    class CObjectsPoolEntry : FastListNode
     {
-        internal IObjectsPool pool;
+        internal ICObjectsPool pool;
         internal bool recycled;
 
-        public ObjectsPoolEntry AutoRecycle()
+        public CObjectsPoolEntry AutoRecycle()
         {
             TimerManager.ScheduleTimer(Recycle);
             return this;

@@ -41,7 +41,7 @@ namespace LunarEditor
         FlexibleBottomMargin = 1 << 5
     }
 
-    class View : ObjectsPoolEntry, IDisposable
+    class View : CObjectsPoolEntry, IDisposable
     {
         private static readonly Rect EmptyRect = new Rect(0, 0, 0, 0);
 

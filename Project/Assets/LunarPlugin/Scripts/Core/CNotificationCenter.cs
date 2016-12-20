@@ -46,7 +46,7 @@ namespace LunarPluginInternal
 
         private TimerManager m_timerManager;
         private IDictionary<string, CNotificationDelegateList> m_registerMap;
-        private ObjectsPool<CNotification> m_notificatoinsPool;
+        private CObjectsPool<CNotification> m_notificatoinsPool;
 
         static CNotificationCenter()
         {
@@ -57,7 +57,7 @@ namespace LunarPluginInternal
         {
             m_timerManager = timerManager;
             m_registerMap = new Dictionary<string, CNotificationDelegateList>();
-            m_notificatoinsPool = new ObjectsPool<CNotification>();
+            m_notificatoinsPool = new CObjectsPool<CNotification>();
         }
 
         #region Shared instance
@@ -261,7 +261,7 @@ namespace LunarPluginInternal
         #endif
     }
     
-    class CNotification : ObjectsPoolEntry
+    class CNotification : CObjectsPoolEntry
     {
         private IDictionary<string, object> m_dictionary;
         
