@@ -67,7 +67,7 @@ namespace LunarEditor
             AddWindow(this);
             OnStart();
 
-            NotificationCenter.PostNotification(this, WindowNotifications.WindowOpen, "window", this);
+            CNotificationCenter.PostNotification(this, WindowNotifications.WindowOpen, "window", this);
         }
 
         private void RunStop()
@@ -75,14 +75,14 @@ namespace LunarEditor
             RemoveWindow(this);
             OnStop();
 
-            NotificationCenter.PostNotification(this, WindowNotifications.WindowClose, "window", this);
+            CNotificationCenter.PostNotification(this, WindowNotifications.WindowClose, "window", this);
         }
 
         void OnDestroy()
         {
             RunStop();
 
-            NotificationCenter.UnregisterNotifications(this);
+            CNotificationCenter.UnregisterNotifications(this);
         }
 
         void OnGUI()

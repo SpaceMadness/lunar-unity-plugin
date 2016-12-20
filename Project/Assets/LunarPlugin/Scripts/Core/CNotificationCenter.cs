@@ -26,58 +26,58 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    delegate void NotificationDelegate(Notification notification);
+    delegate void CNotificationDelegate(CNotification notification);
 
-    struct NotificationInfo
+    struct CNotificationInfo
     {
         public string name;
-        public NotificationDelegate del;
+        public CNotificationDelegate del;
 
-        public NotificationInfo(string name, NotificationDelegate del)
+        public CNotificationInfo(string name, CNotificationDelegate del)
         {
             this.name = name;
             this.del = del;
         }
     }
 
-    class NotificationCenter : IDestroyable
+    class CNotificationCenter : IDestroyable
     {
-        private static NotificationCenter s_sharedInstance;
+        private static CNotificationCenter s_sharedInstance;
 
         private TimerManager m_timerManager;
-        private IDictionary<string, NotificationDelegateList> m_registerMap;
-        private ObjectsPool<Notification> m_notificatoinsPool;
+        private IDictionary<string, CNotificationDelegateList> m_registerMap;
+        private ObjectsPool<CNotification> m_notificatoinsPool;
 
-        static NotificationCenter()
+        static CNotificationCenter()
         {
-            s_sharedInstance = new NotificationCenter(TimerManager.SharedInstance);
+            s_sharedInstance = new CNotificationCenter(TimerManager.SharedInstance);
         }
 
-        public NotificationCenter(TimerManager timerManager)
+        public CNotificationCenter(TimerManager timerManager)
         {
             m_timerManager = timerManager;
-            m_registerMap = new Dictionary<string, NotificationDelegateList>();
-            m_notificatoinsPool = new ObjectsPool<Notification>();
+            m_registerMap = new Dictionary<string, CNotificationDelegateList>();
+            m_notificatoinsPool = new ObjectsPool<CNotification>();
         }
 
         #region Shared instance
 
-        public static void RegisterNotification(string name, NotificationDelegate del)
+        public static void RegisterNotification(string name, CNotificationDelegate del)
         {
             s_sharedInstance.Register(name, del);
         }
 
-        public static void RegisterNotifications(params NotificationInfo[] list)
+        public static void RegisterNotifications(params CNotificationInfo[] list)
         {
             s_sharedInstance.Register(list);
         }
 
-        public static void UnregisterNotification(string name, NotificationDelegate del)
+        public static void UnregisterNotification(string name, CNotificationDelegate del)
         {
             s_sharedInstance.Unregister(name, del);
         }
 
-        public static void UnregisterNotifications(params NotificationInfo[] list)
+        public static void UnregisterNotifications(params CNotificationInfo[] list)
         {
             s_sharedInstance.Unregister(list);
         }
@@ -87,7 +87,7 @@ namespace LunarPluginInternal
             s_sharedInstance.UnregisterAll(target);
         }
 
-        public static void UnregisterNotifications(NotificationDelegate del)
+        public static void UnregisterNotifications(CNotificationDelegate del)
         {
             s_sharedInstance.UnregisterAll(del);
         }
@@ -102,7 +102,7 @@ namespace LunarPluginInternal
             s_sharedInstance.PostImmediately(sender, name, data);
         }
 
-        public static NotificationCenter SharedInstance // TODO: decrease visiblity
+        public static CNotificationCenter SharedInstance // TODO: decrease visiblity
         {
             get { return s_sharedInstance; }
         }
@@ -114,7 +114,7 @@ namespace LunarPluginInternal
             CancelScheduledPosts();
         }
         
-        public void Register(string name, NotificationDelegate del)
+        public void Register(string name, CNotificationDelegate del)
         {
             if (name == null)
             {
@@ -126,17 +126,17 @@ namespace LunarPluginInternal
                 throw new NullReferenceException("del");
             }
             
-            NotificationDelegateList list = FindList(name);
+            CNotificationDelegateList list = FindList(name);
             if (list == null)
             {
-                list = new NotificationDelegateList();
+                list = new CNotificationDelegateList();
                 m_registerMap [name] = list;
             }
             
             list.Add(del);
         }
 
-        public void Register(params NotificationInfo[] list)
+        public void Register(params CNotificationInfo[] list)
         {
             for (int i = 0; i < list.Length; ++i)
             {
@@ -144,9 +144,9 @@ namespace LunarPluginInternal
             }
         }
         
-        public bool Unregister(string name, NotificationDelegate del)
+        public bool Unregister(string name, CNotificationDelegate del)
         {
-            NotificationDelegateList list = FindList(name);
+            CNotificationDelegateList list = FindList(name);
             if (list != null)
             {
                 return list.Remove(del);
@@ -155,7 +155,7 @@ namespace LunarPluginInternal
             return false;
         }
 
-        public void Unregister(params NotificationInfo[] list)
+        public void Unregister(params CNotificationInfo[] list)
         {
             for (int i = 0; i < list.Length; ++i)
             {
@@ -163,12 +163,12 @@ namespace LunarPluginInternal
             }
         }
         
-        public bool UnregisterAll(NotificationDelegate del)
+        public bool UnregisterAll(CNotificationDelegate del)
         {
             bool removed = false;
-            foreach (KeyValuePair<string, NotificationDelegateList> e in m_registerMap)
+            foreach (KeyValuePair<string, CNotificationDelegateList> e in m_registerMap)
             {   
-                NotificationDelegateList list = e.Value;
+                CNotificationDelegateList list = e.Value;
                 removed |= list.Remove(del);
             }
             return removed;
@@ -177,9 +177,9 @@ namespace LunarPluginInternal
         public bool UnregisterAll(Object target)
         {
             bool removed = false;
-            foreach (KeyValuePair<string, NotificationDelegateList> e in m_registerMap)
+            foreach (KeyValuePair<string, CNotificationDelegateList> e in m_registerMap)
             {
-                NotificationDelegateList list = e.Value;
+                CNotificationDelegateList list = e.Value;
                 removed |= list.RemoveAll(target);
             }
             return removed;
@@ -187,10 +187,10 @@ namespace LunarPluginInternal
         
         public void Post(Object sender, string name, params object[] data)
         {
-            NotificationDelegateList list = FindList(name);
+            CNotificationDelegateList list = FindList(name);
             if (list != null && list.Count > 0)
             {
-                Notification notification = m_notificatoinsPool.NextObject();
+                CNotification notification = m_notificatoinsPool.NextObject();
                 notification.Init(sender, name, data);
                 
                 SchedulePost(notification);
@@ -199,10 +199,10 @@ namespace LunarPluginInternal
         
         public void PostImmediately(Object sender, string name, params object[] data)
         {   
-            NotificationDelegateList list = FindList(name);
+            CNotificationDelegateList list = FindList(name);
             if (list != null && list.Count > 0)
             {
-                Notification notification = m_notificatoinsPool.NextObject();
+                CNotification notification = m_notificatoinsPool.NextObject();
                 notification.Init(sender, name, data);
                 
                 list.NotifyDelegates(notification);
@@ -210,10 +210,10 @@ namespace LunarPluginInternal
             }
         }
         
-        public void PostImmediately(Notification notification)
+        public void PostImmediately(CNotification notification)
         {
             string name = notification.Name;
-            NotificationDelegateList list = FindList(name);
+            CNotificationDelegateList list = FindList(name);
             if (list != null)
             {
                 list.NotifyDelegates(notification);
@@ -221,9 +221,9 @@ namespace LunarPluginInternal
             notification.Recycle();
         }
         
-        private NotificationDelegateList FindList(string name)
+        private CNotificationDelegateList FindList(string name)
         {
-            NotificationDelegateList list;
+            CNotificationDelegateList list;
             if (m_registerMap.TryGetValue(name, out list))
             {
                 return list;
@@ -232,7 +232,7 @@ namespace LunarPluginInternal
             return null;
         }
         
-        private void SchedulePost(Notification notification)
+        private void SchedulePost(CNotification notification)
         {
             Timer timer = m_timerManager.Schedule(PostCallback);
             timer.userData = notification;
@@ -245,7 +245,7 @@ namespace LunarPluginInternal
         
         private void PostCallback(Timer timer)
         {
-            Notification notification = timer.userData as Notification;
+            CNotification notification = timer.userData as CNotification;
             Assert.IsNotNull(notification);
             
             PostImmediately(notification);
@@ -253,7 +253,7 @@ namespace LunarPluginInternal
 
         #if LUNAR_DEVELOPMENT
 
-        public IDictionary<string, NotificationDelegateList> RegistryMap
+        public IDictionary<string, CNotificationDelegateList> RegistryMap
         {
             get { return m_registerMap; }
         }
@@ -261,7 +261,7 @@ namespace LunarPluginInternal
         #endif
     }
     
-    class Notification : ObjectsPoolEntry
+    class CNotification : ObjectsPoolEntry
     {
         private IDictionary<string, object> m_dictionary;
         
@@ -325,14 +325,14 @@ namespace LunarPluginInternal
         public object Sender { get; private set; }
     }
     
-    class NotificationDelegateList : CBaseList<NotificationDelegate>
+    class CNotificationDelegateList : CBaseList<CNotificationDelegate>
     {
-        public NotificationDelegateList()
+        public CNotificationDelegateList()
             : base(NullNotificationDelegate)
         {
         }
         
-        public override bool Add(NotificationDelegate del)
+        public override bool Add(CNotificationDelegate del)
         {
             Assert.IsFalse(Contains(del));
             return base.Add(del);
@@ -343,7 +343,7 @@ namespace LunarPluginInternal
             bool removed = false;
             for (int i = 0; i < list.Count; ++i)
             {
-                NotificationDelegate del = list [i];
+                CNotificationDelegate del = list [i];
                 if (del.Target == target)
                 {
                     RemoveAt(i); // it's safe: the list size will be changed on the next update
@@ -354,7 +354,7 @@ namespace LunarPluginInternal
             return removed;
         }
         
-        public void NotifyDelegates(Notification notification)
+        public void NotifyDelegates(CNotification notification)
         {
             try
             {
@@ -363,7 +363,7 @@ namespace LunarPluginInternal
                 int delegatesCount = list.Count;
                 for (int i = 0; i < delegatesCount; ++i)
                 {
-                    NotificationDelegate del = list[i];
+                    CNotificationDelegate del = list[i];
                     try
                     {
                         del(notification);
@@ -380,7 +380,7 @@ namespace LunarPluginInternal
             }
         }
         
-        private static void NullNotificationDelegate(Notification notification)
+        private static void NullNotificationDelegate(CNotification notification)
         {
         }
     }

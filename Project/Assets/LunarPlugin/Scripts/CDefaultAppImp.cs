@@ -31,7 +31,7 @@ namespace LunarPluginInternal
     {
         private readonly CCommandProcessor m_processor;
         private readonly TimerManager m_timerManager;
-        private readonly NotificationCenter m_notificationCenter;
+        private readonly CNotificationCenter m_notificationCenter;
         private readonly UpdatableList m_updatables;
 
         public DefaultAppImp()
@@ -89,7 +89,7 @@ namespace LunarPluginInternal
         protected virtual void RegisterCommandNotifications()
         {
             // cvar value changed
-            m_notificationCenter.Register(CCommandNotifications.CVarValueChanged, delegate(Notification n)
+            m_notificationCenter.Register(CCommandNotifications.CVarValueChanged, delegate(CNotification n)
             {
                 bool manual = n.Get<bool>(CCommandNotifications.KeyManualMode);
 
@@ -100,14 +100,14 @@ namespace LunarPluginInternal
             });
 
             // binding changed
-            m_notificationCenter.Register(CCommandNotifications.CBindingsChanged, delegate(Notification n)
+            m_notificationCenter.Register(CCommandNotifications.CBindingsChanged, delegate(CNotification n)
             {
                 bool manual = n.Get<bool>(CCommandNotifications.KeyManualMode);
                 OnCBindingsChanged(manual);
             });
 
             // alias changed
-            m_notificationCenter.Register(CCommandNotifications.CAliasesChanged, delegate(Notification n)
+            m_notificationCenter.Register(CCommandNotifications.CAliasesChanged, delegate(CNotification n)
             {
                 bool manual = n.Get<bool>(CCommandNotifications.KeyManualMode);
                 OnCAliasesChanged(manual);
@@ -214,9 +214,9 @@ namespace LunarPluginInternal
             return TimerManager.SharedInstance;
         }
 
-        protected virtual NotificationCenter CreateNotificationCenter()
+        protected virtual CNotificationCenter CreateNotificationCenter()
         {
-            return NotificationCenter.SharedInstance;
+            return CNotificationCenter.SharedInstance;
         }
 
         protected virtual CCommandProcessor CreateCommandProcessor()

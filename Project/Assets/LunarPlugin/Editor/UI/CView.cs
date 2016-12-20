@@ -556,7 +556,7 @@ namespace LunarEditor
 
         public void Dispose()
         {
-            NotificationCenter.UnregisterNotifications(this);
+            CNotificationCenter.UnregisterNotifications(this);
             TimerManager.CancelTimers(this);
 
             OnDispose();
