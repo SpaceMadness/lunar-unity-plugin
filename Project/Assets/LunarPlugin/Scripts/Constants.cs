@@ -23,6 +23,7 @@
 {
     static class Constants
     {
+        public static readonly string PluginHome = "Assets/LunarPlugin";
         public static readonly string ConfigDefault = "default.cfg";
         public static readonly string ConfigAutoExec = "autoexec.cfg";
         public static readonly string ConfigPlayMode = "playmode.cfg";
