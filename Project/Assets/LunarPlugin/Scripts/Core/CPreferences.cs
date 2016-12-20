@@ -66,7 +66,7 @@ namespace LunarPluginInternal
                         return false;
                     }
 
-                    if (FileUtils.FileExists(m_path))
+                    if (CFileUtils.FileExists(m_path))
                     {
                         m_data = CPlist.readPlist(m_path) as Dictionary<string, object>;
                         return true;
@@ -94,7 +94,7 @@ namespace LunarPluginInternal
                         return false;
                     }
 
-                    using (Stream stream = FileUtils.OpenWrite(m_path))
+                    using (Stream stream = CFileUtils.OpenWrite(m_path))
                     {
                         CPlist.writeBinary(m_data, stream);
                         return true;

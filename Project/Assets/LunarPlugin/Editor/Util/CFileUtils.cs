@@ -35,13 +35,13 @@ namespace LunarPluginInternal
     {
         public static bool PathExists(string path)
         {
-            return path != null && Path.IsPathRooted(path) ? FileUtils.FileExists(path) : AssetPathExists(path);
+            return path != null && Path.IsPathRooted(path) ? CFileUtils.FileExists(path) : AssetPathExists(path);
         }
 
         public static bool AssetPathExists(string path)
         {
             string fullPath = Path.Combine(LunarEditor.Editor.ProjectPath, path);
-            return FileUtils.FileExists(fullPath);
+            return CFileUtils.FileExists(fullPath);
         }
     }
 }

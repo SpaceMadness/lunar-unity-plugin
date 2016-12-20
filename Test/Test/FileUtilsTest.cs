@@ -19,32 +19,32 @@ namespace LunarPlugin.Test
         public void TestFileExt()
         {
             string path = "/usr/tmp/file.txt";
-            Assert.AreEqual(".txt", FileUtils.GetExtension(path));
-            Assert.AreEqual("file", FileUtils.GetFileNameWithoutExtension(path));
+            Assert.AreEqual(".txt", CFileUtils.GetExtension(path));
+            Assert.AreEqual("file", CFileUtils.GetFileNameWithoutExtension(path));
         }
 
         [Test]
         public void TestFileEmptyExt()
         {
             string path = "/usr/tmp/file";
-            Assert.AreEqual("", FileUtils.GetExtension(path));
-            Assert.AreEqual("file", FileUtils.GetFileNameWithoutExtension(path));
+            Assert.AreEqual("", CFileUtils.GetExtension(path));
+            Assert.AreEqual("file", CFileUtils.GetFileNameWithoutExtension(path));
         }
 
         [Test]
         public void TestFileReplaceExt()
         {
             string path = "autoexec.cfg";
-            Assert.AreEqual("autoexec.cfg", FileUtils.ChangeExtension(path, ".cfg"));
+            Assert.AreEqual("autoexec.cfg", CFileUtils.ChangeExtension(path, ".cfg"));
 
             path = "usr/bin/autoexec.cfg";
-            Assert.AreEqual("usr/bin/autoexec.cfg", FileUtils.ChangeExtension(path, ".cfg"));
+            Assert.AreEqual("usr/bin/autoexec.cfg", CFileUtils.ChangeExtension(path, ".cfg"));
 
             path = "usr/bin/autoexec.CFG";
-            Assert.AreEqual("usr/bin/autoexec.cfg", FileUtils.ChangeExtension(path, ".cfg"));
+            Assert.AreEqual("usr/bin/autoexec.cfg", CFileUtils.ChangeExtension(path, ".cfg"));
 
             path = "usr/bin/autoexec";
-            Assert.AreEqual("usr/bin/autoexec.cfg", FileUtils.ChangeExtension(path, ".cfg"));
+            Assert.AreEqual("usr/bin/autoexec.cfg", CFileUtils.ChangeExtension(path, ".cfg"));
         }
 
         [Test]
@@ -56,24 +56,24 @@ namespace LunarPlugin.Test
             Directory.CreateDirectory(rootPath);
 
             string path1 = Path.Combine(rootPath, "file1.txt");
-            FileUtils.Write(path1, "text");
+            CFileUtils.Write(path1, "text");
 
             string path2 = Path.Combine(rootPath, "file2.txt");
-            FileUtils.Write(path2, "text");
+            CFileUtils.Write(path2, "text");
 
-            Assert.IsTrue(FileUtils.FileExists(path1));
-            Assert.IsTrue(FileUtils.FileExists(path2));
+            Assert.IsTrue(CFileUtils.FileExists(path1));
+            Assert.IsTrue(CFileUtils.FileExists(path2));
 
-            Assert.IsTrue(FileUtils.Delete(path1));
-            Assert.IsFalse(FileUtils.FileExists(path1));
-            Assert.IsFalse(FileUtils.Delete(path1));
+            Assert.IsTrue(CFileUtils.Delete(path1));
+            Assert.IsFalse(CFileUtils.FileExists(path1));
+            Assert.IsFalse(CFileUtils.Delete(path1));
 
-            Assert.IsTrue(FileUtils.Delete(rootPath));
-            Assert.IsFalse(FileUtils.FileExists(rootPath));
-            Assert.IsFalse(FileUtils.Delete(rootPath));
+            Assert.IsTrue(CFileUtils.Delete(rootPath));
+            Assert.IsFalse(CFileUtils.FileExists(rootPath));
+            Assert.IsFalse(CFileUtils.Delete(rootPath));
 
-            Assert.IsFalse(FileUtils.FileExists(path2));
-            Assert.IsFalse(FileUtils.Delete(path2));
+            Assert.IsFalse(CFileUtils.FileExists(path2));
+            Assert.IsFalse(CFileUtils.Delete(path2));
         }
     }
 }

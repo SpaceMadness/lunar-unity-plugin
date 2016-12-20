@@ -31,7 +31,7 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    static class FileUtils
+    static class CFileUtils
     {
         public static bool FileExists(string path)
         {

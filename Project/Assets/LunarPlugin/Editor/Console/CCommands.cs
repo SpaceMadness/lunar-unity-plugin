@@ -776,7 +776,7 @@ namespace LunarEditor
                 if (edit)
                 {
                     string configPath = ConfigHelper.GetConfigPath(filename);
-                    if (!FileUtils.FileExists(configPath))
+                    if (!CFileUtils.FileExists(configPath))
                     {
                         PrintError("File does not exist: {0}", configPath);
                         return false;

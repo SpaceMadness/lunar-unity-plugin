@@ -83,13 +83,13 @@ namespace LunarEditor
             toolbar.AddButton("Save", delegate(Button button)
                 {
                     string title = "Console log";
-                    string directory = FileUtils.DataPath;
+                    string directory = CFileUtils.DataPath;
                     string defaultName = string.Format("console");
                     string filename = Editor.SaveFilePanel(title, directory, defaultName, "log");
                     if (!string.IsNullOrEmpty(filename))
                     {
                         string text = GetText();
-                        FileUtils.Write(filename, text);
+                        CFileUtils.Write(filename, text);
                     }
                 });
 

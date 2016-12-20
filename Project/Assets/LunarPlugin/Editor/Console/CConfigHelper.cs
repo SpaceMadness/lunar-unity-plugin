@@ -47,7 +47,7 @@ namespace LunarEditor
                 string[] files = Directory.GetFiles(configsPath, "*.cfg");
                 foreach (string file in files)
                 {
-                    string filename = FileUtils.GetFileName(file);
+                    string filename = CFileUtils.GetFileName(file);
                     if (token == null || StringUtils.StartsWithIgnoreCase(filename, token))
                     {
                         result.Add(filename);
@@ -71,7 +71,7 @@ namespace LunarEditor
             }
 
             string path = GetConfigPath(filename);
-            FileUtils.Write(path, lines);
+            CFileUtils.Write(path, lines);
         }
 
         public static IList<string> ReadConfig(string filename)
@@ -82,18 +82,18 @@ namespace LunarEditor
             }
 
             string path = GetConfigPath(filename);
-            return FileUtils.Read(path);
+            return CFileUtils.Read(path);
         }
 
         public static void DeleteConfigs()
         {
-            FileUtils.Delete(ConfigPath);
+            CFileUtils.Delete(ConfigPath);
         }
 
         public static string GetConfigPath(string filename)
         {
-            string path = FileUtils.ChangeExtension(filename, ".cfg");
-            if (FileUtils.IsPathRooted(path))
+            string path = CFileUtils.ChangeExtension(filename, ".cfg");
+            if (CFileUtils.IsPathRooted(path))
             {
                 return path;
             }
@@ -117,7 +117,7 @@ namespace LunarEditor
         {
             try
             {
-                return Path.Combine(FileUtils.DataPath, "configs");
+                return Path.Combine(CFileUtils.DataPath, "configs");
             }
             catch (MissingMethodException)
             {
