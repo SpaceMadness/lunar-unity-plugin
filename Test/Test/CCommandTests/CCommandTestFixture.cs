@@ -120,7 +120,7 @@ namespace CCommandTests
 
         protected void AssertConfig(ConfigReadFilter filter, params string[] expected)
         {
-            IList<string> lines = ConfigHelper.ReadConfig(Constants.ConfigDefault);
+            IList<string> lines = ConfigHelper.ReadConfig(LPConstants.ConfigDefault);
             IList<string> actual = new List<string>();
             foreach (string line in lines)
             {
@@ -135,7 +135,7 @@ namespace CCommandTests
 
         protected void WriteConfig(params string[] lines)
         {
-            ConfigHelper.WriteConfig(Constants.ConfigDefault, lines);
+            ConfigHelper.WriteConfig(LPConstants.ConfigDefault, lines);
         }
 
         #endregion
