@@ -33,7 +33,7 @@ using System.Xml;
 
 namespace LunarPluginExternal.PlistCS
 {
-    internal static class Plist
+    internal static class CPlist
     {
         private static List<int> offsetTable = new List<int>();
         private static List<byte> objectTable = new List<byte>();
@@ -48,7 +48,7 @@ namespace LunarPluginExternal.PlistCS
         {
             using (FileStream f = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                return readPlist(f, plistType.Auto);
+                return readPlist(f, CPlistType.Auto);
             }
         }
 
@@ -59,33 +59,33 @@ namespace LunarPluginExternal.PlistCS
 
         public static object readPlist(byte[] data)
         {
-            return readPlist(new MemoryStream(data), plistType.Auto);
+            return readPlist(new MemoryStream(data), CPlistType.Auto);
         }
 
-        public static plistType getPlistType(Stream stream)
+        public static CPlistType getPlistType(Stream stream)
         {
             byte[] magicHeader = new byte[8];
             stream.Read(magicHeader, 0, 8);
 
             if (BitConverter.ToInt64(magicHeader, 0) == 3472403351741427810)
             {
-                return plistType.Binary;
+                return CPlistType.Binary;
             }
             else
             {
-                return plistType.Xml;
+                return CPlistType.Xml;
             }
         }
 
-        public static object readPlist(Stream stream, plistType type)
+        public static object readPlist(Stream stream, CPlistType type)
         {
-            if (type == plistType.Auto)
+            if (type == CPlistType.Auto)
             {
                 type = getPlistType(stream);
                 stream.Seek(0, SeekOrigin.Begin);
             }
 
-            if (type == plistType.Binary)
+            if (type == CPlistType.Binary)
             {
                 using (BinaryReader reader = new BinaryReader(stream))
                 {
@@ -567,7 +567,7 @@ namespace LunarPluginExternal.PlistCS
 
         public static byte[] writeBinaryDate(DateTime obj)
         {
-            List<byte> buffer =new List<byte>(RegulateNullBytes(BitConverter.GetBytes(PlistDateConverter.ConvertToAppleTimeStamp(obj)), 8));
+            List<byte> buffer =new List<byte>(RegulateNullBytes(BitConverter.GetBytes(CPlistDateConverter.ConvertToAppleTimeStamp(obj)), 8));
             buffer.Reverse();
             buffer.Insert(0, 0x33);
             objectTable.InsertRange(0, buffer);
@@ -847,7 +847,7 @@ namespace LunarPluginExternal.PlistCS
             byte[] buffer = objectTable.GetRange(headerPosition + 1, 8).ToArray();
             Array.Reverse(buffer);
             double appleTime = BitConverter.ToDouble(buffer, 0);
-            DateTime result = PlistDateConverter.ConvertFromAppleTimeStamp(appleTime);
+            DateTime result = CPlistDateConverter.ConvertFromAppleTimeStamp(appleTime);
             return result;
         }
         
@@ -932,12 +932,12 @@ namespace LunarPluginExternal.PlistCS
         #endregion
     }
     
-    public enum plistType
+    public enum CPlistType
     {
         Auto, Binary, Xml
     }
 
-    public static class PlistDateConverter
+    public static class CPlistDateConverter
     {
         public static long timeDifference = 978307200;
 
