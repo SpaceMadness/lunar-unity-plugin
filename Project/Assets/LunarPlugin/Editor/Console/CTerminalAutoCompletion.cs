@@ -31,7 +31,7 @@ namespace LunarEditor
 {
     using Option = CCommand.Option;
 
-    public static class TerminalAutocompletion
+    public static class CTerminalAutocompletion
     {
         public static Result Autocomplete(string line)
         {

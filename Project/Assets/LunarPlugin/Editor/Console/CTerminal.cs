@@ -62,7 +62,7 @@ namespace LunarEditor
         {
             try
             {
-                TerminalAutocompletion.Result result = TerminalAutocompletion.Autocomplete(line, index);
+                CTerminalAutocompletion.Result result = CTerminalAutocompletion.Autocomplete(line, index);
 
                 if (isDoubleTab && result.suggestions != null)
                 {
