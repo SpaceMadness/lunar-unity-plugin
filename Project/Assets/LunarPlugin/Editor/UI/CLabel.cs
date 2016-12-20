@@ -29,11 +29,11 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class Label : View
+    class CLabel : View
     {
         private GUIContent m_content;
 
-        public Label(string text = "", GUIStyle style = null)
+        public CLabel(string text = "", GUIStyle style = null)
         {
             if (style != null)
             {
@@ -45,7 +45,7 @@ namespace LunarEditor
             this.Frame = new Rect(0, 0, size.x, size.y);
         }
 
-        public Label(string text, float width, GUIStyle style = null)
+        public CLabel(string text, float width, GUIStyle style = null)
         {
             if (style != null)
             {

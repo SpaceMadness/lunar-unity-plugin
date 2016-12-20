@@ -47,10 +47,10 @@ namespace LunarEditor
 
             GUIStyle titleStyle = new GUIStyle(GUI.skin.label);
             titleStyle.fontSize = 20;
-            Label titleLabel = new Label("Lunar Plugin for Unity", titleStyle);
+            CLabel titleLabel = new CLabel("Lunar Plugin for Unity", titleStyle);
             contentView.AddSubview(titleLabel);
 
-            Label copyrightLabel = new Label("(C) 2015  Space Madness", EditorStyles.miniLabel);
+            CLabel copyrightLabel = new CLabel("(C) 2015  Space Madness", EditorStyles.miniLabel);
             copyrightLabel.Height += 20;
             contentView.AddSubview(copyrightLabel);
 
@@ -82,7 +82,7 @@ namespace LunarEditor
 
             contentView.ArrangeVert();
 
-            Label thanksLabel = new Label("Thanks for using Lunar!");
+            CLabel thanksLabel = new CLabel("Thanks for using Lunar!");
             contentView.AddSubview(thanksLabel);
             thanksLabel.Align(0.5f, 1.0f);
         }
