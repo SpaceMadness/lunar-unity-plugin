@@ -135,7 +135,7 @@ Features:
   
 ## Social media
 
-- Dev Blog: [lunar-plugin.tumblr.com](http://lunar-plugin.tumblr.com/)
+- Dev Blog: [madspaceness.tumblr.com](https://madspaceness.tumblr.com/)
 - YouTube Channel: [Space Madness](https://www.youtube.com/channel/UCNZ2ja_pI9wqKsZcnVnt_zQ)
 - Twitter: [@LunarPlugin](https://twitter.com/intent/follow?screen_name=LunarPlugin&user_id=2939274198)
 - Facebook: [Unity Lunar Plugin](https://www.facebook.com/LunarPlugin)
