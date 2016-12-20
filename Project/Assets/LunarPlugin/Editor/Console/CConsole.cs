@@ -30,9 +30,9 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class Console : CAbstractConsole
+    class CConsole : CAbstractConsole
     {
-        public Console(int capacity)
+        public CConsole(int capacity)
             : base(capacity)
         {
         }
@@ -91,9 +91,9 @@ namespace LunarEditor
         #endregion
     }
 
-    internal class FormattedConsole : Console
+    internal class CFormattedConsole : CConsole
     {
-        public FormattedConsole(int capacity)
+        public CFormattedConsole(int capacity)
             : base(capacity)
         {
         }
