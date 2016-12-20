@@ -26,7 +26,7 @@ namespace LunarEditor
 {
     delegate void ToggleButtonDelegate(ToggleButton button);
     
-    class ToggleButton : AbstractButton
+    class ToggleButton : CAbstractButton
     {
         public ToggleButton(string title = "", ToggleButtonDelegate buttonDelegate = null)
             : base(title)

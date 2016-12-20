@@ -26,9 +26,9 @@ using UnityEditor;
 
 namespace LunarEditor
 {
-    class AboutWindow : Window
+    class CAboutWindow : Window
     {
-        public AboutWindow()
+        public CAboutWindow()
             : base("About Lunar")
         {
             Rect rect = this.position;
@@ -89,7 +89,7 @@ namespace LunarEditor
 
         internal static void ShowWindow()
         {
-            EditorWindow.GetWindow<AboutWindow>();
+            EditorWindow.GetWindow<CAboutWindow>();
         }
     }
 }

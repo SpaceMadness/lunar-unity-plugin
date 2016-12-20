@@ -24,9 +24,9 @@ using System.Collections;
 
 namespace LunarEditor
 {
-    abstract class AbstractButton : View
+    abstract class CAbstractButton : View
     {
-        public AbstractButton(string title)
+        public CAbstractButton(string title)
         {
             Content = new GUIContent(title);
 

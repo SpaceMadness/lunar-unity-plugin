@@ -58,7 +58,7 @@ namespace LunarEditor
         [MenuItem("Window/Lunar/About Lunar...")]
         private static void ShowAbout()
         {
-            AboutWindow.ShowWindow();
+            CAboutWindow.ShowWindow();
         }
 
         [MenuItem("Window/Lunar/Request Feature...")]

@@ -26,7 +26,7 @@ namespace LunarEditor
 {
     delegate void ButtonDelegate(Button button);
 
-    class Button : AbstractButton
+    class Button : CAbstractButton
     {
         public Button(string title, ButtonDelegate buttonDelegate)
             : base(title)
