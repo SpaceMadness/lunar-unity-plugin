@@ -22,7 +22,7 @@
 ﻿
 namespace LunarPluginInternal
 {
-    interface IBaseCollection<T>
+    interface ICBaseCollection<T>
     {
         bool Add(T t);
         bool Remove(T t);

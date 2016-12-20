@@ -26,7 +26,7 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    abstract class CBaseList<T> : IBaseCollection<T> where T : class // TODO: thread safety
+    abstract class CBaseList<T> : ICBaseCollection<T> where T : class // TODO: thread safety
     {
         protected readonly List<T> list;
         
