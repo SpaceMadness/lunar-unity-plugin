@@ -28,11 +28,11 @@ using UnityEditor;
 
 namespace LunarPluginInternal
 {
-    public static class PlayerPrefsHelper
+    public static class CPlayerPrefsHelper
     {
         private static CPreferences s_prefs;
 
-        static PlayerPrefsHelper()
+        static CPlayerPrefsHelper()
         {
             if (CRuntime.IsOSXEditor)
             {
