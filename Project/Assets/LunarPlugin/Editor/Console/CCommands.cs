@@ -654,7 +654,7 @@ namespace LunarEditor
     {
         bool Execute(string filename)
         {
-            IList<string> lines = ReusableLists.NextAutoRecycleList<string>();
+            IList<string> lines = new List<string>();
             
             // cvars
             AddEntries(lines, ListCvars(), "cvars");

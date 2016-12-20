@@ -134,7 +134,7 @@ namespace LunarEditor
         {
             if (stackTrace != null)
             {
-                ReusableList<StackTraceLine> list = ReusableLists.NextList<StackTraceLine>();
+                List<StackTraceLine> list = new List<StackTraceLine>();
 
                 int lineStart = 0;
                 int lineEnd;
@@ -184,9 +184,7 @@ namespace LunarEditor
                     }
                 }
 
-                StackTraceLine[] lines = list.ToArray();
-                list.Recycle();
-                return lines;
+                return list.ToArray();
             }
 
             return StackTraceLine.kEmptyLinesArray;

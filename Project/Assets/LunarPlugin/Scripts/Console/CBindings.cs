@@ -263,7 +263,7 @@ namespace LunarPluginInternal
                 throw new NullReferenceException("Filter is null");
             }
 
-            IList<CBinding> list = ReusableLists.NextAutoRecycleList<CBinding>();
+            IList<CBinding> list = new List<CBinding>();
             for (int i = 0; i < m_bindings.Count; ++i)
             {
                 if (filter(m_bindings[i]))

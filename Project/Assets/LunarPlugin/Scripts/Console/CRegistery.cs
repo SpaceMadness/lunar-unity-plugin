@@ -170,7 +170,7 @@ namespace LunarPluginInternal
 
         internal static IList<CCommand> ListCommands(string prefix = null, CCommandListOptions options = CCommandListOptions.None)
         {
-            return ListCommands(ReusableLists.NextAutoRecycleList<CCommand>(), prefix, options);
+            return ListCommands(new List<CCommand>(), prefix, options);
         }
 
         internal static IList<CCommand> ListCommands(IList<CCommand> outList, string prefix = null, CCommandListOptions options = CCommandListOptions.None)
@@ -183,7 +183,7 @@ namespace LunarPluginInternal
 
         internal static IList<CCommand> ListCommands(CCommandsFilter<CCommand> filter)
         {
-            return ListCommands(ReusableLists.NextAutoRecycleList<CCommand>(), filter);
+            return ListCommands(new List<CCommand>(), filter);
         }
 
         internal static IList<CCommand> ListCommands(IList<CCommand> outList, CCommandsFilter<CCommand> filter)
@@ -381,7 +381,7 @@ namespace LunarPluginInternal
 
         public static IList<CVar> ListVars(string prefix = null, CCommandListOptions options = CCommandListOptions.None)
         {
-            return ListVars(ReusableLists.NextAutoRecycleList<CVar>(), prefix, options);
+            return ListVars(new List<CVar>(), prefix, options);
         }
 
         public static IList<CVar> ListVars(IList<CVar> outList, string prefix = null, CCommandListOptions options = CCommandListOptions.None)
@@ -394,7 +394,7 @@ namespace LunarPluginInternal
 
         internal static IList<CVar> ListVars(CCommandsFilter<CVarCommand> filter)
         {
-            return ListVars(ReusableLists.NextAutoRecycleList<CVar>(), filter);
+            return ListVars(new List<CVar>(), filter);
         }
 
         internal static IList<CVar> ListVars(IList<CVar> outList, CCommandsFilter<CVarCommand> filter)
@@ -418,7 +418,7 @@ namespace LunarPluginInternal
 
         public static IList<string> ListVarNames(string prefix = null, CCommandListOptions options = CCommandListOptions.None)
         {
-            IList<CVar> cvars = ListVars(ReusableLists.NextAutoRecycleList<CVar>(), prefix, options);
+            IList<CVar> cvars = ListVars(new List<CVar>(), prefix, options);
 
             string[] names = new string[cvars.Count];
 
@@ -494,7 +494,7 @@ namespace LunarPluginInternal
 
         internal static IList<CAliasCommand> ListAliases(string prefix = null, CCommandListOptions options = CCommandListOptions.None)
         {
-            return ListAliases(ReusableLists.NextAutoRecycleList<CAliasCommand>(), prefix, options);
+            return ListAliases(new List<CAliasCommand>(), prefix, options);
         }
 
         internal static IList<CAliasCommand> ListAliases(IList<CAliasCommand> outList, string prefix = null, CCommandListOptions options = CCommandListOptions.None)

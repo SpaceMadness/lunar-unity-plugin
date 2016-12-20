@@ -36,7 +36,7 @@ namespace LunarPluginInternal
 
         public static IList<string> Tokenize(string str, int options = 0)
         {
-            IList<string> list = ReusableLists.NextAutoRecycleList<string>();
+            IList<string> list = new List<string>();
             Tokenize(str, list, options);
             return list;
         }

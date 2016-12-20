@@ -122,7 +122,7 @@ namespace LunarPlugin
 
         internal static IList<Tag> ListTags()
         {
-            return ListTags(ReusableLists.NextAutoRecycleList<Tag>());
+            return ListTags(new List<Tag>());
         }
 
         internal static IList<Tag> ListTags(IList<Tag> outList)
@@ -216,7 +216,7 @@ namespace LunarPlugin
 
         internal static IList<LogLevel> ListLevels()
         {
-            return ListLevels(ReusableLists.NextAutoRecycleList<LogLevel>());
+            return ListLevels(new List<LogLevel>());
         }
 
         internal static IList<LogLevel> ListLevels(IList<LogLevel> outList)

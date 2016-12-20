@@ -37,7 +37,7 @@ namespace LunarPluginInternal
 
         public static IList<string> Split(string str, int options = 0)
         {
-            IList<string> list = ReusableLists.NextAutoRecycleList<string>();
+            IList<string> list = new List<string>();
             Split(str, list, options);
             return list;
         }

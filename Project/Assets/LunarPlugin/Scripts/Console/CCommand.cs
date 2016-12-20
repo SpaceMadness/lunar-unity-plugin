@@ -172,7 +172,7 @@ namespace LunarPlugin
                 return false;
             }
 
-            ReusableList<string> argsList = ReusableLists.NextAutoRecycleList<string>();
+            List<string> argsList = new List<string>();
             while (iter.HasNext())
             {
                 string token = StringUtils.UnArg(iter.Next());
@@ -548,7 +548,7 @@ namespace LunarPlugin
 
         internal IList<Option> ListShortOptions(string prefix = null)
         {
-            return ListShortOptions(ReusableLists.NextAutoRecycleList<Option>(), prefix);
+            return ListShortOptions(new List<Option>(), prefix);
         }
 
         internal IList<Option> ListShortOptions(IList<Option> outList, string prefix = null)
@@ -565,7 +565,7 @@ namespace LunarPlugin
 
         internal IList<Option> ListOptions(string prefix = null)
         {
-            return ListOptions(ReusableLists.NextAutoRecycleList<Option>(), prefix);
+            return ListOptions(new List<Option>(), prefix);
         }
 
         internal IList<Option> ListOptions(IList<Option> outList, string prefix = null)
