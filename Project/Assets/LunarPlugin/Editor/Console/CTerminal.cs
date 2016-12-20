@@ -36,7 +36,7 @@ namespace LunarEditor
         public CTerminal(int capacity)
             : base(capacity)
         {
-            History = new TerminalHistory(100);
+            History = new CTerminalHistory(100);
         }
 
         public virtual void Add(string line)
@@ -92,14 +92,14 @@ namespace LunarEditor
 
         #region Properties
 
-        public TerminalHistory History { get; private set; }
+        public CTerminalHistory History { get; private set; }
 
         #endregion
     }
 
-    class FormattedTerminal : CTerminal
+    class CFormattedTerminal : CTerminal
     {
-        public FormattedTerminal(int capacity)
+        public CFormattedTerminal(int capacity)
             : base(capacity)
         {
         }
@@ -137,12 +137,12 @@ namespace LunarEditor
         #endregion
     }
 
-    class TerminalHistory
+    class CTerminalHistory
     {
         private CCycleArray<string> m_entries;
         private int m_currentIndex;
 
-        public TerminalHistory(int capacity)
+        public CTerminalHistory(int capacity)
         {
             m_entries = new CCycleArray<string>(capacity);
             m_currentIndex = -1;

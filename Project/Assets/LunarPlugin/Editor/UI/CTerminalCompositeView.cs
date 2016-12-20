@@ -289,7 +289,7 @@ namespace LunarEditor
             get { return m_delegate.Terminal; }
         }
 
-        private TerminalHistory History
+        private CTerminalHistory History
         {
             get { return Terminal.History; }
         }

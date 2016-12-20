@@ -17,7 +17,7 @@ namespace TerminalTests
         [Test()]
         public void TestAddingItems()
         {
-            TerminalHistory history = new TerminalHistory(5);
+            CTerminalHistory history = new CTerminalHistory(5);
 
             history.Push("1");
             AssertHistory(history, "1");
@@ -56,7 +56,7 @@ namespace TerminalTests
         [Test()]
         public void TestIteratingItems()
         {
-            TerminalHistory history = new TerminalHistory(5);
+            CTerminalHistory history = new CTerminalHistory(5);
             
             history.Push("1");
             AssertIterateBack(history, "1");
@@ -103,7 +103,7 @@ namespace TerminalTests
             AssertIterateForward(history, "8", "9", "10", "11");
         }
 
-        private void AssertHistory(TerminalHistory history, params string[] values)
+        private void AssertHistory(CTerminalHistory history, params string[] values)
         {
             Assert.AreEqual(values.Length, history.Count);
             for (int i = 0; i < values.Length; ++i)
@@ -112,7 +112,7 @@ namespace TerminalTests
             }
         }
 
-        private void AssertIterateBack(TerminalHistory history, params string[] values)
+        private void AssertIterateBack(CTerminalHistory history, params string[] values)
         {
             int index = 0;
 
@@ -126,7 +126,7 @@ namespace TerminalTests
             Assert.AreEqual(values.Length, index);
         }
 
-        private void AssertIterateForward(TerminalHistory history, params string[] values)
+        private void AssertIterateForward(CTerminalHistory history, params string[] values)
         {
             int index = 0;
             

@@ -66,7 +66,7 @@ namespace LunarEditor
 
         protected virtual CTerminal CreateTerminal(int capacity)
         {
-            return new FormattedTerminal(capacity);
+            return new CFormattedTerminal(capacity);
         }
 
         #endregion
