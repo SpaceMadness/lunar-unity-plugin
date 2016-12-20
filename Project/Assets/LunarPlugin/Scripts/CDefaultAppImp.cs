@@ -94,7 +94,7 @@ namespace LunarPluginInternal
                 bool manual = n.Get<bool>(CCommandNotifications.KeyManualMode);
 
                 CVar cvar = n.Get<CVar>(CCommandNotifications.CVarValueChangedKeyVar);
-                Assert.IsNotNull(cvar);
+                CAssert.IsNotNull(cvar);
 
                 OnCVarValueChanged(cvar, manual);
             });

@@ -246,7 +246,7 @@ namespace LunarPluginInternal
         private void PostCallback(CTimer timer)
         {
             CNotification notification = timer.userData as CNotification;
-            Assert.IsNotNull(notification);
+            CAssert.IsNotNull(notification);
             
             PostImmediately(notification);
         }
@@ -270,7 +270,7 @@ namespace LunarPluginInternal
             Sender = sender;
             Name = name;
 
-            Assert.IsTrue(pairs.Length % 2 == 0);
+            CAssert.IsTrue(pairs.Length % 2 == 0);
             for (int i = 0; i < pairs.Length;)
             {
                 string key = ClassUtils.Cast<string>(pairs [i++]);
@@ -334,7 +334,7 @@ namespace LunarPluginInternal
         
         public override bool Add(CNotificationDelegate del)
         {
-            Assert.IsFalse(Contains(del));
+            CAssert.IsFalse(Contains(del));
             return base.Add(del);
         }
         

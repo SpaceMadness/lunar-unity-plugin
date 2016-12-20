@@ -61,8 +61,8 @@ namespace LunarPluginInternal
 
         public virtual void Recycle(CObjectsPoolEntry e)
         {
-            Assert.IsInstanceOfType<T>(e);
-            Assert.AreSame(this, e.pool);
+            CAssert.IsInstanceOfType<T>(e);
+            CAssert.AreSame(this, e.pool);
 
             AddLastItem(e);
         }
@@ -127,7 +127,7 @@ namespace LunarPluginInternal
         {
             if (pool != null)
             {
-                Assert.IsFalse(recycled);
+                CAssert.IsFalse(recycled);
                 recycled = true;
 
                 pool.Recycle(this);

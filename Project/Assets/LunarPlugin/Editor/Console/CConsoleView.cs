@@ -477,7 +477,7 @@ namespace LunarEditor
             else if (this.IsTable)
             {
                 string[] table = this.Table;
-                Assert.IsNotNull(table);
+                CAssert.IsNotNull(table);
 
                 LayoutTable(measure, table, contentWidth, maxWidth);
             }

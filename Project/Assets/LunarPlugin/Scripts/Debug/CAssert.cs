@@ -24,13 +24,13 @@ using System.Collections.Generic;
 
 using LunarPluginInternal;
 
-public delegate void AssertCallback(string message, string stackTrace);
+public delegate void CAssertCallback(string message, string stackTrace);
 
 namespace LunarPlugin
 {
-    public static class Assert
+    public static class CAssert
     {
-        public static AssertCallback callback;
+        public static CAssertCallback callback;
 
         [System.Diagnostics.Conditional("UNITY_EDITOR")]
         public static void IsTrue(bool condition)
@@ -188,7 +188,7 @@ namespace LunarPlugin
                 int index = 0;
                 foreach (T t in list)
                 {
-                    Assert.IsNotNull(t, "Element at {0} is null", index.ToString());
+                    CAssert.IsNotNull(t, "Element at {0} is null", index.ToString());
                     ++index;
                 }
             }

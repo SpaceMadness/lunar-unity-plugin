@@ -117,7 +117,7 @@ namespace LunarEditor
 
         internal static bool HandleURL(string urlString)
         {
-            Assert.IsNotEmpty(urlString);
+            CAssert.IsNotEmpty(urlString);
 
             try
             {

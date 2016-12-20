@@ -358,7 +358,7 @@ namespace LunarPluginInternal
 
         private void AddTimer(CTimer timer)
         {
-            Assert.AreSame(this, timer.manager);
+            CAssert.AreSame(this, timer.manager);
             ++timersCount;
 
             if (rootTimer != null)
@@ -404,8 +404,8 @@ namespace LunarPluginInternal
 
         private void RemoveTimer(CTimer timer)
         {
-            Assert.AreSame(this, timer.manager);
-            Assert.Greater(timersCount, 0);
+            CAssert.AreSame(this, timer.manager);
+            CAssert.Greater(timersCount, 0);
             --timersCount;
 
             CTimer prev = timer.prev;

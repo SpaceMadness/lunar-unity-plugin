@@ -9,7 +9,7 @@ using LunarPluginInternal;
 namespace LunarPlugin.Test
 {
     using Assert = NUnit.Framework.Assert;
-    using LunarAssert = LunarPlugin.Assert;
+    using LunarAssert = LunarPlugin.CAssert;
 
     [TestFixture]
     public class AssertTest : TestFixtureBase

@@ -61,7 +61,7 @@ namespace LunarPluginInternal
                 throw new ArgumentNullException("e");
             }
             
-            Assert.NotContains(e, list);
+            CAssert.NotContains(e, list);
             list.Add(e);
             
             return true;
@@ -143,13 +143,13 @@ namespace LunarPluginInternal
         
         protected void Lock()
         {
-            Assert.IsFalse(locked);
+            CAssert.IsFalse(locked);
             locked = true;
         }
         
         protected void Unlock()
         {
-            Assert.IsTrue(locked);
+            CAssert.IsTrue(locked);
             ClearRemoved();
             locked = false;
         }

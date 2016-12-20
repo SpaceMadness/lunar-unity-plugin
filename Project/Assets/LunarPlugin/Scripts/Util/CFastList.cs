@@ -56,8 +56,8 @@ namespace LunarPluginInternal
 
         public virtual void RemoveItem(T item)
         {
-            Assert.Greater(m_size, 0);
-            Assert.AreSame(this, item.m_list);
+            CAssert.Greater(m_size, 0);
+            CAssert.AreSame(this, item.m_list);
 
             FastListNode prev = item.m_listPrev;
             FastListNode next = item.m_listNext;
@@ -127,7 +127,7 @@ namespace LunarPluginInternal
 
         protected virtual void InsertItem(FastListNode item, FastListNode prev, FastListNode next)
         {
-            Assert.IsNull(item.m_list);
+            CAssert.IsNull(item.m_list);
 
             if (next != null)
             {

@@ -37,8 +37,8 @@ namespace LunarPluginInternal
     {
         public static T Cast<T>(object obj) where T : class
         {
-            Assert.IsNotNull(obj);
-            Assert.IsInstanceOfType<T>(obj);
+            CAssert.IsNotNull(obj);
+            CAssert.IsInstanceOfType<T>(obj);
 
             return obj as T;
         }
@@ -100,7 +100,7 @@ namespace LunarPluginInternal
 
         public static List<MethodInfo> ListMethods(List<MethodInfo> outList, Type type, ListMethodsFilter filter, BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
         {
-            Assert.IsNotNull(type, "Type is null");
+            CAssert.IsNotNull(type, "Type is null");
 
             MethodInfo[] methods = type.GetMethods(flags);
 
