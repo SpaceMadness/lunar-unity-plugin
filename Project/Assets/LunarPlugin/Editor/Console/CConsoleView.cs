@@ -203,7 +203,7 @@ namespace LunarEditor
             {
                 ConsoleTextEntryView cell;
 
-                if (entry.level == LogLevel.Exception)
+                if (entry.level == CLogLevel.Exception)
                 {
                     ConsoleTextEntryExceptionView exceptionCell = table.DequeueReusableCell<ConsoleTextEntryExceptionView>();
                     if (exceptionCell == null)
@@ -307,25 +307,25 @@ namespace LunarEditor
             SetFilteredDelegate(m_filteredDelegate, needReload);
         }
 
-        public void SetFilterLogLevel(LogLevel level)
+        public void SetFilterLogLevel(CLogLevel level)
         {
             bool needReload = m_filteredDelegate.SetFilterLogLevel(level);
             SetFilteredDelegate(m_filteredDelegate, needReload);
         }
 
-        public void SetFilterTags(params Tag[] tags)
+        public void SetFilterTags(params CTag[] tags)
         {
             bool needReload = m_filteredDelegate.SetFilterTags(tags);
             SetFilteredDelegate(m_filteredDelegate, needReload);
         }
 
-        public void AddFilterTags(params Tag[] tags)
+        public void AddFilterTags(params CTag[] tags)
         {
             bool needReload = m_filteredDelegate.AddFilterTags(tags);
             SetFilteredDelegate(m_filteredDelegate, needReload);
         }
 
-        public void RemoveFilterTags(params Tag[] tags)
+        public void RemoveFilterTags(params CTag[] tags)
         {
             bool needReload = m_filteredDelegate.RemoveFilterTags(tags);
             SetFilteredDelegate(m_filteredDelegate, needReload);
@@ -395,8 +395,8 @@ namespace LunarEditor
         public float width;
         public float height;
 
-        public Tag tag;
-        public LogLevel level;
+        public CTag tag;
+        public CLogLevel level;
         public string stackTrace;
 
         internal Flags flags;
@@ -445,7 +445,7 @@ namespace LunarEditor
 
             this.data = null;
             this.tag = null;
-            this.level = LogLevel.Exception;
+            this.level = CLogLevel.Exception;
             this.stackTrace = e.StackTrace;
         }
 
@@ -458,7 +458,7 @@ namespace LunarEditor
         {
             if (this.IsPlain)
             {
-                if (this.level == LogLevel.Exception)
+                if (this.level == CLogLevel.Exception)
                 {
                     StackTraceLine[] stackLines = this.data as StackTraceLine[];
                     if (stackLines == null && this.stackTrace != null)
@@ -685,7 +685,7 @@ namespace LunarEditor
                     return true;
                 }
             }
-            else if (this.LogLevel == LogLevel.Error || this.LogLevel == LogLevel.Warn)
+            else if (this.LogLevel == CLogLevel.Error || this.LogLevel == CLogLevel.Warn)
             {
                 SourcePathEntry element;
                 if (EditorStackTrace.TryParseCompilerMessage(m_value, out element))
@@ -712,7 +712,7 @@ namespace LunarEditor
             set { m_value = value; }
         }
 
-        public LogLevel LogLevel
+        public CLogLevel LogLevel
         {
             get;
             set;

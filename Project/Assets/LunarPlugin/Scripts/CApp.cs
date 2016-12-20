@@ -61,7 +61,7 @@ namespace LunarPluginInternal
 
             if (s_sharedInstance == null)
             {
-                Log.e("Can't execute command: app is not initialized");
+                CLog.e("Can't execute command: app is not initialized");
                 return false;
             }
 

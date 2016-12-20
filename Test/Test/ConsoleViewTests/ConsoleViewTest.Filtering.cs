@@ -132,11 +132,11 @@ namespace ConsoleViewTests
         public void TestFiltering()
         {
             MockConsole console = new MockConsole();
-            console.Add(LogLevel.Debug, tag, "line1");
-            console.Add(LogLevel.Debug, tag, "line11");
-            console.Add(LogLevel.Debug, tag, "line111");
-            console.Add(LogLevel.Debug, tag, "line1111");
-            console.Add(LogLevel.Debug, tag, "foo");
+            console.Add(CLogLevel.Debug, tag, "line1");
+            console.Add(CLogLevel.Debug, tag, "line11");
+            console.Add(CLogLevel.Debug, tag, "line111");
+            console.Add(CLogLevel.Debug, tag, "line1111");
+            console.Add(CLogLevel.Debug, tag, "foo");
 
             MockConsoleView consoleView = new MockConsoleView(console, 320, 230);
 
@@ -224,31 +224,31 @@ namespace ConsoleViewTests
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView);
 
-            console.Add(LogLevel.Debug, tag, "line1");
+            console.Add(CLogLevel.Debug, tag, "line1");
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView);
 
-            console.Add(LogLevel.Debug, tag, "line11");
+            console.Add(CLogLevel.Debug, tag, "line11");
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView, "line11");
 
-            console.Add(LogLevel.Debug, tag, "line111");
+            console.Add(CLogLevel.Debug, tag, "line111");
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView, "line11", "line111");
 
-            console.Add(LogLevel.Debug, tag, "line12");
+            console.Add(CLogLevel.Debug, tag, "line12");
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView, "line11", "line111");
 
-            console.Add(LogLevel.Debug, tag, "foo1");
+            console.Add(CLogLevel.Debug, tag, "foo1");
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView, "line11", "line111");
 
-            console.Add(LogLevel.Debug, tag, "foo12");
+            console.Add(CLogLevel.Debug, tag, "foo12");
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView, "line11", "line111");
 
-            console.Add(LogLevel.Debug, tag, "foo123");
+            console.Add(CLogLevel.Debug, tag, "foo123");
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView, "line11", "line111");
 
@@ -281,11 +281,11 @@ namespace ConsoleViewTests
         public void TestFilteringAndClear()
         {
             MockConsole console = new MockConsole();
-            console.Add(LogLevel.Debug, tag, "line1");
-            console.Add(LogLevel.Debug, tag, "line11");
-            console.Add(LogLevel.Debug, tag, "line111");
-            console.Add(LogLevel.Debug, tag, "line1111");
-            console.Add(LogLevel.Debug, tag, "foo");
+            console.Add(CLogLevel.Debug, tag, "line1");
+            console.Add(CLogLevel.Debug, tag, "line11");
+            console.Add(CLogLevel.Debug, tag, "line111");
+            console.Add(CLogLevel.Debug, tag, "line1111");
+            console.Add(CLogLevel.Debug, tag, "foo");
 
             MockConsoleView consoleView = new MockConsoleView(console, 320, 230);
 
@@ -297,11 +297,11 @@ namespace ConsoleViewTests
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView);
 
-            console.Add(LogLevel.Debug, tag, "line12");
-            console.Add(LogLevel.Debug, tag, "line112");
-            console.Add(LogLevel.Debug, tag, "line1112");
-            console.Add(LogLevel.Debug, tag, "line11112");
-            console.Add(LogLevel.Debug, tag, "foo2");
+            console.Add(CLogLevel.Debug, tag, "line12");
+            console.Add(CLogLevel.Debug, tag, "line112");
+            console.Add(CLogLevel.Debug, tag, "line1112");
+            console.Add(CLogLevel.Debug, tag, "line11112");
+            console.Add(CLogLevel.Debug, tag, "foo2");
 
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView, "line1112", "line11112");
@@ -315,91 +315,91 @@ namespace ConsoleViewTests
         public void TestFilterAndOverflow()
         {
             MockConsole console = new MockConsole(10);
-            console.Add(LogLevel.Debug, tag, "a1");
-            console.Add(LogLevel.Debug, tag, "a2");
-            console.Add(LogLevel.Debug, tag, "a3");
-            console.Add(LogLevel.Debug, tag, "a4");
-            console.Add(LogLevel.Debug, tag, "b1");
-            console.Add(LogLevel.Debug, tag, "b2");
+            console.Add(CLogLevel.Debug, tag, "a1");
+            console.Add(CLogLevel.Debug, tag, "a2");
+            console.Add(CLogLevel.Debug, tag, "a3");
+            console.Add(CLogLevel.Debug, tag, "a4");
+            console.Add(CLogLevel.Debug, tag, "b1");
+            console.Add(CLogLevel.Debug, tag, "b2");
 
             MockConsoleView consoleView = new MockConsoleView(console, 320, 230);
 
             consoleView.SetFilterText("a");
             AssertVisibleRows(consoleView, "a1", "a2", "a3", "a4");
 
-            console.Add(LogLevel.Debug, tag, "b3");
+            console.Add(CLogLevel.Debug, tag, "b3");
             AssertVisibleRows(consoleView, "a1", "a2", "a3", "a4");
 
-            console.Add(LogLevel.Debug, tag, "a5");
+            console.Add(CLogLevel.Debug, tag, "a5");
             AssertVisibleRows(consoleView, "a1", "a2", "a3", "a4", "a5");
 
-            console.Add(LogLevel.Debug, tag, "b4");
+            console.Add(CLogLevel.Debug, tag, "b4");
             AssertVisibleRows(consoleView, "a1", "a2", "a3", "a4", "a5");
 
-            console.Add(LogLevel.Debug, tag, "a6");
+            console.Add(CLogLevel.Debug, tag, "a6");
             AssertVisibleRows(consoleView, "a1", "a2", "a3", "a4", "a5", "a6");
 
-            console.Add(LogLevel.Debug, tag, "b5");
+            console.Add(CLogLevel.Debug, tag, "b5");
             AssertVisibleRows(consoleView, "a2", "a3", "a4", "a5", "a6");
 
-            console.Add(LogLevel.Debug, tag, "b6");
+            console.Add(CLogLevel.Debug, tag, "b6");
             AssertVisibleRows(consoleView, "a3", "a4", "a5", "a6");
 
-            console.Add(LogLevel.Debug, tag, "a7");
+            console.Add(CLogLevel.Debug, tag, "a7");
             AssertVisibleRows(consoleView, "a4", "a5", "a6", "a7");
 
-            console.Add(LogLevel.Debug, tag, "a8");
+            console.Add(CLogLevel.Debug, tag, "a8");
             AssertVisibleRows(consoleView, "a5", "a6", "a7", "a8");
 
-            console.Add(LogLevel.Debug, tag, "a9");
+            console.Add(CLogLevel.Debug, tag, "a9");
             AssertVisibleRows(consoleView, "a5", "a6", "a7", "a8", "a9");
 
-            console.Add(LogLevel.Debug, tag, "b7");
+            console.Add(CLogLevel.Debug, tag, "b7");
             AssertVisibleRows(consoleView, "a5", "a6", "a7", "a8", "a9");
 
-            console.Add(LogLevel.Debug, tag, "b8");
+            console.Add(CLogLevel.Debug, tag, "b8");
             AssertVisibleRows(consoleView, "a5", "a6", "a7", "a8", "a9");
 
-            console.Add(LogLevel.Debug, tag, "a10");
+            console.Add(CLogLevel.Debug, tag, "a10");
             AssertVisibleRows(consoleView, "a6", "a7", "a8", "a9", "a10");
 
-            console.Add(LogLevel.Debug, tag, "b9");
+            console.Add(CLogLevel.Debug, tag, "b9");
             AssertVisibleRows(consoleView, "a6", "a7", "a8", "a9", "a10");
 
-            console.Add(LogLevel.Debug, tag, "b10");
+            console.Add(CLogLevel.Debug, tag, "b10");
             AssertVisibleRows(consoleView, "a7", "a8", "a9", "a10");
 
-            console.Add(LogLevel.Debug, tag, "b11");
+            console.Add(CLogLevel.Debug, tag, "b11");
             AssertVisibleRows(consoleView, "a7", "a8", "a9", "a10");
 
-            console.Add(LogLevel.Debug, tag, "b12");
+            console.Add(CLogLevel.Debug, tag, "b12");
             AssertVisibleRows(consoleView, "a7", "a8", "a9", "a10");
 
-            console.Add(LogLevel.Debug, tag, "b13");
+            console.Add(CLogLevel.Debug, tag, "b13");
             AssertVisibleRows(consoleView, "a8", "a9", "a10");
 
-            console.Add(LogLevel.Debug, tag, "b14");
+            console.Add(CLogLevel.Debug, tag, "b14");
             AssertVisibleRows(consoleView, "a9", "a10");
 
-            console.Add(LogLevel.Debug, tag, "b15");
+            console.Add(CLogLevel.Debug, tag, "b15");
             AssertVisibleRows(consoleView, "a10");
 
-            console.Add(LogLevel.Debug, tag, "b16");
+            console.Add(CLogLevel.Debug, tag, "b16");
             AssertVisibleRows(consoleView, "a10");
 
-            console.Add(LogLevel.Debug, tag, "b17");
+            console.Add(CLogLevel.Debug, tag, "b17");
             AssertVisibleRows(consoleView, "a10");
 
-            console.Add(LogLevel.Debug, tag, "b18");
+            console.Add(CLogLevel.Debug, tag, "b18");
             AssertVisibleRows(consoleView);
 
-            console.Add(LogLevel.Debug, tag, "a11");
+            console.Add(CLogLevel.Debug, tag, "a11");
             AssertVisibleRows(consoleView, "a11");
 
-            console.Add(LogLevel.Debug, tag, "b19");
+            console.Add(CLogLevel.Debug, tag, "b19");
             AssertVisibleRows(consoleView, "a11");
 
-            console.Add(LogLevel.Debug, tag, "a12");
+            console.Add(CLogLevel.Debug, tag, "a12");
             AssertVisibleRows(consoleView, "a11", "a12");
 
             consoleView.SetFilterText("");
@@ -410,135 +410,135 @@ namespace ConsoleViewTests
         public void TestFilterByLogLevel()
         {
             MockConsole console = new MockConsole(10);
-            LogLevel[] levels = {
-                LogLevel.Verbose,
-                LogLevel.Debug,
-                LogLevel.Info,
-                LogLevel.Warn,
-                LogLevel.Error,
-                LogLevel.Exception
+            CLogLevel[] levels = {
+                CLogLevel.Verbose,
+                CLogLevel.Debug,
+                CLogLevel.Info,
+                CLogLevel.Warn,
+                CLogLevel.Error,
+                CLogLevel.Exception
             };
 
-            foreach (LogLevel l in levels)
+            foreach (CLogLevel l in levels)
             {
                 console.Add(l, tag, l.Name);
             }
 
             MockConsoleView consoleView = new MockConsoleView(console, 320, 230);
 
-            consoleView.SetFilterLogLevel(LogLevel.Verbose);
+            consoleView.SetFilterLogLevel(CLogLevel.Verbose);
             Assert.IsFalse(consoleView.IsFiltering);
 
             AssertVisibleRows(consoleView,
-                LogLevel.Verbose.Name,
-                LogLevel.Debug.Name,
-                LogLevel.Info.Name,
-                LogLevel.Warn.Name,
-                LogLevel.Error.Name,
-                LogLevel.Exception.Name
+                CLogLevel.Verbose.Name,
+                CLogLevel.Debug.Name,
+                CLogLevel.Info.Name,
+                CLogLevel.Warn.Name,
+                CLogLevel.Error.Name,
+                CLogLevel.Exception.Name
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Debug);
+            consoleView.SetFilterLogLevel(CLogLevel.Debug);
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView,
-                LogLevel.Debug.Name,
-                LogLevel.Info.Name,
-                LogLevel.Warn.Name,
-                LogLevel.Error.Name,
-                LogLevel.Exception.Name
+                CLogLevel.Debug.Name,
+                CLogLevel.Info.Name,
+                CLogLevel.Warn.Name,
+                CLogLevel.Error.Name,
+                CLogLevel.Exception.Name
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Info);
+            consoleView.SetFilterLogLevel(CLogLevel.Info);
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView,
-                LogLevel.Info.Name,
-                LogLevel.Warn.Name,
-                LogLevel.Error.Name,
-                LogLevel.Exception.Name
+                CLogLevel.Info.Name,
+                CLogLevel.Warn.Name,
+                CLogLevel.Error.Name,
+                CLogLevel.Exception.Name
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Warn);
+            consoleView.SetFilterLogLevel(CLogLevel.Warn);
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView,
-                LogLevel.Warn.Name,
-                LogLevel.Error.Name,
-                LogLevel.Exception.Name
+                CLogLevel.Warn.Name,
+                CLogLevel.Error.Name,
+                CLogLevel.Exception.Name
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Error);
+            consoleView.SetFilterLogLevel(CLogLevel.Error);
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView,
-                LogLevel.Error.Name,
-                LogLevel.Exception.Name
+                CLogLevel.Error.Name,
+                CLogLevel.Exception.Name
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Exception);
+            consoleView.SetFilterLogLevel(CLogLevel.Exception);
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView,
-                LogLevel.Exception.Name
+                CLogLevel.Exception.Name
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Error);
+            consoleView.SetFilterLogLevel(CLogLevel.Error);
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView,
-                LogLevel.Error.Name,
-                LogLevel.Exception.Name
+                CLogLevel.Error.Name,
+                CLogLevel.Exception.Name
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Warn);
+            consoleView.SetFilterLogLevel(CLogLevel.Warn);
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView,
-                LogLevel.Warn.Name,
-                LogLevel.Error.Name,
-                LogLevel.Exception.Name
+                CLogLevel.Warn.Name,
+                CLogLevel.Error.Name,
+                CLogLevel.Exception.Name
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Info);
+            consoleView.SetFilterLogLevel(CLogLevel.Info);
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView,
-                LogLevel.Info.Name,
-                LogLevel.Warn.Name,
-                LogLevel.Error.Name,
-                LogLevel.Exception.Name
+                CLogLevel.Info.Name,
+                CLogLevel.Warn.Name,
+                CLogLevel.Error.Name,
+                CLogLevel.Exception.Name
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Debug);
+            consoleView.SetFilterLogLevel(CLogLevel.Debug);
             Assert.IsTrue(consoleView.IsFiltering);
             AssertVisibleRows(consoleView,
-                LogLevel.Debug.Name,
-                LogLevel.Info.Name,
-                LogLevel.Warn.Name,
-                LogLevel.Error.Name,
-                LogLevel.Exception.Name
+                CLogLevel.Debug.Name,
+                CLogLevel.Info.Name,
+                CLogLevel.Warn.Name,
+                CLogLevel.Error.Name,
+                CLogLevel.Exception.Name
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Verbose);
+            consoleView.SetFilterLogLevel(CLogLevel.Verbose);
             Assert.IsFalse(consoleView.IsFiltering);
 
             AssertVisibleRows(consoleView,
-                LogLevel.Verbose.Name,
-                LogLevel.Debug.Name,
-                LogLevel.Info.Name,
-                LogLevel.Warn.Name,
-                LogLevel.Error.Name,
-                LogLevel.Exception.Name
+                CLogLevel.Verbose.Name,
+                CLogLevel.Debug.Name,
+                CLogLevel.Info.Name,
+                CLogLevel.Warn.Name,
+                CLogLevel.Error.Name,
+                CLogLevel.Exception.Name
             );
         }
 
         [Test]
         public void TestFilterByTag()
         {
-            Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("tag2");
-            Tag tag3 = new Tag("tag3");
+            CTag tag1 = new CTag("tag1");
+            CTag tag2 = new CTag("tag2");
+            CTag tag3 = new CTag("tag3");
 
             MockConsole console = new MockConsole(10);
 
-            console.Add(LogLevel.Debug, tag1, "tag1-1");
-            console.Add(LogLevel.Debug, tag2, "tag2-1");
-            console.Add(LogLevel.Debug, tag1, "tag1-2");
-            console.Add(LogLevel.Debug, tag3, "tag3-1");
-            console.Add(LogLevel.Debug, tag1, "tag1-3");
+            console.Add(CLogLevel.Debug, tag1, "tag1-1");
+            console.Add(CLogLevel.Debug, tag2, "tag2-1");
+            console.Add(CLogLevel.Debug, tag1, "tag1-2");
+            console.Add(CLogLevel.Debug, tag3, "tag3-1");
+            console.Add(CLogLevel.Debug, tag1, "tag1-3");
 
             MockConsoleView consoleView = new MockConsoleView(console, 320, 230);
 
@@ -604,33 +604,33 @@ namespace ConsoleViewTests
         [Test]
         public void TestMixedFiltersLevelTextTag()
         {
-            Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("tag2");
-            Tag tag3 = new Tag("tag3");
+            CTag tag1 = new CTag("tag1");
+            CTag tag2 = new CTag("tag2");
+            CTag tag3 = new CTag("tag3");
 
             MockConsole console = new MockConsole(64);
 
-            console.Add(LogLevel.Exception, tag1, "tog1-exception");
-            console.Add(LogLevel.Exception, tag1, "tag1-exception");
+            console.Add(CLogLevel.Exception, tag1, "tog1-exception");
+            console.Add(CLogLevel.Exception, tag1, "tag1-exception");
 
-            console.Add(LogLevel.Error, tag2, "tog2-error");
-            console.Add(LogLevel.Error, tag2, "tag2-error");
+            console.Add(CLogLevel.Error, tag2, "tog2-error");
+            console.Add(CLogLevel.Error, tag2, "tag2-error");
 
-            console.Add(LogLevel.Warn, tag3, "tog3-warning");
-            console.Add(LogLevel.Warn, tag3, "tag3-warning");
+            console.Add(CLogLevel.Warn, tag3, "tog3-warning");
+            console.Add(CLogLevel.Warn, tag3, "tag3-warning");
 
-            console.Add(LogLevel.Info, tag1, "tog1-info");
-            console.Add(LogLevel.Info, tag1, "tag1-info");
+            console.Add(CLogLevel.Info, tag1, "tog1-info");
+            console.Add(CLogLevel.Info, tag1, "tag1-info");
 
-            console.Add(LogLevel.Debug, tag2, "tog2-debug");
-            console.Add(LogLevel.Debug, tag2, "tag2-debug");
+            console.Add(CLogLevel.Debug, tag2, "tog2-debug");
+            console.Add(CLogLevel.Debug, tag2, "tag2-debug");
 
-            console.Add(LogLevel.Verbose, tag3, "tog3-verbose");
-            console.Add(LogLevel.Verbose, tag3, "tag3-verbose");
+            console.Add(CLogLevel.Verbose, tag3, "tog3-verbose");
+            console.Add(CLogLevel.Verbose, tag3, "tag3-verbose");
 
             MockConsoleView consoleView = new MockConsoleView(console, 320, 230);
 
-            consoleView.SetFilterLogLevel(LogLevel.Warn);
+            consoleView.SetFilterLogLevel(CLogLevel.Warn);
             Assert.IsTrue(consoleView.IsFiltering);
 
             AssertVisibleRows(consoleView,
@@ -659,7 +659,7 @@ namespace ConsoleViewTests
                 "tag3-warning"
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Verbose);
+            consoleView.SetFilterLogLevel(CLogLevel.Verbose);
             Assert.IsTrue(consoleView.IsFiltering);
 
             AssertVisibleRows(consoleView,
@@ -705,29 +705,29 @@ namespace ConsoleViewTests
         [Test]
         public void TestMixedFiltersTextLevelTag()
         {
-            Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("tag2");
-            Tag tag3 = new Tag("tag3");
+            CTag tag1 = new CTag("tag1");
+            CTag tag2 = new CTag("tag2");
+            CTag tag3 = new CTag("tag3");
 
             MockConsole console = new MockConsole(64);
 
-            console.Add(LogLevel.Exception, tag1, "tog1-exception");
-            console.Add(LogLevel.Exception, tag1, "tag1-exception");
+            console.Add(CLogLevel.Exception, tag1, "tog1-exception");
+            console.Add(CLogLevel.Exception, tag1, "tag1-exception");
 
-            console.Add(LogLevel.Error, tag2, "tog2-error");
-            console.Add(LogLevel.Error, tag2, "tag2-error");
+            console.Add(CLogLevel.Error, tag2, "tog2-error");
+            console.Add(CLogLevel.Error, tag2, "tag2-error");
 
-            console.Add(LogLevel.Warn, tag3, "tog3-warning");
-            console.Add(LogLevel.Warn, tag3, "tag3-warning");
+            console.Add(CLogLevel.Warn, tag3, "tog3-warning");
+            console.Add(CLogLevel.Warn, tag3, "tag3-warning");
 
-            console.Add(LogLevel.Info, tag1, "tog1-info");
-            console.Add(LogLevel.Info, tag1, "tag1-info");
+            console.Add(CLogLevel.Info, tag1, "tog1-info");
+            console.Add(CLogLevel.Info, tag1, "tag1-info");
 
-            console.Add(LogLevel.Debug, tag2, "tog2-debug");
-            console.Add(LogLevel.Debug, tag2, "tag2-debug");
+            console.Add(CLogLevel.Debug, tag2, "tog2-debug");
+            console.Add(CLogLevel.Debug, tag2, "tag2-debug");
 
-            console.Add(LogLevel.Verbose, tag3, "tog3-verbose");
-            console.Add(LogLevel.Verbose, tag3, "tag3-verbose");
+            console.Add(CLogLevel.Verbose, tag3, "tog3-verbose");
+            console.Add(CLogLevel.Verbose, tag3, "tag3-verbose");
 
             MockConsoleView consoleView = new MockConsoleView(console, 320, 230);
 
@@ -743,7 +743,7 @@ namespace ConsoleViewTests
                 "tag3-verbose"
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Warn);
+            consoleView.SetFilterLogLevel(CLogLevel.Warn);
             Assert.IsTrue(consoleView.IsFiltering);
 
             AssertVisibleRows(consoleView,
@@ -782,7 +782,7 @@ namespace ConsoleViewTests
                 "tag3-warning"
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Verbose);
+            consoleView.SetFilterLogLevel(CLogLevel.Verbose);
             Assert.IsFalse(consoleView.IsFiltering);
 
             AssertVisibleRows(consoleView,
@@ -804,29 +804,29 @@ namespace ConsoleViewTests
         [Test]
         public void TestMixedFiltersTagLevelText()
         {
-            Tag tag1 = new Tag("tag1");
-            Tag tag2 = new Tag("tag2");
-            Tag tag3 = new Tag("tag3");
+            CTag tag1 = new CTag("tag1");
+            CTag tag2 = new CTag("tag2");
+            CTag tag3 = new CTag("tag3");
 
             MockConsole console = new MockConsole(64);
 
-            console.Add(LogLevel.Exception, tag1, "tog1-exception");
-            console.Add(LogLevel.Exception, tag1, "tag1-exception");
+            console.Add(CLogLevel.Exception, tag1, "tog1-exception");
+            console.Add(CLogLevel.Exception, tag1, "tag1-exception");
 
-            console.Add(LogLevel.Error, tag2, "tog2-error");
-            console.Add(LogLevel.Error, tag2, "tag2-error");
+            console.Add(CLogLevel.Error, tag2, "tog2-error");
+            console.Add(CLogLevel.Error, tag2, "tag2-error");
 
-            console.Add(LogLevel.Warn, tag3, "tog3-warning");
-            console.Add(LogLevel.Warn, tag3, "tag3-warning");
+            console.Add(CLogLevel.Warn, tag3, "tog3-warning");
+            console.Add(CLogLevel.Warn, tag3, "tag3-warning");
 
-            console.Add(LogLevel.Info, tag1, "tog1-info");
-            console.Add(LogLevel.Info, tag1, "tag1-info");
+            console.Add(CLogLevel.Info, tag1, "tog1-info");
+            console.Add(CLogLevel.Info, tag1, "tag1-info");
 
-            console.Add(LogLevel.Debug, tag2, "tog2-debug");
-            console.Add(LogLevel.Debug, tag2, "tag2-debug");
+            console.Add(CLogLevel.Debug, tag2, "tog2-debug");
+            console.Add(CLogLevel.Debug, tag2, "tag2-debug");
 
-            console.Add(LogLevel.Verbose, tag3, "tog3-verbose");
-            console.Add(LogLevel.Verbose, tag3, "tag3-verbose");
+            console.Add(CLogLevel.Verbose, tag3, "tog3-verbose");
+            console.Add(CLogLevel.Verbose, tag3, "tag3-verbose");
 
             MockConsoleView consoleView = new MockConsoleView(console, 320, 230);
 
@@ -844,7 +844,7 @@ namespace ConsoleViewTests
                 "tag3-verbose"
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Warn);
+            consoleView.SetFilterLogLevel(CLogLevel.Warn);
             Assert.IsTrue(consoleView.IsFiltering);
 
             AssertVisibleRows(consoleView,
@@ -862,7 +862,7 @@ namespace ConsoleViewTests
                 "tag3-warning"
             );
 
-            consoleView.SetFilterLogLevel(LogLevel.Verbose);
+            consoleView.SetFilterLogLevel(CLogLevel.Verbose);
             Assert.IsTrue(consoleView.IsFiltering);
 
             AssertVisibleRows(consoleView,

@@ -110,7 +110,7 @@ namespace LunarPluginInternal
                 }
                 else
                 {
-                    Log.e("Unable to register command: name={0} type={1}", commandName, type);
+                    CLog.e("Unable to register command: name={0} type={1}", commandName, type);
                 }
             }
 

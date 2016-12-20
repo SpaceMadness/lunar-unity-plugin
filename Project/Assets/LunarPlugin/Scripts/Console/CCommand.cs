@@ -527,13 +527,13 @@ namespace LunarPlugin
 
             if (m_optionsLookup.ContainsKey(name)) 
             {
-                Log.e("Option already registered: {0}", name);
+                CLog.e("Option already registered: {0}", name);
                 return;
             }
 
             if (shortName != null && m_optionsLookup.ContainsKey(name)) 
             {
-                Log.e("Short option already registered: {0}", shortName);
+                CLog.e("Short option already registered: {0}", shortName);
                 return;
             }
 

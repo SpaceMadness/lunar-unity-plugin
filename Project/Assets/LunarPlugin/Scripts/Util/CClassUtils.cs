@@ -56,7 +56,7 @@ namespace LunarPluginInternal
             }
             catch (Exception e)
             {
-                Log.error(e, "Can't create instance of type: " + t);
+                CLog.error(e, "Can't create instance of type: " + t);
             }
 
             return null;

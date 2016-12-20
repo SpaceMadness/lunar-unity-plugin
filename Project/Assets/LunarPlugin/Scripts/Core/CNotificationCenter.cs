@@ -370,7 +370,7 @@ namespace LunarPluginInternal
                     }
                     catch (Exception e)
                     {
-                        Log.error(e, "Error while notifying delegate");
+                        CLog.error(e, "Error while notifying delegate");
                     }
                 }
             }

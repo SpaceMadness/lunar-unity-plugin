@@ -44,7 +44,7 @@ namespace LunarEditor
             Add(new ConsoleViewCellEntry(text));
         }
 
-        public virtual void Add(LogLevel level, Tag tag, string text, string stackTrace)
+        public virtual void Add(CLogLevel level, CTag tag, string text, string stackTrace)
         {
             ConsoleViewCellEntry entry = new ConsoleViewCellEntry(text);
             entry.level = level;
@@ -53,7 +53,7 @@ namespace LunarEditor
             Add(entry);
         }
         
-        public virtual void Add(LogLevel level, Tag tag, string[] table, string stackTrace)
+        public virtual void Add(CLogLevel level, CTag tag, string[] table, string stackTrace)
         {
             ConsoleViewCellEntry entry = new ConsoleViewCellEntry(table);
             entry.level = level;
@@ -68,10 +68,10 @@ namespace LunarEditor
 
         public void RegisterLogDelegate()
         {
-            Log.AddLogDelegate(OnLogMessage);
+            CLog.AddLogDelegate(OnLogMessage);
         }
         
-        private void OnLogMessage(LogLevel level, Tag tag, string message, string stackTrace)
+        private void OnLogMessage(CLogLevel level, CTag tag, string message, string stackTrace)
         {
             Add(level, tag, message, stackTrace);
         }
@@ -84,7 +84,7 @@ namespace LunarEditor
 
         public override void Destroy()
         {
-            Log.RemoveLogDelegate(OnLogMessage);
+            CLog.RemoveLogDelegate(OnLogMessage);
             base.Destroy();
         }
 
@@ -103,13 +103,13 @@ namespace LunarEditor
             base.Add(FormatLine(text));
         }
 
-        public override void Add(LogLevel level, Tag tag, string text, string stackTrace)
+        public override void Add(CLogLevel level, CTag tag, string text, string stackTrace)
         {
             string formattedText = FormatLine(text, level, tag, stackTrace);
             base.Add(level, tag, formattedText, stackTrace);
         }
 
-        public override void Add(LogLevel level, Tag tag, string[] table, string stackTrace)
+        public override void Add(CLogLevel level, CTag tag, string[] table, string stackTrace)
         {
             string[] formattedTable = FormatTable(table, level, tag, stackTrace);
             base.Add(level, tag, formattedTable, stackTrace);
@@ -117,7 +117,7 @@ namespace LunarEditor
 
         #region Format
         
-        private string FormatLine(string line, LogLevel level, Tag tag, string stackTrace)
+        private string FormatLine(string line, CLogLevel level, CTag tag, string stackTrace)
         {
             StringBuilder lineBuffer = new StringBuilder();
 
@@ -153,7 +153,7 @@ namespace LunarEditor
             return EditorSkin.SetColors(line);
         }
         
-        private string[] FormatTable(string[] table, LogLevel level, Tag tag, string stackTrace)
+        private string[] FormatTable(string[] table, CLogLevel level, CTag tag, string stackTrace)
         {
             for (int i = 0; i < table.Length; ++i)
             {

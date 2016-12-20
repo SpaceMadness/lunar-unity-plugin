@@ -88,7 +88,7 @@ namespace LunarPluginInternal
                 }
                 catch (Exception e)
                 {
-                    Log.error(e, "Exception while firing timer");
+                    CLog.error(e, "Exception while firing timer");
                     Cancel();
                 }
             }

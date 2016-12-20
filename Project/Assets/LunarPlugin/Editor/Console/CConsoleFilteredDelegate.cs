@@ -48,9 +48,9 @@ namespace LunarEditor
             m_filteredIndices = new CycleArray<int>(consoleView.Entries.Capacity);
         }
 
-        public bool SetFilterLogLevel(LogLevel level)
+        public bool SetFilterLogLevel(CLogLevel level)
         {
-            if (level != null && level != LogLevel.Verbose) // no need to filter on verbose
+            if (level != null && level != CLogLevel.Verbose) // no need to filter on verbose
             {
                 if (m_levelFilter == null)
                 {
@@ -62,7 +62,7 @@ namespace LunarEditor
                     return shouldAppend ? AppendFilter(m_levelFilter) : ApplyFilter(m_levelFilter);
                 }
 
-                LogLevel oldLevel = m_levelFilter.Level;
+                CLogLevel oldLevel = m_levelFilter.Level;
                 m_levelFilter.Level = level;
 
                 if (oldLevel.Priority < level.Priority) // can only decrease filtered items count: e.g. 'debug' -> 'error'
@@ -86,7 +86,7 @@ namespace LunarEditor
             return false;
         }
 
-        public bool AddFilterTags(params Tag[] tags)
+        public bool AddFilterTags(params CTag[] tags)
         {
             if (tags == null)
             {
@@ -100,7 +100,7 @@ namespace LunarEditor
             }
 
             bool changed = false;
-            foreach (Tag tag in tags)
+            foreach (CTag tag in tags)
             {
                 changed |= m_tagFilter.AddTag(tag);
             }
@@ -108,7 +108,7 @@ namespace LunarEditor
             return changed && ApplyFilter(this); // can increase filtered items count
         }
 
-        public bool SetFilterTags(params Tag[] tags)
+        public bool SetFilterTags(params CTag[] tags)
         {
             if (tags == null)
             {
@@ -133,7 +133,7 @@ namespace LunarEditor
             return ApplyFilter(this); // can increase filtered items count
         }
 
-        public bool RemoveFilterTags(params Tag[] tags)
+        public bool RemoveFilterTags(params CTag[] tags)
         {
             if (tags == null)
             {
@@ -143,7 +143,7 @@ namespace LunarEditor
             if (m_tagFilter != null)
             {
                 bool changed = false;
-                foreach (Tag tag in tags)
+                foreach (CTag tag in tags)
                 {
                     changed |= m_tagFilter.RemoveTag(tag);
                 }
@@ -380,12 +380,12 @@ namespace LunarEditor
 
     class ConsoleViewTagFilter : ConsoleViewFilterBase
     {
-        private HashSet<Tag> m_tags;
+        private HashSet<CTag> m_tags;
 
         public ConsoleViewTagFilter()
             : base(1)
         {
-            m_tags = new HashSet<Tag>();
+            m_tags = new HashSet<CTag>();
         }
 
         public override bool Apply(ref ConsoleViewCellEntry entry)
@@ -393,7 +393,7 @@ namespace LunarEditor
             return entry.tag != null && m_tags.Contains(entry.tag);
         }
 
-        public bool SetTags(params Tag[] tags)
+        public bool SetTags(params CTag[] tags)
         {
             if (tags == null)
             {
@@ -402,7 +402,7 @@ namespace LunarEditor
 
             m_tags.Clear();
 
-            foreach (Tag tag in tags)
+            foreach (CTag tag in tags)
             {
                 AddTag(tag);
             }
@@ -410,7 +410,7 @@ namespace LunarEditor
             return true;
         }
 
-        public bool AddTag(Tag tag)
+        public bool AddTag(CTag tag)
         {
             if (tag == null)
             {
@@ -420,7 +420,7 @@ namespace LunarEditor
             return m_tags.Add(tag);
         }
 
-        public bool RemoveTag(Tag tag)
+        public bool RemoveTag(CTag tag)
         {
             return m_tags.Remove(tag);
         }
@@ -433,9 +433,9 @@ namespace LunarEditor
 
     class ConsoleViewLogLevelFilter : ConsoleViewFilterBase
     {
-        private LogLevel m_level;
+        private CLogLevel m_level;
 
-        public ConsoleViewLogLevelFilter(LogLevel level)
+        public ConsoleViewLogLevelFilter(CLogLevel level)
             : base(2)
         {
             this.Level = level;
@@ -446,7 +446,7 @@ namespace LunarEditor
             return entry.level != null && entry.level.Priority >= m_level.Priority;
         }
 
-        public LogLevel Level
+        public CLogLevel Level
         {
             get { return m_level; }
             set

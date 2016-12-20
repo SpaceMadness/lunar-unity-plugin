@@ -620,7 +620,7 @@ namespace LunarPlugin
                     }
                     catch (Exception e)
                     {
-                        Log.error(e);
+                        CLog.error(e);
                     }
                 }
             }

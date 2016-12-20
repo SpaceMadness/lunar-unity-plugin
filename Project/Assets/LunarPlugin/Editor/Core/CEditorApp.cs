@@ -56,7 +56,7 @@ namespace LunarEditor
             CTimerManager.ScheduleTimer(() =>
             {
                 CThreadUtils.InitOnMainThread(); // we need to make sure this call is done on the main thread
-                Log.Initialize(); // it's safe to initialize logging
+                CLog.Initialize(); // it's safe to initialize logging
 
                 EditorSceneKeyHandler.keyDownHandler += SceneKeyDownHandler;
                 EditorSceneKeyHandler.keyUpHandler += SceneUpDownHandler;
@@ -127,7 +127,7 @@ namespace LunarEditor
                 URLHandler handler = FindURLHandler(scheme);
                 if (handler == null)
                 {
-                    Log.e("Can't find URL handler for scheme: '{0}'", scheme);
+                    CLog.e("Can't find URL handler for scheme: '{0}'", scheme);
                     return false;
                 }
 

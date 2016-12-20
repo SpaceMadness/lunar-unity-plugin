@@ -28,7 +28,7 @@ namespace ConsoleViewTests
             MockConsole console = new MockConsole();
             for (int i = 0; i < lines.Length; ++i)
             {
-                console.Add(LogLevel.Debug, tag, lines[i]);
+                console.Add(CLogLevel.Debug, tag, lines[i]);
             }
 
             ConsoleView consoleView = new MockConsoleView(console, 320, 230);
@@ -50,7 +50,7 @@ namespace ConsoleViewTests
             MockConsole console = new MockConsole();
             for (int i = 0; i < lines.Length; ++i)
             {
-                console.Add(LogLevel.Debug, tag, lines[i]);
+                console.Add(CLogLevel.Debug, tag, lines[i]);
             }
 
             ConsoleView consoleView = new MockConsoleView(console, 320, 230);
@@ -77,7 +77,7 @@ namespace ConsoleViewTests
             MockConsole console = new MockConsole(3);
             for (int i = 0; i < lines.Length; ++i)
             {
-                console.Add(LogLevel.Debug, tag, lines[i]);
+                console.Add(CLogLevel.Debug, tag, lines[i]);
             }
 
             ConsoleView consoleView = new MockConsoleView(console, 320, 230);
@@ -105,7 +105,7 @@ namespace ConsoleViewTests
             MockConsole console = new MockConsole(4);
             for (int i = 0; i < lines.Length; ++i)
             {
-                console.Add(LogLevel.Debug, tag, lines[i]);
+                console.Add(CLogLevel.Debug, tag, lines[i]);
             }
 
             ConsoleView consoleView = new MockConsoleView(console, 320, 230);
@@ -131,7 +131,7 @@ namespace ConsoleViewTests
             for (int i = 0; i < lines.Length; ++i)
             {
                 string line = StringUtils.C(lines[i], ColorCode.LevelDebug);
-                console.Add(LogLevel.Debug, tag, line);
+                console.Add(CLogLevel.Debug, tag, line);
             }
 
             ConsoleView consoleView = new MockConsoleView(console, 320, 230);

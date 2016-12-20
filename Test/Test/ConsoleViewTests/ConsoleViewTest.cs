@@ -17,7 +17,7 @@ namespace ConsoleViewTests
 
     public abstract class ConsoleViewTest : TestFixtureBase
     {
-        protected Tag tag = new Tag("TestTag");
+        protected CTag tag = new CTag("TestTag");
 
         #region Helpers
 
@@ -127,7 +127,7 @@ namespace ConsoleViewTests
         {
         }
 
-        public void Add(LogLevel level, Tag tag, string line)
+        public void Add(CLogLevel level, CTag tag, string line)
         {
             ConsoleViewCellEntry entry = new ConsoleViewCellEntry(line);
             entry.level = level;

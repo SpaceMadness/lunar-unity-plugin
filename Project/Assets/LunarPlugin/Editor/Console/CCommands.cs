@@ -929,10 +929,10 @@ namespace LunarEditor
         
         void Execute()
         {
-            Tag tag = Tag.Find(name);
+            CTag tag = CTag.Find(name);
             if (tag == null)
             {
-                tag = new Tag(name); // the tag would be registered
+                tag = new CTag(name); // the tag would be registered
             }
             
             tag.Enabled = enabled;
@@ -949,13 +949,13 @@ namespace LunarEditor
         [CCommandOption(ShortName="l", Values="exception,error,warn,info,debug,verbose")]
         private string level;
         
-        private LogLevel m_lastLogLevel;
+        private CLogLevel m_lastLogLevel;
         
         bool Execute(string[] args)
         {
             if (level != null)
             {
-                LogLevel logLevel = FromString(level);
+                CLogLevel logLevel = FromString(level);
                 if (logLevel == null)
                 {
                     PrintError("Unexpected log level: '{0}'", level);
@@ -963,7 +963,7 @@ namespace LunarEditor
                     return false;
                 }
                 
-                Log.Level = logLevel;
+                CLog.Level = logLevel;
                 
                 PrintLogLevel();
                 return true;
@@ -975,15 +975,15 @@ namespace LunarEditor
                 string arg = args[0];
                 if (arg == "enable" || arg == "on" || arg == "1")
                 {
-                    if (m_lastLogLevel != null) Log.Level = m_lastLogLevel;
+                    if (m_lastLogLevel != null) CLog.Level = m_lastLogLevel;
                     
                     PrintLogLevel();
                     return true;
                 }
                 if (arg == "disable" || arg == "off" || arg == "0")
                 {
-                    m_lastLogLevel = Log.Level;
-                    Log.Level = null;
+                    m_lastLogLevel = CLog.Level;
+                    CLog.Level = null;
                     
                     PrintLogLevel();
                     return true;
@@ -996,17 +996,17 @@ namespace LunarEditor
         
         private void PrintLogLevel()
         {
-            Print("Log level: {0}", Log.Level != null ? Log.Level.Name : "<none>");
+            Print("Log level: {0}", CLog.Level != null ? CLog.Level.Name : "<none>");
         }
         
-        private LogLevel FromString(String name)
+        private CLogLevel FromString(String name)
         {
-            if (name == "debug")     return LogLevel.Debug;
-            if (name == "exception") return LogLevel.Exception;
-            if (name == "error")     return LogLevel.Error;
-            if (name == "info")      return LogLevel.Info;
-            if (name == "warn")      return LogLevel.Warn;
-            if (name == "verbose")   return LogLevel.Verbose;
+            if (name == "debug")     return CLogLevel.Debug;
+            if (name == "exception") return CLogLevel.Exception;
+            if (name == "error")     return CLogLevel.Error;
+            if (name == "info")      return CLogLevel.Info;
+            if (name == "warn")      return CLogLevel.Warn;
+            if (name == "verbose")   return CLogLevel.Verbose;
             
             return null;
         }
@@ -1021,12 +1021,12 @@ namespace LunarEditor
         {
             if (args.Length == 0)
             {
-                ICollection<Tag> tags = Tag.ListTags();
+                ICollection<CTag> tags = CTag.ListTags();
                 if (tags != null && tags.Count > 0)
                 {
                     string[] names = new string[tags.Count];
                     int index = 0;
-                    foreach (Tag t in tags)
+                    foreach (CTag t in tags)
                     {
                         names[index++] = t.Name;
                     }
@@ -1039,7 +1039,7 @@ namespace LunarEditor
             return true;
         }
         
-        private int CompareTags(Tag t1, Tag t2)
+        private int CompareTags(CTag t1, CTag t2)
         {
             return t1.Name.CompareTo(t2.Name);
         }

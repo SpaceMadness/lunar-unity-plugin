@@ -89,7 +89,7 @@ namespace LunarEditor
                 }
                 catch (Exception e)
                 {
-                    Log.error(e);
+                    CLog.error(e);
                 }
             }
 
@@ -130,7 +130,7 @@ namespace LunarEditor
             }
             catch (Exception e)
             {
-                Log.error(e);
+                CLog.error(e);
             }
 
             if (CEvent.current.keyCode == KeyCode.Tab || CEvent.current.character == '\t')

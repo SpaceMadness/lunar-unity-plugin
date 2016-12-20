@@ -62,7 +62,7 @@ namespace LunarPluginInternal
                 {
                     if (m_path == null)
                     {
-                        Log.e("Can't load settings: path is null");
+                        CLog.e("Can't load settings: path is null");
                         return false;
                     }
 
@@ -74,7 +74,7 @@ namespace LunarPluginInternal
                 }
                 catch (Exception e)
                 {
-                    Log.error(e, "Can't read settings: {0}", m_path);
+                    CLog.error(e, "Can't read settings: {0}", m_path);
                 }
 
                 m_data = new Dictionary<string, object>();
@@ -90,7 +90,7 @@ namespace LunarPluginInternal
                 {
                     if (m_path == null)
                     {
-                        Log.e("Can't save settings: path is null");
+                        CLog.e("Can't save settings: path is null");
                         return false;
                     }
 
@@ -102,7 +102,7 @@ namespace LunarPluginInternal
                 }
                 catch (Exception e)
                 {
-                    Log.error(e, "Can't save settings: {0}", m_path);
+                    CLog.error(e, "Can't save settings: {0}", m_path);
                     return false;
                 }
             }
