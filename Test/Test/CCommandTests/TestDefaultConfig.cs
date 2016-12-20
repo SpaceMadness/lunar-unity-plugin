@@ -380,19 +380,19 @@ namespace CCommandTests
         [Test]
         public void TestListConfigs()
         {
-            IList<string> configs = ConfigHelper.ListConfigs();
+            IList<string> configs = CConfigHelper.ListConfigs();
             Assert.AreEqual(0, configs.Count);
 
             Execute("bind t test"); // create a dummy config to write into files
             Execute("writeconfig " + CConstants.ConfigDefault);
 
-            configs = ConfigHelper.ListConfigs();
+            configs = CConfigHelper.ListConfigs();
             Assert.AreEqual(1, configs.Count);
             Assert.AreEqual(CConstants.ConfigDefault, configs[0]);
 
             Execute("writeconfig " + CConstants.ConfigAutoExec);
 
-            configs = ConfigHelper.ListConfigs();
+            configs = CConfigHelper.ListConfigs();
             Assert.AreEqual(2, configs.Count);
             Assert.AreEqual(CConstants.ConfigAutoExec, configs[0]);
             Assert.AreEqual(CConstants.ConfigDefault, configs[1]);
@@ -405,15 +405,15 @@ namespace CCommandTests
             Execute("writeconfig " + CConstants.ConfigDefault);
             Execute("writeconfig " + CConstants.ConfigAutoExec);
 
-            IList<string> configs = ConfigHelper.ListConfigs("default");
+            IList<string> configs = CConfigHelper.ListConfigs("default");
             Assert.AreEqual(1, configs.Count);
             Assert.AreEqual(CConstants.ConfigDefault, configs[0]);
 
-            configs = ConfigHelper.ListConfigs("auto");
+            configs = CConfigHelper.ListConfigs("auto");
             Assert.AreEqual(1, configs.Count);
             Assert.AreEqual(CConstants.ConfigAutoExec, configs[0]);
 
-            configs = ConfigHelper.ListConfigs("foo");
+            configs = CConfigHelper.ListConfigs("foo");
             Assert.AreEqual(0, configs.Count);
         }
 

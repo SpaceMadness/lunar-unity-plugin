@@ -33,7 +33,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    static class ConfigHelper
+    static class CConfigHelper
     {
         private static string configPath;
 

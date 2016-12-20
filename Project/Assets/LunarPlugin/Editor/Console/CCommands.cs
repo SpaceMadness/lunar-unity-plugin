@@ -614,7 +614,7 @@ namespace LunarEditor
         {
             try
             {
-                IList<string> lines = ConfigHelper.ReadConfig(filename);
+                IList<string> lines = CConfigHelper.ReadConfig(filename);
                 foreach (string line in lines)
                 {
                     string trim = line.Trim();
@@ -643,7 +643,7 @@ namespace LunarEditor
 
         protected override IList<string> AutoCompleteArgs(string commandLine, string token)
         {
-            return ConfigHelper.ListConfigs(token);
+            return CConfigHelper.ListConfigs(token);
         }
     }
 
@@ -667,7 +667,7 @@ namespace LunarEditor
 
             try
             {
-                ConfigHelper.WriteConfig(filename, lines);
+                CConfigHelper.WriteConfig(filename, lines);
                 return true;
             }
             catch (Exception e)
@@ -683,7 +683,7 @@ namespace LunarEditor
 
         protected override IList<string> AutoCompleteArgs(string commandLine, string token) // TODO: better autocompletion
         {
-            List<string> configs = new List<string>(ConfigHelper.ListConfigs(token));
+            List<string> configs = new List<string>(CConfigHelper.ListConfigs(token));
 
             // TODO: refactor this
             if (!configs.Contains(CConstants.ConfigDefault))
@@ -775,7 +775,7 @@ namespace LunarEditor
             {
                 if (edit)
                 {
-                    string configPath = ConfigHelper.GetConfigPath(filename);
+                    string configPath = CConfigHelper.GetConfigPath(filename);
                     if (!CFileUtils.FileExists(configPath))
                     {
                         PrintError("File does not exist: {0}", configPath);
@@ -786,7 +786,7 @@ namespace LunarEditor
                     return true;
                 }
                 
-                IList<string> lines = ConfigHelper.ReadConfig(filename);
+                IList<string> lines = CConfigHelper.ReadConfig(filename);
                 foreach (string line in lines)
                 {
                     PrintIndent(line);
@@ -803,7 +803,7 @@ namespace LunarEditor
 
         protected override IList<string> AutoCompleteArgs(string commandLine, string token)
         {
-            return ConfigHelper.ListConfigs(token);
+            return CConfigHelper.ListConfigs(token);
         }
     }
 

@@ -44,7 +44,7 @@ namespace CCommandTests
 
             if (deleteConfigs)
             {
-                ConfigHelper.DeleteConfigs();
+                CConfigHelper.DeleteConfigs();
             }
         }
 
@@ -120,7 +120,7 @@ namespace CCommandTests
 
         protected void AssertConfig(ConfigReadFilter filter, params string[] expected)
         {
-            IList<string> lines = ConfigHelper.ReadConfig(CConstants.ConfigDefault);
+            IList<string> lines = CConfigHelper.ReadConfig(CConstants.ConfigDefault);
             IList<string> actual = new List<string>();
             foreach (string line in lines)
             {
@@ -135,7 +135,7 @@ namespace CCommandTests
 
         protected void WriteConfig(params string[] lines)
         {
-            ConfigHelper.WriteConfig(CConstants.ConfigDefault, lines);
+            CConfigHelper.WriteConfig(CConstants.ConfigDefault, lines);
         }
 
         #endregion
