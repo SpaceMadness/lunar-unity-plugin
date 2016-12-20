@@ -62,7 +62,7 @@ namespace LunarEditor
 
         private void CreateUI()
         {
-            this.AutoresizeMask = ViewAutoresizing.FlexibleWidth | ViewAutoresizing.FlexibleHeight;
+            this.AutoresizeMask = CViewAutoresizing.FlexibleWidth | CViewAutoresizing.FlexibleHeight;
 
             CToolBar toolbar = new CToolBar(this.Width);
             toolbar.Width = this.Width;
@@ -104,7 +104,7 @@ namespace LunarEditor
             AddSubview(m_commandField);
             m_commandField.AlignX(CView.AlignCenter);
             m_commandField.AlignBottom(0);
-            m_commandField.AutoresizeMask = ViewAutoresizing.FlexibleTopMargin | ViewAutoresizing.FlexibleWidth;
+            m_commandField.AutoresizeMask = CViewAutoresizing.FlexibleTopMargin | CViewAutoresizing.FlexibleWidth;
 
             m_commandField.TextKeyDelegate = delegate(CTextField tf, KeyCode code, bool pressed)
             {
@@ -211,7 +211,7 @@ namespace LunarEditor
             m_consoleView = new CConsoleView(Terminal, m_commandField.Width, this.Height - (toolbar.Height + m_commandField.Height));
             m_consoleView.Y = toolbar.Bottom;
             m_consoleView.IsScrollLocked = true;
-            m_consoleView.AutoresizeMask = ViewAutoresizing.FlexibleWidth | ViewAutoresizing.FlexibleHeight;
+            m_consoleView.AutoresizeMask = CViewAutoresizing.FlexibleWidth | CViewAutoresizing.FlexibleHeight;
             AddSubview(m_consoleView);
 
             m_lastUserInput = null;

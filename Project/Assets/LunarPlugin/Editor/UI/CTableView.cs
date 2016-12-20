@@ -133,7 +133,7 @@ namespace LunarEditor
             {
                 if (IsCellSelected(cell.CellIndex))
                 {
-                    CUIHelper.DrawRect(cell.Frame, SharedStyles.SelectedCellBackStyle);
+                    CUIHelper.DrawRect(cell.Frame, CSharedStyles.SelectedCellBackStyle);
                 }
                 cell.OnGUI();
             }

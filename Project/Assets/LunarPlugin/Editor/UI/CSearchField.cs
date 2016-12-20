@@ -33,7 +33,7 @@ namespace LunarEditor
                 GUILayout.BeginHorizontal();
                 {
                     text = GUILayout.TextField(text, Style);
-                    if (GUILayout.Button(GUIContent.none, SharedStyles.toolbarSearchCancelButton))
+                    if (GUILayout.Button(GUIContent.none, CSharedStyles.toolbarSearchCancelButton))
                     {
                         // Remove focus if cleared
                         text = "";
@@ -49,7 +49,7 @@ namespace LunarEditor
 
         protected override GUIStyle CreateGUIStyle()
         {
-            return SharedStyles.searchField;
+            return CSharedStyles.searchField;
         }
     }
 }

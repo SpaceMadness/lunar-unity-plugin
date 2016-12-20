@@ -30,7 +30,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    enum ViewAutoresizing
+    enum CViewAutoresizing
     {
         None                 = 0,
         FlexibleLeftMargin   = 1 << 0,
@@ -434,9 +434,9 @@ namespace LunarEditor
             for (int i = 0; i < m_subviews.Count; ++i)
             {
                 CView subview = m_subviews[i];
-                ViewAutoresizing mask = subview.AutoresizeMask;
+                CViewAutoresizing mask = subview.AutoresizeMask;
 
-                if (mask == ViewAutoresizing.None)
+                if (mask == CViewAutoresizing.None)
                 {
                     continue;
                 }
@@ -444,22 +444,22 @@ namespace LunarEditor
                 float dw = 0;
                 float dh = 0;
 
-                if ((mask & ViewAutoresizing.FlexibleWidth) != 0)
+                if ((mask & CViewAutoresizing.FlexibleWidth) != 0)
                 {
                     dw = dx;
                     subview.Width += dw;
                 }
-                else if ((mask & ViewAutoresizing.FlexibleLeftMargin) != 0)
+                else if ((mask & CViewAutoresizing.FlexibleLeftMargin) != 0)
                 {
                     subview.X += dx;
                 }
 
-                if ((mask & ViewAutoresizing.FlexibleHeight) != 0)
+                if ((mask & CViewAutoresizing.FlexibleHeight) != 0)
                 {
                     dh = dy;
                     subview.Height += dh;
                 }
-                else if ((mask & ViewAutoresizing.FlexibleTopMargin) != 0)
+                else if ((mask & CViewAutoresizing.FlexibleTopMargin) != 0)
                 {
                     subview.Y += dy;
                 }
@@ -661,7 +661,7 @@ namespace LunarEditor
 
         public object Tag { get; set; }
 
-        public ViewAutoresizing AutoresizeMask { get; set; }
+        public CViewAutoresizing AutoresizeMask { get; set; }
 
         public Color BackColor 
         { 
@@ -784,7 +784,7 @@ namespace LunarEditor
         protected abstract void DestroyEvent();
     }
 
-    class SharedStyles
+    class CSharedStyles
     {
         private static GUIContent m_content = new GUIContent();
 
@@ -988,11 +988,11 @@ namespace LunarEditor
         }
     }
 
-    class GUIStyleTextMeasure : ICTextMeasure
+    class CGUIStyleTextMeasure : ICTextMeasure
     {
         private GUIStyle m_style;
 
-        public GUIStyleTextMeasure(GUIStyle style)
+        public CGUIStyleTextMeasure(GUIStyle style)
         {
             if (style == null)
             {
@@ -1004,12 +1004,12 @@ namespace LunarEditor
 
         public Vector2 CalcSize(string text)
         {
-            return SharedStyles.MeasureText(m_style, text);
+            return CSharedStyles.MeasureText(m_style, text);
         }
 
         public float CalcHeight(string text, float width)
         {
-            return SharedStyles.MeasureHeight(m_style, text, width);
+            return CSharedStyles.MeasureHeight(m_style, text, width);
         }
 
         public float LineHeight
@@ -1023,7 +1023,7 @@ namespace LunarEditor
         }
     }
 
-    static class SharedGUIContent
+    static class CSharedGUIContent
     {
         private static GUIContent m_content = new GUIContent();
 

@@ -60,7 +60,7 @@ namespace LunarEditor
 
         protected virtual ICTextMeasure CreateTextMeasure()
         {
-            return new GUIStyleTextMeasure(SharedStyles.consoleTextStyle);
+            return new CGUIStyleTextMeasure(CSharedStyles.consoleTextStyle);
         }
 
         //////////////////////////////////////////////////////////////////////////////
@@ -577,7 +577,7 @@ namespace LunarEditor
 
                     if (stackLines[i].sourcePathStart != -1)
                     {
-                        GUIStyleTextMeasure styleMeasure = measure as GUIStyleTextMeasure;
+                        CGUIStyleTextMeasure styleMeasure = measure as CGUIStyleTextMeasure;
                         if (styleMeasure != null)
                         {
                             ResolveSourceLink(styleMeasure, ref stackLines[i]);
@@ -592,7 +592,7 @@ namespace LunarEditor
             this.height = totalHeight;
         }
 
-        private static void ResolveSourceLink(GUIStyleTextMeasure measure, ref CStackTraceLine stackLine)
+        private static void ResolveSourceLink(CGUIStyleTextMeasure measure, ref CStackTraceLine stackLine)
         {
             Color color = CEditorSkin.GetColor(stackLine.sourcePathExists ? CColorCode.Link : CColorCode.LinkInnactive);
 
@@ -661,7 +661,7 @@ namespace LunarEditor
 
         protected override void DrawGUI()
         {
-            GUIStyle style = SharedStyles.consoleTextStyle;
+            GUIStyle style = CSharedStyles.consoleTextStyle;
             Color oldColor = style.normal.textColor;
             style.normal.textColor = this.TextColor;
             GUI.Label(Frame, this.Value, style);
@@ -731,7 +731,7 @@ namespace LunarEditor
         {
             BeginGroup(Frame);
             {
-                GUIStyle style = SharedStyles.consoleTextStyle;
+                GUIStyle style = CSharedStyles.consoleTextStyle;
                 Color oldColor = style.normal.textColor;
                 style.normal.textColor = this.TextColor;
 
@@ -753,7 +753,7 @@ namespace LunarEditor
         {
             if (stackLine.IsClickable)
             {
-                GUIStyle linkStyle = stackLine.sourcePathExists ? SharedStyles.consoleLinkStyle : SharedStyles.consoleLinkInnactiveStyle;
+                GUIStyle linkStyle = stackLine.sourcePathExists ? CSharedStyles.consoleLinkStyle : CSharedStyles.consoleLinkInnactiveStyle;
                 CUIHelper.DrawUnderLine(stackLine.sourceFrame, linkStyle);
 
                 if (stackLine.sourcePathExists && GUI.Button(stackLine.sourceFrame, GUIContent.none, GUIStyle.none))

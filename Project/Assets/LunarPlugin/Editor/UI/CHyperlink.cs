@@ -54,7 +54,7 @@ namespace LunarEditor
 
         protected override GUIStyle CreateGUIStyle()
         {
-            return SharedStyles.linkTextStyle;
+            return CSharedStyles.linkTextStyle;
         }
 
         protected override void DrawGUI()

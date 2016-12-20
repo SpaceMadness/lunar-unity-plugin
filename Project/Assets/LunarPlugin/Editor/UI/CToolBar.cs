@@ -32,12 +32,12 @@ namespace LunarEditor
         public CToolBar(float width)
             : base(width, CUISize.ToolbarHeight)
         {
-            this.AutoresizeMask = ViewAutoresizing.FlexibleWidth;
+            this.AutoresizeMask = CViewAutoresizing.FlexibleWidth;
         }
 
         public override void OnGUI()
         {
-            GUILayout.BeginHorizontal(SharedStyles.toolbar, GUILayout.Width(this.Width));
+            GUILayout.BeginHorizontal(CSharedStyles.toolbar, GUILayout.Width(this.Width));
             {
                 DrawChildren();
             }
@@ -100,12 +100,12 @@ namespace LunarEditor
         public CToolBarButton(string title, CButtonDelegate buttonDelegate)
             : base(title, buttonDelegate)
         {
-            Width = SharedStyles.MeasureWidth(SharedStyles.toolbarButton, title);
+            Width = CSharedStyles.MeasureWidth(CSharedStyles.toolbarButton, title);
         }
 
         public override void OnGUI()
         {
-            if (GUILayout.Button(Title, SharedStyles.toolbarButton, GUILayout.Width(Frame.width)))
+            if (GUILayout.Button(Title, CSharedStyles.toolbarButton, GUILayout.Width(Frame.width)))
             {
                 if (ButtonDelegate != null)
                     ButtonDelegate(this);
@@ -145,13 +145,13 @@ namespace LunarEditor
         public CToolBarToggle(string title, CToggleButtonDelegate buttonDelegate)
             : base(title, buttonDelegate)
         {
-            Width = SharedStyles.MeasureWidth(SharedStyles.toolbarButton, title);
+            Width = CSharedStyles.MeasureWidth(CSharedStyles.toolbarButton, title);
         }
 
         public override void OnGUI()
         {
             bool oldFlag = this.IsOn;
-            this.IsOn = GUILayout.Toggle(oldFlag, Title, SharedStyles.toolbarButton, GUILayout.Width(Frame.width));
+            this.IsOn = GUILayout.Toggle(oldFlag, Title, CSharedStyles.toolbarButton, GUILayout.Width(Frame.width));
             if (oldFlag ^ this.IsOn)
             {
                 if (ButtonDelegate != null)
@@ -165,7 +165,7 @@ namespace LunarEditor
         public CToolBarCheckbox(string title, CToggleButtonDelegate buttonDelegate)
             : base(title, buttonDelegate)
         {
-            Width = SharedStyles.MeasureWidth(GUI.skin.toggle, title);
+            Width = CSharedStyles.MeasureWidth(GUI.skin.toggle, title);
         }
 
         public override void OnGUI()
@@ -234,7 +234,7 @@ namespace LunarEditor
 
                     if (m_titleWith == 0)
                     {
-                        m_titleWith = SharedStyles.MeasureWidth(style, m_title);
+                        m_titleWith = CSharedStyles.MeasureWidth(style, m_title);
                     }
 
                     GUILayout.Label(m_title, style, GUILayout.Width(m_titleWith));
@@ -271,7 +271,7 @@ namespace LunarEditor
             float width = 0;
             for (int i = 0; i < options.Length; ++i)
             {
-                width = Mathf.Max(width, SharedStyles.MeasureWidth(style, options[i]));
+                width = Mathf.Max(width, CSharedStyles.MeasureWidth(style, options[i]));
             }
 
             return width;
