@@ -27,7 +27,7 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    class PlatformDefault : CPlatformImpl
+    class CPlatformDefault : CPlatformImpl
     {
         public override void AssertMessage(string message, string stackTrace)
         {

@@ -55,7 +55,7 @@ namespace LunarPluginInternal
                     }
                 }
 
-                return new PlatformDefault();
+                return new CPlatformDefault();
             }
             catch (MissingMethodException) // FIXME: I don't like this
             {
