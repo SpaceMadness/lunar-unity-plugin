@@ -180,7 +180,7 @@ namespace LunarPlugin.Test
         public void TestRemoveColorTag()
         {
             string expected = "text";
-            string formatted = CStringUtils.C(expected, ColorCode.Clear);
+            string formatted = CStringUtils.C(expected, CColorCode.Clear);
             Assert.AreEqual(expected, CStringUtils.RemoveRichTextTags(formatted));
         }
 
@@ -189,9 +189,9 @@ namespace LunarPlugin.Test
         {
             string expected = "red green blue";
             string formatted = string.Format("{0} {1} {2}", 
-                CStringUtils.C("red", ColorCode.Clear),
-                CStringUtils.C("green", ColorCode.Error),
-                CStringUtils.C("blue", ColorCode.LevelDebug)
+                CStringUtils.C("red", CColorCode.Clear),
+                CStringUtils.C("green", CColorCode.Error),
+                CStringUtils.C("blue", CColorCode.LevelDebug)
             );
             Assert.AreEqual(expected, CStringUtils.RemoveRichTextTags(formatted));
         }
@@ -201,10 +201,10 @@ namespace LunarPlugin.Test
         {
             string expected = "red green blue";
             string formatted = CStringUtils.C(string.Format("{0} {1} {2}", 
-                CStringUtils.C("red", ColorCode.Clear),
-                CStringUtils.C("green", ColorCode.Error),
-                CStringUtils.C("blue", ColorCode.LevelDebug)
-            ), ColorCode.LevelError);
+                CStringUtils.C("red", CColorCode.Clear),
+                CStringUtils.C("green", CColorCode.Error),
+                CStringUtils.C("blue", CColorCode.LevelDebug)
+            ), CColorCode.LevelError);
             Assert.AreEqual(expected, CStringUtils.RemoveRichTextTags(formatted));
         }
 
@@ -213,9 +213,9 @@ namespace LunarPlugin.Test
         {
             string expected = "red green blue";
             string formatted = CStringUtils.B(string.Format("{0} {1} {2}", 
-                CStringUtils.C("red", ColorCode.Clear),
-                CStringUtils.C("green", ColorCode.Error),
-                CStringUtils.C("blue", ColorCode.LevelDebug)
+                CStringUtils.C("red", CColorCode.Clear),
+                CStringUtils.C("green", CColorCode.Error),
+                CStringUtils.C("blue", CColorCode.LevelDebug)
             ));
             Assert.AreEqual(expected, CStringUtils.RemoveRichTextTags(formatted));
         }
@@ -235,9 +235,9 @@ namespace LunarPlugin.Test
             };
 
             string formatted = string.Format("{0} {1} {2}", 
-                CStringUtils.C("red", (ColorCode)0),
-                CStringUtils.C("green", (ColorCode)1),
-                CStringUtils.C("blue", (ColorCode)2)
+                CStringUtils.C("red", (CColorCode)0),
+                CStringUtils.C("green", (CColorCode)1),
+                CStringUtils.C("blue", (CColorCode)2)
             );
 
             string expected = string.Format("{0} {1} {2}", 
@@ -261,17 +261,17 @@ namespace LunarPlugin.Test
             };
 
             string formatted = string.Format("{0} {1} {2}", 
-                CStringUtils.C("red", (ColorCode)0),
-                CStringUtils.C("green", (ColorCode)1),
-                CStringUtils.C("blue", (ColorCode)2),
-                CStringUtils.C("yellow", (ColorCode)3)
+                CStringUtils.C("red", (CColorCode)0),
+                CStringUtils.C("green", (CColorCode)1),
+                CStringUtils.C("blue", (CColorCode)2),
+                CStringUtils.C("yellow", (CColorCode)3)
             );
 
             string expected = string.Format("{0} {1} {2}", 
                 CStringUtils.C("red", lookup[0]),
                 CStringUtils.C("green", lookup[1]),
                 CStringUtils.C("blue", lookup[2]),
-                CStringUtils.C("yellow", (ColorCode)3)
+                CStringUtils.C("yellow", (CColorCode)3)
             );
 
             string actual = CStringUtils.SetColors(formatted, lookup);

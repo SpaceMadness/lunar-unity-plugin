@@ -161,16 +161,16 @@ namespace LunarPlugin
 
     public sealed class CLogLevel
     {
-        public static readonly CLogLevel Verbose   = new CLogLevel(0, "verbose",   "V", ColorCode.LevelVerbose);
-        public static readonly CLogLevel Debug     = new CLogLevel(1, "debug",     "D", ColorCode.LevelDebug);
-        public static readonly CLogLevel Info      = new CLogLevel(2, "info",      "I", ColorCode.LevelInfo);
-        public static readonly CLogLevel Warn      = new CLogLevel(3, "warning",   "W", ColorCode.LevelWarning);
-        public static readonly CLogLevel Error     = new CLogLevel(4, "error",     "E", ColorCode.LevelError);
-        public static readonly CLogLevel Exception = new CLogLevel(5, "exception", "C", ColorCode.LevelCritical);
+        public static readonly CLogLevel Verbose   = new CLogLevel(0, "verbose",   "V", CColorCode.LevelVerbose);
+        public static readonly CLogLevel Debug     = new CLogLevel(1, "debug",     "D", CColorCode.LevelDebug);
+        public static readonly CLogLevel Info      = new CLogLevel(2, "info",      "I", CColorCode.LevelInfo);
+        public static readonly CLogLevel Warn      = new CLogLevel(3, "warning",   "W", CColorCode.LevelWarning);
+        public static readonly CLogLevel Error     = new CLogLevel(4, "error",     "E", CColorCode.LevelError);
+        public static readonly CLogLevel Exception = new CLogLevel(5, "exception", "C", CColorCode.LevelCritical);
 
         private static Dictionary<string, CLogLevel> m_lookup;
 
-        private CLogLevel(int priority, string name, string shortName, ColorCode color = ColorCode.Clear, ColorCode backColor = ColorCode.Clear)
+        private CLogLevel(int priority, string name, string shortName, CColorCode color = CColorCode.Clear, CColorCode backColor = CColorCode.Clear)
         {
             this.Priority = priority;
             this.Name = name;
@@ -185,9 +185,9 @@ namespace LunarPlugin
 
         public string ShortName { get; private set; }
 
-        internal ColorCode Color { get; private set; }
+        internal CColorCode Color { get; private set; }
 
-        internal ColorCode BackColor { get; private set; }
+        internal CColorCode BackColor { get; private set; }
 
         public int Priority { get; private set; }
 

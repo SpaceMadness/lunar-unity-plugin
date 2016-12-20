@@ -822,7 +822,7 @@ namespace LunarEditor
                     m_consoleTextStyle = new GUIStyle(GUI.skin.label);
                     m_consoleTextStyle.font = (Font) UnityEditor.AssetDatabase.LoadAssetAtPath(CConstants.PluginHome + "/Editor/Menlo-Regular.ttf", typeof(Font)); // FIXME: embed in configuration
                     m_consoleTextStyle.fontSize = 12;
-                    m_consoleTextStyle.normal.textColor = EditorSkin.GetColor(ColorCode.Plain);
+                    m_consoleTextStyle.normal.textColor = EditorSkin.GetColor(CColorCode.Plain);
                     m_consoleTextStyle.richText = true;
                 }
 
@@ -837,7 +837,7 @@ namespace LunarEditor
                 if (m_consoleLinkStyle == null)
                 {
                     m_consoleLinkStyle = new GUIStyle(consoleTextStyle);
-                    m_consoleLinkStyle.normal.textColor = EditorSkin.GetColor(ColorCode.Link);
+                    m_consoleLinkStyle.normal.textColor = EditorSkin.GetColor(CColorCode.Link);
                 }
                 
                 return m_consoleLinkStyle;
@@ -851,7 +851,7 @@ namespace LunarEditor
                 if (m_consoleLinkInnactiveStyle == null)
                 {
                     m_consoleLinkInnactiveStyle = new GUIStyle(consoleTextStyle);
-                    m_consoleLinkInnactiveStyle.normal.textColor = EditorSkin.GetColor(ColorCode.LinkInnactive);
+                    m_consoleLinkInnactiveStyle.normal.textColor = EditorSkin.GetColor(CColorCode.LinkInnactive);
                 }
                 
                 return m_consoleLinkInnactiveStyle;
@@ -865,7 +865,7 @@ namespace LunarEditor
                 if (m_linkStyle == null)
                 {
                     m_linkStyle = new GUIStyle(GUI.skin.label);
-                    m_linkStyle.normal.textColor = EditorSkin.GetColor(ColorCode.Link);
+                    m_linkStyle.normal.textColor = EditorSkin.GetColor(CColorCode.Link);
                 }
 
                 return m_linkStyle;

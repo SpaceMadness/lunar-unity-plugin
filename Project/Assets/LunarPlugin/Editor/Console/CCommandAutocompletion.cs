@@ -294,10 +294,10 @@ namespace LunarEditor
         {
             if (useShort)
             {
-                return CStringUtils.C("-" + opt.ShortName, ColorCode.TableVar);
+                return CStringUtils.C("-" + opt.ShortName, CColorCode.TableVar);
             }
 
-            return CStringUtils.C("--" + opt.Name, ColorCode.TableVar);
+            return CStringUtils.C("--" + opt.Name, CColorCode.TableVar);
         }
 
         private static bool isOptionNameMatch(Option opt, string token, bool useShort)
@@ -373,7 +373,7 @@ namespace LunarEditor
 
         private static string toDisplayName(CCommand cmd)
         {
-            ColorCode color = cmd is CVarCommand ? ColorCode.TableVar : cmd.ColorCode;
+            CColorCode color = cmd is CVarCommand ? CColorCode.TableVar : cmd.ColorCode;
             return CStringUtils.C(cmd.Name, color);
         }
 

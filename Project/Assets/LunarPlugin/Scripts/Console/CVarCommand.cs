@@ -49,7 +49,7 @@ namespace LunarPluginInternal
         {
             if (args.Length == 0)
             {
-                PrintIndent("{0} is:\"{1}\" default:\"{2}\"", CStringUtils.C(cvar.Name, ColorCode.TableVar), cvar.Value, cvar.DefaultValue);
+                PrintIndent("{0} is:\"{1}\" default:\"{2}\"", CStringUtils.C(cvar.Name, CColorCode.TableVar), cvar.Value, cvar.DefaultValue);
                 return false;
             }
 

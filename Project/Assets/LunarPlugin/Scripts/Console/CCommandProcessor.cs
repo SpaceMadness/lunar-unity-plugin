@@ -76,8 +76,8 @@ namespace LunarPluginInternal
             }
             catch (Exception e)
             {
-                m_delegate.LogTerminal(CStringUtils.C(e.Message, ColorCode.ErrorUnknownCommand));
-                m_delegate.LogTerminal(CStringUtils.C(e.StackTrace, ColorCode.ErrorUnknownCommand));
+                m_delegate.LogTerminal(CStringUtils.C(e.Message, CColorCode.ErrorUnknownCommand));
+                m_delegate.LogTerminal(CStringUtils.C(e.StackTrace, CColorCode.ErrorUnknownCommand));
                 return false;
             }
 
@@ -105,7 +105,7 @@ namespace LunarPluginInternal
 
                 if (manualMode)
                 {
-                    m_delegate.LogTerminal(CStringUtils.C(commandName + ": command not found", ColorCode.ErrorUnknownCommand));
+                    m_delegate.LogTerminal(CStringUtils.C(commandName + ": command not found", CColorCode.ErrorUnknownCommand));
                 }
             }
 

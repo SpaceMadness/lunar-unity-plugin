@@ -532,7 +532,7 @@ namespace LunarPluginInternal
             return "";
         }
 
-        internal static string C(string str, ColorCode color)
+        internal static string C(string str, CColorCode color)
         {
             return CStringUtils.TryFormat("<color=${0}>{1}</color>", ((int)color).ToString(), str);
         }

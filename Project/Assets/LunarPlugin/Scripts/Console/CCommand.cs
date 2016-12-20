@@ -801,7 +801,7 @@ namespace LunarPlugin
         /// </summary>
         protected void PrintError(string format, params object[] args)
         {
-            PrintIndent(C(CStringUtils.TryFormat(format, args), ColorCode.Error));
+            PrintIndent(C(CStringUtils.TryFormat(format, args), CColorCode.Error));
         }
 
         /// <summary>
@@ -847,7 +847,7 @@ namespace LunarPlugin
             // name
             if (argsUsages != null && argsUsages.Length > 0)
             {
-                string name = CStringUtils.C(this.Name, ColorCode.TableCommand);
+                string name = CStringUtils.C(this.Name, CColorCode.TableCommand);
 
                 // first usage line
                 buffer.AppendFormat("  usage: {0}", name);
@@ -870,7 +870,7 @@ namespace LunarPlugin
             }
             else
             {
-                buffer.Append(CStringUtils.C("'Execute' method is not resolved", ColorCode.Error)); 
+                buffer.Append(CStringUtils.C("'Execute' method is not resolved", CColorCode.Error)); 
             }
 
             Print(buffer.ToString());
@@ -894,10 +894,10 @@ namespace LunarPlugin
 
                     if (opt.ShortName != null)
                     {
-                        buffer.AppendFormat("-{0}|", CStringUtils.C(opt.ShortName, ColorCode.TableVar));
+                        buffer.AppendFormat("-{0}|", CStringUtils.C(opt.ShortName, CColorCode.TableVar));
                     }
 
-                    buffer.AppendFormat("--{0}", CStringUtils.C(opt.Name, ColorCode.TableVar));
+                    buffer.AppendFormat("--{0}", CStringUtils.C(opt.Name, CColorCode.TableVar));
 
                     if (opt.Type != typeof(bool))
                     {
@@ -1055,7 +1055,7 @@ namespace LunarPlugin
 
         internal static string Arg(string value) { return CStringUtils.Arg(value); }
 
-        internal static string C(string str, ColorCode color) { return CStringUtils.C(str, color); }
+        internal static string C(string str, CColorCode color) { return CStringUtils.C(str, color); }
 
         #endregion
 
@@ -1147,9 +1147,9 @@ namespace LunarPlugin
 
         protected bool IsIgnoreOptions { get; set; }
 
-        internal ColorCode ColorCode
+        internal CColorCode ColorCode
         {
-            get { return IsPlayModeOnly && !CRuntime.IsPlaying ? ColorCode.TableCommandDisabled : ColorCode.TableCommand; }
+            get { return IsPlayModeOnly && !CRuntime.IsPlaying ? CColorCode.TableCommandDisabled : CColorCode.TableCommand; }
         }
 
         #endregion

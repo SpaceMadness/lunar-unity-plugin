@@ -130,7 +130,7 @@ namespace ConsoleViewTests
             MockConsole console = new MockConsole();
             for (int i = 0; i < lines.Length; ++i)
             {
-                string line = CStringUtils.C(lines[i], ColorCode.LevelDebug);
+                string line = CStringUtils.C(lines[i], CColorCode.LevelDebug);
                 console.Add(CLogLevel.Debug, tag, line);
             }
 

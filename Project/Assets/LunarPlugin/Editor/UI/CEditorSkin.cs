@@ -50,12 +50,12 @@ namespace LunarEditor
             }
         }
 
-        public static Color GetColor(ColorCode code)
+        public static Color GetColor(CColorCode code)
         {
             return colors.GetColor(code);
         }
 
-        internal static void SetColor(ColorCode code, Color color)
+        internal static void SetColor(CColorCode code, Color color)
         {
             colors.SetColor(code, color);
         }
@@ -88,28 +88,28 @@ namespace LunarEditor
 
             public Colors()
             {
-                int lookupSize = Enum.GetNames(typeof(ColorCode)).Length;
+                int lookupSize = Enum.GetNames(typeof(CColorCode)).Length;
 
                 m_lookup = new Color[lookupSize];
 
-                m_lookup[(int)ColorCode.Clear] = CreateClear();
-                m_lookup[(int)ColorCode.Plain] = CreatePlain();
-                m_lookup[(int)ColorCode.TableCommand] = CreateTableCommand();
-                m_lookup[(int)ColorCode.TableCommandDisabled] = CreateTableCommandDisabled();
-                m_lookup[(int)ColorCode.TableVar] = CreateTableVar();
-                m_lookup[(int)ColorCode.Error] = CreateError();
-                m_lookup[(int)ColorCode.ErrorUnknownCommand] = CreateErrorUnknownCommand();
-                m_lookup[(int)ColorCode.LevelCritical] = CreateLevelCritical();
-                m_lookup[(int)ColorCode.LevelError] = CreateLevelError();
-                m_lookup[(int)ColorCode.LevelWarning] = CreateLevelWarning();
-                m_lookup[(int)ColorCode.LevelInfo] = CreateLevelInfo();
-                m_lookup[(int)ColorCode.LevelDebug] = CreateLevelDebug();
-                m_lookup[(int)ColorCode.LevelVerbose] = CreateLevelVerbose();
-                m_lookup[(int)ColorCode.Link] = CreateLink();
-                m_lookup[(int)ColorCode.LinkInnactive] = CreateLinkInnactive();
+                m_lookup[(int)CColorCode.Clear] = CreateClear();
+                m_lookup[(int)CColorCode.Plain] = CreatePlain();
+                m_lookup[(int)CColorCode.TableCommand] = CreateTableCommand();
+                m_lookup[(int)CColorCode.TableCommandDisabled] = CreateTableCommandDisabled();
+                m_lookup[(int)CColorCode.TableVar] = CreateTableVar();
+                m_lookup[(int)CColorCode.Error] = CreateError();
+                m_lookup[(int)CColorCode.ErrorUnknownCommand] = CreateErrorUnknownCommand();
+                m_lookup[(int)CColorCode.LevelCritical] = CreateLevelCritical();
+                m_lookup[(int)CColorCode.LevelError] = CreateLevelError();
+                m_lookup[(int)CColorCode.LevelWarning] = CreateLevelWarning();
+                m_lookup[(int)CColorCode.LevelInfo] = CreateLevelInfo();
+                m_lookup[(int)CColorCode.LevelDebug] = CreateLevelDebug();
+                m_lookup[(int)CColorCode.LevelVerbose] = CreateLevelVerbose();
+                m_lookup[(int)CColorCode.Link] = CreateLink();
+                m_lookup[(int)CColorCode.LinkInnactive] = CreateLinkInnactive();
             }
 
-            public Color GetColor(ColorCode code)
+            public Color GetColor(CColorCode code)
             {
                 int index = (int)code;
                 if (index >= 0 && index < m_lookup.Length)
@@ -117,10 +117,10 @@ namespace LunarEditor
                     return m_lookup[index];
                 }
 
-                return m_lookup[(int)ColorCode.Clear];
+                return m_lookup[(int)CColorCode.Clear];
             }
 
-            internal void SetColor(ColorCode code, Color color)
+            internal void SetColor(CColorCode code, Color color)
             {
                 int index = (int)code;
                 if (index < 0 || index >= m_lookup.Length)

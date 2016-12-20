@@ -98,7 +98,7 @@ namespace LunarEditor
                 if (shortList)
                 {
                     string[] names = CCollection.Map(vars, delegate(CVar cvar) {
-                        return CStringUtils.C(cvar.Name, ColorCode.TableVar);
+                        return CStringUtils.C(cvar.Name, CColorCode.TableVar);
                     });
                     Print(names);
                 }
@@ -108,12 +108,12 @@ namespace LunarEditor
                     for (int i = 0; i < vars.Count; ++i)
                     {
                         CVar cvar = vars[i];
-                        result.AppendFormat("  {0} {1}", CStringUtils.C(cvar.Name, ColorCode.TableVar), CStringUtils.Arg(cvar.Value));
+                        result.AppendFormat("  {0} {1}", CStringUtils.C(cvar.Name, CColorCode.TableVar), CStringUtils.Arg(cvar.Value));
                         
                         // TODO: better color highlight
                         if (!cvar.IsDefault)
                         {
-                            result.AppendFormat(" {0} {1}", CStringUtils.C("default", ColorCode.TableVar), cvar.DefaultValue);
+                            result.AppendFormat(" {0} {1}", CStringUtils.C("default", CColorCode.TableVar), cvar.DefaultValue);
                         }
                         
                         if (i < vars.Count - 1)
@@ -175,7 +175,7 @@ namespace LunarEditor
             }
 
             return CCollection.Map(vars, delegate(CVar cvar) {
-                return CStringUtils.C(cvar.Name, ColorCode.TableVar);
+                return CStringUtils.C(cvar.Name, CColorCode.TableVar);
             });
         }
     }
@@ -216,7 +216,7 @@ namespace LunarEditor
 
             return CCollection.Map(vars, delegate(CVar cvar)
             {
-                return CStringUtils.C(cvar.Name, ColorCode.TableVar);
+                return CStringUtils.C(cvar.Name, CColorCode.TableVar);
             });
         }
     }
@@ -1050,10 +1050,10 @@ namespace LunarEditor
     {
         void Execute()
         {
-            string[] names = Enum.GetNames(typeof(ColorCode));
+            string[] names = Enum.GetNames(typeof(CColorCode));
             for (int i = 0; i < names.Length; ++i)
             {
-                Print("{0}: {1}", i, CStringUtils.C(names[i], (ColorCode)i));
+                Print("{0}: {1}", i, CStringUtils.C(names[i], (CColorCode)i));
             }
         }
         
@@ -1070,7 +1070,7 @@ namespace LunarEditor
                 return false; 
             }
             
-            ColorCode[] values = (ColorCode[]) Enum.GetValues(typeof(ColorCode));
+            CColorCode[] values = (CColorCode[]) Enum.GetValues(typeof(CColorCode));
             if (index >= 0 && index < values.Length)
             {
                 Color color = CColorUtils.FromRGB(value);

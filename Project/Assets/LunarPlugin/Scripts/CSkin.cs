@@ -25,7 +25,7 @@ using UnityEngine;
 
 namespace LunarPluginInternal
 {
-    enum ColorCode
+    enum CColorCode
     {
         Clear,
         Plain,
