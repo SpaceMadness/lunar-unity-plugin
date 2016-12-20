@@ -106,11 +106,11 @@ namespace LunarEditor
         }
     }
 
-    class UnityEvent : Event
+    class UnityEvent : CEvent
     {
         private UnityEngine.Event m_internalEvent;
 
-        protected override Event CurrentEvent
+        protected override CEvent CurrentEvent
         {
             get
             {

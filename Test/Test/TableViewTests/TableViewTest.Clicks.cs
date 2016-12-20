@@ -7,12 +7,12 @@ using LunarPluginInternal;
 using UnityEngine;
 
 using NUnit.Framework;
-using Event = LunarEditor.Event;
+using Event = LunarEditor.CEvent;
 
 namespace TableViewTests
 {
     using Assert = NUnit.Framework.Assert;
-    using Event = LunarEditor.Event;
+    using CEvent = LunarEditor.CEvent;
 
     public partial class TableViewTest
     {
@@ -114,7 +114,7 @@ namespace TableViewTests
         {
             ClickedCell = null;
 
-            Event evt = new MockEvent();
+            CEvent evt = new MockEvent();
             evt.mousePosition = new Vector2(x, y);
 
             evt.type = EventType.MouseDown;
@@ -124,7 +124,7 @@ namespace TableViewTests
             HandleEvent(evt);
         }
 
-        protected override bool OnMouseDown(Event evt, TableViewCell cell)
+        protected override bool OnMouseDown(CEvent evt, TableViewCell cell)
         {
             ClickedCell = cell;
             return true;
@@ -137,7 +137,7 @@ namespace TableViewTests
         }
     }
 
-    class MockEvent : Event
+    class MockEvent : CEvent
     {
         private bool m_used;
 
@@ -175,7 +175,7 @@ namespace TableViewTests
         public override int button { get; set; }
         public override int clickCount { get; set; }
 
-        protected override Event CurrentEvent
+        protected override CEvent CurrentEvent
         {
             get { return m_used ? null : this; }
         }

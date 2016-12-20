@@ -45,7 +45,7 @@ namespace LunarEditor
     {
         private static readonly Rect EmptyRect = new Rect(0, 0, 0, 0);
 
-        internal delegate bool EventDelegate(View view, Event evt);
+        internal delegate bool EventDelegate(View view, CEvent evt);
 
         public const float AlignMin = 0.0f;
         public const float AlignCenter = 0.5f;
@@ -120,20 +120,20 @@ namespace LunarEditor
 
         protected bool HandleEvent()
         {
-            if (Event.current != null)
+            if (CEvent.current != null)
             {
                 if (IsFocusable)
                 {
                     SetFocusableControlName();
                 }
 
-                return HandleEvent(Event.current);
+                return HandleEvent(CEvent.current);
             }
 
             return false;
         }
 
-        protected virtual bool HandleEvent(Event evt)
+        protected virtual bool HandleEvent(CEvent evt)
         {
             if (evt.isMouse)
             {
@@ -164,7 +164,7 @@ namespace LunarEditor
             return false;
         }
 
-        private bool HandleMouseEvent(Event evt)
+        private bool HandleMouseEvent(CEvent evt)
         {
             if (MouseEvent != null)
             {
@@ -218,7 +218,7 @@ namespace LunarEditor
             return true;
         }
 
-        private bool HandleKeyEvent(Event evt)
+        private bool HandleKeyEvent(CEvent evt)
         {
             switch (evt.type)
             {
@@ -739,16 +739,16 @@ namespace LunarEditor
         #endregion
     }
 
-    internal abstract class Event
+    internal abstract class CEvent
     {
-        private static Event m_instance;
+        private static CEvent m_instance;
 
-        public Event()
+        public CEvent()
         {
             m_instance = this;
         }
 
-        public static Event current
+        public static CEvent current
         { 
             get { return m_instance != null ? m_instance.CurrentEvent : null; }
         }
@@ -779,7 +779,7 @@ namespace LunarEditor
         public abstract int button { get; set; }
         public abstract int clickCount { get; set; }
 
-        protected abstract Event CurrentEvent { get; }
+        protected abstract CEvent CurrentEvent { get; }
 
         protected abstract void DestroyEvent();
     }

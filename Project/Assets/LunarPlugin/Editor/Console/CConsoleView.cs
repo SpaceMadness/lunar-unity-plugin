@@ -171,7 +171,7 @@ namespace LunarEditor
 
         #region Cell clicks
 
-        protected override bool OnMouseDown(Event evt, TableViewCell cell)
+        protected override bool OnMouseDown(CEvent evt, TableViewCell cell)
         {
             ConsoleViewCell consoleCell = cell as ConsoleViewCell;
             if (consoleCell != null && consoleCell.OnMouseDown(evt))
@@ -182,7 +182,7 @@ namespace LunarEditor
             return base.OnMouseDown(evt, cell);
         }
 
-        protected override bool OnMouseDoubleClick(Event evt, TableViewCell cell)
+        protected override bool OnMouseDoubleClick(CEvent evt, TableViewCell cell)
         {
             ConsoleViewCell consoleCell = cell as ConsoleViewCell;
             if (consoleCell != null && consoleCell.OnMouseDoubleClick(evt))
@@ -632,22 +632,22 @@ namespace LunarEditor
 
     class ConsoleViewCell : TableViewCell
     {
-        public virtual bool OnMouseDown(Event evt)
+        public virtual bool OnMouseDown(CEvent evt)
         {
             return false;
         }
 
-        public virtual bool OnMouseDoubleClick(Event evt)
+        public virtual bool OnMouseDoubleClick(CEvent evt)
         {
             return false;
         }
 
-        public virtual bool OnMouseUp(Event evt)
+        public virtual bool OnMouseUp(CEvent evt)
         {
             return false;
         }
 
-        public virtual bool OnKeyDown(Event evt)
+        public virtual bool OnKeyDown(CEvent evt)
         {
             return false;
         }
@@ -676,7 +676,7 @@ namespace LunarEditor
 
         //////////////////////////////////////////////////////////////////////////////
 
-        public override bool OnMouseDoubleClick(Event evt)
+        public override bool OnMouseDoubleClick(CEvent evt)
         {
             if (!string.IsNullOrEmpty(StackTrace))
             {

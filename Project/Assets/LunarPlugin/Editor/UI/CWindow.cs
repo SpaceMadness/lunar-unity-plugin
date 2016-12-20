@@ -29,7 +29,7 @@ using System.IO;
 using LunarPlugin;
 using LunarPluginInternal;
 
-using Event = LunarEditor.Event;
+using Event = LunarEditor.CEvent;
 
 namespace LunarEditor
 {
@@ -111,7 +111,7 @@ namespace LunarEditor
             m_rootView.OnGUI();
             m_dirty = true;
 
-            Event.Destroy();
+            CEvent.Destroy();
         }
 
         void OnFocus()

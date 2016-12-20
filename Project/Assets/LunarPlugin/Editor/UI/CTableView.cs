@@ -610,7 +610,7 @@ namespace LunarEditor
 
         #region Mouse clicks
 
-        private bool MouseDownEventHandler(View view, Event evt)
+        private bool MouseDownEventHandler(View view, CEvent evt)
         {
             FocusControl();
 
@@ -623,7 +623,7 @@ namespace LunarEditor
             return false;
         }
 
-        private bool MouseDoubleClickHandler(View view, Event evt)
+        private bool MouseDoubleClickHandler(View view, CEvent evt)
         {
             FocusControl();
 
@@ -636,7 +636,7 @@ namespace LunarEditor
             return false;
         }
 
-        protected bool OnMouseDown(Event evt)
+        protected bool OnMouseDown(CEvent evt)
         {
             float clickX = evt.mousePosition.x;
             float clickY = evt.mousePosition.y + m_scrollPos - m_contentOffset;
@@ -654,7 +654,7 @@ namespace LunarEditor
             return false;
         }
 
-        protected bool OnMouseDoubleClick(Event evt)
+        protected bool OnMouseDoubleClick(CEvent evt)
         {
             float clickX = evt.mousePosition.x;
             float clickY = evt.mousePosition.y + m_scrollPos - m_contentOffset;
@@ -672,17 +672,17 @@ namespace LunarEditor
             return false;
         }
 
-        protected virtual bool OnMouseDown(Event evt, TableViewCell cell)
+        protected virtual bool OnMouseDown(CEvent evt, TableViewCell cell)
         {
             return this.SelectionMode != TableViewSelectionMode.None && OnCellSelected(cell);
         }
 
-        protected virtual bool OnMouseDoubleClick(Event evt, TableViewCell cell)
+        protected virtual bool OnMouseDoubleClick(CEvent evt, TableViewCell cell)
         {
             return false;
         }
 
-        protected virtual bool KeyDownEventHandler(View view, Event evt)
+        protected virtual bool KeyDownEventHandler(View view, CEvent evt)
         {
             switch (evt.keyCode)
             {
@@ -743,7 +743,7 @@ namespace LunarEditor
             return false;
         }
 
-        private bool KeyUpEventHandler(View view, Event evt)
+        private bool KeyUpEventHandler(View view, CEvent evt)
         {
             return false;
         }

@@ -57,7 +57,7 @@ namespace LunarEditor
         {
             try
             {
-                Event evt = Event.current;
+                CEvent evt = CEvent.current;
                 if (evt != null && evt.isKey)
                 {
                     int keyIndex = (int)evt.keyCode;
@@ -96,7 +96,7 @@ namespace LunarEditor
             }
         }
 
-        private static CModifiers GetModifiers(Event evt)
+        private static CModifiers GetModifiers(CEvent evt)
         {
             CModifiers modifiers = 0;
 

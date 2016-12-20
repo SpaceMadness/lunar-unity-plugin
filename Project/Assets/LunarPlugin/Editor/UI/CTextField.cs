@@ -58,7 +58,7 @@ namespace LunarEditor
             this.KeyDown = KeyDownHandler;
         }
 
-        private bool KeyDownHandler(View view, Event evt)
+        private bool KeyDownHandler(View view, CEvent evt)
         {
             if (TextKeyDelegate == null)
             {
@@ -93,15 +93,15 @@ namespace LunarEditor
                 }
             }
 
-            if (Event.current.keyCode == KeyCode.Tab || Event.current.character == '\t')
+            if (CEvent.current.keyCode == KeyCode.Tab || CEvent.current.character == '\t')
             {
-                Event.current.Use();  // disable focus traversal on the tab key
+                CEvent.current.Use();  // disable focus traversal on the tab key
             }
 
             return false;
         }
 
-        private bool KeyUpHandler(View view, Event evt)
+        private bool KeyUpHandler(View view, CEvent evt)
         {
             if (TextKeyDelegate == null)
             {
@@ -110,10 +110,10 @@ namespace LunarEditor
 
             m_firstKeyDown = true;
 
-            IsCtrlPressed = Event.current.control;
-            IsShiftPressed = Event.current.shift;
-            IsAltPressed = Event.current.alt;
-            IsCmdPressed = Event.current.command;
+            IsCtrlPressed = CEvent.current.control;
+            IsShiftPressed = CEvent.current.shift;
+            IsAltPressed = CEvent.current.alt;
+            IsCmdPressed = CEvent.current.command;
 
             KeyCode key = GetKeyCode(evt);
             if (OnKeyRelease(key))
@@ -133,9 +133,9 @@ namespace LunarEditor
                 Log.error(e);
             }
 
-            if (Event.current.keyCode == KeyCode.Tab || Event.current.character == '\t')
+            if (CEvent.current.keyCode == KeyCode.Tab || CEvent.current.character == '\t')
             {
-                Event.current.Use(); // disable focus traversal on the tab key
+                CEvent.current.Use(); // disable focus traversal on the tab key
             }
 
             return false;
@@ -193,7 +193,7 @@ namespace LunarEditor
             return false;
         }
 
-        private KeyCode GetKeyCode(Event evt)
+        private KeyCode GetKeyCode(CEvent evt)
         {
             KeyCode keyCode = evt.keyCode;
             if (keyCode != KeyCode.None)
