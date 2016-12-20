@@ -40,7 +40,7 @@ namespace LunarEditor
 
         public static Result Autocomplete(string line, int index)
         {
-            string[] suggestions = CommandAutocompletion.getSuggestions(line, index);
+            string[] suggestions = CCommandAutocompletion.getSuggestions(line, index);
 
             Result result;
             result.line = GetNewLine(line, suggestions);

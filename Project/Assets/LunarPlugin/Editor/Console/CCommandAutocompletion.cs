@@ -31,7 +31,7 @@ namespace LunarEditor
 {
     using Option = CCommand.Option;
 
-    public class CommandAutocompletion
+    public class CCommandAutocompletion
     {
         private static readonly string[] EMPTY_SUGGESTIONS = new string[0]; // TODO: rename
         private static readonly string[] SINGLE_SUGGESTION = new string[1]; // TODO: rename
