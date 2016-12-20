@@ -23,7 +23,7 @@
 
 namespace LunarPluginInternal
 {
-    abstract class ITimerManager : ICUpdatable, IDestroyable // not a good idea to name abstract class as interface, but what you gonna do
+    abstract class ITimerManager : ICUpdatable, ICDestroyable // not a good idea to name abstract class as interface, but what you gonna do
     {
         public virtual void Update(float delta)
         {

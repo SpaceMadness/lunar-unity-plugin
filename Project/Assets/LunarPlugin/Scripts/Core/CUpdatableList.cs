@@ -26,7 +26,7 @@ namespace LunarPluginInternal
 {
     delegate void CUpdatableDelegate(float delta);
 
-    class CUpdatableList : CBaseUpdatableList<ICUpdatable>, IDestroyable
+    class CUpdatableList : CBaseUpdatableList<ICUpdatable>, ICDestroyable
     {
         public static readonly CUpdatableList Null = new CNullUpdatableList();
         private static readonly ICUpdatable nullUpdatable = new CNullUpdatable();

@@ -33,7 +33,7 @@ namespace LunarPluginInternal
         void Recycle(CObjectsPoolEntry entry);
     }
 
-    class CObjectsPool<T> : FastList<CObjectsPoolEntry>, ICObjectsPool, IDestroyable
+    class CObjectsPool<T> : FastList<CObjectsPoolEntry>, ICObjectsPool, ICDestroyable
         where T : CObjectsPoolEntry, new()
     {
         public CObjectsPool()

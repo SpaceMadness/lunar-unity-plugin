@@ -40,7 +40,7 @@ namespace LunarPluginInternal
         }
     }
 
-    class CNotificationCenter : IDestroyable
+    class CNotificationCenter : ICDestroyable
     {
         private static CNotificationCenter s_sharedInstance;
 

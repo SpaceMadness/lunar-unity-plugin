@@ -27,7 +27,7 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    class DefaultAppImp : AppImp, ICUpdatable, IDestroyable, ICCommandDelegate
+    class DefaultAppImp : AppImp, ICUpdatable, ICDestroyable, ICCommandDelegate
     {
         private readonly CCommandProcessor m_processor;
         private readonly CTimerManager m_timerManager;

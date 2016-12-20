@@ -22,7 +22,7 @@
 ﻿
 namespace LunarPluginInternal
 {
-    interface IDestroyable
+    interface ICDestroyable
     {
         void Destroy();
     }

@@ -37,7 +37,7 @@ namespace LunarEditor
     public // looks ugly but works for Unit testing
 #endif
 
-    class AbstractConsole : IDestroyable, IConsoleDelegate
+    class AbstractConsole : ICDestroyable, IConsoleDelegate
     {
         public AbstractConsole(int historySize)
         {

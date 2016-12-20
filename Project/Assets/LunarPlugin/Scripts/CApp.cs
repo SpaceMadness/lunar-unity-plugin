@@ -35,7 +35,7 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    abstract class App : ICUpdatable, IDestroyable
+    abstract class App : ICUpdatable, ICDestroyable
     {
         #pragma warning disable 0649
         protected static App s_sharedInstance;
