@@ -25,16 +25,16 @@ using System.Globalization;
 
 namespace LunarEditor
 {
-    interface IConsoleViewFilter
+    interface ICConsoleViewFilter
     {
         bool Apply(ref CConsoleViewCellEntry entry);
     }
 
-    abstract class ConsoleViewFilterBase : IConsoleViewFilter
+    abstract class CConsoleViewFilterBase : ICConsoleViewFilter
     {
         private int m_priority;
 
-        public ConsoleViewFilterBase(int priority = int.MinValue)
+        public CConsoleViewFilterBase(int priority = int.MinValue)
         {
             m_priority = priority;
         }
@@ -47,13 +47,13 @@ namespace LunarEditor
         }
     }
 
-    class ConsoleViewCompositeFilter : IConsoleViewFilter
+    class CConsoleViewCompositeFilter : ICConsoleViewFilter
     {
-        private List<ConsoleViewFilterBase> m_filters;
+        private List<CConsoleViewFilterBase> m_filters;
 
-        public ConsoleViewCompositeFilter()
+        public CConsoleViewCompositeFilter()
         {
-            m_filters = new List<ConsoleViewFilterBase>();
+            m_filters = new List<CConsoleViewFilterBase>();
         }
 
         #region IConsoleViewFilter implementation
@@ -75,7 +75,7 @@ namespace LunarEditor
 
         #region Filters
 
-        public void AddFilter(ConsoleViewFilterBase filter)
+        public void AddFilter(CConsoleViewFilterBase filter)
         {
             if (filter == null)
             {
@@ -84,7 +84,7 @@ namespace LunarEditor
 
             for (int i = 0; i < m_filters.Count; ++i)
             {
-                ConsoleViewFilterBase f = m_filters[i];
+                CConsoleViewFilterBase f = m_filters[i];
                 if (f.Priority < filter.Priority)
                 {
                     m_filters.Insert(i, filter);
@@ -100,7 +100,7 @@ namespace LunarEditor
             m_filters.Add(filter);
         }
 
-        public void RemoveFilter(ConsoleViewFilterBase filter)
+        public void RemoveFilter(CConsoleViewFilterBase filter)
         {
             m_filters.Remove(filter);
         }

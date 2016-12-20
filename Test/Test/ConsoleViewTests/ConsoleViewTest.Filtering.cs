@@ -22,25 +22,25 @@ namespace ConsoleViewTests
         {
             List<int> priorities = new List<int>();
 
-            ConsoleViewFilterBase filter1 = new TestFilter(1, delegate(ref CConsoleViewCellEntry e)
+            CConsoleViewFilterBase filter1 = new TestFilter(1, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(1);
                 return true;
             });
 
-            ConsoleViewFilterBase filter2 = new TestFilter(2, delegate(ref CConsoleViewCellEntry e)
+            CConsoleViewFilterBase filter2 = new TestFilter(2, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(2);
                 return true;
             });
 
-            ConsoleViewFilterBase filter3 = new TestFilter(3, delegate(ref CConsoleViewCellEntry e)
+            CConsoleViewFilterBase filter3 = new TestFilter(3, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(3);
                 return true;
             });
 
-            ConsoleViewCompositeFilter compositeFilter = new ConsoleViewCompositeFilter();
+            CConsoleViewCompositeFilter compositeFilter = new CConsoleViewCompositeFilter();
             compositeFilter.AddFilter(filter2);
             compositeFilter.AddFilter(filter1);
             compositeFilter.AddFilter(filter3);
@@ -59,25 +59,25 @@ namespace ConsoleViewTests
         {
             List<int> priorities = new List<int>();
 
-            ConsoleViewFilterBase filter1 = new TestFilter(1, delegate(ref CConsoleViewCellEntry e)
+            CConsoleViewFilterBase filter1 = new TestFilter(1, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(1);
                 return true;
             });
 
-            ConsoleViewFilterBase filter2 = new TestFilter(2, delegate(ref CConsoleViewCellEntry e)
+            CConsoleViewFilterBase filter2 = new TestFilter(2, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(2);
                 return false;
             });
 
-            ConsoleViewFilterBase filter3 = new TestFilter(3, delegate(ref CConsoleViewCellEntry e)
+            CConsoleViewFilterBase filter3 = new TestFilter(3, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(3);
                 return true;
             });
 
-            ConsoleViewCompositeFilter compositeFilter = new ConsoleViewCompositeFilter();
+            CConsoleViewCompositeFilter compositeFilter = new CConsoleViewCompositeFilter();
             compositeFilter.AddFilter(filter2);
             compositeFilter.AddFilter(filter1);
             compositeFilter.AddFilter(filter3);
@@ -96,25 +96,25 @@ namespace ConsoleViewTests
         {
             List<int> priorities = new List<int>();
 
-            ConsoleViewFilterBase filter1 = new TestFilter(1, delegate(ref CConsoleViewCellEntry e)
+            CConsoleViewFilterBase filter1 = new TestFilter(1, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(1);
                 return true;
             });
 
-            ConsoleViewFilterBase filter2 = new TestFilter(2, delegate(ref CConsoleViewCellEntry e)
+            CConsoleViewFilterBase filter2 = new TestFilter(2, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(2);
                 return true;
             });
 
-            ConsoleViewFilterBase filter3 = new TestFilter(3, delegate(ref CConsoleViewCellEntry e)
+            CConsoleViewFilterBase filter3 = new TestFilter(3, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(3);
                 return true;
             });
 
-            ConsoleViewCompositeFilter compositeFilter = new ConsoleViewCompositeFilter();
+            CConsoleViewCompositeFilter compositeFilter = new CConsoleViewCompositeFilter();
             compositeFilter.AddFilter(filter1);
             compositeFilter.AddFilter(filter2);
             compositeFilter.AddFilter(filter3);
@@ -905,7 +905,7 @@ namespace ConsoleViewTests
 
         delegate bool TestFilterDelegate(ref CConsoleViewCellEntry entry);
 
-        class TestFilter : ConsoleViewFilterBase
+        class TestFilter : CConsoleViewFilterBase
         {
             private TestFilterDelegate m_delegate;
 

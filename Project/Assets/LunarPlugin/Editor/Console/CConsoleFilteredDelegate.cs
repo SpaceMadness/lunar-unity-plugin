@@ -28,7 +28,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class CConsoleFilteredDelegate : ConsoleViewCompositeFilter, ITableViewDataSource, ITableViewDelegate, ICConsoleDelegate
+    class CConsoleFilteredDelegate : CConsoleViewCompositeFilter, ITableViewDataSource, ITableViewDelegate, ICConsoleDelegate
     {
         private CConsoleView m_consoleView;
 
@@ -201,7 +201,7 @@ namespace LunarEditor
             return false;
         }
 
-        private bool ApplyFilter(IConsoleViewFilter filter)
+        private bool ApplyFilter(ICConsoleViewFilter filter)
         {
             int oldIndicesCount = m_filteredIndices.RealLength;
             ClearIndices();
@@ -223,7 +223,7 @@ namespace LunarEditor
                 m_filteredIndices.RealLength != Entries.RealLength;
         }
 
-        private bool AppendFilter(IConsoleViewFilter filter)
+        private bool AppendFilter(ICConsoleViewFilter filter)
         {
             CConsoleViewCellEntry[] entriesArray = Entries.InternalArray;
             int toIndex = m_filteredIndices.HeadIndex;
@@ -349,7 +349,7 @@ namespace LunarEditor
         #endregion
     }
 
-    class CConsoleViewTextFilter : ConsoleViewFilterBase
+    class CConsoleViewTextFilter : CConsoleViewFilterBase
     {
         private string m_text;
 
@@ -378,7 +378,7 @@ namespace LunarEditor
         }
     }
 
-    class CConsoleViewTagFilter : ConsoleViewFilterBase
+    class CConsoleViewTagFilter : CConsoleViewFilterBase
     {
         private HashSet<CTag> m_tags;
 
@@ -431,7 +431,7 @@ namespace LunarEditor
         }
     }
 
-    class CConsoleViewLogLevelFilter : ConsoleViewFilterBase
+    class CConsoleViewLogLevelFilter : CConsoleViewFilterBase
     {
         private CLogLevel m_level;
 
