@@ -23,19 +23,19 @@
 
 namespace LunarPluginInternal
 {
-    abstract class BaseUpdatableList<T> : BaseList<T>, IUpdatable where T : class, IUpdatable
+    abstract class CBaseUpdatableList<T> : CBaseList<T>, ICUpdatable where T : class, ICUpdatable
     {   
-        protected BaseUpdatableList(T nullElement)
+        protected CBaseUpdatableList(T nullElement)
             : base(nullElement, 0)
         {
         }
 
-        protected BaseUpdatableList(T nullElement, int capacity)
+        protected CBaseUpdatableList(T nullElement, int capacity)
             : base(nullElement, capacity)
         {   
         }
 
-        protected BaseUpdatableList(List<T> list, T nullElement)
+        protected CBaseUpdatableList(List<T> list, T nullElement)
             : base(list, nullElement)
         {
         }

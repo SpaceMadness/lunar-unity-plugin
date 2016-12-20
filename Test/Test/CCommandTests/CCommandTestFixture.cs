@@ -68,7 +68,7 @@ namespace CCommandTests
 
             command.Name = commandName;
             command.IsHidden = hidden;
-            RuntimeResolver.ResolveOptions(command);
+            CRuntimeResolver.ResolveOptions(command);
 
             CRegistery.Register(command);
         }

@@ -27,7 +27,7 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    class DefaultAppImp : AppImp, IUpdatable, IDestroyable, ICCommandDelegate
+    class DefaultAppImp : AppImp, ICUpdatable, IDestroyable, ICCommandDelegate
     {
         private readonly CCommandProcessor m_processor;
         private readonly TimerManager m_timerManager;
@@ -125,7 +125,7 @@ namespace LunarPluginInternal
             m_updatables.Update(dt);
         }
 
-        protected void AddUpdatable(IUpdatable updatable)
+        protected void AddUpdatable(ICUpdatable updatable)
         {
             m_updatables.Add(updatable);
         }
@@ -135,7 +135,7 @@ namespace LunarPluginInternal
             m_updatables.Add(updatable);
         }
 
-        protected void RemoveUpdatable(IUpdatable updatable)
+        protected void RemoveUpdatable(ICUpdatable updatable)
         {
             m_updatables.Remove(updatable);
         }

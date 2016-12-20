@@ -29,7 +29,7 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    class CVarsLunar
+    class CSystemVars
     {
         public static readonly CVar c_historySize = new CVar("c_historySize", 32768, CFlags.System);
         public static readonly CVar d_assertsEnabled = new CVar("d_assertsEnabled", Config.isDebugBuild, CFlags.System);

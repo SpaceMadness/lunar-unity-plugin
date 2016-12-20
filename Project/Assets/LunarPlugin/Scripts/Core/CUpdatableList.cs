@@ -26,10 +26,10 @@ namespace LunarPluginInternal
 {
     delegate void UpdatableDelegate(float delta);
 
-    class UpdatableList : BaseUpdatableList<IUpdatable>, IDestroyable
+    class UpdatableList : CBaseUpdatableList<ICUpdatable>, IDestroyable
     {
         public static readonly UpdatableList Null = new NullUpdatableList();
-        private static readonly IUpdatable nullUpdatable = new NullUpdatable();
+        private static readonly ICUpdatable nullUpdatable = new NullUpdatable();
 
         public UpdatableList()
             : base(nullUpdatable) 
@@ -58,7 +58,7 @@ namespace LunarPluginInternal
             }
         }
 
-        protected UpdatableList(List<IUpdatable> list, IUpdatable nullUpdatable)
+        protected UpdatableList(List<ICUpdatable> list, ICUpdatable nullUpdatable)
             : base(list, nullUpdatable)
         {
         }
@@ -72,7 +72,7 @@ namespace LunarPluginInternal
         }
     }
 
-    internal sealed class UpdatableDelegateClass : IUpdatable
+    internal sealed class UpdatableDelegateClass : ICUpdatable
     {
         private UpdatableDelegate m_delegate;
 
@@ -116,12 +116,12 @@ namespace LunarPluginInternal
         {
         }
 
-        public override bool Add(IUpdatable updatable)
+        public override bool Add(ICUpdatable updatable)
         {
             throw new InvalidOperationException("Can't add element to unmodifiable updatable list");
         }
 
-        public override bool Remove(IUpdatable updatable)
+        public override bool Remove(ICUpdatable updatable)
         {
             throw new InvalidOperationException("Can't remove element from unmodifiable updatable list");
         }
@@ -136,7 +136,7 @@ namespace LunarPluginInternal
             throw new InvalidOperationException("Can't clear unmodifiable updatable list");
         }
 
-        public override bool Contains(IUpdatable updatable)
+        public override bool Contains(ICUpdatable updatable)
         {
             return false;
         }
@@ -147,7 +147,7 @@ namespace LunarPluginInternal
         }
     }
 
-    internal sealed class NullUpdatable : IUpdatable
+    internal sealed class NullUpdatable : ICUpdatable
     {
         public void Update(float delta)
         {

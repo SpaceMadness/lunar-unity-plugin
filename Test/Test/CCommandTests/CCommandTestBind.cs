@@ -264,8 +264,8 @@ namespace CCommandTests
         {
             Execute("bind mouse0 +bool");
 
-            Assert.AreEqual(1, CRegistery.ListCommands("+bool", CommandListOptions.System).Count);
-            Assert.AreEqual(1, CRegistery.ListCommands("-bool", CommandListOptions.System).Count);
+            Assert.AreEqual(1, CRegistery.ListCommands("+bool", CCommandListOptions.System).Count);
+            Assert.AreEqual(1, CRegistery.ListCommands("-bool", CCommandListOptions.System).Count);
         }
 
         [Test]

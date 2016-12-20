@@ -26,7 +26,7 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    abstract class BaseList<T> : IBaseCollection<T> where T : class // TODO: thread safety
+    abstract class CBaseList<T> : IBaseCollection<T> where T : class // TODO: thread safety
     {
         protected readonly List<T> list;
         
@@ -34,12 +34,12 @@ namespace LunarPluginInternal
         private int removedCount;
         private bool locked;
         
-        protected BaseList(T nullElement)
+        protected CBaseList(T nullElement)
             : this(nullElement, 0)
         {
         }
         
-        protected BaseList(T nullElement, int capacity)
+        protected CBaseList(T nullElement, int capacity)
             : this(new List<T>(capacity), nullElement)
         {   
             if (nullElement == null)
@@ -48,7 +48,7 @@ namespace LunarPluginInternal
             }
         }
         
-        protected BaseList(List<T> list, T nullElement)
+        protected CBaseList(List<T> list, T nullElement)
         {
             this.list = list;
             this.nullElement = nullElement;

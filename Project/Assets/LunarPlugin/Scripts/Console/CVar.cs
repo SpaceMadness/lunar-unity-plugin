@@ -598,7 +598,7 @@ namespace LunarPlugin
         #endregion
     }
 
-    class CVarChangedDelegateList : BaseList<CVarChangedDelegate>
+    class CVarChangedDelegateList : CBaseList<CVarChangedDelegate>
     {
         public CVarChangedDelegateList(int capacity)
             : base(NullCVarChangedDelegate, capacity)

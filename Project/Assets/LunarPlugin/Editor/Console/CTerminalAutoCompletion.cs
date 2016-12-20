@@ -78,7 +78,7 @@ namespace LunarEditor
 
         private static string GetToken(string line)
         {
-            return CommandTokenizer.GetAutoCompleteToken(line);
+            return CCommandTokenizer.GetAutoCompleteToken(line);
         }
 
         private static string ReplaceToken(string line, string token, string suggestion)

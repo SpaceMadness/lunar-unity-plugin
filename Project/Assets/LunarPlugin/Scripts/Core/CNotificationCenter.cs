@@ -325,7 +325,7 @@ namespace LunarPluginInternal
         public object Sender { get; private set; }
     }
     
-    class NotificationDelegateList : BaseList<NotificationDelegate>
+    class NotificationDelegateList : CBaseList<NotificationDelegate>
     {
         public NotificationDelegateList()
             : base(NullNotificationDelegate)

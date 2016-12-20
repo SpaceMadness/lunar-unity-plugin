@@ -26,7 +26,7 @@ using System.Collections.Generic;
 
 namespace LunarPluginInternal
 {
-    class CommandTokenizer
+    class CCommandTokenizer
     {
         public const int OPTION_IGNORE_MISSING_QUOTES = 1; // FIXME: use enum
 

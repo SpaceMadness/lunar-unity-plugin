@@ -124,12 +124,12 @@ namespace LunarPlugin
 
         internal static void ResolveOptions(CCommand command)
         {
-            RuntimeResolver.ResolveOptions(command);
+            CRuntimeResolver.ResolveOptions(command);
         }
 
         internal static void ResolveOptions(CCommand command, Type commandType)
         {
-            RuntimeResolver.ResolveOptions(command, commandType);
+            CRuntimeResolver.ResolveOptions(command, commandType);
         }
 
         internal bool ExecuteTokens(IList<string> tokens, string commandLine = null)
@@ -1131,14 +1131,14 @@ namespace LunarPlugin
 
         internal bool IsManualMode { get; set; }
 
-        internal static CommandListOptions DefaultListOptions
+        internal static CCommandListOptions DefaultListOptions
         {
             get
             {
-                CommandListOptions options = CommandListOptions.None;
+                CCommandListOptions options = CCommandListOptions.None;
                 if (Config.isDebugBuild)
                 {
-                    options |= CommandListOptions.Debug;
+                    options |= CCommandListOptions.Debug;
                 }
 
                 return options;

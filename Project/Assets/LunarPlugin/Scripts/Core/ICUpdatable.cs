@@ -21,7 +21,7 @@
 
 ﻿namespace LunarPluginInternal
 {
-    interface IUpdatable
+    interface ICUpdatable
     {
         void Update(float dt);
     }

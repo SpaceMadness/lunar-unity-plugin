@@ -379,7 +379,7 @@ namespace LunarEditor
 
         private static IList<string> getTokens(string line)
         {
-            IList<string> tokens = CommandTokenizer.Tokenize(line, CommandTokenizer.OPTION_IGNORE_MISSING_QUOTES);
+            IList<string> tokens = CCommandTokenizer.Tokenize(line, CCommandTokenizer.OPTION_IGNORE_MISSING_QUOTES);
             if (tokens.Count > 0 && line.EndsWith(" "))
             {
                 tokens.Add(""); // treat last space as "empty" token

@@ -27,9 +27,9 @@ using System.Collections.Generic;
 
 namespace LunarPluginInternal
 {
-    static class Collection
+    static class CCollection
     {
-        public static void Each<T>(IList<T> list, EachDelegate<T> each)
+        public static void Each<T>(IList<T> list, CEachDelegate<T> each)
         {
             foreach (T element in list)
             {
@@ -37,7 +37,7 @@ namespace LunarPluginInternal
             }
         }
 
-        public static void Each<T>(IList<T> list, EachIndexDelegate<T> each)
+        public static void Each<T>(IList<T> list, CEachIndexDelegate<T> each)
         {
             int index = 0;
             foreach (T element in list)
@@ -46,7 +46,7 @@ namespace LunarPluginInternal
             }
         }
 
-        public static OUT[] Map<IN, OUT>(IList<IN> list, MapDelegate<IN, OUT> map)
+        public static OUT[] Map<IN, OUT>(IList<IN> list, CMapDelegate<IN, OUT> map)
         {
             OUT[] result = new OUT[list.Count];
 
@@ -58,7 +58,7 @@ namespace LunarPluginInternal
             return result;
         }
 
-        public static OUT[] Map<IN, OUT>(IList<IN> list, MapIndexDelegate<IN, OUT> map)
+        public static OUT[] Map<IN, OUT>(IList<IN> list, CMapIndexDelegate<IN, OUT> map)
         {
             OUT[] result = new OUT[list.Count];
 
@@ -72,9 +72,9 @@ namespace LunarPluginInternal
         }
     }
 
-    delegate void EachDelegate<T>(T element);
-    delegate void EachIndexDelegate<T>(T element, int index);
+    delegate void CEachDelegate<T>(T element);
+    delegate void CEachIndexDelegate<T>(T element, int index);
 
-    delegate OUT MapDelegate<IN, OUT>(IN element);
-    delegate OUT MapIndexDelegate<IN, OUT>(IN element, int index);
+    delegate OUT CMapDelegate<IN, OUT>(IN element);
+    delegate OUT CMapIndexDelegate<IN, OUT>(IN element, int index);
 }

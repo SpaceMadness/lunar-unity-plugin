@@ -65,7 +65,7 @@ namespace LunarPluginInternal
         {
             try
             {
-                IList<string> commandList = CommandSplitter.Split(commandLine);
+                IList<string> commandList = CCommandSplitter.Split(commandLine);
                 for (int commandIndex = 0; commandIndex < commandList.Count; ++commandIndex)
                 {
                     if (!TryExecuteSingleCommand(commandList[commandIndex], manualMode))
@@ -86,7 +86,7 @@ namespace LunarPluginInternal
 
         private bool TryExecuteSingleCommand(string commandLine, bool manualMode = false)
         {
-            IList<string> tokensList = CommandTokenizer.Tokenize(commandLine);
+            IList<string> tokensList = CCommandTokenizer.Tokenize(commandLine);
             if (tokensList.Count > 0)
             {
                 string commandName = tokensList[0];

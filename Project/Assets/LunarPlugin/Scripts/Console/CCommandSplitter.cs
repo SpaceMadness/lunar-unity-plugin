@@ -26,7 +26,7 @@ using System.Collections.Generic;
 
 namespace LunarPluginInternal
 {
-    class CommandSplitter
+    class CCommandSplitter
     {
         public const int OPTION_IGNORE_MISSING_QUOTES = 1; // TODO: use enum
     

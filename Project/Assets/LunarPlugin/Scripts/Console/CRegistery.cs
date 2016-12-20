@@ -30,9 +30,9 @@ namespace LunarPluginInternal
     using CommandList = LinkedList<CCommand>;
     using CommandLookup = Dictionary<string, CCommand>;
 
-    delegate bool ListCommandsFilter<T>(T cmd) where T : CCommand ; // TODO: rename
+    delegate bool CCommandsFilter<T>(T cmd) where T : CCommand ; // TODO: rename
 
-    enum CommandListOptions
+    enum CCommandListOptions
     {
         None       = 0,
         Debug      = 1 << 0,
@@ -87,7 +87,7 @@ namespace LunarPluginInternal
 
         public static void ResolveElements()
         {
-            RuntimeResolver.Result result = RuntimeResolver.Resolve();
+            CRuntimeResolver.Result result = CRuntimeResolver.Resolve();
 
             IList<CCommand> commands = result.Commands;
             for (int i = 0; i < commands.Count; ++i)
@@ -143,7 +143,7 @@ namespace LunarPluginInternal
             return RemoveCommand(cmd);
         }
 
-        internal static bool Unregister(ListCommandsFilter<CCommand> filter)
+        internal static bool Unregister(CCommandsFilter<CCommand> filter)
         {
             bool unregistered = false;
 
@@ -168,12 +168,12 @@ namespace LunarPluginInternal
             m_commandsLookup.Clear();
         }
 
-        internal static IList<CCommand> ListCommands(string prefix = null, CommandListOptions options = CommandListOptions.None)
+        internal static IList<CCommand> ListCommands(string prefix = null, CCommandListOptions options = CCommandListOptions.None)
         {
             return ListCommands(ReusableLists.NextAutoRecycleList<CCommand>(), prefix, options);
         }
 
-        internal static IList<CCommand> ListCommands(IList<CCommand> outList, string prefix = null, CommandListOptions options = CommandListOptions.None)
+        internal static IList<CCommand> ListCommands(IList<CCommand> outList, string prefix = null, CCommandListOptions options = CCommandListOptions.None)
         {
             return ListCommands(outList, delegate(CCommand cmd)
             {
@@ -181,12 +181,12 @@ namespace LunarPluginInternal
             });
         }
 
-        internal static IList<CCommand> ListCommands(ListCommandsFilter<CCommand> filter)
+        internal static IList<CCommand> ListCommands(CCommandsFilter<CCommand> filter)
         {
             return ListCommands(ReusableLists.NextAutoRecycleList<CCommand>(), filter);
         }
 
-        internal static IList<CCommand> ListCommands(IList<CCommand> outList, ListCommandsFilter<CCommand> filter)
+        internal static IList<CCommand> ListCommands(IList<CCommand> outList, CCommandsFilter<CCommand> filter)
         {
             if (filter == null)
             {
@@ -204,19 +204,19 @@ namespace LunarPluginInternal
             return outList;
         }
 
-        internal static bool ShouldListCommand(CCommand cmd, string prefix, CommandListOptions options = CommandListOptions.None)
+        internal static bool ShouldListCommand(CCommand cmd, string prefix, CCommandListOptions options = CCommandListOptions.None)
         {
-            if (cmd.IsDebug && (options & CommandListOptions.Debug) == 0)
+            if (cmd.IsDebug && (options & CCommandListOptions.Debug) == 0)
             {
                 return false;
             }
 
-            if (cmd.IsSystem && (options & CommandListOptions.System) == 0)
+            if (cmd.IsSystem && (options & CCommandListOptions.System) == 0)
             {
                 return false;
             }
 
-            if (cmd.IsHidden && (options & CommandListOptions.Hidden) == 0)
+            if (cmd.IsHidden && (options & CCommandListOptions.Hidden) == 0)
             {
                 return false;
             }
@@ -379,12 +379,12 @@ namespace LunarPluginInternal
             return cmd != null && Unregister(cmd);
         }
 
-        public static IList<CVar> ListVars(string prefix = null, CommandListOptions options = CommandListOptions.None)
+        public static IList<CVar> ListVars(string prefix = null, CCommandListOptions options = CCommandListOptions.None)
         {
             return ListVars(ReusableLists.NextAutoRecycleList<CVar>(), prefix, options);
         }
 
-        public static IList<CVar> ListVars(IList<CVar> outList, string prefix = null, CommandListOptions options = CommandListOptions.None)
+        public static IList<CVar> ListVars(IList<CVar> outList, string prefix = null, CCommandListOptions options = CCommandListOptions.None)
         {
             return ListVars(outList, delegate(CVarCommand cmd)
             {
@@ -392,12 +392,12 @@ namespace LunarPluginInternal
             });
         }
 
-        internal static IList<CVar> ListVars(ListCommandsFilter<CVarCommand> filter)
+        internal static IList<CVar> ListVars(CCommandsFilter<CVarCommand> filter)
         {
             return ListVars(ReusableLists.NextAutoRecycleList<CVar>(), filter);
         }
 
-        internal static IList<CVar> ListVars(IList<CVar> outList, ListCommandsFilter<CVarCommand> filter)
+        internal static IList<CVar> ListVars(IList<CVar> outList, CCommandsFilter<CVarCommand> filter)
         {
             if (filter == null)
             {
@@ -416,7 +416,7 @@ namespace LunarPluginInternal
             return outList;
         }
 
-        public static IList<string> ListVarNames(string prefix = null, CommandListOptions options = CommandListOptions.None)
+        public static IList<string> ListVarNames(string prefix = null, CCommandListOptions options = CCommandListOptions.None)
         {
             IList<CVar> cvars = ListVars(ReusableLists.NextAutoRecycleList<CVar>(), prefix, options);
 
@@ -492,12 +492,12 @@ namespace LunarPluginInternal
             return cmd != null && Unregister(cmd);
         }
 
-        internal static IList<CAliasCommand> ListAliases(string prefix = null, CommandListOptions options = CommandListOptions.None)
+        internal static IList<CAliasCommand> ListAliases(string prefix = null, CCommandListOptions options = CCommandListOptions.None)
         {
             return ListAliases(ReusableLists.NextAutoRecycleList<CAliasCommand>(), prefix, options);
         }
 
-        internal static IList<CAliasCommand> ListAliases(IList<CAliasCommand> outList, string prefix = null, CommandListOptions options = CommandListOptions.None)
+        internal static IList<CAliasCommand> ListAliases(IList<CAliasCommand> outList, string prefix = null, CCommandListOptions options = CCommandListOptions.None)
         {
             foreach (CCommand cmd in m_commands)
             {

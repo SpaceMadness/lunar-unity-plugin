@@ -31,15 +31,15 @@ namespace LunarPluginInternal
 {
     using Option = CCommand.Option;
 
-    public class LunarRuntimeResolverException : Exception
+    public class CRuntimeResolverException : Exception
     {
-        public LunarRuntimeResolverException(string message, Exception innerException)
+        public CRuntimeResolverException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
     }
 
-    internal static class RuntimeResolver // TODO: remove this class
+    internal static class CRuntimeResolver // TODO: remove this class
     {
         public static Result Resolve()
         {
@@ -72,11 +72,11 @@ namespace LunarPluginInternal
                     message.AppendFormat("\n\t{0}", ex.Message);
                 }
                 
-                throw new LunarRuntimeResolverException(message.ToString(), e);
+                throw new CRuntimeResolverException(message.ToString(), e);
             }
             catch (Exception e)
             {
-                throw new LunarRuntimeResolverException("Unable to resolve Lunar commands", e);
+                throw new CRuntimeResolverException("Unable to resolve Lunar commands", e);
             }
 
             return result;

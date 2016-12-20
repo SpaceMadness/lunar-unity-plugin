@@ -96,7 +96,7 @@ namespace CCommandTests
 
         private static IList<string> Tokenize(string str)
         {
-            return CommandTokenizer.Tokenize(str);
+            return CCommandTokenizer.Tokenize(str);
         }
 
         #endregion

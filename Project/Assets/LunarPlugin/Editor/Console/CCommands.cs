@@ -42,10 +42,10 @@ namespace LunarEditor
         
         bool Execute(string prefix = null)
         {
-            CommandListOptions options = CCommand.DefaultListOptions;
+            CCommandListOptions options = CCommand.DefaultListOptions;
             if (includeSystem)
             {
-                options |= CommandListOptions.System;
+                options |= CCommandListOptions.System;
             }
             
             Print(ListCommandNames(prefix, options));
@@ -58,14 +58,14 @@ namespace LunarEditor
             return ListCommandNames(token, CCommand.DefaultListOptions);
         }
 
-        private string[] ListCommandNames(string prefix, CommandListOptions options)
+        private string[] ListCommandNames(string prefix, CCommandListOptions options)
         {
             IList<CCommand> commands = CRegistery.ListCommands(delegate(CCommand cmd)
             {
                 return !(cmd is CVarCommand) && CRegistery.ShouldListCommand(cmd, prefix, options);
             });
 
-            return Collection.Map(commands, delegate(CCommand cmd)
+            return CCollection.Map(commands, delegate(CCommand cmd)
             {
                 return C(cmd.Name, cmd.ColorCode);
             });
@@ -85,10 +85,10 @@ namespace LunarEditor
         
         bool Execute(string prefix = null)
         {
-            CommandListOptions options = CCommand.DefaultListOptions;
+            CCommandListOptions options = CCommand.DefaultListOptions;
             if (includeSystem)
             {
-                options |= CommandListOptions.System;
+                options |= CCommandListOptions.System;
             }
             
             // TODO: refactoring
@@ -97,7 +97,7 @@ namespace LunarEditor
             {
                 if (shortList)
                 {
-                    string[] names = Collection.Map(vars, delegate(CVar cvar) {
+                    string[] names = CCollection.Map(vars, delegate(CVar cvar) {
                         return StringUtils.C(cvar.Name, ColorCode.TableVar);
                     });
                     Print(names);
@@ -174,7 +174,7 @@ namespace LunarEditor
                 return null;
             }
 
-            return Collection.Map(vars, delegate(CVar cvar) {
+            return CCollection.Map(vars, delegate(CVar cvar) {
                 return StringUtils.C(cvar.Name, ColorCode.TableVar);
             });
         }
@@ -214,7 +214,7 @@ namespace LunarEditor
                 return null;
             }
 
-            return Collection.Map(vars, delegate(CVar cvar)
+            return CCollection.Map(vars, delegate(CVar cvar)
             {
                 return StringUtils.C(cvar.Name, ColorCode.TableVar);
             });
@@ -475,7 +475,7 @@ namespace LunarEditor
             IList<CAliasCommand> aliases = CRegistery.ListAliases();
             if (aliases != null && aliases.Count > 0)
             {
-                return Collection.Map(aliases, delegate(CAliasCommand alias)
+                return CCollection.Map(aliases, delegate(CAliasCommand alias)
                 {
                     return alias.Name;
                 });
@@ -486,7 +486,7 @@ namespace LunarEditor
         
         public static IList<string> ListAliasesConfig()
         {
-            return Collection.Map(CRegistery.ListAliases(), delegate(CAliasCommand alias)
+            return CCollection.Map(CRegistery.ListAliases(), delegate(CAliasCommand alias)
             {
                 return ToString(alias);
             });
@@ -513,7 +513,7 @@ namespace LunarEditor
             {
                 if (shortList)
                 {
-                    string[] names = Collection.Map(cmds, delegate(CAliasCommand cmd)
+                    string[] names = CCollection.Map(cmds, delegate(CAliasCommand cmd)
                     {
                         return cmd.Name;
                     });
@@ -843,7 +843,7 @@ namespace LunarEditor
                 return null;
             }
 
-            return Collection.Map(commands, delegate(CCommand cmd)
+            return CCollection.Map(commands, delegate(CCommand cmd)
             {
                 return StringUtils.C(cmd.Name, cmd.ColorCode);
             });
