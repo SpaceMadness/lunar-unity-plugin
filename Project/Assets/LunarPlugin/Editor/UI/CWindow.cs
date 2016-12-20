@@ -33,13 +33,13 @@ using Event = LunarEditor.CEvent;
 
 namespace LunarEditor
 {
-    static class WindowNotifications
+    static class CWindowNotifications
     {
         public static readonly string WindowOpen = "WindowOpen";   // window : Window
         public static readonly string WindowClose = "WindowClose"; // window : Window
     }
 
-    class Window : EditorWindow
+    class CWindow : EditorWindow
     {
         private Vector2 m_oldSize;
         private CView m_rootView;
@@ -47,14 +47,14 @@ namespace LunarEditor
         private string m_tag;
         private bool m_dirty;
 
-        private static List<Window> m_windows = new List<Window>();
+        private static List<CWindow> m_windows = new List<CWindow>();
 
-        static Window()
+        static CWindow()
         {
             new CUnityEvent(); // initialize instance
         }
 
-        public Window(string title)
+        public CWindow(string title)
         {
             #pragma warning disable 0618
             this.title = title;
@@ -67,7 +67,7 @@ namespace LunarEditor
             AddWindow(this);
             OnStart();
 
-            CNotificationCenter.PostNotification(this, WindowNotifications.WindowOpen, "window", this);
+            CNotificationCenter.PostNotification(this, CWindowNotifications.WindowOpen, "window", this);
         }
 
         private void RunStop()
@@ -75,7 +75,7 @@ namespace LunarEditor
             RemoveWindow(this);
             OnStop();
 
-            CNotificationCenter.PostNotification(this, WindowNotifications.WindowClose, "window", this);
+            CNotificationCenter.PostNotification(this, CWindowNotifications.WindowClose, "window", this);
         }
 
         void OnDestroy()
@@ -156,9 +156,9 @@ namespace LunarEditor
             get { return EditorWindow.focusedWindow == this; }
         }
 
-        public static Window Find(string tag)
+        public static CWindow Find(string tag)
         {
-            foreach (Window window in m_windows)
+            foreach (CWindow window in m_windows)
             {
                 if (window.Tag == tag)
                 {
@@ -169,14 +169,14 @@ namespace LunarEditor
             return null;
         }
 
-        public static Window Find<T>()
+        public static CWindow Find<T>()
         {
             return Find(typeof(T));
         }
 
-        public static Window Find(Type type)
+        public static CWindow Find(Type type)
         {
-            foreach (Window window in m_windows)
+            foreach (CWindow window in m_windows)
             {
                 if (window.GetType() == type)
                 {
@@ -212,12 +212,12 @@ namespace LunarEditor
 
         //////////////////////////////////////////////////////////////////////////////
 
-        private static void AddWindow(Window window)
+        private static void AddWindow(CWindow window)
         {
             // there're might be duplicates from the serialization
             for (int i = m_windows.Count - 1; i >= 0; --i)
             {
-                Window current = m_windows[i];
+                CWindow current = m_windows[i];
                 if (current.Tag != null && 
                     current.Tag.Length > 0 && 
                     current.Tag == window.Tag)
@@ -229,7 +229,7 @@ namespace LunarEditor
             m_windows.Add(window);
         }
 
-        private static void RemoveWindow(Window window)
+        private static void RemoveWindow(CWindow window)
         {
             m_windows.Remove(window);
         }
@@ -240,7 +240,7 @@ namespace LunarEditor
 
         private CView CreateRootView()
         {
-            return new WindowRootView(this, Width, Height);
+            return new CWindowRootView(this, Width, Height);
         }
 
         protected void DestroyRootView()
@@ -296,11 +296,11 @@ namespace LunarEditor
         #endregion
     }
 
-    class WindowRootView : CView
+    class CWindowRootView : CView
     {
-        private Window m_window;
+        private CWindow m_window;
         
-        public WindowRootView(Window window, float width, float height)
+        public CWindowRootView(CWindow window, float width, float height)
             : base(width, height)
         {
             if (window == null)

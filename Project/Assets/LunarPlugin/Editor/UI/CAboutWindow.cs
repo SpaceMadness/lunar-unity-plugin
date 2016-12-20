@@ -26,7 +26,7 @@ using UnityEditor;
 
 namespace LunarEditor
 {
-    class CAboutWindow : Window
+    class CAboutWindow : CWindow
     {
         public CAboutWindow()
             : base("About Lunar")

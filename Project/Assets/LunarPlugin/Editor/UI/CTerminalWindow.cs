@@ -30,7 +30,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class CTerminalWindow : Window, ICTerminalCompositeViewDelegate
+    class CTerminalWindow : CWindow, ICTerminalCompositeViewDelegate
     {
         public CTerminalWindow()
             : base("Terminal")
