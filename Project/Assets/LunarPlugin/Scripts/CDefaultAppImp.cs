@@ -27,14 +27,14 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    class DefaultAppImp : CAppImp, ICUpdatable, ICDestroyable, ICCommandDelegate
+    class CDefaultAppImp : CAppImp, ICUpdatable, ICDestroyable, ICCommandDelegate
     {
         private readonly CCommandProcessor m_processor;
         private readonly CTimerManager m_timerManager;
         private readonly CNotificationCenter m_notificationCenter;
         private readonly CUpdatableList m_updatables;
 
-        public DefaultAppImp()
+        public CDefaultAppImp()
         {
             m_timerManager = CreateTimerManager();
             m_notificationCenter = CreateNotificationCenter();
@@ -78,11 +78,11 @@ namespace LunarPluginInternal
         protected virtual void ExecStartupConfigs()
         {
             // TODO: unit tests
-            CApp.ExecCommand("exec " + LPConstants.ConfigDefault);
-            CApp.ExecCommand("exec " + LPConstants.ConfigAutoExec);
+            CApp.ExecCommand("exec " + CConstants.ConfigDefault);
+            CApp.ExecCommand("exec " + CConstants.ConfigAutoExec);
             if (CRuntime.IsPlaying)
             {
-                CApp.ExecCommand("exec " + LPConstants.ConfigPlayMode);
+                CApp.ExecCommand("exec " + CConstants.ConfigPlayMode);
             }
         }
 
@@ -263,7 +263,7 @@ namespace LunarPluginInternal
 
         protected virtual void SaveConfig()
         {
-            CApp.ExecCommand("writeconfig " + LPConstants.ConfigDefault);
+            CApp.ExecCommand("writeconfig " + CConstants.ConfigDefault);
         }
 
         #endregion

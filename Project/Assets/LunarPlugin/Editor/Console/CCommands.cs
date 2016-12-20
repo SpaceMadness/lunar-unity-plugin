@@ -686,17 +686,17 @@ namespace LunarEditor
             List<string> configs = new List<string>(ConfigHelper.ListConfigs(token));
 
             // TODO: refactor this
-            if (!configs.Contains(LPConstants.ConfigDefault))
+            if (!configs.Contains(CConstants.ConfigDefault))
             {
-                configs.Add(LPConstants.ConfigDefault);
+                configs.Add(CConstants.ConfigDefault);
             }
-            if (!configs.Contains(LPConstants.ConfigAutoExec))
+            if (!configs.Contains(CConstants.ConfigAutoExec))
             {
-                configs.Add(LPConstants.ConfigAutoExec);
+                configs.Add(CConstants.ConfigAutoExec);
             }
-            if (!configs.Contains(LPConstants.ConfigPlayMode))
+            if (!configs.Contains(CConstants.ConfigPlayMode))
             {
-                configs.Add(LPConstants.ConfigPlayMode);
+                configs.Add(CConstants.ConfigPlayMode);
             }
 
             return CStringUtils.Filter(configs, token);

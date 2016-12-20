@@ -1136,7 +1136,7 @@ namespace LunarPlugin
             get
             {
                 CCommandListOptions options = CCommandListOptions.None;
-                if (Config.isDebugBuild)
+                if (CConfig.isDebugBuild)
                 {
                     options |= CCommandListOptions.Debug;
                 }

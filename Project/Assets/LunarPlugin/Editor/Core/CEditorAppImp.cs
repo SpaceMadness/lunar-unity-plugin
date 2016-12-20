@@ -26,7 +26,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class EditorAppImp : DefaultAppImp
+    class EditorAppImp : CDefaultAppImp
     {
         private readonly CTerminal m_terminal;
 

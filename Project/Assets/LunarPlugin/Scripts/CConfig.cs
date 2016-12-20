@@ -26,7 +26,7 @@ using System.Collections;
 
 namespace LunarPluginInternal
 {
-    static class Config
+    static class CConfig
     {
         public static readonly bool isUnityFree;
         public static readonly bool isUnityPro;
@@ -34,7 +34,7 @@ namespace LunarPluginInternal
         public static readonly bool isUnityBuild;
         public static bool isDebugBuild;
 
-        static Config()
+        static CConfig()
         {
             try
             {

@@ -50,7 +50,7 @@ namespace CCommandTests
             CVar c_string = new CVar("string", "Default string");
 
             // load default config
-            Execute("exec " + LPConstants.ConfigDefault); // TODO: make a convinience method for it
+            Execute("exec " + CConstants.ConfigDefault); // TODO: make a convinience method for it
 
             // check loaded values
             Assert.AreEqual(20, c_int.IntValue);
@@ -70,7 +70,7 @@ namespace CCommandTests
             new CVar("string", "Default string");
 
             // load default config
-            Execute("exec " + LPConstants.ConfigDefault); // TODO: make a convinience method for it
+            Execute("exec " + CConstants.ConfigDefault); // TODO: make a convinience method for it
 
             // reset variables
             Execute("reset int");
@@ -92,7 +92,7 @@ namespace CCommandTests
             new CVar("string", "Default string");
 
             // load default config
-            Execute("exec " + LPConstants.ConfigDefault); // TODO: make a convinience method for it
+            Execute("exec " + CConstants.ConfigDefault); // TODO: make a convinience method for it
 
             // reset variables
             Execute("reset int");
@@ -116,7 +116,7 @@ namespace CCommandTests
             new CVar("string", "Default string");
 
             // load default config
-            Execute("exec " + LPConstants.ConfigDefault); // TODO: make a convinience method for it
+            Execute("exec " + CConstants.ConfigDefault); // TODO: make a convinience method for it
 
             // reset variables
             Execute("resetAll");
@@ -135,7 +135,7 @@ namespace CCommandTests
             new CVar("string", "Default string");
 
             // load default config
-            Execute("exec " + LPConstants.ConfigDefault); // TODO: make a convinience method for it
+            Execute("exec " + CConstants.ConfigDefault); // TODO: make a convinience method for it
 
             // reset variables
             Execute("resetAll f");
@@ -384,34 +384,34 @@ namespace CCommandTests
             Assert.AreEqual(0, configs.Count);
 
             Execute("bind t test"); // create a dummy config to write into files
-            Execute("writeconfig " + LPConstants.ConfigDefault);
+            Execute("writeconfig " + CConstants.ConfigDefault);
 
             configs = ConfigHelper.ListConfigs();
             Assert.AreEqual(1, configs.Count);
-            Assert.AreEqual(LPConstants.ConfigDefault, configs[0]);
+            Assert.AreEqual(CConstants.ConfigDefault, configs[0]);
 
-            Execute("writeconfig " + LPConstants.ConfigAutoExec);
+            Execute("writeconfig " + CConstants.ConfigAutoExec);
 
             configs = ConfigHelper.ListConfigs();
             Assert.AreEqual(2, configs.Count);
-            Assert.AreEqual(LPConstants.ConfigAutoExec, configs[0]);
-            Assert.AreEqual(LPConstants.ConfigDefault, configs[1]);
+            Assert.AreEqual(CConstants.ConfigAutoExec, configs[0]);
+            Assert.AreEqual(CConstants.ConfigDefault, configs[1]);
         }
 
         [Test]
         public void TestListConfigsFiltered()
         {
             Execute("bind t test"); // create a dummy config to write into files
-            Execute("writeconfig " + LPConstants.ConfigDefault);
-            Execute("writeconfig " + LPConstants.ConfigAutoExec);
+            Execute("writeconfig " + CConstants.ConfigDefault);
+            Execute("writeconfig " + CConstants.ConfigAutoExec);
 
             IList<string> configs = ConfigHelper.ListConfigs("default");
             Assert.AreEqual(1, configs.Count);
-            Assert.AreEqual(LPConstants.ConfigDefault, configs[0]);
+            Assert.AreEqual(CConstants.ConfigDefault, configs[0]);
 
             configs = ConfigHelper.ListConfigs("auto");
             Assert.AreEqual(1, configs.Count);
-            Assert.AreEqual(LPConstants.ConfigAutoExec, configs[0]);
+            Assert.AreEqual(CConstants.ConfigAutoExec, configs[0]);
 
             configs = ConfigHelper.ListConfigs("foo");
             Assert.AreEqual(0, configs.Count);
