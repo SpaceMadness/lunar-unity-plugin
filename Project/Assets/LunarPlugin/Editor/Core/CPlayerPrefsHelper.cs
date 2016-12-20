@@ -30,11 +30,11 @@ namespace LunarPluginInternal
 {
     public static class PlayerPrefsHelper
     {
-        private static Preferences s_prefs;
+        private static CPreferences s_prefs;
 
         static PlayerPrefsHelper()
         {
-            if (Runtime.IsOSXEditor)
+            if (CRuntime.IsOSXEditor)
             {
                 string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "/Library/Preferences/" + "unity." + PlayerSettings.companyName + "." + PlayerSettings.productName + ".plist";
                 if (!File.Exists(path))
@@ -43,7 +43,7 @@ namespace LunarPluginInternal
                     return;
                 }
 
-                s_prefs = new Preferences(path);
+                s_prefs = new CPreferences(path);
                 s_prefs.Load();
             }
         }

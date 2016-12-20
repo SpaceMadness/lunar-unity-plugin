@@ -80,7 +80,7 @@ namespace LunarPluginInternal
             // TODO: unit tests
             App.ExecCommand("exec " + LPConstants.ConfigDefault);
             App.ExecCommand("exec " + LPConstants.ConfigAutoExec);
-            if (Runtime.IsPlaying)
+            if (CRuntime.IsPlaying)
             {
                 App.ExecCommand("exec " + LPConstants.ConfigPlayMode);
             }

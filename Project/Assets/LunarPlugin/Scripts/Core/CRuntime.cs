@@ -26,7 +26,7 @@ using System.Collections;
 
 namespace LunarPluginInternal
 {
-    static class Runtime
+    static class CRuntime
     {
         #if LUNAR_DEVELOPMENT
         private static RuntimePlatform s_overridenPlatform = RuntimePlatform.OSXEditor;

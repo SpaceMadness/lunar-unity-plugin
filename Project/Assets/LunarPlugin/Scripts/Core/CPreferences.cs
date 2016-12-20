@@ -29,19 +29,19 @@ using LunarPluginExternal.PlistCS;
 
 namespace LunarPluginInternal
 {
-    class Preferences
+    class CPreferences
     {
         private string m_path;
         private IDictionary<string, object> m_data;
 
         //////////////////////////////////////////////////////////////////////////////
 
-        internal Preferences()
+        internal CPreferences()
         {
             m_data = new Dictionary<string, object>();
         }
 
-        internal Preferences(string path)
+        internal CPreferences(string path)
         {
             if (path == null)
             {

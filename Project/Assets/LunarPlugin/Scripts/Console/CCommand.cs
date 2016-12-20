@@ -166,7 +166,7 @@ namespace LunarPlugin
                 PrintPrompt(commandLine);
             }
 
-            if (this.IsPlayModeOnly && !Runtime.IsPlaying)
+            if (this.IsPlayModeOnly && !CRuntime.IsPlaying)
             {
                 PrintError("Command is available in the play mode only");
                 return false;
@@ -1149,7 +1149,7 @@ namespace LunarPlugin
 
         internal ColorCode ColorCode
         {
-            get { return IsPlayModeOnly && !Runtime.IsPlaying ? ColorCode.TableCommandDisabled : ColorCode.TableCommand; }
+            get { return IsPlayModeOnly && !CRuntime.IsPlaying ? ColorCode.TableCommandDisabled : ColorCode.TableCommand; }
         }
 
         #endregion

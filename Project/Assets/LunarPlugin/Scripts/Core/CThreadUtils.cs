@@ -63,7 +63,7 @@ namespace LunarPluginInternal
                     return;
                 }
 
-                if (Runtime.IsEditor)
+                if (CRuntime.IsEditor)
                 {
                     try
                     {

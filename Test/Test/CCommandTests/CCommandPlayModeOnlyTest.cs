@@ -17,7 +17,7 @@ namespace CCommandTests
         [Test]
         public void TestRunInPlayMode()
         {
-            Runtime.IsPlaying = true;
+            CRuntime.IsPlaying = true;
             Execute("playmode");
 
             AssertResult("executed");
@@ -26,7 +26,7 @@ namespace CCommandTests
         [Test]
         public void TestRunInEditorMode()
         {
-            Runtime.IsPlaying = false;
+            CRuntime.IsPlaying = false;
             Execute("playmode", false);
 
             AssertResult();
@@ -47,7 +47,7 @@ namespace CCommandTests
         {
             base.RunTearDown();
 
-            Runtime.IsPlaying = true;
+            CRuntime.IsPlaying = true;
         }
     }
 

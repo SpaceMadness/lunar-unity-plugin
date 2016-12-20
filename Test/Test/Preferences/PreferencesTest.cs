@@ -74,7 +74,7 @@ namespace PreferencesTests
             List<object> listValue2 = new List<object>();
             List<object> listValue3 = null;
 
-            Preferences prefs = new Preferences(kPreferencesPath);
+            CPreferences prefs = new CPreferences(kPreferencesPath);
             prefs.Set("boolValue", boolValue);
             prefs.Set("boolValue2", boolValue2);
 
@@ -116,7 +116,7 @@ namespace PreferencesTests
 
             prefs.Save();
 
-            prefs = new Preferences(kPreferencesPath);
+            prefs = new CPreferences(kPreferencesPath);
 
             Assert.AreEqual(boolValue, prefs.GetBool("boolValue"));
             Assert.AreEqual(boolValue2, prefs.GetBool("boolValue2"));
@@ -161,15 +161,15 @@ namespace PreferencesTests
         [Test]
         public void TestSaveDelayed()
         {
-            Preferences prefs = new Preferences(kPreferencesPath);
+            CPreferences prefs = new CPreferences(kPreferencesPath);
             prefs.Set("key", "value");
 
-            Preferences otherPrefs = new Preferences(kPreferencesPath);
+            CPreferences otherPrefs = new CPreferences(kPreferencesPath);
             Assert.IsNull(otherPrefs.GetString("key"));
 
             TimerManager.RunUpdate(0.5f);
 
-            otherPrefs = new Preferences(kPreferencesPath);
+            otherPrefs = new CPreferences(kPreferencesPath);
             Assert.AreEqual("value", otherPrefs.GetString("key"));
         }
 
@@ -193,7 +193,7 @@ namespace PreferencesTests
             string prefsFile = "unity_test_player_prefs.plist";
             Assert.IsTrue(File.Exists(prefsFile), "File doesn't exist: " + prefsFile);
 
-            Preferences prefs = new Preferences(prefsFile);
+            CPreferences prefs = new CPreferences(prefsFile);
 
             Assert.AreEqual(Int32.MinValue, prefs.GetInt("int1"));
             Assert.AreEqual((float)Int32.MinValue, prefs.GetFloat("int1"));
@@ -227,7 +227,7 @@ namespace PreferencesTests
         [Test]
         public void TestListPreferences()
         {
-            Preferences prefs = new Preferences();
+            CPreferences prefs = new CPreferences();
             prefs.Set("p1", "p1");
             prefs.Set("p12", "p12");
             prefs.Set("P12", "P12");
@@ -241,7 +241,7 @@ namespace PreferencesTests
         [Test]
         public void TestListPreferencesToken()
         {
-            Preferences prefs = new Preferences();
+            CPreferences prefs = new CPreferences();
             prefs.Set("p1", "p1");
             prefs.Set("p12", "p12");
             prefs.Set("P12", "P12");
@@ -255,7 +255,7 @@ namespace PreferencesTests
         [Test]
         public void TestListPreferencesEmpty()
         {
-            Preferences prefs = new Preferences();
+            CPreferences prefs = new CPreferences();
             prefs.Set("p1", "p1");
             prefs.Set("p12", "p12");
             prefs.Set("P12", "P12");
@@ -269,7 +269,7 @@ namespace PreferencesTests
         [Test]
         public void TestListPreferencesTokenOne()
         {
-            Preferences prefs = new Preferences();
+            CPreferences prefs = new CPreferences();
             prefs.Set("p1", "p1");
             prefs.Set("p12", "p12");
             prefs.Set("P12", "P12");
@@ -283,7 +283,7 @@ namespace PreferencesTests
         [Test]
         public void TestListPreferencesTokenNone()
         {
-            Preferences prefs = new Preferences();
+            CPreferences prefs = new CPreferences();
             prefs.Set("p1", "p1");
             prefs.Set("p12", "p12");
             prefs.Set("P12", "P12");
@@ -297,7 +297,7 @@ namespace PreferencesTests
         [Test]
         public void TestFindPreferences()
         {
-            Preferences prefs = new Preferences();
+            CPreferences prefs = new CPreferences();
             prefs.Set("p1", "p1");
             prefs.Set("p12", "p12");
             prefs.Set("P12", "P12");
@@ -314,7 +314,7 @@ namespace PreferencesTests
         [Test]
         public void TestFindMissingPreferences()
         {
-            Preferences prefs = new Preferences();
+            CPreferences prefs = new CPreferences();
             prefs.Set("p1", "p1");
             prefs.Set("p12", "p12");
             prefs.Set("P12", "P12");
