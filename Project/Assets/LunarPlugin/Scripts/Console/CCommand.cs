@@ -158,7 +158,7 @@ namespace LunarPlugin
         {
             ResetOptions();
             
-            Iterator<string> iter = new Iterator<string>(tokens);
+            CIterator<string> iter = new CIterator<string>(tokens);
             iter.Next(); // first token is a command name
 
             if (this.IsManualMode)
@@ -289,7 +289,7 @@ namespace LunarPlugin
             return result.ToArray();
         }
 
-        private bool TryParseOption(Iterator<string> iter, string token)
+        private bool TryParseOption(CIterator<string> iter, string token)
         {
             if (this.IsIgnoreOptions)
             {
@@ -314,7 +314,7 @@ namespace LunarPlugin
             return false;
         }
 
-        private Option ParseOption(Iterator<string> iter, string name)
+        private Option ParseOption(CIterator<string> iter, string name)
         {
             Option option = FindOption(name);
             if (option != null)
@@ -328,7 +328,7 @@ namespace LunarPlugin
             }
         }
 
-        private void ParseOption(Iterator<string> iter, Option opt) // FIXME: fix '-' and '--' args
+        private void ParseOption(CIterator<string> iter, Option opt) // FIXME: fix '-' and '--' args
         {
             Type type = opt.Target.FieldType;
             opt.IsHandled = true;
@@ -413,13 +413,13 @@ namespace LunarPlugin
             }
         }
 
-        private bool SkipOption(Iterator<string> iter, string name)
+        private bool SkipOption(CIterator<string> iter, string name)
         {
             Option option = FindOption(name);
             return option != null && SkipOption(iter, option);
         }
 
-        private bool SkipOption(Iterator<string> iter, Option opt)
+        private bool SkipOption(CIterator<string> iter, Option opt)
         {
             Type type = opt.Target.FieldType;
 

@@ -99,7 +99,7 @@ namespace LunarEditor
 
         private static string[] getSuggestions(string commandLine, IList<string> tokens)
         {
-            Iterator<string> iter = new Iterator<string>(tokens);
+            CIterator<string> iter = new CIterator<string>(tokens);
 
             CCommand cmd = CRegistery.FindCommand(iter.Next());
             if (cmd == null)
@@ -162,13 +162,13 @@ namespace LunarEditor
         //////////////////////////////////////////////////////////////////////////////
         // Options
 
-        private static bool SkipOption(Iterator<string> iter, CCommand cmd, string name)
+        private static bool SkipOption(CIterator<string> iter, CCommand cmd, string name)
         {
             Option opt = cmd.FindOption(name);
             return opt != null && SkipOption(iter, opt) && iter.HasNext();
         }
 
-        private static bool SkipOption(Iterator<string> iter, Option opt)
+        private static bool SkipOption(CIterator<string> iter, Option opt)
         {
             Type type = opt.Target.FieldType;
 
@@ -220,7 +220,7 @@ namespace LunarEditor
             return Option.IsValidValue(typeof(string), value); // don't actually check types: just format
         }
 
-        private static string[] getSuggestedOptions(Iterator<string> iter, CCommand cmd, string optNameToken, string prefix)
+        private static string[] getSuggestedOptions(CIterator<string> iter, CCommand cmd, string optNameToken, string prefix)
         {
             List<Option> optionsList = new List<Option>(); // TODO: reuse list
 

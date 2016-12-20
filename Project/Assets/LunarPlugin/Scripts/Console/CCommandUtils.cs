@@ -115,7 +115,7 @@ namespace LunarPluginInternal
 
             List<object> invokeList = new List<object>(invokeArgs.Length);
 
-            Iterator<string> iter = new Iterator<string>(invokeArgs);
+            CIterator<string> iter = new CIterator<string>(invokeArgs);
             foreach (ParameterInfo param in parameters)
             {
                 invokeList.Add(ResolveInvokeParameter(param, iter));
@@ -178,7 +178,7 @@ namespace LunarPluginInternal
         {
             List<object> list = new List<object>(invokeArgs.Length);
 
-            Iterator<string> iter = new Iterator<string>(invokeArgs);
+            CIterator<string> iter = new CIterator<string>(invokeArgs);
             foreach (ParameterInfo param in parameters)
             {
                 list.Add(ResolveInvokeParameter(param, iter));
@@ -187,7 +187,7 @@ namespace LunarPluginInternal
             return list;
         }
 
-        private static object ResolveInvokeParameter(ParameterInfo param, Iterator<string> iter)
+        private static object ResolveInvokeParameter(ParameterInfo param, CIterator<string> iter)
         {
             if (param.IsOptional && !iter.HasNext())
             {
@@ -286,7 +286,7 @@ namespace LunarPluginInternal
             throw new CCommandException("Unsupported value type: " + type);
         }
 
-        public static int NextIntArg(Iterator<string> iter)
+        public static int NextIntArg(CIterator<string> iter)
         {
             string arg = NextArg(iter);
             int value;
@@ -299,7 +299,7 @@ namespace LunarPluginInternal
             throw new CCommandException("Can't parse int arg: '" + arg + "'"); 
         }
 
-        public static float NextFloatArg(Iterator<string> iter)
+        public static float NextFloatArg(CIterator<string> iter)
         {
             string arg = NextArg(iter);
             float value;
@@ -312,7 +312,7 @@ namespace LunarPluginInternal
             throw new CCommandException("Can't parse float arg: '" + arg + "'"); 
         }
 
-        public static bool NextBoolArg(Iterator<string> iter)
+        public static bool NextBoolArg(CIterator<string> iter)
         {
             string arg = NextArg(iter).ToLower();
             if (arg == "1" || arg == "yes" || arg == "true") return true;
@@ -321,7 +321,7 @@ namespace LunarPluginInternal
             throw new CCommandException("Can't parse bool arg: '" + arg + "'"); 
         }
 
-        public static string NextArg(Iterator<string> iter)
+        public static string NextArg(CIterator<string> iter)
         {
             if (iter.HasNext())
             {

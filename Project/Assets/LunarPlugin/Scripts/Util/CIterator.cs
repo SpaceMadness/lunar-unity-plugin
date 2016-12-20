@@ -26,12 +26,12 @@ using System.Collections.Generic;
 
 namespace LunarPluginInternal
 {
-    class Iterator<T>
+    class CIterator<T>
     {
         private IList<T> m_target;
         private int m_current;
 
-        public Iterator(IList<T> target)
+        public CIterator(IList<T> target)
         {
             Init(target);
         }
