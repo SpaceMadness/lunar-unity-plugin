@@ -33,7 +33,7 @@ namespace LunarEditor
 {
     delegate bool URLHandler(string urlString);
 
-    class EditorApp : App
+    class EditorApp : CApp
     {
         private static double m_lastUpdateTime;
         private static EditorApp s_editorInstance; // keep another reference to avoid casts
@@ -220,7 +220,7 @@ namespace LunarEditor
 
         protected new static EditorAppImp Imp
         {
-            get { return (EditorAppImp)App.Imp; }
+            get { return (EditorAppImp)CApp.Imp; }
         }
 
         #endregion

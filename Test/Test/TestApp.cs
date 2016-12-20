@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace LunarPlugin.Test
 {
-    class TestApp : App
+    class TestApp : CApp
     {
         private readonly ITestAppImpDelegate m_delegate;
         private readonly TestAppConfig m_config;

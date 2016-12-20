@@ -77,7 +77,7 @@ namespace LunarPluginInternal
 
         private void UpdateBindings()
         {
-            App.UpdateKeyBindings();
+            CApp.UpdateKeyBindings();
         }
 
         #endregion

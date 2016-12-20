@@ -104,7 +104,7 @@ namespace CCommandTests
 
         protected bool Execute(string commandLine, bool shouldSucceed = true)
         {
-            bool result = App.ExecCommand(commandLine, true);
+            bool result = CApp.ExecCommand(commandLine, true);
             Assert.IsFalse(result ^ shouldSucceed, "Command should " + (shouldSucceed ? "succeed" : "fail") + ": " + commandLine);
             return result;
         }

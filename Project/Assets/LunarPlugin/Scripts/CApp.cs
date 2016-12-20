@@ -35,15 +35,15 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    abstract class App : ICUpdatable, ICDestroyable
+    abstract class CApp : ICUpdatable, ICDestroyable
     {
         #pragma warning disable 0649
-        protected static App s_sharedInstance;
+        protected static CApp s_sharedInstance;
         #pragma warning restore 0649
 
         private readonly AppImp m_appImp;
 
-        protected App()
+        protected CApp()
         {
             m_appImp = CreateAppImp();
         }
