@@ -29,25 +29,25 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    delegate void TextFieldDelegate(TextField field);
-    delegate bool TextFieldKeyDelegate(TextField field, KeyCode code, bool pressed);
+    delegate void CTextFieldDelegate(CTextField field);
+    delegate bool CTextFieldKeyDelegate(CTextField field, KeyCode code, bool pressed);
 
-    class TextField : View
+    class CTextField : View
     {
         private string m_text;
         private bool m_firstKeyDown;
 
-        public TextField(string text = "")
+        public CTextField(string text = "")
             : this(0, 0, text)
         {
         }
 
-        public TextField(float x, float y, string text = "")
+        public CTextField(float x, float y, string text = "")
             : this(x, y, UISize.TextFieldWidth, UISize.TextFieldHeight, text)
         {
         }
 
-        public TextField(float x, float y, float w, float h, string text = "")
+        public CTextField(float x, float y, float w, float h, string text = "")
             : base(x, y, w, h)
         {
             Text = text;
@@ -228,8 +228,8 @@ namespace LunarEditor
             }
         }
 
-        public TextFieldDelegate TextChangedDelegate { get; set; }
-        public TextFieldKeyDelegate TextKeyDelegate { get; set; }
+        public CTextFieldDelegate TextChangedDelegate { get; set; }
+        public CTextFieldKeyDelegate TextKeyDelegate { get; set; }
 
         public bool IsCtrlPressed { get; private set; }
         public bool IsAltPressed { get; private set; }

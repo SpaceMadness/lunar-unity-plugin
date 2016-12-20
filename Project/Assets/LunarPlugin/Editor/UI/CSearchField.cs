@@ -24,7 +24,7 @@ using System.Collections;
 
 namespace LunarEditor
 {
-    class CSearchField : TextField
+    class CSearchField : CTextField
     {
         protected override string CreateTextField(string text)
         {

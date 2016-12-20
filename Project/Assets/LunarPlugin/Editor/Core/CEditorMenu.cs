@@ -34,7 +34,7 @@ namespace LunarEditor
         [MenuItem("Window/Lunar/Terminal %#t")]
         public static void ShowTerminal()
         {
-            TerminalWindow.ShowWindow();
+            CTerminalWindow.ShowWindow();
         }
 
         [MenuItem("Window/Lunar/Console %#&c")]

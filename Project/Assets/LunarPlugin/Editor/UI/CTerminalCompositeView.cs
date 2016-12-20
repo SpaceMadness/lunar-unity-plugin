@@ -30,24 +30,24 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    interface ITerminalCompositeViewDelegate
+    interface ICTerminalCompositeViewDelegate
     {
         void ExecCommand(string commandLine);
         CTerminal Terminal { get; }
     }
 
-    class TerminalCompositeView : View
+    class CTerminalCompositeView : View
     {
         private CConsoleView m_consoleView;
-        private TextField m_commandField;
+        private CTextField m_commandField;
         private ToolBarLabel m_infoLabel;
 
-        private ITerminalCompositeViewDelegate m_delegate;
+        private ICTerminalCompositeViewDelegate m_delegate;
 
         private float m_lastTabTimestamp;
         private string m_lastUserInput;
 
-        public TerminalCompositeView(ITerminalCompositeViewDelegate del, float width, float height)
+        public CTerminalCompositeView(ICTerminalCompositeViewDelegate del, float width, float height)
             : base(width, height)
         {
             if (del == null)
@@ -99,14 +99,14 @@ namespace LunarEditor
 
             AddSubview(toolbar);
 
-            m_commandField = new TextField();
+            m_commandField = new CTextField();
             m_commandField.Width = Width;
             AddSubview(m_commandField);
             m_commandField.AlignX(View.AlignCenter);
             m_commandField.AlignBottom(0);
             m_commandField.AutoresizeMask = ViewAutoresizing.FlexibleTopMargin | ViewAutoresizing.FlexibleWidth;
 
-            m_commandField.TextKeyDelegate = delegate(TextField tf, KeyCode code, bool pressed)
+            m_commandField.TextKeyDelegate = delegate(CTextField tf, KeyCode code, bool pressed)
             {
                 if (pressed)
                 {
@@ -204,7 +204,7 @@ namespace LunarEditor
                 return false;
             };
 
-            m_commandField.TextChangedDelegate = delegate(TextField field) {
+            m_commandField.TextChangedDelegate = delegate(CTextField field) {
                 HistoryReset();
             };
 
@@ -236,7 +236,7 @@ namespace LunarEditor
             History.Push(commandLine);
         }
 
-        private bool HistoryNext(TextField tf)
+        private bool HistoryNext(CTextField tf)
         {
             string line = History.Next();
             if (line != null)
@@ -248,7 +248,7 @@ namespace LunarEditor
             return false;
         }
 
-        private bool HistoryPrev(TextField tf)
+        private bool HistoryPrev(CTextField tf)
         {
             string line = History.Prev();
             if (line != null)
