@@ -59,7 +59,7 @@ namespace LunarEditor
     class CTableView : CView
     {
         private IDictionary<Type, TableViewCellList> m_reusableCellsLists;
-        private CCycleArray<TableViewCellEntry> m_cellsEntries;
+        private CCycleArray<CTableViewCellEntry> m_cellsEntries;
         private CFastList<CTableViewCell> m_visibleCells;
 
         private float m_totalHeight;
@@ -80,7 +80,7 @@ namespace LunarEditor
             }
 
             m_reusableCellsLists = new Dictionary<Type, TableViewCellList>();
-            m_cellsEntries = new CCycleArray<TableViewCellEntry>(capacity);
+            m_cellsEntries = new CCycleArray<CTableViewCellEntry>(capacity);
             m_visibleCells = new CFastList<CTableViewCell>();
 
             this.DataSource = CTableViewNullDataSource.Instance; // don't do null reference checks
@@ -261,7 +261,7 @@ namespace LunarEditor
 
             int cellIndex = m_cellsEntries.Length;
             float cellHeight = Delegate.HeightForTableCell(cellIndex);
-            m_cellsEntries.Add(new TableViewCellEntry(m_totalHeight, cellHeight));
+            m_cellsEntries.Add(new CTableViewCellEntry(m_totalHeight, cellHeight));
 
             if (IsCellVisible(cellIndex, m_scrollPos))
             {
@@ -887,13 +887,13 @@ namespace LunarEditor
 
         #endregion
 
-        struct TableViewCellEntry
+        struct CTableViewCellEntry
         {
             private float m_top;
             private float m_height;
             private bool m_selected;
 
-            public TableViewCellEntry(float top, float height)
+            public CTableViewCellEntry(float top, float height)
             {
                 m_top = top;
                 m_height = height;
