@@ -27,9 +27,9 @@ using System.Collections;
 
 namespace LunarEditor
 {
-    class ToolBar : View
+    class CToolBar : View
     {
-        public ToolBar(float width)
+        public CToolBar(float width)
             : base(width, UISize.ToolbarHeight)
         {
             this.AutoresizeMask = ViewAutoresizing.FlexibleWidth;
@@ -44,60 +44,60 @@ namespace LunarEditor
             GUILayout.EndHorizontal();
         }
 
-        public ToolBarButton AddButton(string title, CButtonDelegate buttonDelegate)
+        public CToolBarButton AddButton(string title, CButtonDelegate buttonDelegate)
         {
-            ToolBarButton button = new ToolBarButton(title, buttonDelegate);
+            CToolBarButton button = new CToolBarButton(title, buttonDelegate);
             AddSubview(button);
             return button;
         }
 
-        public ToolBarLabel AddLabel(string text)
+        public CToolBarLabel AddLabel(string text)
         {
-            ToolBarLabel label = new ToolBarLabel(text);
+            CToolBarLabel label = new CToolBarLabel(text);
             AddSubview(label);
             return label;
         }
 
-        public ToolBarToggle AddToggle(string title, ToggleButtonDelegate buttonDelegate)
+        public CToolBarToggle AddToggle(string title, CToggleButtonDelegate buttonDelegate)
         {
-            ToolBarToggle button = new ToolBarToggle(title, buttonDelegate);
+            CToolBarToggle button = new CToolBarToggle(title, buttonDelegate);
             AddSubview(button);
             return button;
         }
 
-        public ToolBarCheckbox AddCheckbox(string title, ToggleButtonDelegate buttonDelegate)
+        public CToolBarCheckbox AddCheckbox(string title, CToggleButtonDelegate buttonDelegate)
         {
-            ToolBarCheckbox button = new ToolBarCheckbox(title, buttonDelegate);
+            CToolBarCheckbox button = new CToolBarCheckbox(title, buttonDelegate);
             AddSubview(button);
             return button;
         }
 
-        public ToolBarDropList AddDropList(string[] values, int selectedValue = 0)
+        public CToolBarDropList AddDropList(string[] values, int selectedValue = 0)
         {
             return AddDropList(null, values, selectedValue);
         }
 
-        public ToolBarDropList AddDropList(string title, string[] values, int selectedValue = 0)
+        public CToolBarDropList AddDropList(string title, string[] values, int selectedValue = 0)
         {
-            ToolBarDropList list = new ToolBarDropList(title, values, selectedValue);
+            CToolBarDropList list = new CToolBarDropList(title, values, selectedValue);
             AddSubview(list);
             return list;
         }
 
         public void AddSpace(float pixels = UISize.ToolbarSpacing)
         {
-            AddSubview(new ToolBarSpace(pixels));
+            AddSubview(new CToolBarSpace(pixels));
         }
 
         public void AddFlexibleSpace()
         {
-            AddSubview(new ToolBarFlexibleSpace());
+            AddSubview(new CToolBarFlexibleSpace());
         }
     }
 
-    class ToolBarButton : CButton
+    class CToolBarButton : CButton
     {
-        public ToolBarButton(string title, CButtonDelegate buttonDelegate)
+        public CToolBarButton(string title, CButtonDelegate buttonDelegate)
             : base(title, buttonDelegate)
         {
             Width = SharedStyles.MeasureWidth(SharedStyles.toolbarButton, title);
@@ -113,16 +113,16 @@ namespace LunarEditor
         }
     }
 
-    class ToolBarLabel : View
+    class CToolBarLabel : View
     {
         private string m_text;
 
-        public ToolBarLabel(string text)
+        public CToolBarLabel(string text)
             : this(text, EditorStyles.miniLabel)
         {
         }
 
-        public ToolBarLabel(string text, GUIStyle style)
+        public CToolBarLabel(string text, GUIStyle style)
         {
             m_text = text;
             this.Style = style;
@@ -140,9 +140,9 @@ namespace LunarEditor
         }
     }
 
-    class ToolBarToggle : ToggleButton
+    class CToolBarToggle : CToggleButton
     {
-        public ToolBarToggle(string title, ToggleButtonDelegate buttonDelegate)
+        public CToolBarToggle(string title, CToggleButtonDelegate buttonDelegate)
             : base(title, buttonDelegate)
         {
             Width = SharedStyles.MeasureWidth(SharedStyles.toolbarButton, title);
@@ -160,9 +160,9 @@ namespace LunarEditor
         }
     }
 
-    class ToolBarCheckbox : ToggleButton
+    class CToolBarCheckbox : CToggleButton
     {
-        public ToolBarCheckbox(string title, ToggleButtonDelegate buttonDelegate)
+        public CToolBarCheckbox(string title, CToggleButtonDelegate buttonDelegate)
             : base(title, buttonDelegate)
         {
             Width = SharedStyles.MeasureWidth(GUI.skin.toggle, title);
@@ -180,9 +180,9 @@ namespace LunarEditor
         }
     }
 
-    delegate void ToolBarDropListDelegate(ToolBarDropList list);
+    delegate void CToolBarDropListDelegate(CToolBarDropList list);
 
-    class ToolBarDropList : View
+    class CToolBarDropList : View
     {
         private string m_title;
         private int m_selectedValue;
@@ -192,12 +192,12 @@ namespace LunarEditor
         private float m_titleWith;
         private float m_popupWidth;
 
-        public ToolBarDropList(string[] displayedOptions, int selectedValue = 0)
+        public CToolBarDropList(string[] displayedOptions, int selectedValue = 0)
             : this(null, displayedOptions, selectedValue)
         {
         }
 
-        public ToolBarDropList(string title, string[] displayedOptions, int selectedValue = 0)
+        public CToolBarDropList(string title, string[] displayedOptions, int selectedValue = 0)
         {
             if (displayedOptions == null)
             {
@@ -295,16 +295,16 @@ namespace LunarEditor
             }
         }
 
-        public ToolBarDropListDelegate Delegate
+        public CToolBarDropListDelegate Delegate
         {
             get;
             set;
         }
     }
 
-    class ToolBarSpace : View
+    class CToolBarSpace : View
     {
-        public ToolBarSpace(float pixels)
+        public CToolBarSpace(float pixels)
             : base(pixels, 0)
         {
         }
@@ -315,7 +315,7 @@ namespace LunarEditor
         }
     }
 
-    class ToolBarFlexibleSpace : View
+    class CToolBarFlexibleSpace : View
     {
         public override void OnGUI()
         {

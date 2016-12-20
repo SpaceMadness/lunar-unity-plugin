@@ -40,7 +40,7 @@ namespace LunarEditor
     {
         private CConsoleView m_consoleView;
         private CTextField m_commandField;
-        private ToolBarLabel m_infoLabel;
+        private CToolBarLabel m_infoLabel;
 
         private ICTerminalCompositeViewDelegate m_delegate;
 
@@ -64,7 +64,7 @@ namespace LunarEditor
         {
             this.AutoresizeMask = ViewAutoresizing.FlexibleWidth | ViewAutoresizing.FlexibleHeight;
 
-            ToolBar toolbar = new ToolBar(this.Width);
+            CToolBar toolbar = new CToolBar(this.Width);
             toolbar.Width = this.Width;
 
             toolbar.AddButton("Clear", delegate(CButton button)

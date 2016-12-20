@@ -24,11 +24,11 @@ using System.Collections;
 
 namespace LunarEditor
 {
-    delegate void ToggleButtonDelegate(ToggleButton button);
+    delegate void CToggleButtonDelegate(CToggleButton button);
     
-    class ToggleButton : CAbstractButton
+    class CToggleButton : CAbstractButton
     {
-        public ToggleButton(string title = "", ToggleButtonDelegate buttonDelegate = null)
+        public CToggleButton(string title = "", CToggleButtonDelegate buttonDelegate = null)
             : base(title)
         {
             ButtonDelegate = buttonDelegate;
@@ -53,7 +53,7 @@ namespace LunarEditor
         
         #region Properties
         
-        public ToggleButtonDelegate ButtonDelegate { get; set; }
+        public CToggleButtonDelegate ButtonDelegate { get; set; }
         public bool IsOn { get; set; }
         
         #endregion

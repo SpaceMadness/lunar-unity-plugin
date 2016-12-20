@@ -24,13 +24,13 @@ using System.Collections;
 
 namespace LunarEditor
 {
-    delegate void ToggleChangeDelegate(Toggle toggle);
+    delegate void CToggleChangeDelegate(CToggle toggle);
 
-    class Toggle : View 
+    class CToggle : View 
     {
         private GUIContent m_content;
 
-        public Toggle(string title, bool isOn = false)
+        public CToggle(string title, bool isOn = false)
         {
             m_content = new GUIContent(title);
             IsOn = isOn;
@@ -58,7 +58,7 @@ namespace LunarEditor
         #region Properties
 
         public bool IsOn { get; set; }
-        public ToggleChangeDelegate Delegate { get; set; }
+        public CToggleChangeDelegate Delegate { get; set; }
 
         #endregion
     }
