@@ -30,14 +30,14 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    struct SourcePathEntry
+    struct CSourcePathEntry
     {
-        public static readonly SourcePathEntry Invalid = new SourcePathEntry(null, 0);
+        public static readonly CSourcePathEntry Invalid = new CSourcePathEntry(null, 0);
 
         public readonly string sourcePath;
         public readonly int lineNumber;
 
-        public SourcePathEntry(string sourcePath, int lineNumber)
+        public CSourcePathEntry(string sourcePath, int lineNumber)
         {
             this.sourcePath = sourcePath;
             this.lineNumber = lineNumber;
@@ -46,9 +46,9 @@ namespace LunarEditor
         public bool IsValid { get { return sourcePath != null; } }
     }
 
-    struct StackTraceLine
+    struct CStackTraceLine
     {
-        public static readonly StackTraceLine[] kEmptyLinesArray = new StackTraceLine[0];
+        public static readonly CStackTraceLine[] kEmptyLinesArray = new CStackTraceLine[0];
 
         public string line;
         public readonly string sourcePath;
@@ -61,7 +61,7 @@ namespace LunarEditor
         public Rect frame;
         public Rect sourceFrame;
 
-        public StackTraceLine(string line, string sourcePath = null, int lineNumber = -1, int lineNumberLength = 0)
+        public CStackTraceLine(string line, string sourcePath = null, int lineNumber = -1, int lineNumberLength = 0)
         {
             this.line = line;
             this.sourcePath = sourcePath;
@@ -84,9 +84,9 @@ namespace LunarEditor
 
         public override bool Equals(object obj)
         {
-            if (obj is StackTraceLine)
+            if (obj is CStackTraceLine)
             {
-                StackTraceLine other = (StackTraceLine) obj;
+                CStackTraceLine other = (CStackTraceLine) obj;
                 return string.Equals(other.line, line) &&
                     string.Equals(other.sourcePath, sourcePath) &&
                     other.lineNumber == lineNumber;
@@ -111,7 +111,7 @@ namespace LunarEditor
         }
     }
 
-    class EditorStackTrace
+    class CEditorStackTrace
     {
         private static Regex m_patterFilename;
         private static Regex m_patternSystemStackTrace;
@@ -130,11 +130,11 @@ namespace LunarEditor
             return null;
         }
 
-        public static StackTraceLine[] ParseStackTrace(string stackTrace)
+        public static CStackTraceLine[] ParseStackTrace(string stackTrace)
         {
             if (stackTrace != null)
             {
-                List<StackTraceLine> list = new List<StackTraceLine>();
+                List<CStackTraceLine> list = new List<CStackTraceLine>();
 
                 int lineStart = 0;
                 int lineEnd;
@@ -155,7 +155,7 @@ namespace LunarEditor
                         string lineNumberStr = groups[3].Value;
                         int lineNumber = CStringUtils.ParseInt(lineNumberStr, -1);
 
-                        list.Add(new StackTraceLine(line, string.IsNullOrEmpty(sourcePath) ? null : sourcePath, lineNumber, lineNumberStr.Length));
+                        list.Add(new CStackTraceLine(line, string.IsNullOrEmpty(sourcePath) ? null : sourcePath, lineNumber, lineNumberStr.Length));
                     }
                     else if ((m = PatternSystemStackTrace.Match(line)).Success)
                     {
@@ -176,21 +176,21 @@ namespace LunarEditor
                             line = CStringUtils.TryFormat("{0}({1})", method, args);
                         }
 
-                        list.Add(new StackTraceLine(line, path, lineNumber, lineNumberStr.Length));
+                        list.Add(new CStackTraceLine(line, path, lineNumber, lineNumberStr.Length));
                     }
                     else
                     {
-                        list.Add(new StackTraceLine(line));
+                        list.Add(new CStackTraceLine(line));
                     }
                 }
 
                 return list.ToArray();
             }
 
-            return StackTraceLine.kEmptyLinesArray;
+            return CStackTraceLine.kEmptyLinesArray;
         }
 
-        public static bool TryParseCompilerMessage(string line, out SourcePathEntry entry)
+        public static bool TryParseCompilerMessage(string line, out CSourcePathEntry entry)
         {
             if (line != null)
             {
@@ -199,12 +199,12 @@ namespace LunarEditor
                 {
                     string path = m.Groups[1].Value;
                     int lineNumber = CStringUtils.ParseInt(m.Groups[2].Value, -1);
-                    entry = new SourcePathEntry(path, lineNumber);
+                    entry = new CSourcePathEntry(path, lineNumber);
                     return true;
                 }
             }
 
-            entry = SourcePathEntry.Invalid;
+            entry = CSourcePathEntry.Invalid;
             return false;
         }
 
@@ -283,11 +283,11 @@ namespace LunarEditor
         }
     }
 
-    static class UnityStackTraceParser
+    static class CUnityStackTraceParser
     {
         private static Regex m_pattern;
 
-        public static bool TryParse(string line, out SourcePathEntry element)
+        public static bool TryParse(string line, out CSourcePathEntry element)
         {
             Match match = Pattern.Match(line);
             if (match.Success)
@@ -298,12 +298,12 @@ namespace LunarEditor
                 int lineNumber;
                 if (int.TryParse(lineVal, out lineNumber))
                 {
-                    element = new SourcePathEntry(path, lineNumber);
+                    element = new CSourcePathEntry(path, lineNumber);
                     return true;
                 }
             }
 
-            element = SourcePathEntry.Invalid;
+            element = CSourcePathEntry.Invalid;
             return false;
         }
 

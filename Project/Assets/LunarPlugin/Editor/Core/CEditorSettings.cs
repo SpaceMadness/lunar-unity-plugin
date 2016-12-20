@@ -23,7 +23,7 @@
 
 namespace LunarEditor
 {
-    static class EditorSettings
+    static class CEditorSettings
     {
         public static readonly string DontShowScriptCameraWarning = "DontShowScriptCameraWarning";
     }

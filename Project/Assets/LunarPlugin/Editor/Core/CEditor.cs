@@ -47,8 +47,8 @@ namespace LunarEditor
 
         internal static bool OpenFileExternal(string stackTrace)
         {
-            SourcePathEntry element;
-            if (UnityStackTraceParser.TryParse(stackTrace, out element))
+            CSourcePathEntry element;
+            if (CUnityStackTraceParser.TryParse(stackTrace, out element))
             {
                 return CEditor.OpenFileAtLineExternal(element.sourcePath, element.lineNumber);
             }

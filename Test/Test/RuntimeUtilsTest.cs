@@ -36,7 +36,7 @@ namespace LunarPlugin.Test
 
             string expected = "CConsole_common.cs";
 
-            string actual = EditorStackTrace.ExtractFileName(stackTrace);
+            string actual = CEditorStackTrace.ExtractFileName(stackTrace);
             Assert.AreEqual(expected, actual);
         }
     }

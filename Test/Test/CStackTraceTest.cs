@@ -122,17 +122,17 @@ namespace LunarPlugin.Test
                 "  at LunarPlugin.Timer.DefaultTimerCallback (LunarPlugin.Timer timer) [0x00000] in /Users/alementuev/dev/my/unity-debug-kit/Project/Assets/Plugins/LunarPlugin/Core/Timer.cs:76 \n" +
                 "  at LunarPlugin.Timer.Fire () [0x00008] in /Users/alementuev/dev/my/unity-debug-kit/Project/Assets/Plugins/LunarPlugin/Core/Timer.cs:51 ";
 
-            StackTraceLine[] expected =
+            CStackTraceLine[] expected =
             {
-                new StackTraceLine("System.Reflection.MonoMethod.Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) (at /Users/builduser/buildslave/mono-runtime-and-classlibs/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:232)", "/Users/builduser/buildslave/mono-runtime-and-classlibs/build/mcs/class/corlib/System.Reflection/MonoMethod.cs", 232),
-                new StackTraceLine("System.Reflection.MethodBase.Invoke(Object, Object[])"),
-                new StackTraceLine("System.Reflection.MethodBase.Invoke(Object)"),
-                new StackTraceLine("Test.<OnGUIHelper>m__4() (at Assets/Test.cs:100)", "Assets/Test.cs", 100),
-                new StackTraceLine("LunarPlugin.Timer.DefaultTimerCallback(Timer) (at Assets/Plugins/LunarPlugin/Core/Timer.cs:76)", "Assets/Plugins/LunarPlugin/Core/Timer.cs", 76),
-                new StackTraceLine("LunarPlugin.Timer.Fire() (at Assets/Plugins/LunarPlugin/Core/Timer.cs:51)", "Assets/Plugins/LunarPlugin/Core/Timer.cs", 51)
+                new CStackTraceLine("System.Reflection.MonoMethod.Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) (at /Users/builduser/buildslave/mono-runtime-and-classlibs/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:232)", "/Users/builduser/buildslave/mono-runtime-and-classlibs/build/mcs/class/corlib/System.Reflection/MonoMethod.cs", 232),
+                new CStackTraceLine("System.Reflection.MethodBase.Invoke(Object, Object[])"),
+                new CStackTraceLine("System.Reflection.MethodBase.Invoke(Object)"),
+                new CStackTraceLine("Test.<OnGUIHelper>m__4() (at Assets/Test.cs:100)", "Assets/Test.cs", 100),
+                new CStackTraceLine("LunarPlugin.Timer.DefaultTimerCallback(Timer) (at Assets/Plugins/LunarPlugin/Core/Timer.cs:76)", "Assets/Plugins/LunarPlugin/Core/Timer.cs", 76),
+                new CStackTraceLine("LunarPlugin.Timer.Fire() (at Assets/Plugins/LunarPlugin/Core/Timer.cs:51)", "Assets/Plugins/LunarPlugin/Core/Timer.cs", 51)
             };
 
-            StackTraceLine[] actual = EditorStackTrace.ParseStackTrace(stackTrace);
+            CStackTraceLine[] actual = CEditorStackTrace.ParseStackTrace(stackTrace);
             Assert.AreEqual(expected, actual);
         }
 
@@ -147,18 +147,18 @@ namespace LunarPlugin.Test
                 "UnityEditor.HostView:Invoke(String)\n" +
                 "UnityEditor.DockArea:OnGUI()";
 
-            StackTraceLine[] expected =
+            CStackTraceLine[] expected =
             {
-                new StackTraceLine("Test.foo(String, Timer, Boolean[]) (at Assets/Test.cs:120)", "Assets/Test.cs", 120),
-                new StackTraceLine("Test.<OnGUIHelper>m__4() (at Assets/Test.cs:98)", "Assets/Test.cs", 98),
-                new StackTraceLine("LunarPlugin.Timer.DefaultTimerCallback(Timer) (at Assets/Plugins/LunarPlugin/Core/Timer.cs:76)", "Assets/Plugins/LunarPlugin/Core/Timer.cs", 76),
-                new StackTraceLine("LunarPlugin.Timer.Fire() (at Assets/Plugins/LunarPlugin/Core/Timer.cs:51)", "Assets/Plugins/LunarPlugin/Core/Timer.cs", 51),
-                new StackTraceLine("UnityEditor.HostView:Invoke(String, Object)"),
-                new StackTraceLine("UnityEditor.HostView:Invoke(String)"),
-                new StackTraceLine("UnityEditor.DockArea:OnGUI()")
+                new CStackTraceLine("Test.foo(String, Timer, Boolean[]) (at Assets/Test.cs:120)", "Assets/Test.cs", 120),
+                new CStackTraceLine("Test.<OnGUIHelper>m__4() (at Assets/Test.cs:98)", "Assets/Test.cs", 98),
+                new CStackTraceLine("LunarPlugin.Timer.DefaultTimerCallback(Timer) (at Assets/Plugins/LunarPlugin/Core/Timer.cs:76)", "Assets/Plugins/LunarPlugin/Core/Timer.cs", 76),
+                new CStackTraceLine("LunarPlugin.Timer.Fire() (at Assets/Plugins/LunarPlugin/Core/Timer.cs:51)", "Assets/Plugins/LunarPlugin/Core/Timer.cs", 51),
+                new CStackTraceLine("UnityEditor.HostView:Invoke(String, Object)"),
+                new CStackTraceLine("UnityEditor.HostView:Invoke(String)"),
+                new CStackTraceLine("UnityEditor.DockArea:OnGUI()")
             };
 
-            StackTraceLine[] actual = EditorStackTrace.ParseStackTrace(stackTrace);
+            CStackTraceLine[] actual = CEditorStackTrace.ParseStackTrace(stackTrace);
             Assert.AreEqual(expected, actual);
         }
 
@@ -176,21 +176,21 @@ namespace LunarPlugin.Test
                 "Test:OnGUI() (at Assets/Test.cs:52)";
 
             string[] lines = data.Split('\n');
-            SourcePathEntry[] expected = 
+            CSourcePathEntry[] expected = 
             {
-                SourcePathEntry.Invalid,
-                new SourcePathEntry("Assets/Test.cs", 106),
-                new SourcePathEntry("Assets/Plugins/LunarPlugin/UI/Button.cs", 21),
-                new SourcePathEntry("Assets/Plugins/LunarPlugin/UI/View.cs", 382),
-                new SourcePathEntry("Assets/Plugins/LunarPlugin/UI/View.cs", 70),
-                new SourcePathEntry("Assets/Plugins/LunarPlugin/UI/View.cs", 62),
-                new SourcePathEntry("Assets/Test.cs", 52)
+                CSourcePathEntry.Invalid,
+                new CSourcePathEntry("Assets/Test.cs", 106),
+                new CSourcePathEntry("Assets/Plugins/LunarPlugin/UI/Button.cs", 21),
+                new CSourcePathEntry("Assets/Plugins/LunarPlugin/UI/View.cs", 382),
+                new CSourcePathEntry("Assets/Plugins/LunarPlugin/UI/View.cs", 70),
+                new CSourcePathEntry("Assets/Plugins/LunarPlugin/UI/View.cs", 62),
+                new CSourcePathEntry("Assets/Test.cs", 52)
             };
 
             for (int i = 0; i < lines.Length; ++i)
             {
-                SourcePathEntry actual;
-                UnityStackTraceParser.TryParse(lines[i], out actual);
+                CSourcePathEntry actual;
+                CUnityStackTraceParser.TryParse(lines[i], out actual);
 
                 Assert.AreEqual(expected[i].IsValid, actual.IsValid);
                 Assert.AreEqual(expected[i].sourcePath, actual.sourcePath);
@@ -203,9 +203,9 @@ namespace LunarPlugin.Test
         {
             string line = "[E]: Assets/Editor/Console/ConsoleView.cs(637,18): error CS1525: Unexpected symbol `if', expecting `)', `,', `;', `[', or `='";
 
-            SourcePathEntry expected = new SourcePathEntry("Assets/Editor/Console/ConsoleView.cs", 637);
-            SourcePathEntry actual;
-            bool succeed = EditorStackTrace.TryParseCompilerMessage(line, out actual);
+            CSourcePathEntry expected = new CSourcePathEntry("Assets/Editor/Console/ConsoleView.cs", 637);
+            CSourcePathEntry actual;
+            bool succeed = CEditorStackTrace.TryParseCompilerMessage(line, out actual);
             Assert.IsTrue(succeed);
 
             Assert.AreEqual(expected.IsValid, actual.IsValid);

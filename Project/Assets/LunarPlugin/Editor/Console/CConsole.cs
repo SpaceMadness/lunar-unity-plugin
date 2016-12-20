@@ -123,7 +123,7 @@ namespace LunarEditor
 
             string coloredLine = EditorSkin.SetColors(line);
             
-            string filename = EditorStackTrace.ExtractFileName(stackTrace);
+            string filename = CEditorStackTrace.ExtractFileName(stackTrace);
             if (level != null)
             {
                 lineBuffer.Append("[");

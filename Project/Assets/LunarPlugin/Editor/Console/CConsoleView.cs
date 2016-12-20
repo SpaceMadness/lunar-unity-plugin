@@ -210,7 +210,7 @@ namespace LunarEditor
                     {
                         exceptionCell = new CConsoleTextEntryExceptionView();
                     }
-                    exceptionCell.StackTraceLines = entry.data as StackTraceLine[];
+                    exceptionCell.StackTraceLines = entry.data as CStackTraceLine[];
 
                     cell = exceptionCell;
                 }
@@ -460,10 +460,10 @@ namespace LunarEditor
             {
                 if (this.level == CLogLevel.Exception)
                 {
-                    StackTraceLine[] stackLines = this.data as StackTraceLine[];
+                    CStackTraceLine[] stackLines = this.data as CStackTraceLine[];
                     if (stackLines == null && this.stackTrace != null)
                     {
-                        stackLines = EditorStackTrace.ParseStackTrace(this.stackTrace);
+                        stackLines = CEditorStackTrace.ParseStackTrace(this.stackTrace);
                         this.data = stackLines;
                     }
 
@@ -563,7 +563,7 @@ namespace LunarEditor
             this.height = size.y;
         }
 
-        private void LayoutException(ICTextMeasure measure, StackTraceLine[] stackLines, float maxWidth)
+        private void LayoutException(ICTextMeasure measure, CStackTraceLine[] stackLines, float maxWidth)
         {
             float nextX = 0.0f;
             float totalHeight = measure.CalcHeight(value, maxWidth);
@@ -592,7 +592,7 @@ namespace LunarEditor
             this.height = totalHeight;
         }
 
-        private static void ResolveSourceLink(GUIStyleTextMeasure measure, ref StackTraceLine stackLine)
+        private static void ResolveSourceLink(GUIStyleTextMeasure measure, ref CStackTraceLine stackLine)
         {
             Color color = EditorSkin.GetColor(stackLine.sourcePathExists ? CColorCode.Link : CColorCode.LinkInnactive);
 
@@ -687,8 +687,8 @@ namespace LunarEditor
             }
             else if (this.LogLevel == CLogLevel.Error || this.LogLevel == CLogLevel.Warn)
             {
-                SourcePathEntry element;
-                if (EditorStackTrace.TryParseCompilerMessage(m_value, out element))
+                CSourcePathEntry element;
+                if (CEditorStackTrace.TryParseCompilerMessage(m_value, out element))
                 {
                     if (CEditor.OpenFileAtLineExternal(element.sourcePath, element.lineNumber))
                     {
@@ -725,7 +725,7 @@ namespace LunarEditor
 
     class CConsoleTextEntryExceptionView : CConsoleTextEntryView
     {
-        private StackTraceLine[] m_stackTraceLines = StackTraceLine.kEmptyLinesArray;
+        private CStackTraceLine[] m_stackTraceLines = CStackTraceLine.kEmptyLinesArray;
 
         protected override void DrawGUI()
         {
@@ -749,7 +749,7 @@ namespace LunarEditor
             EndGroup();
         }
 
-        private void DrawStackLine(ref StackTraceLine stackLine, GUIStyle style)
+        private void DrawStackLine(ref CStackTraceLine stackLine, GUIStyle style)
         {
             if (stackLine.IsClickable)
             {
@@ -798,7 +798,7 @@ namespace LunarEditor
 
         #region Properties
 
-        public StackTraceLine[] StackTraceLines
+        public CStackTraceLine[] StackTraceLines
         {
             get { return m_stackTraceLines; }
             set { m_stackTraceLines = value; }
