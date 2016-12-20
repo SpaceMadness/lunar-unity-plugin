@@ -41,12 +41,12 @@ namespace LunarEditor
 
         public virtual void Add(string text)
         {
-            Add(new ConsoleViewCellEntry(text));
+            Add(new CConsoleViewCellEntry(text));
         }
 
         public virtual void Add(CLogLevel level, CTag tag, string text, string stackTrace)
         {
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(text);
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(text);
             entry.level = level;
             entry.tag = tag;
             entry.stackTrace = stackTrace;
@@ -55,7 +55,7 @@ namespace LunarEditor
         
         public virtual void Add(CLogLevel level, CTag tag, string[] table, string stackTrace)
         {
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(table);
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(table);
             entry.level = level;
             entry.tag = tag;
             entry.stackTrace = stackTrace;

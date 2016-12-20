@@ -32,7 +32,7 @@ namespace ConsoleViewTests
             TableViewCell lastCell = null;
             while (cell != null)
             {
-                ConsoleTextEntryView textCell = cell as ConsoleTextEntryView;
+                CConsoleTextEntryView textCell = cell as CConsoleTextEntryView;
                 Assert.IsNotNull(textCell);
 
                 Assert.AreEqual(values[index++], textCell.Value);
@@ -49,7 +49,7 @@ namespace ConsoleViewTests
             int index = 0;
             for (TableViewCell cell = table.FirstVisibleCell; cell != null; cell = cell.NextCell)
             {
-                ConsoleTextEntryView textCell = cell as ConsoleTextEntryView;
+                CConsoleTextEntryView textCell = cell as CConsoleTextEntryView;
                 Assert.IsNotNull(textCell);
 
                 buffer.Append(textCell.Value);
@@ -83,7 +83,7 @@ namespace ConsoleViewTests
         #endregion
     }
 
-    class MockConsoleView : ConsoleView, ICTextMeasure
+    class MockConsoleView : CConsoleView, ICTextMeasure
     {
         public MockConsoleView(CAbstractConsole console, float width, float height)
             : base(console, width, height)
@@ -129,7 +129,7 @@ namespace ConsoleViewTests
 
         public void Add(CLogLevel level, CTag tag, string line)
         {
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(line);
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(line);
             entry.level = level;
             entry.tag = tag;
             Add(entry);

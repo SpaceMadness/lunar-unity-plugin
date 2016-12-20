@@ -29,7 +29,7 @@ namespace TableViewTest
 
             string[] lines = { "1111" };
 
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(lines);
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(lines);
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -44,7 +44,7 @@ namespace TableViewTest
 
             string[] lines = { "111", "2222" };
 
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(lines);
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(lines);
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -59,7 +59,7 @@ namespace TableViewTest
 
             string[] lines = { "111", "22", "3333" };
 
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(lines);
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(lines);
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -74,7 +74,7 @@ namespace TableViewTest
 
             string[] lines = { "1111", "2222", "3333", "4444" };
 
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(lines);
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(lines);
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -95,7 +95,7 @@ namespace TableViewTest
             lines.Add("4444");
             lines.Add("5555");
 
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(lines.ToArray());
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(lines.ToArray());
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -117,7 +117,7 @@ namespace TableViewTest
             lines.Add("5555");
             lines.Add("6666");
 
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(lines.ToArray());
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(lines.ToArray());
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -140,7 +140,7 @@ namespace TableViewTest
             lines.Add("6666");
             lines.Add("7777");
 
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(lines.ToArray());
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(lines.ToArray());
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -165,7 +165,7 @@ namespace TableViewTest
             lines.Add("7777");
             lines.Add("8888");
 
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(lines.ToArray());
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(lines.ToArray());
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -191,7 +191,7 @@ namespace TableViewTest
             lines.Add("8888");
             lines.Add("9999");
 
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(lines.ToArray());
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(lines.ToArray());
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -210,7 +210,7 @@ namespace TableViewTest
             List<string> lines = new List<string>();
             lines.Add("1111");
 
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(lines.ToArray());
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(lines.ToArray());
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -227,7 +227,7 @@ namespace TableViewTest
             List<string> lines = new List<string>();
             lines.Add("1111");
 
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(lines.ToArray());
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(lines.ToArray());
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -244,7 +244,7 @@ namespace TableViewTest
             lines.Add("1111");
             lines.Add("222222");
 
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(lines.ToArray());
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(lines.ToArray());
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -262,7 +262,7 @@ namespace TableViewTest
             lines.Add("222222");
             lines.Add("33333");
 
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(lines.ToArray());
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(lines.ToArray());
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -281,7 +281,7 @@ namespace TableViewTest
             lines.Add("222222");
             lines.Add("333333333");
 
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(lines.ToArray());
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(lines.ToArray());
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -302,7 +302,7 @@ namespace TableViewTest
             Vector2 size = new Vector2(5, 1);
 
             string line = "12345";
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(line);
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(line);
             entry.Layout(this, size.x + 1);
 
             AssertCellEntryLayout(entry, size,
@@ -317,7 +317,7 @@ namespace TableViewTest
             Vector2 size = new Vector2(5, 1);
 
             string line = "12345";
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(line);
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(line);
             entry.Layout(this, size.x);
 
             AssertCellEntryLayout(entry, size,
@@ -332,7 +332,7 @@ namespace TableViewTest
             Vector2 size = new Vector2(5, 1);
 
             string line = "12345";
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(line);
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(line);
             entry.Layout(this, size.x - 1);
 
             AssertCellEntryLayout(entry, size,
@@ -344,7 +344,7 @@ namespace TableViewTest
 
         #region Helpers
 
-        private void AssertCellEntryLayout(ConsoleViewCellEntry entry, Vector2 expectedSize, string expectedValue)
+        private void AssertCellEntryLayout(CConsoleViewCellEntry entry, Vector2 expectedSize, string expectedValue)
         {
             Assert.AreEqual(expectedValue, entry.value);
             Assert.AreEqual(expectedSize.x, entry.width);

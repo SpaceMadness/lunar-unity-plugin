@@ -57,7 +57,7 @@ namespace LunarPlugin.Test
 
         #region IConsoleDelegate implementation
 
-        public void OnConsoleEntryAdded(CAbstractConsole console, ref ConsoleViewCellEntry entry)
+        public void OnConsoleEntryAdded(CAbstractConsole console, ref CConsoleViewCellEntry entry)
         {
             if (entry.IsTable)
             {

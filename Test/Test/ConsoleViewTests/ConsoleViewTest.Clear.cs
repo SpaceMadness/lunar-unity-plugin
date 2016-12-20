@@ -25,7 +25,7 @@ namespace ConsoleViewTests
             console.Add(CLogLevel.Debug, tag, "line1111");
             console.Add(CLogLevel.Debug, tag, "foo");
 
-            ConsoleView consoleView = new MockConsoleView(console, 320, 230);
+            CConsoleView consoleView = new MockConsoleView(console, 320, 230);
 
             AssertVisibleRows(consoleView, "line1", "line11", "line111", "line1111", "foo");
             Assert.AreEqual(5, consoleView.RowsCount);

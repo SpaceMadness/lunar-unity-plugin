@@ -27,7 +27,7 @@ namespace LunarEditor
 {
     interface IConsoleViewFilter
     {
-        bool Apply(ref ConsoleViewCellEntry entry);
+        bool Apply(ref CConsoleViewCellEntry entry);
     }
 
     abstract class ConsoleViewFilterBase : IConsoleViewFilter
@@ -39,7 +39,7 @@ namespace LunarEditor
             m_priority = priority;
         }
 
-        public abstract bool Apply(ref ConsoleViewCellEntry entry);
+        public abstract bool Apply(ref CConsoleViewCellEntry entry);
 
         public int Priority
         {
@@ -58,7 +58,7 @@ namespace LunarEditor
 
         #region IConsoleViewFilter implementation
 
-        public bool Apply(ref ConsoleViewCellEntry entry)
+        public bool Apply(ref CConsoleViewCellEntry entry)
         {
             for (int i = 0; i < m_filters.Count; ++i)
             {

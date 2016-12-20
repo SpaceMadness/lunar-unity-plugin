@@ -38,7 +38,7 @@ namespace LunarEditor
 
     class TerminalCompositeView : View
     {
-        private ConsoleView m_consoleView;
+        private CConsoleView m_consoleView;
         private TextField m_commandField;
         private ToolBarLabel m_infoLabel;
 
@@ -208,7 +208,7 @@ namespace LunarEditor
                 HistoryReset();
             };
 
-            m_consoleView = new ConsoleView(Terminal, m_commandField.Width, this.Height - (toolbar.Height + m_commandField.Height));
+            m_consoleView = new CConsoleView(Terminal, m_commandField.Width, this.Height - (toolbar.Height + m_commandField.Height));
             m_consoleView.Y = toolbar.Bottom;
             m_consoleView.IsScrollLocked = true;
             m_consoleView.AutoresizeMask = ViewAutoresizing.FlexibleWidth | ViewAutoresizing.FlexibleHeight;

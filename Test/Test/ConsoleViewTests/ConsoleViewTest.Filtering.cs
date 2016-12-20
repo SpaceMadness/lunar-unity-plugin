@@ -22,19 +22,19 @@ namespace ConsoleViewTests
         {
             List<int> priorities = new List<int>();
 
-            ConsoleViewFilterBase filter1 = new TestFilter(1, delegate(ref ConsoleViewCellEntry e)
+            ConsoleViewFilterBase filter1 = new TestFilter(1, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(1);
                 return true;
             });
 
-            ConsoleViewFilterBase filter2 = new TestFilter(2, delegate(ref ConsoleViewCellEntry e)
+            ConsoleViewFilterBase filter2 = new TestFilter(2, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(2);
                 return true;
             });
 
-            ConsoleViewFilterBase filter3 = new TestFilter(3, delegate(ref ConsoleViewCellEntry e)
+            ConsoleViewFilterBase filter3 = new TestFilter(3, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(3);
                 return true;
@@ -48,7 +48,7 @@ namespace ConsoleViewTests
             compositeFilter.AddFilter(filter2);
             compositeFilter.AddFilter(filter3);
 
-            ConsoleViewCellEntry entry = default(ConsoleViewCellEntry);
+            CConsoleViewCellEntry entry = default(CConsoleViewCellEntry);
             compositeFilter.Apply(ref entry);
 
             AssertList(priorities, 3, 2, 1);
@@ -59,19 +59,19 @@ namespace ConsoleViewTests
         {
             List<int> priorities = new List<int>();
 
-            ConsoleViewFilterBase filter1 = new TestFilter(1, delegate(ref ConsoleViewCellEntry e)
+            ConsoleViewFilterBase filter1 = new TestFilter(1, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(1);
                 return true;
             });
 
-            ConsoleViewFilterBase filter2 = new TestFilter(2, delegate(ref ConsoleViewCellEntry e)
+            ConsoleViewFilterBase filter2 = new TestFilter(2, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(2);
                 return false;
             });
 
-            ConsoleViewFilterBase filter3 = new TestFilter(3, delegate(ref ConsoleViewCellEntry e)
+            ConsoleViewFilterBase filter3 = new TestFilter(3, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(3);
                 return true;
@@ -85,7 +85,7 @@ namespace ConsoleViewTests
             compositeFilter.AddFilter(filter2);
             compositeFilter.AddFilter(filter3);
 
-            ConsoleViewCellEntry entry = default(ConsoleViewCellEntry);
+            CConsoleViewCellEntry entry = default(CConsoleViewCellEntry);
             compositeFilter.Apply(ref entry);
 
             AssertList(priorities, 3, 2);
@@ -96,19 +96,19 @@ namespace ConsoleViewTests
         {
             List<int> priorities = new List<int>();
 
-            ConsoleViewFilterBase filter1 = new TestFilter(1, delegate(ref ConsoleViewCellEntry e)
+            ConsoleViewFilterBase filter1 = new TestFilter(1, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(1);
                 return true;
             });
 
-            ConsoleViewFilterBase filter2 = new TestFilter(2, delegate(ref ConsoleViewCellEntry e)
+            ConsoleViewFilterBase filter2 = new TestFilter(2, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(2);
                 return true;
             });
 
-            ConsoleViewFilterBase filter3 = new TestFilter(3, delegate(ref ConsoleViewCellEntry e)
+            ConsoleViewFilterBase filter3 = new TestFilter(3, delegate(ref CConsoleViewCellEntry e)
             {
                 priorities.Add(3);
                 return true;
@@ -122,7 +122,7 @@ namespace ConsoleViewTests
             compositeFilter.RemoveFilter(filter1);
             compositeFilter.RemoveFilter(filter3);
 
-            ConsoleViewCellEntry entry = default(ConsoleViewCellEntry);
+            CConsoleViewCellEntry entry = default(CConsoleViewCellEntry);
             compositeFilter.Apply(ref entry);
 
             AssertList(priorities, 2);
@@ -903,7 +903,7 @@ namespace ConsoleViewTests
             );
         }
 
-        delegate bool TestFilterDelegate(ref ConsoleViewCellEntry entry);
+        delegate bool TestFilterDelegate(ref CConsoleViewCellEntry entry);
 
         class TestFilter : ConsoleViewFilterBase
         {
@@ -915,7 +915,7 @@ namespace ConsoleViewTests
                 m_delegate = del;
             }
 
-            public override bool Apply(ref ConsoleViewCellEntry entry)
+            public override bool Apply(ref CConsoleViewCellEntry entry)
             {
                 return m_delegate(ref entry);
             }

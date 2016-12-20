@@ -29,7 +29,7 @@ namespace LunarEditor
 {
     interface ICConsoleDelegate
     {
-        void OnConsoleEntryAdded(CAbstractConsole console, ref ConsoleViewCellEntry entry);
+        void OnConsoleEntryAdded(CAbstractConsole console, ref CConsoleViewCellEntry entry);
         void OnConsoleCleared(CAbstractConsole console);
     }
 
@@ -41,11 +41,11 @@ namespace LunarEditor
     {
         public CAbstractConsole(int historySize)
         {
-            Entries = new CCycleArray<ConsoleViewCellEntry>(historySize);
+            Entries = new CCycleArray<CConsoleViewCellEntry>(historySize);
             Delegate = this; // use null-object to avoid constant null reference checks
         }
 
-        internal void Add(ConsoleViewCellEntry entry)
+        internal void Add(CConsoleViewCellEntry entry)
         {
             if (CThreadUtils.IsUnityThread())
             {
@@ -81,7 +81,7 @@ namespace LunarEditor
 
         #region IConsoleDelegate null implementation
 
-        public void OnConsoleEntryAdded(CAbstractConsole console, ref ConsoleViewCellEntry entry)
+        public void OnConsoleEntryAdded(CAbstractConsole console, ref CConsoleViewCellEntry entry)
         {
         }
 
@@ -95,7 +95,7 @@ namespace LunarEditor
         
         #region Properties
         
-        internal CCycleArray<ConsoleViewCellEntry> Entries { get; private set; }
+        internal CCycleArray<CConsoleViewCellEntry> Entries { get; private set; }
         internal ICConsoleDelegate Delegate { get; set; }
 
         public int Capacity

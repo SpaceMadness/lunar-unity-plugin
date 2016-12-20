@@ -33,7 +33,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class ConsoleView : TableView, ITableViewDataSource, ITableViewDelegate, ICConsoleDelegate
+    class CConsoleView : TableView, ITableViewDataSource, ITableViewDelegate, ICConsoleDelegate
     {
         private readonly CAbstractConsole m_console;
 
@@ -42,7 +42,7 @@ namespace LunarEditor
         private ICTextMeasure m_textMeasure;
         private float m_overridenContentWidth;
 
-        public ConsoleView(CAbstractConsole console, float width, float height)
+        public CConsoleView(CAbstractConsole console, float width, float height)
             : base(console.Capacity, width, height)
         {
             m_console = console;
@@ -67,7 +67,7 @@ namespace LunarEditor
 
         #region IConsoleDelegate implementation
 
-        public void OnConsoleEntryAdded(CAbstractConsole console, ref ConsoleViewCellEntry entry)
+        public void OnConsoleEntryAdded(CAbstractConsole console, ref CConsoleViewCellEntry entry)
         {
             ReloadNewData();
             Repaint();
@@ -173,7 +173,7 @@ namespace LunarEditor
 
         protected override bool OnMouseDown(CEvent evt, TableViewCell cell)
         {
-            ConsoleViewCell consoleCell = cell as ConsoleViewCell;
+            CConsoleViewCell consoleCell = cell as CConsoleViewCell;
             if (consoleCell != null && consoleCell.OnMouseDown(evt))
             {
                 return true;
@@ -184,7 +184,7 @@ namespace LunarEditor
 
         protected override bool OnMouseDoubleClick(CEvent evt, TableViewCell cell)
         {
-            ConsoleViewCell consoleCell = cell as ConsoleViewCell;
+            CConsoleViewCell consoleCell = cell as CConsoleViewCell;
             if (consoleCell != null && consoleCell.OnMouseDoubleClick(evt))
             {
                 return true;
@@ -197,18 +197,18 @@ namespace LunarEditor
 
         //////////////////////////////////////////////////////////////////////////////
 
-        private TableViewCell CreateTableCell(TableView table, ref ConsoleViewCellEntry entry)
+        private TableViewCell CreateTableCell(TableView table, ref CConsoleViewCellEntry entry)
         {
             if (entry.IsPlain || entry.IsTable)
             {
-                ConsoleTextEntryView cell;
+                CConsoleTextEntryView cell;
 
                 if (entry.level == CLogLevel.Exception)
                 {
-                    ConsoleTextEntryExceptionView exceptionCell = table.DequeueReusableCell<ConsoleTextEntryExceptionView>();
+                    CConsoleTextEntryExceptionView exceptionCell = table.DequeueReusableCell<CConsoleTextEntryExceptionView>();
                     if (exceptionCell == null)
                     {
-                        exceptionCell = new ConsoleTextEntryExceptionView();
+                        exceptionCell = new CConsoleTextEntryExceptionView();
                     }
                     exceptionCell.StackTraceLines = entry.data as StackTraceLine[];
 
@@ -216,10 +216,10 @@ namespace LunarEditor
                 }
                 else
                 {
-                    cell = table.DequeueReusableCell<ConsoleTextEntryView>();
+                    cell = table.DequeueReusableCell<CConsoleTextEntryView>();
                     if (cell == null)
                     {
-                        cell = new ConsoleTextEntryView();
+                        cell = new CConsoleTextEntryView();
                     }
                 }
 
@@ -241,7 +241,7 @@ namespace LunarEditor
             }
         }
 
-        private float HeightForTableCell(ref ConsoleViewCellEntry entry)
+        private float HeightForTableCell(ref CConsoleViewCellEntry entry)
         {
             if (entry.width != this.ContentWidth)
             {
@@ -374,12 +374,12 @@ namespace LunarEditor
             get { return m_filteredDelegate != null && m_filteredDelegate.HasFilters; }
         }
 
-        internal CCycleArray<ConsoleViewCellEntry> Entries { get { return m_console.Entries; } }
+        internal CCycleArray<CConsoleViewCellEntry> Entries { get { return m_console.Entries; } }
 
         #endregion
     }
 
-    public struct ConsoleViewCellEntry
+    public struct CConsoleViewCellEntry
     {
         internal enum Flags : byte
         {
@@ -401,7 +401,7 @@ namespace LunarEditor
 
         internal Flags flags;
 
-        public ConsoleViewCellEntry(string line, float width = 0, float height = 0)
+        public CConsoleViewCellEntry(string line, float width = 0, float height = 0)
         {
             this.value = line;
             this.width = width;
@@ -414,7 +414,7 @@ namespace LunarEditor
             this.stackTrace = null;
         }
 
-        public ConsoleViewCellEntry(string[] lines, float width = 0, float height = 0)
+        public CConsoleViewCellEntry(string[] lines, float width = 0, float height = 0)
         {
             if (lines.Length == 1)
             {
@@ -436,7 +436,7 @@ namespace LunarEditor
             this.stackTrace = null;
         }
 
-        public ConsoleViewCellEntry(Exception e, string message, float width = 0, float height = 0)
+        public CConsoleViewCellEntry(Exception e, string message, float width = 0, float height = 0)
         {
             this.value = message != null ? CStringUtils.TryFormat("{0} ({1})", message, e.Message) : e.Message;
             this.width = width;
@@ -630,7 +630,7 @@ namespace LunarEditor
         }
     }
 
-    class ConsoleViewCell : TableViewCell
+    class CConsoleViewCell : TableViewCell
     {
         public virtual bool OnMouseDown(CEvent evt)
         {
@@ -652,10 +652,10 @@ namespace LunarEditor
             return false;
         }
 
-        public ConsoleView ConsoleView { get { return Table as ConsoleView; } }
+        public CConsoleView ConsoleView { get { return Table as CConsoleView; } }
     }
 
-    class ConsoleTextEntryView : ConsoleViewCell
+    class CConsoleTextEntryView : CConsoleViewCell
     {
         protected string m_value;
 
@@ -723,7 +723,7 @@ namespace LunarEditor
         #endregion
     }
 
-    class ConsoleTextEntryExceptionView : ConsoleTextEntryView
+    class CConsoleTextEntryExceptionView : CConsoleTextEntryView
     {
         private StackTraceLine[] m_stackTraceLines = StackTraceLine.kEmptyLinesArray;
 

@@ -31,7 +31,7 @@ namespace ConsoleViewTests
                 console.Add(CLogLevel.Debug, tag, lines[i]);
             }
 
-            ConsoleView consoleView = new MockConsoleView(console, 320, 230);
+            CConsoleView consoleView = new MockConsoleView(console, 320, 230);
             string actual = consoleView.GetText();
 
             Assert.AreEqual(expected, actual);
@@ -53,7 +53,7 @@ namespace ConsoleViewTests
                 console.Add(CLogLevel.Debug, tag, lines[i]);
             }
 
-            ConsoleView consoleView = new MockConsoleView(console, 320, 230);
+            CConsoleView consoleView = new MockConsoleView(console, 320, 230);
             string actual = consoleView.GetText(1, 2);
 
             string expected = "line 2\n" +
@@ -80,7 +80,7 @@ namespace ConsoleViewTests
                 console.Add(CLogLevel.Debug, tag, lines[i]);
             }
 
-            ConsoleView consoleView = new MockConsoleView(console, 320, 230);
+            CConsoleView consoleView = new MockConsoleView(console, 320, 230);
             string actual = consoleView.GetText();
 
             string expected = "line 4\n" +
@@ -108,7 +108,7 @@ namespace ConsoleViewTests
                 console.Add(CLogLevel.Debug, tag, lines[i]);
             }
 
-            ConsoleView consoleView = new MockConsoleView(console, 320, 230);
+            CConsoleView consoleView = new MockConsoleView(console, 320, 230);
             string actual = consoleView.GetText(3, 2);
 
             string expected = "line 4\n" +
@@ -134,7 +134,7 @@ namespace ConsoleViewTests
                 console.Add(CLogLevel.Debug, tag, line);
             }
 
-            ConsoleView consoleView = new MockConsoleView(console, 320, 230);
+            CConsoleView consoleView = new MockConsoleView(console, 320, 230);
             string actual = consoleView.GetText();
 
             Assert.AreEqual(expected, actual);

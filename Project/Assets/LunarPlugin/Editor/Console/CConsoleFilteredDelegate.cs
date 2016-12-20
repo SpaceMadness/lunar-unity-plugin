@@ -30,7 +30,7 @@ namespace LunarEditor
 {
     class CConsoleFilteredDelegate : ConsoleViewCompositeFilter, ITableViewDataSource, ITableViewDelegate, ICConsoleDelegate
     {
-        private ConsoleView m_consoleView;
+        private CConsoleView m_consoleView;
 
         private CCycleArray<int> m_filteredIndices;
 
@@ -40,7 +40,7 @@ namespace LunarEditor
 
         private int m_oldConsoleEntriesHeadIndex;
 
-        public CConsoleFilteredDelegate(ConsoleView consoleView)
+        public CConsoleFilteredDelegate(CConsoleView consoleView)
         {
             m_consoleView = consoleView;
             m_oldConsoleEntriesHeadIndex = Entries.HeadIndex;
@@ -206,7 +206,7 @@ namespace LunarEditor
             int oldIndicesCount = m_filteredIndices.RealLength;
             ClearIndices();
 
-            ConsoleViewCellEntry[] entriesArray = Entries.InternalArray;
+            CConsoleViewCellEntry[] entriesArray = Entries.InternalArray;
             for (int entryIndex = Entries.HeadIndex; entryIndex < Entries.Length; ++entryIndex)
             {
                 int entryArrayIndex = Entries.ToArrayIndex(entryIndex);
@@ -225,7 +225,7 @@ namespace LunarEditor
 
         private bool AppendFilter(IConsoleViewFilter filter)
         {
-            ConsoleViewCellEntry[] entriesArray = Entries.InternalArray;
+            CConsoleViewCellEntry[] entriesArray = Entries.InternalArray;
             int toIndex = m_filteredIndices.HeadIndex;
             for (int fromIndex = toIndex; fromIndex < m_filteredIndices.Length; ++fromIndex)
             {
@@ -294,9 +294,9 @@ namespace LunarEditor
 
         #region IConsoleDelegate implementation
 
-        public void OnConsoleEntryAdded(CAbstractConsole console, ref ConsoleViewCellEntry entry)
+        public void OnConsoleEntryAdded(CAbstractConsole console, ref CConsoleViewCellEntry entry)
         {
-            CCycleArray<ConsoleViewCellEntry> Entries = this.Entries;
+            CCycleArray<CConsoleViewCellEntry> Entries = this.Entries;
 
             // if unfiltered console entries overflow - we need to adjust indices and visible lines
             if (m_oldConsoleEntriesHeadIndex < Entries.HeadIndex)
@@ -341,7 +341,7 @@ namespace LunarEditor
 
         #region Properties
 
-        private CCycleArray<ConsoleViewCellEntry> Entries
+        private CCycleArray<CConsoleViewCellEntry> Entries
         {
             get { return m_consoleView.Entries; }
         }
@@ -359,7 +359,7 @@ namespace LunarEditor
             this.Text = text;
         }
 
-        public override bool Apply(ref ConsoleViewCellEntry entry)
+        public override bool Apply(ref CConsoleViewCellEntry entry)
         {
             return CultureInfo.CurrentCulture.CompareInfo.IndexOf(entry.value, m_text, CompareOptions.IgnoreCase) != -1;
         }
@@ -388,7 +388,7 @@ namespace LunarEditor
             m_tags = new HashSet<CTag>();
         }
 
-        public override bool Apply(ref ConsoleViewCellEntry entry)
+        public override bool Apply(ref CConsoleViewCellEntry entry)
         {
             return entry.tag != null && m_tags.Contains(entry.tag);
         }
@@ -441,7 +441,7 @@ namespace LunarEditor
             this.Level = level;
         }
 
-        public override bool Apply(ref ConsoleViewCellEntry entry)
+        public override bool Apply(ref CConsoleViewCellEntry entry)
         {
             return entry.level != null && entry.level.Priority >= m_level.Priority;
         }

@@ -41,17 +41,17 @@ namespace LunarEditor
 
         public virtual void Add(string line)
         {
-            Add(new ConsoleViewCellEntry(line));
+            Add(new CConsoleViewCellEntry(line));
         }
         
         public virtual void Add(string[] lines)
         {
-            Add(new ConsoleViewCellEntry(lines));
+            Add(new CConsoleViewCellEntry(lines));
         }
 
         public virtual void Add(Exception e, string message)
         {
-            Add(new ConsoleViewCellEntry(e, message));
+            Add(new CConsoleViewCellEntry(e, message));
         }
 
         //////////////////////////////////////////////////////////////////////////////
