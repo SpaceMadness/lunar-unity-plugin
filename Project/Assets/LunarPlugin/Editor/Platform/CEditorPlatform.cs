@@ -29,7 +29,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class EditorPlatform : PlatformImpl
+    class EditorPlatform : CPlatformImpl
     {
         public override void AssertMessage(string message, string stackTrace)
         {

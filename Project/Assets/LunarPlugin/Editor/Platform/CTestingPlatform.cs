@@ -27,7 +27,7 @@ namespace LunarPluginInternal
 {
     delegate void TestingPlatformAssertDelegate(string message, string stackTrace);
 
-    class TestingPlatform : PlatformImpl
+    class TestingPlatform : CPlatformImpl
     {
         private static TestingPlatformAssertDelegate s_assertDelegate = DefaultAssertDelegate;
 

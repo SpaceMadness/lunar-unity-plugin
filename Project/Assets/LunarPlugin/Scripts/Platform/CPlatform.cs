@@ -28,17 +28,17 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    internal static class Platform
+    internal static class CPlatform
     {
         private static readonly string EditorPlatformType = "LunarEditor.EditorPlatform";
-        private static PlatformImpl s_impl;
+        private static CPlatformImpl s_impl;
 
-        static Platform()
+        static CPlatform()
         {
             s_impl = CreateImpl();
         }
 
-        private static PlatformImpl CreateImpl()
+        private static CPlatformImpl CreateImpl()
         {
             try
             {
@@ -47,7 +47,7 @@ namespace LunarPluginInternal
                     Type type = ClassUtils.TypeForName(EditorPlatformType);
                     if (type != null)
                     {
-                        return ClassUtils.CreateInstance<PlatformImpl>(type);
+                        return ClassUtils.CreateInstance<CPlatformImpl>(type);
                     }
                     else
                     {
@@ -61,7 +61,7 @@ namespace LunarPluginInternal
             {
                 // unit test running
                 Type type = ClassUtils.TypeForName("LunarPluginInternal.TestingPlatform");
-                return ClassUtils.CreateInstance<PlatformImpl>(type);
+                return ClassUtils.CreateInstance<CPlatformImpl>(type);
             }
         }
 
@@ -71,7 +71,7 @@ namespace LunarPluginInternal
         }
     }
 
-    abstract class PlatformImpl
+    abstract class CPlatformImpl
     {
         public abstract void AssertMessage(string message, string stackTrace);
     }

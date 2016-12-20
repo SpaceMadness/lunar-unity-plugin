@@ -2050,7 +2050,7 @@ namespace LunarPlugin
             string message = StringUtils.TryFormat(format, args);
             string stackTrace = CStackTrace.ExtractStackTrace(3);
 
-            Platform.AssertMessage(message, stackTrace);
+            CPlatform.AssertMessage(message, stackTrace);
 
             try
             {
