@@ -165,7 +165,7 @@ namespace LunarPluginInternal
         public ICCommandDelegate CommandDelegate
         {
             get { return m_delegate; }
-            set { m_delegate = value != null ? value : NullCommandDelegate.Instance; }
+            set { m_delegate = value != null ? value : CNullCommandDelegate.Instance; }
         }
 
         #endregion

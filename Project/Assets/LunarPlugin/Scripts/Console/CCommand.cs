@@ -30,7 +30,7 @@ using LunarPluginInternal;
 
 namespace LunarPlugin
 {
-    delegate bool ListOptionsFilter(CCommand.Option opt);
+    delegate bool COptionsFilter(CCommand.Option opt);
 
     public enum CCommandFlags
     {
@@ -55,11 +55,11 @@ namespace LunarPlugin
         bool IsPromptEnabled { get; }
     }
 
-    internal class NullCommandDelegate : ICCommandDelegate
+    internal class CNullCommandDelegate : ICCommandDelegate
     {
-        public static readonly NullCommandDelegate Instance = new NullCommandDelegate();
+        public static readonly CNullCommandDelegate Instance = new CNullCommandDelegate();
 
-        private NullCommandDelegate()
+        private CNullCommandDelegate()
         {
         }
 
@@ -579,7 +579,7 @@ namespace LunarPlugin
             return ListOptions(outList, DefaultListOptionsFilter);
         }
 
-        internal IList<Option> ListOptions(IList<Option> outList, ListOptionsFilter filter)
+        internal IList<Option> ListOptions(IList<Option> outList, COptionsFilter filter)
         {
             if (filter == null)
             {
@@ -1097,7 +1097,7 @@ namespace LunarPlugin
         internal ICCommandDelegate Delegate
         { 
             get { return m_delegate; } 
-            set { m_delegate = value != null ? value : NullCommandDelegate.Instance; }
+            set { m_delegate = value != null ? value : CNullCommandDelegate.Instance; }
         }
 
         internal List<string> Args { get; set; }
