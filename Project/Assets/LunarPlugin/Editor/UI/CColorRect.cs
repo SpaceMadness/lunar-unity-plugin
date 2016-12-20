@@ -49,7 +49,7 @@ namespace LunarEditor
                 if (m_color != value)
                 {
                     m_color = value;
-                    m_style.normal.background = UIHelper.Create1x1ColorTexture(m_color);
+                    m_style.normal.background = CUIHelper.Create1x1ColorTexture(m_color);
                 }
             }
         }

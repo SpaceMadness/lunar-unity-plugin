@@ -31,8 +31,8 @@ namespace LunarEditor
             Content = new GUIContent(title);
 
             Vector2 size = Style.CalcSize(Content);
-            Width = size.x + 2 * UISize.ButtonBorder;
-            Height = UISize.ButtonHeight;
+            Width = size.x + 2 * CUISize.ButtonBorder;
+            Height = CUISize.ButtonHeight;
         }
         
         //////////////////////////////////////////////////////////////////////////////

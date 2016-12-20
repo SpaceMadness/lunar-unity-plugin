@@ -68,7 +68,7 @@ namespace LunarEditor
 
         internal static void OnPlayModeChanged(bool isPlaying)
         {
-            UIHelper.RecycleTextures();
+            CUIHelper.RecycleTextures();
         }
 
         internal static void CopyToClipboard(string text)

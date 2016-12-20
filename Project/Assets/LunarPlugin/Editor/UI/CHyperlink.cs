@@ -71,7 +71,7 @@ namespace LunarEditor
             #if !(UNITY_4_7 || UNITY_4_6 || UNITY_4_5 || UNITY_4_4 || UNITY_4_3 || UNITY_4_2 || UNITY_4_1 || UNITY_4)
             Rect linkFrame = this.Frame;
             linkFrame.height = this.Style.font.ascent;
-            UIHelper.DrawUnderLine(linkFrame, this.Style.normal.textColor);
+            CUIHelper.DrawUnderLine(linkFrame, this.Style.normal.textColor);
             #endif
         }
     }

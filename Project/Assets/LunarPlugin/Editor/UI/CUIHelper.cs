@@ -27,7 +27,7 @@ using System.Collections.Generic;
 
 namespace LunarEditor
 {
-    static class UISize
+    static class CUISize
     {
         public const float ToolbarHeight = 17;
         public const float ToolbarSpacing = 6;
@@ -46,11 +46,11 @@ namespace LunarEditor
         public const float CVarEntryWidth = 270;
     }
 
-    static class UIHelper
+    static class CUIHelper
     {
         private static Dictionary<Color, Texture2D> m_texturesLookup;
 
-        static UIHelper()
+        static CUIHelper()
         {
             m_texturesLookup = new Dictionary<Color, Texture2D>();
             m_texturesLookup[Color.clear] = null;
@@ -106,7 +106,7 @@ namespace LunarEditor
         }
     }
 
-    class UnityEvent : CEvent
+    class CUnityEvent : CEvent
     {
         private UnityEngine.Event m_internalEvent;
 

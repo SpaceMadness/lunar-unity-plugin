@@ -671,7 +671,7 @@ namespace LunarEditor
                 if (m_backColor != value)
                 {
                     m_backColor = value;
-                    Style.normal.background = UIHelper.Create1x1ColorTexture(value);
+                    Style.normal.background = CUIHelper.Create1x1ColorTexture(value);
                 }
             }
         }
@@ -926,7 +926,7 @@ namespace LunarEditor
                 if (m_cursorStyle == null)
                 {
                     m_cursorStyle = new GUIStyle();
-                    m_cursorStyle.normal.background = UIHelper.Create1x1ColorTexture(Color.blue);
+                    m_cursorStyle.normal.background = CUIHelper.Create1x1ColorTexture(Color.blue);
                 }
 
                 return m_cursorStyle;

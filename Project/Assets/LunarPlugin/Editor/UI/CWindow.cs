@@ -51,7 +51,7 @@ namespace LunarEditor
 
         static Window()
         {
-            new UnityEvent(); // initialize instance
+            new CUnityEvent(); // initialize instance
         }
 
         public Window(string title)

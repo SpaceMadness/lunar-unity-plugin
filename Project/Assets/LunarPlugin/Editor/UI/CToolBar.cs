@@ -30,7 +30,7 @@ namespace LunarEditor
     class CToolBar : View
     {
         public CToolBar(float width)
-            : base(width, UISize.ToolbarHeight)
+            : base(width, CUISize.ToolbarHeight)
         {
             this.AutoresizeMask = ViewAutoresizing.FlexibleWidth;
         }
@@ -84,7 +84,7 @@ namespace LunarEditor
             return list;
         }
 
-        public void AddSpace(float pixels = UISize.ToolbarSpacing)
+        public void AddSpace(float pixels = CUISize.ToolbarSpacing)
         {
             AddSubview(new CToolBarSpace(pixels));
         }

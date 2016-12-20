@@ -43,7 +43,7 @@ namespace LunarEditor
         }
 
         public CTextField(float x, float y, string text = "")
-            : this(x, y, UISize.TextFieldWidth, UISize.TextFieldHeight, text)
+            : this(x, y, CUISize.TextFieldWidth, CUISize.TextFieldHeight, text)
         {
         }
 

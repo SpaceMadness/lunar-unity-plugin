@@ -133,7 +133,7 @@ namespace LunarEditor
             {
                 if (IsCellSelected(cell.CellIndex))
                 {
-                    UIHelper.DrawRect(cell.Frame, SharedStyles.SelectedCellBackStyle);
+                    CUIHelper.DrawRect(cell.Frame, SharedStyles.SelectedCellBackStyle);
                 }
                 cell.OnGUI();
             }
@@ -148,11 +148,11 @@ namespace LunarEditor
 
             if (scrollRect.width > Width)
             {
-                float barWidth = scrollRect.height > contentHeight ? Width - UISize.ScrollBarWidth : Width;
+                float barWidth = scrollRect.height > contentHeight ? Width - CUISize.ScrollBarWidth : Width;
                 float minPos = 0;
                 float maxPos = contentWidth - Width;
                 float barSize = Width * (contentWidth - Width) / contentWidth;
-                m_horizontalScrollPos = GUI.HorizontalScrollbar(new Rect(0, contentHeight, barWidth, UISize.ScrollBarWidth), m_horizontalScrollPos, barSize, minPos, maxPos);
+                m_horizontalScrollPos = GUI.HorizontalScrollbar(new Rect(0, contentHeight, barWidth, CUISize.ScrollBarWidth), m_horizontalScrollPos, barSize, minPos, maxPos);
                 m_guiScrollPos.x = m_horizontalScrollPos;
             }
 
@@ -882,7 +882,7 @@ namespace LunarEditor
 
         protected IDictionary<Type, TableViewCellList> ReusableCellsLists { get { return m_reusableCellsLists; } }
         protected float TotalHeight { get { return m_totalHeight; } }
-        protected virtual float ContentWidth { get { return Width - UISize.ScrollBarWidth; } }
+        protected virtual float ContentWidth { get { return Width - CUISize.ScrollBarWidth; } }
         protected virtual float ContentHeight { get { return Height; } }
 
         #endregion

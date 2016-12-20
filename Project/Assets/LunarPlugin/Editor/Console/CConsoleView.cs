@@ -245,7 +245,7 @@ namespace LunarEditor
         {
             if (entry.width != this.ContentWidth)
             {
-                entry.Layout(m_textMeasure, this.Width - UISize.ScrollBarWidth, this.ContentWidth);
+                entry.Layout(m_textMeasure, this.Width - CUISize.ScrollBarWidth, this.ContentWidth);
             }
 
             return entry.height;
@@ -280,7 +280,7 @@ namespace LunarEditor
 
         protected override float ContentHeight 
         {
-            get { return ContentWidth > Width ? Height - UISize.ScrollBarWidth : Height; }
+            get { return ContentWidth > Width ? Height - CUISize.ScrollBarWidth : Height; }
         }
 
         internal float OverridenContentWidth
@@ -754,7 +754,7 @@ namespace LunarEditor
             if (stackLine.IsClickable)
             {
                 GUIStyle linkStyle = stackLine.sourcePathExists ? SharedStyles.consoleLinkStyle : SharedStyles.consoleLinkInnactiveStyle;
-                UIHelper.DrawUnderLine(stackLine.sourceFrame, linkStyle);
+                CUIHelper.DrawUnderLine(stackLine.sourceFrame, linkStyle);
 
                 if (stackLine.sourcePathExists && GUI.Button(stackLine.sourceFrame, GUIContent.none, GUIStyle.none))
                 {
