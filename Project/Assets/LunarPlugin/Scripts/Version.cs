@@ -21,7 +21,7 @@
 
 namespace LunarPluginInternal
 {
-    static class Version
+    static class LunarPluginVersion
     {
         public static readonly string VERSION = "0.0.7b";
     }
