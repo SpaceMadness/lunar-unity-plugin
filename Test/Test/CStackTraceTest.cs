@@ -12,7 +12,7 @@ namespace LunarPlugin.Test
     using Assert = NUnit.Framework.Assert;
 
     [TestFixture()]
-    public class StackTraceTest : TestFixtureBase
+    public class CStackTraceTest : TestFixtureBase
     {
         #region Trim
 
@@ -58,7 +58,7 @@ namespace LunarPlugin.Test
                 "UnityEditor.HostView:Invoke(String)\n" +
                 "UnityEditor.DockArea:OnGUI()";
 
-            string actual = StackTrace.ExtractStackTrace(stackTrace, 3);
+            string actual = CStackTrace.ExtractStackTrace(stackTrace, 3);
             Assert.AreEqual(expected, actual);
         }
 
@@ -71,7 +71,7 @@ namespace LunarPlugin.Test
 
             string expected = "";
 
-            string actual = StackTrace.ExtractStackTrace(stackTrace, 3);
+            string actual = CStackTrace.ExtractStackTrace(stackTrace, 3);
             Assert.AreEqual(expected, actual);
         }
 
@@ -84,7 +84,7 @@ namespace LunarPlugin.Test
 
             string expected = "";
 
-            string actual = StackTrace.ExtractStackTrace(stackTrace, 4);
+            string actual = CStackTrace.ExtractStackTrace(stackTrace, 4);
             Assert.AreEqual(expected, actual);
         }
 
@@ -94,7 +94,7 @@ namespace LunarPlugin.Test
             string stackTrace = "LunarPlugin.Log:StackTrace(Int32) (at Assets/Plugins/LunarPlugin/Debugging/Log.cs:365)";
             string expected = "";
 
-            string actual = StackTrace.ExtractStackTrace(stackTrace, 3);
+            string actual = CStackTrace.ExtractStackTrace(stackTrace, 3);
             Assert.AreEqual(expected, actual);
         }
 
@@ -104,7 +104,7 @@ namespace LunarPlugin.Test
             string stackTrace = "LunarPlugin.Log:StackTrace(Int32) (at Assets/Plugins/LunarPlugin/Debugging/Log.cs:365)\n";
             string expected = "";
 
-            string actual = StackTrace.ExtractStackTrace(stackTrace, 1);
+            string actual = CStackTrace.ExtractStackTrace(stackTrace, 1);
             Assert.AreEqual(expected, actual);
         }
 

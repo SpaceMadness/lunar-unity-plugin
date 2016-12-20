@@ -43,7 +43,7 @@
     <Compile Include="TestFixtureBase.cs" />
     <Compile Include="StringUtilsTest.cs" />
     <Compile Include="CycleArrayTest.cs" />
-    <Compile Include="StackTraceTest.cs" />
+    <Compile Include="CStackTraceTest.cs" />
     <Compile Include="IteratorTest.cs" />
     <Compile Include="RuntimeUtilsTest.cs" />
     <Compile Include="TableViewCellEntryTest.cs" />

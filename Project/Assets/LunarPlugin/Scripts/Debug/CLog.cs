@@ -896,7 +896,7 @@ namespace LunarPlugin
 
         internal static void LogMessage(Tag tag, LogLevel level, string message)
         {
-            LogMessage(tag, level, message, StackTrace.ExtractStackTrace(3));
+            LogMessage(tag, level, message, CStackTrace.ExtractStackTrace(3));
         }
 
         internal static void LogMessage(Tag tag, LogLevel level, string message, string stackTrace)

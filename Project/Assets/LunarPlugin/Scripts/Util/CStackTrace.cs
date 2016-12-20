@@ -24,7 +24,7 @@ using UnityEngine;
 
 namespace LunarPluginInternal
 {
-    static class StackTrace
+    static class CStackTrace
     {
         #if TRIM_STACK_TRACE
         private static readonly string kMarkerToken = " (at ";
