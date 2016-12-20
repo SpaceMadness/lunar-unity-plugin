@@ -150,39 +150,39 @@ namespace LunarEditor
 
         class LightColors : Colors
         {
-            protected override Color CreateClear() { return ColorUtils.FromRGB(0xc2c2c2); }
-            protected override Color CreatePlain() { return ColorUtils.FromRGB(0x243e57); }
-            protected override Color CreateTableCommand() { return ColorUtils.FromRGB(0x512352); }
-            protected override Color CreateTableCommandDisabled() { return ColorUtils.FromRGB(0x3e413f); }
-            protected override Color CreateTableVar() { return ColorUtils.FromRGB(0x4e4f2f); }
-            protected override Color CreateError() { return ColorUtils.FromRGB(0xbe2323); }
-            protected override Color CreateErrorUnknownCommand() { return ColorUtils.FromRGB(0xbe2323); }
-            protected override Color CreateLevelCritical() { return ColorUtils.FromRGB(0xbe2323); }
-            protected override Color CreateLevelError() { return ColorUtils.FromRGB(0xbe2323); }
-            protected override Color CreateLevelWarning() { return ColorUtils.FromRGB(0xa7551d); }
-            protected override Color CreateLevelInfo() { return ColorUtils.FromRGB(0x475480); }
-            protected override Color CreateLevelDebug() { return ColorUtils.FromRGB(0x243e57); }
-            protected override Color CreateLevelVerbose() { return ColorUtils.FromRGB(0x3e413f); }
-            protected override Color CreateLink() { return ColorUtils.FromRGB(0x193562); }
+            protected override Color CreateClear() { return CColorUtils.FromRGB(0xc2c2c2); }
+            protected override Color CreatePlain() { return CColorUtils.FromRGB(0x243e57); }
+            protected override Color CreateTableCommand() { return CColorUtils.FromRGB(0x512352); }
+            protected override Color CreateTableCommandDisabled() { return CColorUtils.FromRGB(0x3e413f); }
+            protected override Color CreateTableVar() { return CColorUtils.FromRGB(0x4e4f2f); }
+            protected override Color CreateError() { return CColorUtils.FromRGB(0xbe2323); }
+            protected override Color CreateErrorUnknownCommand() { return CColorUtils.FromRGB(0xbe2323); }
+            protected override Color CreateLevelCritical() { return CColorUtils.FromRGB(0xbe2323); }
+            protected override Color CreateLevelError() { return CColorUtils.FromRGB(0xbe2323); }
+            protected override Color CreateLevelWarning() { return CColorUtils.FromRGB(0xa7551d); }
+            protected override Color CreateLevelInfo() { return CColorUtils.FromRGB(0x475480); }
+            protected override Color CreateLevelDebug() { return CColorUtils.FromRGB(0x243e57); }
+            protected override Color CreateLevelVerbose() { return CColorUtils.FromRGB(0x3e413f); }
+            protected override Color CreateLink() { return CColorUtils.FromRGB(0x193562); }
             protected override Color CreateLinkInnactive() { return Color.gray; }
         }
 
         class DarkColors : Colors
         {
-            protected override Color CreateClear() { return ColorUtils.FromRGB(0x383838); }
-            protected override Color CreatePlain() { return ColorUtils.FromRGB(0xb8c4d0); }
-            protected override Color CreateTableCommand() { return ColorUtils.FromRGB(0xffcf85); }
-            protected override Color CreateTableCommandDisabled() { return ColorUtils.FromRGB(0xb8c4d0); }
-            protected override Color CreateTableVar() { return ColorUtils.FromRGB(0xb4c974); }
-            protected override Color CreateError() { return ColorUtils.FromRGB(0xe1614e); }
-            protected override Color CreateErrorUnknownCommand() { return ColorUtils.FromRGB(0xe1614e); }
-            protected override Color CreateLevelCritical() { return ColorUtils.FromRGB(0xff6f5d); }
-            protected override Color CreateLevelError() { return ColorUtils.FromRGB(0xff6f5d); }
-            protected override Color CreateLevelWarning() { return ColorUtils.FromRGB(0xffcf85); }
-            protected override Color CreateLevelInfo() { return ColorUtils.FromRGB(0xb4c974); }
-            protected override Color CreateLevelDebug() { return ColorUtils.FromRGB(0xdee4ed); }
-            protected override Color CreateLevelVerbose() { return ColorUtils.FromRGB(0xb8c4d0); }
-            protected override Color CreateLink() { return ColorUtils.FromRGB(0x6ba1ff); }
+            protected override Color CreateClear() { return CColorUtils.FromRGB(0x383838); }
+            protected override Color CreatePlain() { return CColorUtils.FromRGB(0xb8c4d0); }
+            protected override Color CreateTableCommand() { return CColorUtils.FromRGB(0xffcf85); }
+            protected override Color CreateTableCommandDisabled() { return CColorUtils.FromRGB(0xb8c4d0); }
+            protected override Color CreateTableVar() { return CColorUtils.FromRGB(0xb4c974); }
+            protected override Color CreateError() { return CColorUtils.FromRGB(0xe1614e); }
+            protected override Color CreateErrorUnknownCommand() { return CColorUtils.FromRGB(0xe1614e); }
+            protected override Color CreateLevelCritical() { return CColorUtils.FromRGB(0xff6f5d); }
+            protected override Color CreateLevelError() { return CColorUtils.FromRGB(0xff6f5d); }
+            protected override Color CreateLevelWarning() { return CColorUtils.FromRGB(0xffcf85); }
+            protected override Color CreateLevelInfo() { return CColorUtils.FromRGB(0xb4c974); }
+            protected override Color CreateLevelDebug() { return CColorUtils.FromRGB(0xdee4ed); }
+            protected override Color CreateLevelVerbose() { return CColorUtils.FromRGB(0xb8c4d0); }
+            protected override Color CreateLink() { return CColorUtils.FromRGB(0x6ba1ff); }
             protected override Color CreateLinkInnactive() { return Color.gray; }
         }
     }

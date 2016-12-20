@@ -24,7 +24,7 @@ using System.Collections;
 
 namespace LunarPluginInternal
 {
-    static class ColorUtils
+    static class CColorUtils
     {
         private const float kMultiplier = 1.0f / 255.0f;
 

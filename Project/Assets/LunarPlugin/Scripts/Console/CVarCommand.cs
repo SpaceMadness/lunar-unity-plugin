@@ -171,12 +171,12 @@ namespace LunarPluginInternal
 
                         if (value.Length == 8)
                         {
-                            Color color = ColorUtils.FromRGBA(colorValue);
+                            Color color = CColorUtils.FromRGBA(colorValue);
                             SetValue(ref color);
                         }
                         else
                         {
-                            Color color = ColorUtils.FromRGB(colorValue);
+                            Color color = CColorUtils.FromRGB(colorValue);
                             SetValue(ref color);
                         }
 

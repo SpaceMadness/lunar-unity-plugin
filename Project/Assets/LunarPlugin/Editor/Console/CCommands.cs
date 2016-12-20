@@ -936,8 +936,8 @@ namespace LunarEditor
             }
             
             tag.Enabled = enabled;
-            tag.Color = ColorUtils.FromRGBA((uint)color);
-            tag.BackColor = ColorUtils.FromRGBA((uint)color);
+            tag.Color = CColorUtils.FromRGBA((uint)color);
+            tag.BackColor = CColorUtils.FromRGBA((uint)color);
         }
     }
     
@@ -1073,7 +1073,7 @@ namespace LunarEditor
             ColorCode[] values = (ColorCode[]) Enum.GetValues(typeof(ColorCode));
             if (index >= 0 && index < values.Length)
             {
-                Color color = ColorUtils.FromRGB(value);
+                Color color = CColorUtils.FromRGB(value);
                 EditorSkin.SetColor(values[index], color);
                 
                 Print("{0}: {1}", index, StringUtils.C(values[index].ToString(), values[index]));

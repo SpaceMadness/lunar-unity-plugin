@@ -443,7 +443,7 @@ namespace LunarPlugin
                 m_value.intValue = 0;
                 m_value.floatValue = 0.0f;
                 m_value.vectorValue = vector;
-                m_value.intValue = (int)(ColorUtils.ToRGBA(ref value));
+                m_value.intValue = (int)(CColorUtils.ToRGBA(ref value));
 
                 if (changed)
                 {
