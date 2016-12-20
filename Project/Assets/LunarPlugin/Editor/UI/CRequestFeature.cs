@@ -25,7 +25,7 @@ using System.Diagnostics;
 
 namespace LunarEditor
 {
-    class RequestFeature
+    class CRequestFeature
     {
         internal static void Open()
         {

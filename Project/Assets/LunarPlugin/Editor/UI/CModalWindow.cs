@@ -24,11 +24,11 @@ using UnityEngine;
 
 namespace LunarEditor
 {
-    class ModalWindow
+    class CModalWindow
     {
         private static View m_rootView;
 
-        public ModalWindow()
+        public CModalWindow()
         {
         }
 
