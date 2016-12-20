@@ -71,7 +71,7 @@ namespace LunarEditor
 
             if (!string.IsNullOrEmpty(sourcePath))
             {
-                sourcePathExists = EditorFileUtils.PathExists(sourcePath);
+                sourcePathExists = CEditorFileUtils.PathExists(sourcePath);
                 sourcePathStart = line.IndexOf(sourcePath);
                 sourcePathEnd = sourcePathStart + sourcePath.Length + 1 + lineNumberLength;
             }

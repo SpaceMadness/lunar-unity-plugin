@@ -31,7 +31,7 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    static class EditorFileUtils
+    static class CEditorFileUtils
     {
         public static bool PathExists(string path)
         {
