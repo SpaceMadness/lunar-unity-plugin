@@ -51,7 +51,7 @@ namespace LunarPlugin.Test
 
         #region Factory methods
 
-        protected override AppImp CreateAppImp()
+        protected override CAppImp CreateAppImp()
         {
             return new TestAppImp(this);
         }

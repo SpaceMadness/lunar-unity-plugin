@@ -41,7 +41,7 @@ namespace LunarPluginInternal
         protected static CApp s_sharedInstance;
         #pragma warning restore 0649
 
-        private readonly AppImp m_appImp;
+        private readonly CAppImp m_appImp;
 
         protected CApp()
         {
@@ -98,7 +98,7 @@ namespace LunarPluginInternal
 
         #region Factory methods
 
-        protected abstract AppImp CreateAppImp();
+        protected abstract CAppImp CreateAppImp();
 
         #endregion
 
@@ -128,7 +128,7 @@ namespace LunarPluginInternal
 
         #region Properties
 
-        protected static AppImp Imp
+        protected static CAppImp Imp
         {
             get { return s_sharedInstance.m_appImp; }
         }

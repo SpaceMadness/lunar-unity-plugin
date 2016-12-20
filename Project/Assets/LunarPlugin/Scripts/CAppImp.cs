@@ -23,7 +23,7 @@
 
 namespace LunarPluginInternal
 {
-    interface AppImp : ICUpdatable, ICDestroyable
+    interface CAppImp : ICUpdatable, ICDestroyable
     {
         void Start();
         void Stop();

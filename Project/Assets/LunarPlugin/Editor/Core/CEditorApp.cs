@@ -74,7 +74,7 @@ namespace LunarEditor
 
         #region AppImp
 
-        protected override AppImp CreateAppImp()
+        protected override CAppImp CreateAppImp()
         {
             return new EditorAppImp();
         }
