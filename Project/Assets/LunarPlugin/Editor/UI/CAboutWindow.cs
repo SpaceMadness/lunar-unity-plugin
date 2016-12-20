@@ -40,7 +40,7 @@ namespace LunarEditor
         {
             const float indent = 12;
 
-            View contentView = new View(this.Width - 2 * indent, this.Height - 2 * indent);
+            CView contentView = new CView(this.Width - 2 * indent, this.Height - 2 * indent);
             contentView.X = indent;
             contentView.Y = indent;
             AddSubview(contentView);
@@ -54,7 +54,7 @@ namespace LunarEditor
             copyrightLabel.Height += 20;
             contentView.AddSubview(copyrightLabel);
 
-            View buttonsView = new View();
+            CView buttonsView = new CView();
 
             CButton twitterButton = new CButton("Follow @LunarPlugin", delegate(CButton button) {
                 Application.OpenURL("https://twitter.com/intent/follow?screen_name=LunarPlugin&user_id=2939274198");

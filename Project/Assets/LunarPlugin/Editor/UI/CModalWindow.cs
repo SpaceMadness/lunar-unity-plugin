@@ -26,7 +26,7 @@ namespace LunarEditor
 {
     class CModalWindow
     {
-        private static View m_rootView;
+        private static CView m_rootView;
 
         public CModalWindow()
         {
@@ -69,7 +69,7 @@ namespace LunarEditor
             }, "Test");
         }
 
-        public static void Show(View rootView)
+        public static void Show(CView rootView)
         {
             if (rootView == null)
             {

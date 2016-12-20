@@ -42,7 +42,7 @@ namespace LunarEditor
     class Window : EditorWindow
     {
         private Vector2 m_oldSize;
-        private View m_rootView;
+        private CView m_rootView;
 
         private string m_tag;
         private bool m_dirty;
@@ -238,7 +238,7 @@ namespace LunarEditor
 
         #region Inheritance
 
-        private View CreateRootView()
+        private CView CreateRootView()
         {
             return new WindowRootView(this, Width, Height);
         }
@@ -252,7 +252,7 @@ namespace LunarEditor
         {
         }
 
-        public void AddSubview(View view)
+        public void AddSubview(CView view)
         {
             m_rootView.AddSubview(view);
         }
@@ -263,7 +263,7 @@ namespace LunarEditor
 
         #region Properties
 
-        public View RootView { get { return m_rootView; } }
+        public CView RootView { get { return m_rootView; } }
 
         public float Width
         {
@@ -296,7 +296,7 @@ namespace LunarEditor
         #endregion
     }
 
-    class WindowRootView : View
+    class WindowRootView : CView
     {
         private Window m_window;
         
@@ -316,7 +316,7 @@ namespace LunarEditor
             get { return m_window.IsFocused; }
         }
 
-        public override View RootView
+        public override CView RootView
         {
             get { return this; }
         }

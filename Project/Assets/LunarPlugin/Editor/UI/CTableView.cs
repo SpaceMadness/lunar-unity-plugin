@@ -56,7 +56,7 @@ namespace LunarEditor
         Multiple
     }
 
-    class CTableView : View
+    class CTableView : CView
     {
         private IDictionary<Type, TableViewCellList> m_reusableCellsLists;
         private CCycleArray<TableViewCellEntry> m_cellsEntries;
@@ -610,7 +610,7 @@ namespace LunarEditor
 
         #region Mouse clicks
 
-        private bool MouseDownEventHandler(View view, CEvent evt)
+        private bool MouseDownEventHandler(CView view, CEvent evt)
         {
             FocusControl();
 
@@ -623,7 +623,7 @@ namespace LunarEditor
             return false;
         }
 
-        private bool MouseDoubleClickHandler(View view, CEvent evt)
+        private bool MouseDoubleClickHandler(CView view, CEvent evt)
         {
             FocusControl();
 
@@ -682,7 +682,7 @@ namespace LunarEditor
             return false;
         }
 
-        protected virtual bool KeyDownEventHandler(View view, CEvent evt)
+        protected virtual bool KeyDownEventHandler(CView view, CEvent evt)
         {
             switch (evt.keyCode)
             {
@@ -743,7 +743,7 @@ namespace LunarEditor
             return false;
         }
 
-        private bool KeyUpEventHandler(View view, CEvent evt)
+        private bool KeyUpEventHandler(CView view, CEvent evt)
         {
             return false;
         }
@@ -926,7 +926,7 @@ namespace LunarEditor
         }
     }
 
-    class CTableViewCell : View
+    class CTableViewCell : CView
     {
         public CTableViewCell()
             : this(0, 0)

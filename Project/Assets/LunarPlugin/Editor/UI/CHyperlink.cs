@@ -28,7 +28,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class CHyperlink : View
+    class CHyperlink : CView
     {
         private GUIContent m_content;
         private string m_href;

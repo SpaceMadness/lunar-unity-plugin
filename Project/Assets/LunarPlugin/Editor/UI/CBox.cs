@@ -24,7 +24,7 @@ using UnityEngine;
 
 namespace LunarEditor
 {
-    class CBox : View
+    class CBox : CView
     {
         public CBox(float width, float height)
             : this(width, height, GUI.skin.box)

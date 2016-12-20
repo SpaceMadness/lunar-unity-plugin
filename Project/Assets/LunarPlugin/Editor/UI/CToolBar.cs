@@ -27,7 +27,7 @@ using System.Collections;
 
 namespace LunarEditor
 {
-    class CToolBar : View
+    class CToolBar : CView
     {
         public CToolBar(float width)
             : base(width, CUISize.ToolbarHeight)
@@ -113,7 +113,7 @@ namespace LunarEditor
         }
     }
 
-    class CToolBarLabel : View
+    class CToolBarLabel : CView
     {
         private string m_text;
 
@@ -182,7 +182,7 @@ namespace LunarEditor
 
     delegate void CToolBarDropListDelegate(CToolBarDropList list);
 
-    class CToolBarDropList : View
+    class CToolBarDropList : CView
     {
         private string m_title;
         private int m_selectedValue;
@@ -302,7 +302,7 @@ namespace LunarEditor
         }
     }
 
-    class CToolBarSpace : View
+    class CToolBarSpace : CView
     {
         public CToolBarSpace(float pixels)
             : base(pixels, 0)
@@ -315,7 +315,7 @@ namespace LunarEditor
         }
     }
 
-    class CToolBarFlexibleSpace : View
+    class CToolBarFlexibleSpace : CView
     {
         public override void OnGUI()
         {

@@ -32,7 +32,7 @@ namespace LunarEditor
     delegate void CTextFieldDelegate(CTextField field);
     delegate bool CTextFieldKeyDelegate(CTextField field, KeyCode code, bool pressed);
 
-    class CTextField : View
+    class CTextField : CView
     {
         private string m_text;
         private bool m_firstKeyDown;
@@ -58,7 +58,7 @@ namespace LunarEditor
             this.KeyDown = KeyDownHandler;
         }
 
-        private bool KeyDownHandler(View view, CEvent evt)
+        private bool KeyDownHandler(CView view, CEvent evt)
         {
             if (TextKeyDelegate == null)
             {
@@ -101,7 +101,7 @@ namespace LunarEditor
             return false;
         }
 
-        private bool KeyUpHandler(View view, CEvent evt)
+        private bool KeyUpHandler(CView view, CEvent evt)
         {
             if (TextKeyDelegate == null)
             {

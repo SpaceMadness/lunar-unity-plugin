@@ -41,19 +41,19 @@ namespace LunarEditor
         FlexibleBottomMargin = 1 << 5
     }
 
-    class View : CObjectsPoolEntry, IDisposable
+    class CView : CObjectsPoolEntry, IDisposable
     {
         private static readonly Rect EmptyRect = new Rect(0, 0, 0, 0);
 
-        internal delegate bool EventDelegate(View view, CEvent evt);
+        internal delegate bool EventDelegate(CView view, CEvent evt);
 
         public const float AlignMin = 0.0f;
         public const float AlignCenter = 0.5f;
         public const float AlignMax = 1.0f;
 
-        private static readonly List<View> m_emptyList = new List<View>(0);
+        private static readonly List<CView> m_emptyList = new List<CView>(0);
 
-        private List<View> m_subviews;
+        private List<CView> m_subviews;
         private GUIStyle m_style;
 
         private Vector2 m_origin;
@@ -64,23 +64,23 @@ namespace LunarEditor
         private static int m_nextFocusableViewId;
         private string m_focusableViewId;
 
-        public View(float width, float height) 
+        public CView(float width, float height) 
             : this(0, 0, width, height)
         {
         }
 
-        public View(float x, float y, float width, float height)
+        public CView(float x, float y, float width, float height)
             : this(new Rect(x, y, width, height))
         {   
         }
 
-        public View(Rect frame) 
+        public CView(Rect frame) 
             : this()
         {
             this.Frame = frame;
         }
 
-        public View()
+        public CView()
         {
             m_subviews = m_emptyList;
             this.IsKeyEventsEnabled = true;
@@ -256,11 +256,11 @@ namespace LunarEditor
 
         #region Subviews
 
-        public View AddSubview(View view)
+        public CView AddSubview(CView view)
         {
             if (m_subviews == m_emptyList)
             {
-                m_subviews = new List<View>(1);
+                m_subviews = new List<CView>(1);
             }
             m_subviews.Add(view);
             view.ParentView = this;
@@ -268,7 +268,7 @@ namespace LunarEditor
             return view;
         }
 
-        public void RemoveSubview(View view)
+        public void RemoveSubview(CView view)
         {
             if (view.ParentView == this)
             {
@@ -294,7 +294,7 @@ namespace LunarEditor
             }
         }
 
-        public View FindSubview(object tag)
+        public CView FindSubview(object tag)
         {
             for (int i = 0; i < m_subviews.Count; ++i)
             {
@@ -329,46 +329,46 @@ namespace LunarEditor
             AlignY(alignY);
         }
 
-        public View AlignTop(float indent = 0.0f)
+        public CView AlignTop(float indent = 0.0f)
         {
             Y = indent;
             return this;
         }
 
-        public View AlignBottom(float indent = 0.0f)
+        public CView AlignBottom(float indent = 0.0f)
         {
             Y = ParentView.Height - Height - indent;
             return this;
         }
 
-        public View AlignLeft(float indent = 0.0f)
+        public CView AlignLeft(float indent = 0.0f)
         {
             X = indent;
             return this;
         }
 
-        public View AlignRight(float indent = 0.0f)
+        public CView AlignRight(float indent = 0.0f)
         {
             X = ParentView.Width - Width - indent;
             return this;
         }
 
-        public void AttachAbove(View other, float indent = 0.0f)
+        public void AttachAbove(CView other, float indent = 0.0f)
         {
             Y = other.Y - Height - indent;
         }
 
-        public void AttachUnder(View other, float indent = 0.0f)
+        public void AttachUnder(CView other, float indent = 0.0f)
         {
             Y = other.Y + other.Height + indent;
         }
 
-        public void AttachLeft(View other, float indent = 0.0f)
+        public void AttachLeft(CView other, float indent = 0.0f)
         {
             X = other.X - Width - indent;
         }
 
-        public void AttachRight(View other, float indent = 0.0f)
+        public void AttachRight(CView other, float indent = 0.0f)
         {
             X = other.X + other.Width + indent;
         }
@@ -400,7 +400,7 @@ namespace LunarEditor
 
             for (int i = 0; i < m_subviews.Count; ++i)
             {
-                View v = m_subviews[i];
+                CView v = m_subviews[i];
                 newWidth = Mathf.Max(newWidth, v.X + v.Width);
                 newHeight = Mathf.Max(newHeight, v.Y + v.Height);
             }
@@ -412,7 +412,7 @@ namespace LunarEditor
         public void ArrangeVert(float indent = 0.0f)
         {
             float nextY = 0;
-            foreach (View view in Subviews)
+            foreach (CView view in Subviews)
             {
                 view.Y = nextY;
                 nextY += view.Height + indent;
@@ -422,7 +422,7 @@ namespace LunarEditor
         public void ArrangeHort(float indent = 0.0f)
         {
             float nextX = 0;
-            foreach (View view in Subviews)
+            foreach (CView view in Subviews)
             {
                 view.X = nextX;
                 nextX += view.Width + indent;
@@ -433,7 +433,7 @@ namespace LunarEditor
         {
             for (int i = 0; i < m_subviews.Count; ++i)
             {
-                View subview = m_subviews[i];
+                CView subview = m_subviews[i];
                 ViewAutoresizing mask = subview.AutoresizeMask;
 
                 if (mask == ViewAutoresizing.None)
@@ -504,7 +504,7 @@ namespace LunarEditor
             {
                 for (int i = 0; i < m_subviews.Count; ++i)
                 {
-                    View subview = m_subviews[i];
+                    CView subview = m_subviews[i];
                     if (!subview.IsEnabled && GUI.enabled)
                     {
                         GUI.enabled = false;
@@ -527,7 +527,7 @@ namespace LunarEditor
 
         public virtual void Repaint()
         {
-            View rootView = RootView;
+            CView rootView = RootView;
             if (rootView != null)
             {
                 rootView.Repaint();
@@ -579,24 +579,24 @@ namespace LunarEditor
 
         public bool IsEnabled { get; set; }
 
-        public View ParentView { get; private set; }
+        public CView ParentView { get; private set; }
 
-        public virtual View RootView 
+        public virtual CView RootView 
         { 
             get { return ParentView != null ? ParentView.RootView : null; } 
         }
 
-        public List<View> Subviews
+        public List<CView> Subviews
         {
             get { return m_subviews; }
         }
 
-        public View FistSubview
+        public CView FistSubview
         {
             get { return m_subviews.Count > 0 ? m_subviews[0] : null; }
         }
 
-        public View LastSubview
+        public CView LastSubview
         {
             get { return m_subviews.Count > 0 ? m_subviews[m_subviews.Count - 1] : null; }
         }

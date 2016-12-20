@@ -26,7 +26,7 @@ namespace LunarEditor
 {
     delegate void CToggleChangeDelegate(CToggle toggle);
 
-    class CToggle : View 
+    class CToggle : CView 
     {
         private GUIContent m_content;
 

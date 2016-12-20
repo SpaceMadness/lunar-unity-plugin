@@ -24,7 +24,7 @@ using System.Collections;
 
 namespace LunarEditor
 {
-    class CColorRect : View
+    class CColorRect : CView
     {
         private Color m_color;
         private GUIStyle m_style;

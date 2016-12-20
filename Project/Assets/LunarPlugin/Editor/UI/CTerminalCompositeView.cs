@@ -36,7 +36,7 @@ namespace LunarEditor
         CTerminal Terminal { get; }
     }
 
-    class CTerminalCompositeView : View
+    class CTerminalCompositeView : CView
     {
         private CConsoleView m_consoleView;
         private CTextField m_commandField;
@@ -102,7 +102,7 @@ namespace LunarEditor
             m_commandField = new CTextField();
             m_commandField.Width = Width;
             AddSubview(m_commandField);
-            m_commandField.AlignX(View.AlignCenter);
+            m_commandField.AlignX(CView.AlignCenter);
             m_commandField.AlignBottom(0);
             m_commandField.AutoresizeMask = ViewAutoresizing.FlexibleTopMargin | ViewAutoresizing.FlexibleWidth;
 

@@ -29,7 +29,7 @@ using LunarPluginInternal;
 
 namespace LunarEditor
 {
-    class CLabel : View
+    class CLabel : CView
     {
         private GUIContent m_content;
 
