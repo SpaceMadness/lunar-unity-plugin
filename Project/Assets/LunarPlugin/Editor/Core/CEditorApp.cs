@@ -55,7 +55,7 @@ namespace LunarEditor
 
             TimerManager.ScheduleTimer(() =>
             {
-                ThreadUtils.InitOnMainThread(); // we need to make sure this call is done on the main thread
+                CThreadUtils.InitOnMainThread(); // we need to make sure this call is done on the main thread
                 Log.Initialize(); // it's safe to initialize logging
 
                 EditorSceneKeyHandler.keyDownHandler += SceneKeyDownHandler;

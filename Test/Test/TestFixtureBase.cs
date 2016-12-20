@@ -19,7 +19,7 @@ namespace LunarPlugin.Test
 
         static TestFixtureBase()
         {
-            ThreadUtils.SetMainThread();
+            CThreadUtils.SetMainThread();
         }
 
         protected virtual void RunSetUp()

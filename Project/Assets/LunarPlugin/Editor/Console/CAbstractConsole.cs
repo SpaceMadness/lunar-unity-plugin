@@ -47,7 +47,7 @@ namespace LunarEditor
 
         internal void Add(ConsoleViewCellEntry entry)
         {
-            if (ThreadUtils.IsUnityThread())
+            if (CThreadUtils.IsUnityThread())
             {
                 Entries.Add(entry);
                 Delegate.OnConsoleEntryAdded(this, ref entry);

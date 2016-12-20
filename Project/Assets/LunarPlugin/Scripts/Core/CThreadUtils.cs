@@ -27,7 +27,7 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    static class ThreadUtils
+    static class CThreadUtils
     {
         private static readonly object s_mutex = new object();
         private static Thread s_mainThread;
