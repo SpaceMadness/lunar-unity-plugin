@@ -25,11 +25,11 @@ using LunarPlugin;
 
 namespace LunarPluginInternal
 {
-    delegate void TestingPlatformAssertDelegate(string message, string stackTrace);
+    delegate void CTestingPlatformAssertDelegate(string message, string stackTrace);
 
-    class TestingPlatform : CPlatformImpl
+    class CTestingPlatform : CPlatformImpl
     {
-        private static TestingPlatformAssertDelegate s_assertDelegate = DefaultAssertDelegate;
+        private static CTestingPlatformAssertDelegate s_assertDelegate = DefaultAssertDelegate;
 
         public override void AssertMessage(string message, string stackTrace)
         {
@@ -41,7 +41,7 @@ namespace LunarPluginInternal
             throw new Exception("Assertion failed: " + message);
         }
 
-        public static TestingPlatformAssertDelegate AssertDelegate
+        public static CTestingPlatformAssertDelegate AssertDelegate
         {
             get { return s_assertDelegate; }
             set { s_assertDelegate = value != null ? value : DefaultAssertDelegate; }
