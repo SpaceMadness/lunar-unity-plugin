@@ -1,5 +1,5 @@
 //
-//  AboutWindow.cs
+//  CAboutWindow.cs
 //
 //  Lunar Plugin for Unity: a command line solution for your game.
 //  https://github.com/SpaceMadness/lunar-unity-plugin
