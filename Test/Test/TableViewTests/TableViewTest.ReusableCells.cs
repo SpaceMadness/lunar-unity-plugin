@@ -34,9 +34,9 @@ namespace TableViewTests
             table.Delegate = adapter;
             table.ReloadData();
 
-            TableViewCell a1 = table.FirstVisibleCell;
-            TableViewCell a2 = a1.NextCell;
-            TableViewCell a3 = a2.NextCell;
+            CTableViewCell a1 = table.FirstVisibleCell;
+            CTableViewCell a2 = a1.NextCell;
+            CTableViewCell a3 = a2.NextCell;
 
             Assert.AreEqual(typeof(TableViewCellMock1), a1.GetType());
             Assert.AreEqual(typeof(TableViewCellMock2), a2.GetType());
@@ -44,9 +44,9 @@ namespace TableViewTests
 
             table.Scroll(10);
 
-            TableViewCell b1 = table.FirstVisibleCell;
-            TableViewCell b2 = b1.NextCell;
-            TableViewCell b3 = b2.NextCell;
+            CTableViewCell b1 = table.FirstVisibleCell;
+            CTableViewCell b2 = b1.NextCell;
+            CTableViewCell b3 = b2.NextCell;
 
             Assert.AreSame(a2, b1);
             Assert.AreSame(a3, b2);
@@ -143,19 +143,19 @@ namespace TableViewTests
             table.Delegate = adapter;
             table.ReloadData();
 
-            TableViewCell a1 = table.FirstVisibleCell;
-            TableViewCell a2 = a1.NextCell;
-            TableViewCell a3 = a2.NextCell;
-            TableViewCell a4 = a3.NextCell;
-            TableViewCell a5 = a4.NextCell;
+            CTableViewCell a1 = table.FirstVisibleCell;
+            CTableViewCell a2 = a1.NextCell;
+            CTableViewCell a3 = a2.NextCell;
+            CTableViewCell a4 = a3.NextCell;
+            CTableViewCell a5 = a4.NextCell;
 
             table.Scroll(50);
 
-            TableViewCell b1 = table.FirstVisibleCell;
-            TableViewCell b2 = b1.NextCell;
-            TableViewCell b3 = b2.NextCell;
-            TableViewCell b4 = b3.NextCell;
-            TableViewCell b5 = b4.NextCell;
+            CTableViewCell b1 = table.FirstVisibleCell;
+            CTableViewCell b2 = b1.NextCell;
+            CTableViewCell b3 = b2.NextCell;
+            CTableViewCell b4 = b3.NextCell;
+            CTableViewCell b5 = b4.NextCell;
 
             Assert.AreSame(a1, b5);
             Assert.AreSame(a2, b4);
@@ -196,19 +196,19 @@ namespace TableViewTests
             table.Delegate = adapter;
             table.ReloadData();
 
-            TableViewCell a1 = table.FirstVisibleCell;
-            TableViewCell a2 = a1.NextCell;
-            TableViewCell a3 = a2.NextCell;
-            TableViewCell a4 = a3.NextCell;
-            TableViewCell a5 = a4.NextCell;
+            CTableViewCell a1 = table.FirstVisibleCell;
+            CTableViewCell a2 = a1.NextCell;
+            CTableViewCell a3 = a2.NextCell;
+            CTableViewCell a4 = a3.NextCell;
+            CTableViewCell a5 = a4.NextCell;
 
             table.Scroll(100);
 
-            TableViewCell b1 = table.FirstVisibleCell;
-            TableViewCell b2 = b1.NextCell;
-            TableViewCell b3 = b2.NextCell;
-            TableViewCell b4 = b3.NextCell;
-            TableViewCell b5 = b4.NextCell;
+            CTableViewCell b1 = table.FirstVisibleCell;
+            CTableViewCell b2 = b1.NextCell;
+            CTableViewCell b3 = b2.NextCell;
+            CTableViewCell b4 = b3.NextCell;
+            CTableViewCell b5 = b4.NextCell;
 
             Assert.AreSame(a1, b5);
             Assert.AreSame(a2, b4);

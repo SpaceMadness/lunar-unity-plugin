@@ -468,7 +468,7 @@ namespace CCommandTests
 
             void Execute(string[] args)
             {
-                m_result.Add("strings " + StringUtils.Join(args));
+                m_result.Add("strings " + CStringUtils.Join(args));
             }
         }
 
@@ -489,7 +489,7 @@ namespace CCommandTests
 
             void Execute(int[] args)
             {
-                m_result.Add("ints " + StringUtils.Join(args));
+                m_result.Add("ints " + CStringUtils.Join(args));
             }
         }
 
@@ -510,7 +510,7 @@ namespace CCommandTests
 
             void Execute(float[] args)
             {
-                m_result.Add("floats " + StringUtils.Join(args));
+                m_result.Add("floats " + CStringUtils.Join(args));
             }
         }
 
@@ -531,7 +531,7 @@ namespace CCommandTests
 
             void Execute(bool[] args)
             {
-                m_result.Add("bools " + StringUtils.Join(args));
+                m_result.Add("bools " + CStringUtils.Join(args));
             }
         }
 

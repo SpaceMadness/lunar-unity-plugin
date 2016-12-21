@@ -23,7 +23,7 @@ namespace LunarPlugin.Test
 
             int index = 0;
 
-            Iterator<string> iter = new Iterator<string>(list);
+            CIterator<string> iter = new CIterator<string>(list);
             while (iter.HasNext())
             {
                 Assert.AreEqual(list[index++], iter.Next());
@@ -42,7 +42,7 @@ namespace LunarPlugin.Test
 
             int iterations = 0;
 
-            Iterator<string> iter = new Iterator<string>(list);
+            CIterator<string> iter = new CIterator<string>(list);
             while (iter.HasNext())
             {
                 iter.Skip();
@@ -60,7 +60,7 @@ namespace LunarPlugin.Test
             list.Add("2");
             list.Add("3");
 
-            Iterator<string> iter = new Iterator<string>(list);
+            CIterator<string> iter = new CIterator<string>(list);
 
             Assert.IsTrue(iter.HasNext());
             iter.Skip();
@@ -82,7 +82,7 @@ namespace LunarPlugin.Test
             list.Add("2");
             list.Add("3");
 
-            Iterator<string> iter = new Iterator<string>(list);
+            CIterator<string> iter = new CIterator<string>(list);
 
             Assert.IsTrue(iter.HasNext(1));
             Assert.IsTrue(iter.HasNext(2));
@@ -98,7 +98,7 @@ namespace LunarPlugin.Test
             list.Add("2");
             list.Add("3");
 
-            Iterator<string> iter = new Iterator<string>(list);
+            CIterator<string> iter = new CIterator<string>(list);
 
             iter.Skip(2);
             Assert.IsTrue(iter.HasNext());

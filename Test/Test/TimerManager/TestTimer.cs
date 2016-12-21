@@ -6,37 +6,37 @@ using LunarPluginInternal;
 
 namespace LunarPlugin.Test.Timers
 {
-    class TestTimer : Timer
+    class TestTimer : CTimer
     {
         public static void Reset()
         {
-            Timer.FreeRoot = null;
+            CTimer.FreeRoot = null;
         }
 
-        public static new Timer FreeRoot
+        public static new CTimer FreeRoot
         {
-            get { return Timer.FreeRoot; }
-            set { Timer.FreeRoot = value; }
+            get { return CTimer.FreeRoot; }
+            set { CTimer.FreeRoot = value; }
         }
 
-        public new static Timer NextFreeTimer()
+        public new static CTimer NextFreeTimer()
         {
-            return Timer.NextFreeTimer();
+            return CTimer.NextFreeTimer();
         }
 
-        public new static void AddFreeTimer(Timer timer)
+        public new static void AddFreeTimer(CTimer timer)
         {
-            Timer.AddFreeTimer(timer);
+            CTimer.AddFreeTimer(timer);
         }
 
-        public static new Timer NextTimer(Timer t)
+        public static new CTimer NextTimer(CTimer t)
         {
-            return Timer.NextTimer(t);
+            return CTimer.NextTimer(t);
         }
 
-        public static new Timer NextHelperListTimer(Timer t)
+        public static new CTimer NextHelperListTimer(CTimer t)
         {
-            return Timer.NextHelperListTimer(t);
+            return CTimer.NextHelperListTimer(t);
         }
 
         public static int PoolSize
@@ -44,7 +44,7 @@ namespace LunarPlugin.Test.Timers
             get
             {
                 int count = 0;
-                for (Timer t = FreeRoot; t != null; t = Timer.NextTimer(t))
+                for (CTimer t = FreeRoot; t != null; t = CTimer.NextTimer(t))
                 {
                     ++count;
                 }

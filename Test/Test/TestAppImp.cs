@@ -6,7 +6,7 @@ using LunarPluginInternal;
 
 namespace LunarPlugin.Test
 {
-    class TestAppImp : DefaultAppImp
+    class TestAppImp : CDefaultAppImp
     {
         private TestApp m_app;
 

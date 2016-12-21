@@ -19,19 +19,19 @@ namespace CCommandTests
         [Test]
         public static void TestAutoCompleteTokenEmpty()
         {
-            Assert.AreEqual("", CommandTokenizer.GetAutoCompleteToken(""));
+            Assert.AreEqual("", CCommandTokenizer.GetAutoCompleteToken(""));
         }
 
         [Test]
         public static void TestAutoCompleteTokenSingleWord()
         {
-            Assert.AreEqual("test", CommandTokenizer.GetAutoCompleteToken("test"));
+            Assert.AreEqual("test", CCommandTokenizer.GetAutoCompleteToken("test"));
         }
 
         [Test]
         public static void TestAutoCompleteTokenSingleWordWithSpaceAtTheEnd()
         {
-            Assert.AreEqual("", CommandTokenizer.GetAutoCompleteToken("test "));
+            Assert.AreEqual("", CCommandTokenizer.GetAutoCompleteToken("test "));
         }
     }
 }

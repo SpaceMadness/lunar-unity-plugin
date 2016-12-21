@@ -784,7 +784,7 @@ namespace TerminalTests
                     "arg2",
                 };
 
-                return StringUtils.Filter(values, token);
+                return CStringUtils.Filter(values, token);
             }
         }
 

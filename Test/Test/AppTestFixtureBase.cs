@@ -65,7 +65,7 @@ namespace LunarPlugin.Test
         {
             if (IsTrackTerminalLog)
             {
-                AddResult(StringUtils.Join(table));
+                AddResult(CStringUtils.Join(table));
             }
         }
 
@@ -119,7 +119,7 @@ namespace LunarPlugin.Test
 
         protected void AddResult(string format, params object[] args)
         {
-            this.Result.Add(StringUtils.RemoveRichTextTags(string.Format(format, args)));
+            this.Result.Add(CStringUtils.RemoveRichTextTags(string.Format(format, args)));
         }
 
         #endregion

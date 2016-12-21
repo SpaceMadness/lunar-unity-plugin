@@ -16,7 +16,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestAddElements()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             array.Add(1);
 
             Assert.AreEqual(3, array.Capacity);
@@ -28,7 +28,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestAddElements2()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             array.Add(1);
             array.Add(2);
 
@@ -41,7 +41,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestAddElements3()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -55,7 +55,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestAddElements4()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -70,7 +70,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestAddElements5()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -86,7 +86,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestAddElements6()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -103,7 +103,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestAddElements7()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -121,7 +121,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestAddElements8()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -140,7 +140,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestAddElements9()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -160,7 +160,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestGrowCapacity()
         {
-            CycleArray<int> array = new CycleArray<int>(5);
+            CCycleArray<int> array = new CCycleArray<int>(5);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -176,7 +176,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestGrowCapacityForAFullArray()
         {
-            CycleArray<int> array = new CycleArray<int>(5);
+            CCycleArray<int> array = new CCycleArray<int>(5);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -194,7 +194,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestGrowCapacityForOverflowedArrayWithOneExtraElement()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -211,7 +211,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestGrowCapacityForOverflowedArrayWithTwoExtraElements()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -229,7 +229,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestGrowCapacityForOverflowedArrayWithThreeExtraElements()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -248,7 +248,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestGrowCapacityForOverflowedArrayWithFourExtraElements()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -268,7 +268,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestGrowCapacityAndAddMoreElements()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -295,7 +295,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestGrowCapacityBiggerArray()
         {
-            CycleArray<int> array = new CycleArray<int>(7);
+            CCycleArray<int> array = new CCycleArray<int>(7);
             for (int i = 1; i <= 7; ++i)
             {
                 array.Add(i);
@@ -316,7 +316,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestGrowCapacityAndOverflowMultipleTimes()
         {
-            CycleArray<int> array = new CycleArray<int>(3);
+            CCycleArray<int> array = new CCycleArray<int>(3);
             for (int i = 0; i < 10; ++i)
             {
                 array.Add(i + 1);
@@ -337,7 +337,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestTrimLength()
         {
-            CycleArray<int> array = new CycleArray<int>(5);
+            CCycleArray<int> array = new CCycleArray<int>(5);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -406,7 +406,7 @@ namespace LunarPlugin.Test
         [Test]
         public void TestTrimHeadIndex()
         {
-            CycleArray<int> array = new CycleArray<int>(5);
+            CCycleArray<int> array = new CCycleArray<int>(5);
             array.Add(1);
             array.Add(2);
             array.Add(3);
@@ -472,7 +472,7 @@ namespace LunarPlugin.Test
             Assert.AreEqual(5, array.RealLength);
         }
 
-        private void AssertArray<T>(CycleArray<T> actual, params T[] expected)
+        private void AssertArray<T>(CCycleArray<T> actual, params T[] expected)
         {
             Assert.AreEqual(expected.Length, actual.RealLength);
             for (int i = 0, j = actual.HeadIndex; i < expected.Length; ++i, ++j)

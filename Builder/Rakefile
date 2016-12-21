@@ -10,7 +10,7 @@ namespace :lunar do
 
   task :init do
 
-    $bin_release_unity = resolve_path '/Applications/Unity4/Unity.app/Contents/MacOS/Unity'
+    $bin_release_unity = resolve_path '/Applications/Unity5/Unity.app/Contents/MacOS/Unity'
 
     $dir_builder = File.expand_path '.'
     $dir_publisher_project = resolve_path "#{$dir_builder}/PublisherProject"
@@ -21,13 +21,12 @@ namespace :lunar do
 
     $dir_project = resolve_path File.expand_path('../Project')
     $dir_project_assets = resolve_path "#{$dir_project}/Assets"
-    $dir_project_assets_plugins = resolve_path "#{$dir_project_assets}/Plugins"
-    $dir_project_assets_plugins_unity = resolve_path "#{$dir_project_assets_plugins}/Lunar"
-    $dir_project_assets_editor = resolve_path "#{$dir_project_assets}/Editor"
+    $dir_project_assets_plugins_unity = resolve_path "#{$dir_project_assets}/LunarPlugin"
+    $dir_project_assets_editor = resolve_path "#{$dir_project_assets_plugins_unity}/Editor"
 
     def extract_package_version(dir_project)
 
-      file_version = resolve_path "#{dir_project}/Assets/Plugins/Lunar/Version.cs"
+      file_version = resolve_path "#{dir_project}/Assets/LunarPlugin/Scripts/LPVersion.cs" # fixme: embed in configuration
       source = File.read file_version
 
       source =~ /VERSION\s+=\s+"(\d+\.\d+.\d+b?)"/

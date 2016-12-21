@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace LunarPlugin.Test
 {
-    class TestApp : App
+    class TestApp : CApp
     {
         private readonly ITestAppImpDelegate m_delegate;
         private readonly TestAppConfig m_config;
@@ -51,7 +51,7 @@ namespace LunarPlugin.Test
 
         #region Factory methods
 
-        protected override AppImp CreateAppImp()
+        protected override CAppImp CreateAppImp()
         {
             return new TestAppImp(this);
         }

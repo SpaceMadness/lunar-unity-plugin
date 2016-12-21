@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace LunarPlugin.Test
 {
-    public class TestInput : IUpdatable
+    public class TestInput : ICUpdatable
     {
         private readonly State m_oldState;
         private readonly State m_state;

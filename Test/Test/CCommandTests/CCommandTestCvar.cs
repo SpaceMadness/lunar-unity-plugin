@@ -213,7 +213,7 @@ namespace CCommandTests
         [Test]
         public void TestCvarColor()
         {
-            Color color = ColorUtils.FromRGBA(0x12345678);
+            Color color = CColorUtils.FromRGBA(0x12345678);
             string colorDefault = string.Format("{0} {1} {2} {3}", color.r, color.g, color.b, color.a);
 
             CVar cvar = new CVar("var", color);
@@ -226,7 +226,7 @@ namespace CCommandTests
             Assert.AreEqual(colorDefault, cvar.Value);
 
             Color otherColor = new Color(0.1f, 0.2f, 0.3f, 0.4f);
-            uint otherColorValue = ColorUtils.ToRGBA(ref otherColor);
+            uint otherColorValue = CColorUtils.ToRGBA(ref otherColor);
 
             Execute("var 0.1 0.2 0.3 0.4");
             Assert.IsFalse(cvar.IsDefault);
@@ -235,7 +235,7 @@ namespace CCommandTests
             Assert.AreEqual("0.1 0.2 0.3 0.4", cvar.Value);
 
             otherColorValue = 0x87654321;
-            otherColor = ColorUtils.FromRGBA(0x87654321);
+            otherColor = CColorUtils.FromRGBA(0x87654321);
             Execute("var 0x{0}", otherColorValue.ToString("X"));
             Assert.IsFalse(cvar.IsDefault);
             Assert.AreEqual(otherColor, cvar.ColorValue);

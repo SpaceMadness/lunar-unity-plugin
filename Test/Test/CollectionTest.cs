@@ -17,7 +17,7 @@ namespace LunarPlugin.Test
         public void TestEach()
         {
             string[] array = { "1", "2", "3" };
-            Collection.Each(array, delegate(String element)
+            CCollection.Each(array, delegate(String element)
             {
                 AddResult(element);
             });
@@ -29,7 +29,7 @@ namespace LunarPlugin.Test
         public void TestEachIndex()
         {
             string[] array = { "1", "2", "3" };
-            Collection.Each(array, delegate(String element, int index)
+            CCollection.Each(array, delegate(String element, int index)
             {
                 AddResult(index + ":" + element);
             });
@@ -43,7 +43,7 @@ namespace LunarPlugin.Test
             string[] array = { "a", "b", "c" };
 
             char[] expected = { 'A', 'B', 'C' };
-            char[] actual = Collection.Map(array, delegate(String element)
+            char[] actual = CCollection.Map(array, delegate(String element)
             {
                 return char.ToUpper(element[0]);
             });
@@ -57,7 +57,7 @@ namespace LunarPlugin.Test
             string[] array = { "a", "b", "c" };
 
             string[] expected = { "a0", "b1", "c2" };
-            string[] actual = Collection.Map(array, delegate(String element, int index)
+            string[] actual = CCollection.Map(array, delegate(String element, int index)
             {
                 return element + index;
             });

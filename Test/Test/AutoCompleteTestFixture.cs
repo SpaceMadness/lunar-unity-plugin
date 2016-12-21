@@ -13,9 +13,9 @@ using CCommandTests;
 
 namespace LunarPlugin.Test
 {
-    public class AutoCompleteTestFixture : CCommandTestFixture, IConsoleDelegate
+    public class AutoCompleteTestFixture : CCommandTestFixture, ICConsoleDelegate
     {
-        private Terminal terminal;
+        private CTerminal terminal;
         private List<string> terminalTableOutput;
 
         //////////////////////////////////////////////////////////////////////////////
@@ -27,7 +27,7 @@ namespace LunarPlugin.Test
         {
             base.RunSetUp();
 
-            terminal = new Terminal(1024);
+            terminal = new CTerminal(1024);
             terminal.Delegate = this;
             terminalTableOutput = new List<string>();
         }
@@ -57,19 +57,19 @@ namespace LunarPlugin.Test
 
         #region IConsoleDelegate implementation
 
-        public void OnConsoleEntryAdded(AbstractConsole console, ref ConsoleViewCellEntry entry)
+        public void OnConsoleEntryAdded(CAbstractConsole console, ref CConsoleViewCellEntry entry)
         {
             if (entry.IsTable)
             {
                 string[] table = entry.Table;
                 foreach (string item in table)
                 {
-                    terminalTableOutput.Add(StringUtils.RemoveRichTextTags(item));
+                    terminalTableOutput.Add(CStringUtils.RemoveRichTextTags(item));
                 }
             }
         }
 
-        public void OnConsoleCleared(AbstractConsole console)
+        public void OnConsoleCleared(CAbstractConsole console)
         {
         }
 

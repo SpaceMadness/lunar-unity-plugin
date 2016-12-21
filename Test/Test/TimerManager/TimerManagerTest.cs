@@ -33,7 +33,7 @@ namespace LunarPlugin.Test.Timers
             manager.Schedule(TimerCallback1, 0.5f,  "timer4");
             manager.Schedule(TimerCallback1, 0.75f, "timer5");
 
-            Timer timer = manager.RootTimer;
+            CTimer timer = manager.RootTimer;
             Assert.AreEqual(timer.name, "timer1"); timer = NextTimer(timer);
             Assert.AreEqual(timer.name, "timer2"); timer = NextTimer(timer);
             Assert.AreEqual(timer.name, "timer3"); timer = NextTimer(timer);
@@ -52,7 +52,7 @@ namespace LunarPlugin.Test.Timers
             manager.Schedule(TimerCallback1, 0.25f, "timer4");
             manager.Schedule(TimerCallback1, 0.0f,  "timer5");
 
-            Timer timer = manager.RootTimer;
+            CTimer timer = manager.RootTimer;
             Assert.AreEqual(timer.name, "timer5"); timer = NextTimer(timer);
             Assert.AreEqual(timer.name, "timer3"); timer = NextTimer(timer);
             Assert.AreEqual(timer.name, "timer4"); timer = NextTimer(timer);
@@ -360,20 +360,20 @@ namespace LunarPlugin.Test.Timers
             return array;
         }
 
-        private static Timer NextTimer(Timer timer)
+        private static CTimer NextTimer(CTimer timer)
         {
-            return ClassUtils.GetObjectField<Timer>(timer, "next");
+            return CClassUtils.GetObjectField<CTimer>(timer, "next");
         }
     }
 
-    class TestTimerManager : TimerManager
+    class TestTimerManager : CTimerManager
     {
-        public Timer Schedule(Action callback, float delay, string name)
+        public CTimer Schedule(Action callback, float delay, string name)
         {
             return Schedule(callback, delay, false, name);
         }
 
-        public new Timer RootTimer
+        public new CTimer RootTimer
         {
             get { return base.RootTimer; }
         }
@@ -383,7 +383,7 @@ namespace LunarPlugin.Test.Timers
             get
             {
                 int count = 0;
-                for (Timer t = DelayedFreeHeadTimer; t != null; t = TestTimer.NextHelperListTimer(t))
+                for (CTimer t = DelayedFreeHeadTimer; t != null; t = TestTimer.NextHelperListTimer(t))
                 {
                     ++count;
                 }

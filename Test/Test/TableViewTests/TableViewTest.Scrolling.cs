@@ -17,7 +17,7 @@ namespace TableViewTests
         [Test]
         public void TestItemsScroll()
         {
-            TestCellPredefinedAdapter adapter = new TestCellPredefinedAdapter(new TableViewCell[0]);
+            TestCellPredefinedAdapter adapter = new TestCellPredefinedAdapter(new CTableViewCell[0]);
             adapter.Add(new TableViewCellMock(320, 10));
             adapter.Add(new TableViewCellMock(320, 15));
             adapter.Add(new TableViewCellMock(320, 10));
@@ -98,7 +98,7 @@ namespace TableViewTests
         [Test]
         public void TestLoadItemsScrollLock()
         {
-            TestCellPredefinedAdapter adapter = new TestCellPredefinedAdapter(new TableViewCell[0]);
+            TestCellPredefinedAdapter adapter = new TestCellPredefinedAdapter(new CTableViewCell[0]);
             adapter.Add(new TableViewCellMock(320, 10));
             adapter.Add(new TableViewCellMock(320, 15));
             adapter.Add(new TableViewCellMock(320, 10));
@@ -120,7 +120,7 @@ namespace TableViewTests
         [Test]
         public void TestAddItemsScrollLock()
         {
-            TestCellPredefinedAdapter adapter = new TestCellPredefinedAdapter(new TableViewCell[0]);
+            TestCellPredefinedAdapter adapter = new TestCellPredefinedAdapter(new CTableViewCell[0]);
 
             TableViewMock table = new TableViewMock(320, 30);
             table.DataSource = adapter;

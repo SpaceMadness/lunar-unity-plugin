@@ -44,7 +44,7 @@ namespace CCommandTests
 
             if (deleteConfigs)
             {
-                ConfigHelper.DeleteConfigs();
+                CConfigHelper.DeleteConfigs();
             }
         }
 
@@ -54,7 +54,7 @@ namespace CCommandTests
 
         protected void RegisterCommand(Type type, bool hidden = true)
         {
-            CCommand command = ClassUtils.CreateInstance<CCommand>(type);
+            CCommand command = CClassUtils.CreateInstance<CCommand>(type);
             if (command == null)
             {
                 throw new ArgumentException("Can't create class instance: " + type.FullName);
@@ -68,7 +68,7 @@ namespace CCommandTests
 
             command.Name = commandName;
             command.IsHidden = hidden;
-            RuntimeResolver.ResolveOptions(command);
+            CRuntimeResolver.ResolveOptions(command);
 
             CRegistery.Register(command);
         }
@@ -104,7 +104,7 @@ namespace CCommandTests
 
         protected bool Execute(string commandLine, bool shouldSucceed = true)
         {
-            bool result = App.ExecCommand(commandLine, true);
+            bool result = CApp.ExecCommand(commandLine, true);
             Assert.IsFalse(result ^ shouldSucceed, "Command should " + (shouldSucceed ? "succeed" : "fail") + ": " + commandLine);
             return result;
         }
@@ -120,7 +120,7 @@ namespace CCommandTests
 
         protected void AssertConfig(ConfigReadFilter filter, params string[] expected)
         {
-            IList<string> lines = ConfigHelper.ReadConfig(Constants.ConfigDefault);
+            IList<string> lines = CConfigHelper.ReadConfig(CConstants.ConfigDefault);
             IList<string> actual = new List<string>();
             foreach (string line in lines)
             {
@@ -135,7 +135,7 @@ namespace CCommandTests
 
         protected void WriteConfig(params string[] lines)
         {
-            ConfigHelper.WriteConfig(Constants.ConfigDefault, lines);
+            CConfigHelper.WriteConfig(CConstants.ConfigDefault, lines);
         }
 
         #endregion

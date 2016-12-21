@@ -17,22 +17,22 @@ namespace ConsoleViewTests
 
     public abstract class ConsoleViewTest : TestFixtureBase
     {
-        protected Tag tag = new Tag("TestTag");
+        protected CTag tag = new CTag("TestTag");
 
         #region Helpers
 
-        internal void AssertVisibleRows(TableView table, params string[] values)
+        internal void AssertVisibleRows(CTableView table, params string[] values)
         {
             Assert.AreEqual(values.Length, table.VisibleCellsCount,
                 "expected: " + StringArrayToString(values) + "\n" +
                 "actual: " + VisibleCellsToString(table));
 
             int index = 0;
-            TableViewCell cell = table.FirstVisibleCell;
-            TableViewCell lastCell = null;
+            CTableViewCell cell = table.FirstVisibleCell;
+            CTableViewCell lastCell = null;
             while (cell != null)
             {
-                ConsoleTextEntryView textCell = cell as ConsoleTextEntryView;
+                CConsoleTextEntryView textCell = cell as CConsoleTextEntryView;
                 Assert.IsNotNull(textCell);
 
                 Assert.AreEqual(values[index++], textCell.Value);
@@ -43,13 +43,13 @@ namespace ConsoleViewTests
             Assert.AreSame(lastCell, table.LastVisibleCell);
         }
 
-        private string VisibleCellsToString(TableView table)
+        private string VisibleCellsToString(CTableView table)
         {
             StringBuilder buffer = new StringBuilder("[");
             int index = 0;
-            for (TableViewCell cell = table.FirstVisibleCell; cell != null; cell = cell.NextCell)
+            for (CTableViewCell cell = table.FirstVisibleCell; cell != null; cell = cell.NextCell)
             {
-                ConsoleTextEntryView textCell = cell as ConsoleTextEntryView;
+                CConsoleTextEntryView textCell = cell as CConsoleTextEntryView;
                 Assert.IsNotNull(textCell);
 
                 buffer.Append(textCell.Value);
@@ -83,14 +83,14 @@ namespace ConsoleViewTests
         #endregion
     }
 
-    class MockConsoleView : ConsoleView, ITextMeasure
+    class MockConsoleView : CConsoleView, ICTextMeasure
     {
-        public MockConsoleView(AbstractConsole console, float width, float height)
+        public MockConsoleView(CAbstractConsole console, float width, float height)
             : base(console, width, height)
         {
         }
 
-        protected override ITextMeasure CreateTextMeasure()
+        protected override ICTextMeasure CreateTextMeasure()
         {
             return this;
         }
@@ -120,16 +120,16 @@ namespace ConsoleViewTests
         }
     }
 
-    class MockConsole : AbstractConsole
+    class MockConsole : CAbstractConsole
     {
         public MockConsole(int historySize = 100)
             : base(historySize)
         {
         }
 
-        public void Add(LogLevel level, Tag tag, string line)
+        public void Add(CLogLevel level, CTag tag, string line)
         {
-            ConsoleViewCellEntry entry = new ConsoleViewCellEntry(line);
+            CConsoleViewCellEntry entry = new CConsoleViewCellEntry(line);
             entry.level = level;
             entry.tag = tag;
             Add(entry);

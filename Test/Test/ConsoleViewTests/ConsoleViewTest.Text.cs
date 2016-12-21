@@ -28,10 +28,10 @@ namespace ConsoleViewTests
             MockConsole console = new MockConsole();
             for (int i = 0; i < lines.Length; ++i)
             {
-                console.Add(LogLevel.Debug, tag, lines[i]);
+                console.Add(CLogLevel.Debug, tag, lines[i]);
             }
 
-            ConsoleView consoleView = new MockConsoleView(console, 320, 230);
+            CConsoleView consoleView = new MockConsoleView(console, 320, 230);
             string actual = consoleView.GetText();
 
             Assert.AreEqual(expected, actual);
@@ -50,10 +50,10 @@ namespace ConsoleViewTests
             MockConsole console = new MockConsole();
             for (int i = 0; i < lines.Length; ++i)
             {
-                console.Add(LogLevel.Debug, tag, lines[i]);
+                console.Add(CLogLevel.Debug, tag, lines[i]);
             }
 
-            ConsoleView consoleView = new MockConsoleView(console, 320, 230);
+            CConsoleView consoleView = new MockConsoleView(console, 320, 230);
             string actual = consoleView.GetText(1, 2);
 
             string expected = "line 2\n" +
@@ -77,10 +77,10 @@ namespace ConsoleViewTests
             MockConsole console = new MockConsole(3);
             for (int i = 0; i < lines.Length; ++i)
             {
-                console.Add(LogLevel.Debug, tag, lines[i]);
+                console.Add(CLogLevel.Debug, tag, lines[i]);
             }
 
-            ConsoleView consoleView = new MockConsoleView(console, 320, 230);
+            CConsoleView consoleView = new MockConsoleView(console, 320, 230);
             string actual = consoleView.GetText();
 
             string expected = "line 4\n" +
@@ -105,10 +105,10 @@ namespace ConsoleViewTests
             MockConsole console = new MockConsole(4);
             for (int i = 0; i < lines.Length; ++i)
             {
-                console.Add(LogLevel.Debug, tag, lines[i]);
+                console.Add(CLogLevel.Debug, tag, lines[i]);
             }
 
-            ConsoleView consoleView = new MockConsoleView(console, 320, 230);
+            CConsoleView consoleView = new MockConsoleView(console, 320, 230);
             string actual = consoleView.GetText(3, 2);
 
             string expected = "line 4\n" +
@@ -130,11 +130,11 @@ namespace ConsoleViewTests
             MockConsole console = new MockConsole();
             for (int i = 0; i < lines.Length; ++i)
             {
-                string line = StringUtils.C(lines[i], ColorCode.LevelDebug);
-                console.Add(LogLevel.Debug, tag, line);
+                string line = CStringUtils.C(lines[i], CColorCode.LevelDebug);
+                console.Add(CLogLevel.Debug, tag, line);
             }
 
-            ConsoleView consoleView = new MockConsoleView(console, 320, 230);
+            CConsoleView consoleView = new MockConsoleView(console, 320, 230);
             string actual = consoleView.GetText();
 
             Assert.AreEqual(expected, actual);

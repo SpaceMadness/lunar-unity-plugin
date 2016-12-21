@@ -9,7 +9,7 @@ using LunarPluginInternal;
 namespace LunarPlugin.Test
 {
     using Assert = NUnit.Framework.Assert;
-    using LunarAssert = LunarPlugin.Assert;
+    using LunarAssert = LunarPlugin.CAssert;
 
     [TestFixture]
     public class AssertTest : TestFixtureBase
@@ -20,7 +20,7 @@ namespace LunarPlugin.Test
         public void SetUp()
         {
             messages = new List<string>();
-            TestingPlatform.AssertDelegate = delegate(string message, string stackTrace)
+            CTestingPlatform.AssertDelegate = delegate(string message, string stackTrace)
             {
                 messages.Add(message);
             };
@@ -29,7 +29,7 @@ namespace LunarPlugin.Test
         [TearDown]
         public void TearDown()
         {
-            TestingPlatform.AssertDelegate = null;
+            CTestingPlatform.AssertDelegate = null;
         }
 
         [Test]
