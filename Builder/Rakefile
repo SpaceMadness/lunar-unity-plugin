@@ -26,7 +26,7 @@ namespace :lunar do
 
     def extract_package_version(dir_project)
 
-      file_version = resolve_path "#{dir_project}/Assets/LunarPlugin/Scripts/LPVersion.cs" # fixme: embed in configuration
+      file_version = resolve_path "#{dir_project}/Assets/LunarPlugin/Scripts/CVersion.cs" # fixme: embed in configuration
       source = File.read file_version
 
       source =~ /VERSION\s+=\s+"(\d+\.\d+.\d+b?)"/
