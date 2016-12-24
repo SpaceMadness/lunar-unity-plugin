@@ -23,6 +23,6 @@ namespace LunarPluginInternal
 {
     static class CVersion
     {
-        public static readonly string VERSION = "0.0.8b";
+        public static readonly string VERSION = "0.0.9b";
     }
 }
